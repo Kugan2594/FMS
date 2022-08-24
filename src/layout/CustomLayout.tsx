@@ -3,7 +3,7 @@ import React from "react";
 import CustomHeader from "../components/organisms/Header/CustomHeader";
 import SideBar from "../components/organisms/SideBar/SideBar";
 import "./CustomLayout.style.less";
-const { Header, Content, Footer } = Layout;
+const { Content, Footer } = Layout;
 
 export default function CustomLayout() {
     return (
