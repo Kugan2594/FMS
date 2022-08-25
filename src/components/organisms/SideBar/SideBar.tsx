@@ -1,6 +1,6 @@
 import React from "react";
 import CustomMenu from "./CustomMenu";
-import { Layout, Menu } from "antd";
+import { Layout } from "antd";
 const { Sider } = Layout;
 
 function SideBar() {
