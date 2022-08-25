@@ -1,5 +1,11 @@
 {
   "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+      "*":["./src/*"],
+      "organisms": ["./src/components/organisms"],
+     
+    },
     "target": "es5",
     "lib": [
       "dom",
@@ -19,14 +25,9 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "paths": {
-
-      "organisms": ["./componenets/organisms"],
-      
-      
-      }
+   
   },
   "include": [
-    "src"
+    "src/**/*"
   ]
 }
