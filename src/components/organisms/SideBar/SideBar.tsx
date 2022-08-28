@@ -2,23 +2,16 @@ import React from "react";
 import CustomMenu from "./CustomMenu";
 import { Divider, Layout } from "antd";
 import HeaderLogo from "./HeaderLogo";
+import UserProfile from "./UserProfile";
+
 const { Sider } = Layout;
 
 function SideBar() {
   return (
     <Sider
-      trigger={null}
-      collapsible
-      collapsed={true}
       theme="light"
-      collapsedWidth="7%"
+      width= "7%"
       breakpoint="md"
-      onBreakpoint={(broken) => {
-        console.log(broken);
-      }}
-      onCollapse={(collapsed, type) => {
-        console.log(collapsed, type);
-      }}
     >
       <div>
         <HeaderLogo />
@@ -26,6 +19,7 @@ function SideBar() {
       </div>
 
       <CustomMenu />
+      <UserProfile />
     </Sider>
   );
 }
