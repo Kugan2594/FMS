@@ -1,6 +1,5 @@
 import { Menu } from "antd";
 import React from "react";
-import { useLinkClickHandler } from "react-router-dom";
 import mainMenuItems from "./items";
 
 function CustomMenu() {
