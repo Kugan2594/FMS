@@ -10,7 +10,7 @@ function SideBar() {
   return (
     <Sider
       theme="light"
-      width= "7%"
+      width= "8%"
       breakpoint="md"
     >
       <div>
