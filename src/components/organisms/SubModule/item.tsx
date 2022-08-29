@@ -1,39 +1,37 @@
-import { Menu } from "antd";
-import { useState } from "react";
-import type { MenuProps } from "antd";
-import { items } from "./items";
-import SubModuleHeaderLogo from "./SubModuleHeader";
-// submenu keys of first level
-const rootSubmenuKeys = ["sub1", "sub2", "sub4"];
+// import React, { useState } from "react";
+// import "antd/dist/antd.css";
+// import { Button, List } from "antd";
+// import SubModuleHeaderLogo from "./SubModuleHeader";
 
-const SbModule: React.FC = () => {
-    const [openKeys, setOpenKeys] = useState(["sub1"]);
+// const data = ["DashBoard", "Stats", "Branch1", "Branch2", "Los Angeles"];
 
-    const onOpenChange: MenuProps["onOpenChange"] = (keys) => {
-        const latestOpenKey = keys.find((key) => openKeys.indexOf(key) === -1);
-        if (rootSubmenuKeys.indexOf(latestOpenKey!) === -1) {
-            setOpenKeys(keys);
-        } else {
-            setOpenKeys(latestOpenKey ? [latestOpenKey] : []);
-        }
-    };
+// const SubModule = (props:any) => {
+//     const [color, setColor] = useState("black");
 
-    return (
-        <>
-            <div className="sub">
-                <SubModuleHeaderLogo />
-                <Menu
-                    theme="light"
-                    className="submenu-item"
-                    mode="inline"
-                    openKeys={openKeys}
-                    onOpenChange={onOpenChange}
-                    style={{ width: 150, color: "blue", height: 400 }}
-                    items={items}
-                />
-            </div>
-        </>
-    );
-};
+//     const onClickActive = (x: string) => {
+//         console.log(x);
+//     };
+//     return (
+//         <>
+//             <div className="sub-module-list">
+//                 <SubModuleHeaderLogo />
+//                 <div style={{ marginLeft: 10 }}>
+//                     {data.map((x: any, index) => {
+//                         return (
+//                             <button
+//                                 className="list"
+//                                 key={index}
+//                                 onClick={() => onClickActive(x)}
+//                             >
+//                                 {x}
+//                             </button>
+//                         );
+//                     })}
+//                 </div>
+//             </div>
+//         </>
+//     );
+// };
 
-export default SbModule;
+// export default SubModule;
+export {};

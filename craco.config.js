@@ -8,7 +8,8 @@ module.exports = {
                 lessLoaderOptions: {
                     lessOptions: {
                         modifyVars: {
-                            "@primary-color": "#0920E1", // primary color for all components,
+                            "@primary-color": "blue", // primary color for all components,
+                            "@menu-inline-toplevel-item-height": "80px",
                         },
                         javascriptEnabled: true,
                     },
