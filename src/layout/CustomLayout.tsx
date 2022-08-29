@@ -8,6 +8,7 @@ export default function CustomLayout() {
     return (
         <Layout>
             <SideBar />
+
             <Layout>
                 {/* <CustomHeader /> */}
                 <Content>
