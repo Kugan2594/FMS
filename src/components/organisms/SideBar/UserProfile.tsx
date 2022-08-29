@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Avatar } from "antd";
-import { UserOutlined } from "@ant-design/icons";
+import { UserOutlined } from '@ant-design/icons';
 
 function UserProfile() {
   const [userProfile, setUserProfile] = useState("");

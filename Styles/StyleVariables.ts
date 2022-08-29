@@ -1081,3 +1081,7 @@
 // @segmented-label-color: fade(@black, 65%);
 // @segmented-label-hover-color: #262626;
 // }
+export const ModifyVars = {
+    "@primary-color": "blue", // primary color for all components,
+    "@menu-inline-toplevel-item-height": "80px",
+};
