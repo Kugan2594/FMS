@@ -7,7 +7,7 @@ function UserProfile() {
 
   return (
     <div className="user-profile">
-      <div>
+      <div style={{cursor: "pointer"}}>
         {userProfile != "" ? (
           <Avatar src={userProfile} shape="square" size="large" />
         ) : (
@@ -15,7 +15,7 @@ function UserProfile() {
         )}
         <div>Profile</div>
       </div>
-      <div className="logout" style={{ marginTop: "20px" }}>
+      <div className="logout" style={{ marginTop: "15px", cursor: "pointer" }}>
         <h4>Logout</h4>
       </div>
     </div>

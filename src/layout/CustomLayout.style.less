@@ -9,67 +9,65 @@
 }
 
 .site-layout-background {
-
 }
-/* .layout {
-    display: flex;
-    flex-direction: row;
-} */
 
 .sidebar-header-logo {
   height: 50px;
   width: 50px;
   text-align: center;
-  margin-top: 25px;
- 
-}
-.user-profile {
-  margin: 80px 25px 25px 25px;
-  position: relative;
-  vertical-align: bottom;
-  cursor: pointer;
-}
-.sub-module-list{
-width: 160px;
-padding-top: 20px;
-box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
-margin-right: 10px;
-margin-top: 0px;
-margin-left: 110px;
-
+  margin: 25px;
 }
 
-.list{
+.sidebar {
+  width: 260px;
+  margin-right: 20px;
+  box-shadow: 3px 0 10px rgb(0 0 0 / 0.2);
+}
+
+.main-sidebar{
+  box-shadow: 3px 0 10px rgb(0 0 0 / 0.2);
+}
+
+.sidebar-menu {
+  display: flex;
+}
+
+.sidebar-mainmenu {
+  width: 110px;
+}
+
+.sidebar-submenu {
+  width: 140px;
+  position: absolute;
+  margin-left: 110px;
+}
+
+.list {
   height: 40px;
-  width: 150px;
+  width: 140px;
   text-align: left;
-  display:block;
+  display: block;
   cursor: pointer;
   margin: 10px 0 10px 0;
   border: 0;
   transition-duration: 0.6s;
-
 }
 
-.list:focus{
-color:blue;
-background-color: lightblue;
-border-right: 3px solid blue;
+.list:focus {
+  color: blue;
+  background-color: lightblue;
+  border-right: 3px solid blue;
 }
 
-.list:hover{
-  color:blue ;
-  }
-
-.mark{
-    height:50px;
-    width:10px;
-    color:red
-  }
+.list:hover {
+  color: blue;
+}
 
 .user-profile {
-  margin: 80px 25px 25px 25px;
-  position: relative;
-  vertical-align: bottom;
-  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+height: 110px;
+width: 110px;
+margin-top: 50px;
 }

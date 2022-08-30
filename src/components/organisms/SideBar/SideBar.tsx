@@ -8,7 +8,7 @@ const { Sider } = Layout;
 
 function SideBar() {
     return (
-        <Sider theme="light" width="8%" breakpoint="md">
+        <Sider theme="light" width="110px" breakpoint="md" className="main-sidebar">
             <div>
                 <HeaderLogo />
                 <Divider />
@@ -17,6 +17,7 @@ function SideBar() {
             <CustomMenu />
             <UserProfile />
         </Sider>
+        
     );
 }
 
