@@ -69,7 +69,7 @@ const mainMenuItems: MenuItem[] = [
     {id: "settings", name: "Settings"},
     {id: "changePassword", name: "Change Password"},
     {id: "paymentMethods", name: "Payment Methods"},
-    {id: "term&conditions", name: "Term & Conditions"},
+    {id: "terms&conditions", name: "Terms & Conditions"},
   ] },
 ];
 
