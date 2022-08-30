@@ -11,7 +11,13 @@ interface MenuItem {
   icon: any;
   name: string;
   link: string;
+  children: SubmenuItem[];
 };
+
+interface SubmenuItem {
+  id: string;
+  name: string;
+}
 
 const Home = () => {
   return(
@@ -50,10 +56,21 @@ const Settings = () => {
 }
 
 const mainMenuItems: MenuItem[] = [
-  { id: "home", icon: Home, name: "Home", link: "" },
-  { id: "master", icon: Master, name: "Master", link: "" },
-  { id: "notification", icon: Notification, name: "Notification", link: "" },
-  { id: "settings", icon: Settings, name: "Settings", link: "" },
+  { id: "home", icon: Home, name: "Home", link: "", children: [] },
+  { id: "master", icon: Master, name: "Master", link: "", children: [
+    {id: "branches", name: "Branches"},
+    {id: "parts", name: "Parts"},
+    {id: "documents", name: "Documents"},
+    {id: "services", name: "Services"},
+    {id: "vehicles", name: "Vehicles"},
+  ] },
+  { id: "notification", icon: Notification, name: "Notification", link: "", children: [] },
+  { id: "settings", icon: Settings, name: "Settings", link: "", children: [
+    {id: "settings", name: "Settings"},
+    {id: "changePassword", name: "Change Password"},
+    {id: "paymentMethods", name: "Payment Methods"},
+    {id: "terms&conditions", name: "Terms & Conditions"},
+  ] },
 ];
 
 export default mainMenuItems;

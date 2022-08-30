@@ -1,24 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import { Avatar } from "antd";
-import { UserOutlined } from "@ant-design/icons";
+import { UserOutlined } from '@ant-design/icons';
 
 function UserProfile() {
-    return (
-        <div className="user-profile">
-            <div>
-                <Avatar
-                    src=""
-                    icon={<UserOutlined />}
-                    shape="square"
-                    size="large"
-                />
-                <div>Profile</div>
-            </div>
-            <div className="logout" style={{ marginTop: "20px" }}>
-                <h4>Logout</h4>
-            </div>
-        </div>
-    );
+  const [userProfile, setUserProfile] = useState("");
+
+  return (
+    <div className="user-profile">
+      <div style={{cursor: "pointer"}}>
+        {userProfile != "" ? (
+          <Avatar src={userProfile} shape="square" size="large" />
+        ) : (
+          <Avatar icon={<UserOutlined />} shape="square" size="large" />
+        )}
+        <div>Profile</div>
+      </div>
+      <div className="logout" style={{ marginTop: "15px", cursor: "pointer" }}>
+        <h4>Logout</h4>
+      </div>
+    </div>
+  );
 }
 
 export default UserProfile;
