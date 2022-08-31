@@ -1,28 +1,55 @@
-import { Button, Card, Col, Row } from "antd";
+import { Button, Card, Col, Progress, Row } from "antd";
 import React from "react";
+import "./card.style.less"
+import { Typography } from 'antd';
 
-const style: React.CSSProperties = { background: "#0092ff", padding: "8px 0" };
+interface CardLargeType {
+    name: string;
+    provider: string;
+    progressData: number;
+    vehicleNo: string;
+    vehicleModel: string;
+    branchName: string;
+    dueDate: string;
+    cardOnClick: any;
+    updateButton: any;
+    deleteButton: any;
+}
 
-function CardLarge() {
+const { Title,Text } = Typography;
+
+function CardLarge({name,provider,progressData,vehicleNo,vehicleModel,branchName,dueDate,updateButton,deleteButton,cardOnClick}: CardLargeType) {
   return (
     <Card className="large-card">
-      <Row gutter={8}>
-        <Col span={6}>
-          <div style={style}>col-6</div>
+      <Row className="large-card-row" gutter={4} align="middle">
+        <Col span={6} >
+          <div className="large-card-name" onClick={cardOnClick}>
+            <Title level={5}>{name}</Title>
+            <Text>{provider}</Text>
+            <br/>
+            <Progress style={{width:"200px", marginTop: "5px"}} percent={progressData} size="small" />
+          </div>
         </Col>
         <Col span={4}>
-          <div style={style}>col-6</div>
+          <div>
+          <Title level={5}>{vehicleNo}</Title>
+          <Text>{vehicleModel}</Text>
+          </div>
+        </Col>
+        <Col span={5}>
+          <div>
+          <Text strong>{branchName}</Text>
+          </div>
         </Col>
         <Col span={4}>
-          <div style={style}>col-6</div>
+          <div>
+          <Text strong type="secondary">Due on: {dueDate}</Text>
+          </div>
         </Col>
-        <Col span={6}>
-          <div style={style}>col-6</div>
-        </Col>
-        <Col span={4}>
-          <div style={style} className="large-card-button">
-            <Button type="primary">Update</Button>
-            <Button>Delete</Button>
+        <Col span={5}>
+          <div className="large-card-button">
+            <Button onClick={updateButton} type="primary">Update</Button>
+            <Button onClick={deleteButton}>Delete</Button>
           </div>
         </Col>
       </Row>
