@@ -59,10 +59,14 @@ const mainMenuItems: MenuItem[] = [
   { id: "home", icon: Home, name: "Home", link: "", children: [] },
   { id: "master", icon: Master, name: "Master", link: "", children: [
     {id: "branches", name: "Branches"},
+    {id: "vehicles", name: "Vehicles"},
+    {id: "generators", name: "Genarators"},
     {id: "parts", name: "Parts"},
     {id: "documents", name: "Documents"},
     {id: "services", name: "Services"},
-    {id: "vehicles", name: "Vehicles"},
+    {id: "branchAdmins", name: "Branch Admins"},
+    {id: "drivers", name: "Drivers"},
+    {id: "lease", name: "Lease"},
   ] },
   { id: "notification", icon: Notification, name: "Notification", link: "", children: [] },
   { id: "settings", icon: Settings, name: "Settings", link: "", children: [
