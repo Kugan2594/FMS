@@ -9,74 +9,74 @@ import MasterTemplateWithLargeCard from "../templates/MasterTemplateWithLargeCar
 const { Content, Footer } = Layout;
 
 const data = [
-  { id: "1", name: "a" },
-  { id: "2", name: "b" },
-  { id: "3", name: "c" },
-  { id: "4", name: "d" },
-  { id: "5", name: "e" },
-  { id: "6", name: "f" },
-  { id: "7", name: "g" },
-  { id: "8", name: "a" },
-  { id: "9", name: "b" },
-  { id: "10", name: "c" },
-  { id: "11", name: "d" },
-  { id: "12", name: "e" },
-  { id: "13", name: "f" },
-  { id: "14", name: "g" },
-  { id: "15", name: "a" },
-  { id: "16", name: "b" },
-  { id: "17", name: "c" },
-  { id: "18", name: "d" },
-  { id: "19", name: "e" },
-  { id: "20", name: "f" },
-  { id: "21", name: "g" },
-  { id: "22", name: "a" },
-  { id: "23", name: "b" },
-  { id: "24", name: "c" },
-  { id: "25", name: "d" },
-  { id: "26", name: "e" },
-  { id: "27", name: "f" },
-  { id: "28", name: "g" },
-  { id: "29", name: "a" },
-  { id: "30", name: "b" },
-  { id: "31", name: "c" },
-  { id: "32", name: "d" },
-  { id: "33", name: "e" },
-  { id: "34", name: "f" },
-  { id: "35", name: "g" },
-  { id: "36", name: "a" },
-  { id: "37", name: "b" },
-  { id: "38", name: "c" },
-  { id: "39", name: "d" },
-  { id: "40", name: "e" },
-  { id: "41", name: "f" },
-  { id: "42", name: "g" },
-  { id: "43", name: "a" },
-  { id: "44", name: "b" },
-  { id: "45", name: "c" },
-  { id: "46", name: "d" },
-  { id: "47", name: "e" },
-  { id: "48", name: "f" },
-  { id: "49", name: "g" },
-  { id: "50", name: "a" },
-  { id: "51", name: "b" },
-  { id: "52", name: "c" },
-  { id: "53", name: "d" },
-  { id: "54", name: "e" },
-  { id: "55", name: "f" },
-  { id: "56", name: "g" },
-  { id: "57", name: "a" },
-  { id: "58", name: "b" },
-  { id: "59", name: "c" },
-  { id: "60", name: "d" },
-  { id: "61", name: "e" },
-  { id: "62", name: "f" },
-  { id: "63", name: "g" },
-  { id: "64", name: "f" },
-  { id: "65", name: "g" },
-  { id: "66", name: "e" },
-  { id: "67", name: "f" },
-  { id: "68", name: "g" },
+  { id: "1", name : "Insurance", progressData : 40, vehicleNo : "NP CAR 5245", vehicleModel : "TOYOTA aqua", branchName: "Jaffna Branch", dueDate: "23 Mar 2022"},
+  { id: "2", name : "Insurance", progressData : 40, vehicleNo : "NP CAR 5245", vehicleModel : "TOYOTA aqua", branchName: "Jaffna Branch", dueDate: "23 Mar 2022" },
+  { id: "3", name : "Insurance", progressData : 40, vehicleNo : "NP CAR 5245", vehicleModel : "TOYOTA aqua", branchName: "Jaffna Branch", dueDate: "23 Mar 2022" },
+  { id: "4", name : "Insurance", progressData : 40, vehicleNo : "NP CAR 5245", vehicleModel : "TOYOTA aqua", branchName: "Jaffna Branch", dueDate: "23 Mar 2022" },
+  { id: "5", name : "Insurance", progressData : 40, vehicleNo : "NP CAR 5245", vehicleModel : "TOYOTA aqua", branchName: "Jaffna Branch", dueDate: "23 Mar 2022" },
+  { id: "6", name : "Insurance", progressData : 40, vehicleNo : "NP CAR 5245", vehicleModel : "TOYOTA aqua", branchName: "Jaffna Branch", dueDate: "23 Mar 2022" },
+  { id: "7", name : "Insurance", progressData : 40, vehicleNo : "NP CAR 5245", vehicleModel : "TOYOTA aqua", branchName: "Jaffna Branch", dueDate: "23 Mar 2022" },
+  { id: "8", name : "Insurance", progressData : 40, vehicleNo : "NP CAR 5245", vehicleModel : "TOYOTA aqua", branchName: "Jaffna Branch", dueDate: "23 Mar 2022" },
+  { id: "9", name : "Insurance", progressData : 40, vehicleNo : "NP CAR 5245", vehicleModel : "TOYOTA aqua", branchName: "Jaffna Branch", dueDate: "23 Mar 2022" },
+  { id: "10", name : "Insurance", progressData : 40, vehicleNo : "NP CAR 5245", vehicleModel : "TOYOTA aqua", branchName: "Jaffna Branch", dueDate: "23 Mar 2022" },
+  { id: "11", name : "Insurance", progressData : 40, vehicleNo : "NP CAR 5245", vehicleModel : "TOYOTA aqua", branchName: "Jaffna Branch", dueDate: "23 Mar 2022" },
+  { id: "12", name : "Insurance", progressData : 40, vehicleNo : "NP CAR 5245", vehicleModel : "TOYOTA aqua", branchName: "Jaffna Branch", dueDate: "23 Mar 2022" },
+  { id: "13", name : "Insurance", progressData : 40, vehicleNo : "NP CAR 5245", vehicleModel : "TOYOTA aqua", branchName: "Jaffna Branch", dueDate: "23 Mar 2022" },
+  { id: "14", name : "Insurance", progressData : 40, vehicleNo : "NP CAR 5245", vehicleModel : "TOYOTA aqua", branchName: "Jaffna Branch", dueDate: "23 Mar 2022" },
+  { id: "15", name : "Insurance", progressData : 40, vehicleNo : "NP CAR 5245", vehicleModel : "TOYOTA aqua", branchName: "Jaffna Branch", dueDate: "23 Mar 2022" },
+  { id: "16", name : "Insurance", progressData : 40, vehicleNo : "NP CAR 5245", vehicleModel : "TOYOTA aqua", branchName: "Jaffna Branch", dueDate: "23 Mar 2022" },
+  { id: "17", name : "Insurance", progressData : 40, vehicleNo : "NP CAR 5245", vehicleModel : "TOYOTA aqua", branchName: "Jaffna Branch", dueDate: "23 Mar 2022" },
+  { id: "18", name : "Insurance", progressData : 40, vehicleNo : "NP CAR 5245", vehicleModel : "TOYOTA aqua", branchName: "Jaffna Branch", dueDate: "23 Mar 2022" },
+  { id: "19", name : "Insurance", progressData : 40, vehicleNo : "NP CAR 5245", vehicleModel : "TOYOTA aqua", branchName: "Jaffna Branch", dueDate: "23 Mar 2022" },
+  { id: "20", name : "Insurance", progressData : 40, vehicleNo : "NP CAR 5245", vehicleModel : "TOYOTA aqua", branchName: "Jaffna Branch", dueDate: "23 Mar 2022" },
+  { id: "21", name : "Insurance", progressData : 40, vehicleNo : "NP CAR 5245", vehicleModel : "TOYOTA aqua", branchName: "Jaffna Branch", dueDate: "23 Mar 2022" },
+  { id: "22", name : "Insurance", progressData : 40, vehicleNo : "NP CAR 5245", vehicleModel : "TOYOTA aqua", branchName: "Jaffna Branch", dueDate: "23 Mar 2022" },
+  { id: "23", name : "Insurance", progressData : 40, vehicleNo : "NP CAR 5245", vehicleModel : "TOYOTA aqua", branchName: "Jaffna Branch", dueDate: "23 Mar 2022" },
+  { id: "24", name : "Insurance", progressData : 40, vehicleNo : "NP CAR 5245", vehicleModel : "TOYOTA aqua", branchName: "Jaffna Branch", dueDate: "23 Mar 2022" },
+  { id: "25", name : "Insurance", progressData : 40, vehicleNo : "NP CAR 5245", vehicleModel : "TOYOTA aqua", branchName: "Jaffna Branch", dueDate: "23 Mar 2022" },
+  { id: "26", name : "Insurance", progressData : 40, vehicleNo : "NP CAR 5245", vehicleModel : "TOYOTA aqua", branchName: "Jaffna Branch", dueDate: "23 Mar 2022" },
+  { id: "27", name : "Insurance", progressData : 40, vehicleNo : "NP CAR 5245", vehicleModel : "TOYOTA aqua", branchName: "Jaffna Branch", dueDate: "23 Mar 2022" },
+  { id: "28", name : "Insurance", progressData : 40, vehicleNo : "NP CAR 5245", vehicleModel : "TOYOTA aqua", branchName: "Jaffna Branch", dueDate: "23 Mar 2022" },
+  { id: "29", name : "Insurance", progressData : 40, vehicleNo : "NP CAR 5245", vehicleModel : "TOYOTA aqua", branchName: "Jaffna Branch", dueDate: "23 Mar 2022" },
+  { id: "30", name : "Insurance", progressData : 40, vehicleNo : "NP CAR 5245", vehicleModel : "TOYOTA aqua", branchName: "Jaffna Branch", dueDate: "23 Mar 2022" },
+  { id: "31", name : "Insurance", progressData : 40, vehicleNo : "NP CAR 5245", vehicleModel : "TOYOTA aqua", branchName: "Jaffna Branch", dueDate: "23 Mar 2022" },
+  { id: "32", name : "Insurance", progressData : 40, vehicleNo : "NP CAR 5245", vehicleModel : "TOYOTA aqua", branchName: "Jaffna Branch", dueDate: "23 Mar 2022" },
+  { id: "33", name : "Insurance", progressData : 40, vehicleNo : "NP CAR 5245", vehicleModel : "TOYOTA aqua", branchName: "Jaffna Branch", dueDate: "23 Mar 2022" },
+  { id: "34", name : "Insurance", progressData : 40, vehicleNo : "NP CAR 5245", vehicleModel : "TOYOTA aqua", branchName: "Jaffna Branch", dueDate: "23 Mar 2022" },
+  { id: "35", name : "Insurance", progressData : 40, vehicleNo : "NP CAR 5245", vehicleModel : "TOYOTA aqua", branchName: "Jaffna Branch", dueDate: "23 Mar 2022" },
+  { id: "36", name : "Insurance", progressData : 40, vehicleNo : "NP CAR 5245", vehicleModel : "TOYOTA aqua", branchName: "Jaffna Branch", dueDate: "23 Mar 2022" },
+  { id: "37", name : "Insurance", progressData : 40, vehicleNo : "NP CAR 5245", vehicleModel : "TOYOTA aqua", branchName: "Jaffna Branch", dueDate: "23 Mar 2022" },
+  { id: "38", name : "Insurance", progressData : 40, vehicleNo : "NP CAR 5245", vehicleModel : "TOYOTA aqua", branchName: "Jaffna Branch", dueDate: "23 Mar 2022" },
+  { id: "39", name : "Insurance", progressData : 40, vehicleNo : "NP CAR 5245", vehicleModel : "TOYOTA aqua", branchName: "Jaffna Branch", dueDate: "23 Mar 2022" },
+  { id: "40", name : "Insurance", progressData : 40, vehicleNo : "NP CAR 5245", vehicleModel : "TOYOTA aqua", branchName: "Jaffna Branch", dueDate: "23 Mar 2022" },
+  { id: "41", name : "Insurance", progressData : 40, vehicleNo : "NP CAR 5245", vehicleModel : "TOYOTA aqua", branchName: "Jaffna Branch", dueDate: "23 Mar 2022" },
+  { id: "42", name : "Insurance", progressData : 40, vehicleNo : "NP CAR 5245", vehicleModel : "TOYOTA aqua", branchName: "Jaffna Branch", dueDate: "23 Mar 2022" },
+  { id: "43", name : "Insurance", progressData : 40, vehicleNo : "NP CAR 5245", vehicleModel : "TOYOTA aqua", branchName: "Jaffna Branch", dueDate: "23 Mar 2022" },
+  { id: "44", name : "Insurance", progressData : 40, vehicleNo : "NP CAR 5245", vehicleModel : "TOYOTA aqua", branchName: "Jaffna Branch", dueDate: "23 Mar 2022" },
+  { id: "45", name : "Insurance", progressData : 40, vehicleNo : "NP CAR 5245", vehicleModel : "TOYOTA aqua", branchName: "Jaffna Branch", dueDate: "23 Mar 2022" },
+  { id: "46", name : "Insurance", progressData : 40, vehicleNo : "NP CAR 5245", vehicleModel : "TOYOTA aqua", branchName: "Jaffna Branch", dueDate: "23 Mar 2022" },
+  { id: "47", name : "Insurance", progressData : 40, vehicleNo : "NP CAR 5245", vehicleModel : "TOYOTA aqua", branchName: "Jaffna Branch", dueDate: "23 Mar 2022" },
+  { id: "48", name : "Insurance", progressData : 40, vehicleNo : "NP CAR 5245", vehicleModel : "TOYOTA aqua", branchName: "Jaffna Branch", dueDate: "23 Mar 2022" },
+  { id: "49", name : "Insurance", progressData : 40, vehicleNo : "NP CAR 5245", vehicleModel : "TOYOTA aqua", branchName: "Jaffna Branch", dueDate: "23 Mar 2022" },
+  { id: "50", name : "Insurance", progressData : 40, vehicleNo : "NP CAR 5245", vehicleModel : "TOYOTA aqua", branchName: "Jaffna Branch", dueDate: "23 Mar 2022" },
+  { id: "51", name : "Insurance", progressData : 40, vehicleNo : "NP CAR 5245", vehicleModel : "TOYOTA aqua", branchName: "Jaffna Branch", dueDate: "23 Mar 2022" },
+  { id: "52", name : "Insurance", progressData : 40, vehicleNo : "NP CAR 5245", vehicleModel : "TOYOTA aqua", branchName: "Jaffna Branch", dueDate: "23 Mar 2022" },
+  { id: "53", name : "Insurance", progressData : 40, vehicleNo : "NP CAR 5245", vehicleModel : "TOYOTA aqua", branchName: "Jaffna Branch", dueDate: "23 Mar 2022" },
+  { id: "54", name : "Insurance", progressData : 40, vehicleNo : "NP CAR 5245", vehicleModel : "TOYOTA aqua", branchName: "Jaffna Branch", dueDate: "23 Mar 2022" },
+  { id: "55", name : "Insurance", progressData : 40, vehicleNo : "NP CAR 5245", vehicleModel : "TOYOTA aqua", branchName: "Jaffna Branch", dueDate: "23 Mar 2022" },
+  { id: "56", name : "Insurance", progressData : 40, vehicleNo : "NP CAR 5245", vehicleModel : "TOYOTA aqua", branchName: "Jaffna Branch", dueDate: "23 Mar 2022" },
+  { id: "57", name : "Insurance", progressData : 40, vehicleNo : "NP CAR 5245", vehicleModel : "TOYOTA aqua", branchName: "Jaffna Branch", dueDate: "23 Mar 2022" },
+  { id: "58", name : "Insurance", progressData : 40, vehicleNo : "NP CAR 5245", vehicleModel : "TOYOTA aqua", branchName: "Jaffna Branch", dueDate: "23 Mar 2022" },
+  { id: "59", name : "Insurance", progressData : 40, vehicleNo : "NP CAR 5245", vehicleModel : "TOYOTA aqua", branchName: "Jaffna Branch", dueDate: "23 Mar 2022" },
+  { id: "60", name : "Insurance", progressData : 40, vehicleNo : "NP CAR 5245", vehicleModel : "TOYOTA aqua", branchName: "Jaffna Branch", dueDate: "23 Mar 2022" },
+  { id: "61", name : "Insurance", progressData : 40, vehicleNo : "NP CAR 5245", vehicleModel : "TOYOTA aqua", branchName: "Jaffna Branch", dueDate: "23 Mar 2022" },
+  { id: "62", name : "Insurance", progressData : 40, vehicleNo : "NP CAR 5245", vehicleModel : "TOYOTA aqua", branchName: "Jaffna Branch", dueDate: "23 Mar 2022" },
+  { id: "63", name : "Insurance", progressData : 40, vehicleNo : "NP CAR 5245", vehicleModel : "TOYOTA aqua", branchName: "Jaffna Branch", dueDate: "23 Mar 2022" },
+  { id: "64", name : "Insurance", progressData : 40, vehicleNo : "NP CAR 5245", vehicleModel : "TOYOTA aqua", branchName: "Jaffna Branch", dueDate: "23 Mar 2022" },
+  { id: "65", name : "Insurance", progressData : 40, vehicleNo : "NP CAR 5245", vehicleModel : "TOYOTA aqua", branchName: "Jaffna Branch", dueDate: "23 Mar 2022" },
+  { id: "66", name : "Insurance", progressData : 40, vehicleNo : "NP CAR 5245", vehicleModel : "TOYOTA aqua", branchName: "Jaffna Branch", dueDate: "23 Mar 2022" },
+  { id: "67", name : "Insurance", progressData : 40, vehicleNo : "NP CAR 5245", vehicleModel : "TOYOTA aqua", branchName: "Jaffna Branch", dueDate: "23 Mar 2022" },
+  { id: "68", name : "Insurance", progressData : 40, vehicleNo : "NP CAR 5245", vehicleModel : "TOYOTA aqua", branchName: "Jaffna Branch", dueDate: "23 Mar 2022" },
 ];
 
 export default function CustomLayout() {
@@ -93,34 +93,6 @@ export default function CustomLayout() {
             className="site-layout-background"
             style={{ padding: "20px 20px 20px 0", minHeight: 400 }}
           >
-            {/* <MasterHeader />
-                        <CardLarge
-                        name = {"Insurance"}
-                        provider ={"Provider"}
-                        progressData = {40}
-                        vehicleNo = {"NP CAR 5245"}
-                        vehicleModel = {"TOYOTA aqua"}
-                        branchName = {"Jaffna Branch"}
-                        dueDate = {"23 Mar 2022"}
-                        cardOnClick = {() => console.log("Card")}
-                        updateButton = {() => console.log("Update")}
-                        deleteButton = {() => console.log("Delete")}
-                        />
-                        <Test type="blue" />
-                        <Test type="black" />
-                        <Test type = "yellow" /> */}
-
-            {/* <CardLarge 
-            branchName="Jaffna Branch"
-            dueDate="24 Mar 2022"
-            id="1"
-            key={"1"}
-            name= "Insurance"
-            progressData={40}
-            vehicleModel="TOYOTA aqua"
-            vehicleNo="NP CAR 5645"
-            /> */}
-
             <MasterTemplateWithLargeCard
               data={data}
               dataCount={data.length}
@@ -132,9 +104,6 @@ export default function CustomLayout() {
             />
           </div>
         </Content>
-        {/* <Footer style={{ textAlign: "center" }}>
-          Ant Design ©2018 Created by Ant UED
-        </Footer> */}
       </Layout>
     </Layout>
   );
