@@ -50,12 +50,12 @@ function MasterTemplateWithLargeCard({
 }: TemplateType) {
   return (
     <div className="master-template-large-card">
-      <div>
+      <div className="master-template-large-card-header">
         <MasterHeader onSearch={headerOnSearch} onClickAdd={headerOnClickAdd} dataCount={dataCount} />
       </div>
-      <div>
+      <div className="master-template-large-card-content">
         <List
-        style={{minHeight: 530}}
+        style={{ height: "100%"}}
           itemLayout="vertical"
           size="default"
           pagination={{
