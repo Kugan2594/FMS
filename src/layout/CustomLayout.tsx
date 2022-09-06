@@ -717,56 +717,30 @@ const data = [
 //     },
 // ];
 export default function CustomLayout() {
-    return (
-        <Layout>
-            <div className="sidebar">
-                <SideBar />
-            </div>
-
-            <Layout>
-                {/* <CustomHeader /> */}
-                <Content>
-                    <div
-                        className="site-layout-background"
-                        style={{
-                            padding: "20px 20px 20px 0",
-                            minHeight: "100vh",
-                            maxHeight: "100vh",
-                        }}
-                    >
-                        <MasterTemplateWithLargeCard
-                            data={data}
-                            dataCount={data.length}
-                            headerOnSearch={() => console.log("SEARCHED")}
-                            headerOnClickAdd={() => console.log("ADDED")}
-                            cardOnClick={(id: string) =>
-                                console.log("CLICKED " + id)
-                            }
-                            deleteButton={(id: string) =>
-                                console.log("DELETED " + id)
-                            }
-                            updateButton={(id: string) =>
-                                console.log("UPDATED " + id)
-                            }
-                        />
-                        {/* <MasterTemplateWithSmallCard
-                            data={data}
-                            headerOnSearch={() => console.log("SEARCHED")}
-                            headerOnClickAdd={() => console.log("ADDED")}
-                            dataCount={data.length}
-                            cardOnClick={(id: string) =>
-                                console.log("CLICKED " + id)
-                            }
-                            onClickDelete={(id: string) =>
-                                console.log("DELETED " + id)
-                            }
-                            onClickUpdate={(id: string) =>
-                                console.log("UPDATED " + id)
-                            }
-                        /> */}
-                    </div>
-                </Content>
-            </Layout>
-        </Layout>
-    );
+  return (
+    <Layout>
+        <div>
+        <SideBar />
+        </div>
+      <Layout>
+        {/* <CustomHeader /> */}
+        <Content>
+          <div
+            className="site-layout-background"
+            style={{ padding: "20px", minHeight: "100vh", maxHeight: "100vh"}}
+          >
+            <MasterTemplateWithLargeCard
+              data={data}
+              dataCount={data.length}
+              headerOnSearch={() => console.log("SEARCHED")}
+              headerOnClickAdd={() => console.log("ADDED")}
+              cardOnClick={(id: string) => console.log("CLICKED " + id)}
+              deleteButton={(id: string) => console.log("DELETED " + id)}
+              updateButton={(id: string) => console.log("UPDATED " + id)}
+            />
+          </div>
+        </Content>
+      </Layout>
+    </Layout>
+  );
 }
