@@ -9,6 +9,7 @@ interface CardLargeType {
     vehicleNo?: string;
     vehicleModel?: string;
     branchName?: string;
+    lastChangedDate?: string;
     dueDate?: string;
     cardOnClick?: any;
     updateButton?: any;
@@ -17,7 +18,7 @@ interface CardLargeType {
 
 const { Title,Text } = Typography;
 
-function CardLarge({id,name,progressData,vehicleNo,vehicleModel,branchName,dueDate,updateButton,deleteButton,cardOnClick}: CardLargeType) {
+function CardLarge({id,name,progressData,vehicleNo,vehicleModel,branchName,dueDate,updateButton,deleteButton,cardOnClick,lastChangedDate}: CardLargeType) {
   return (
     <Card key={id} className="large-card">
       <Row className="large-card-row" gutter={{xs:12, xl:8}} align="middle" justify="space-between">
@@ -33,13 +34,14 @@ function CardLarge({id,name,progressData,vehicleNo,vehicleModel,branchName,dueDa
           <Text>{vehicleModel}</Text>
           </div>
         </Col>
-        <Col xs={12} xl={5}>
-          <div className="large-card-data">
-          <Text strong>{branchName}</Text>
-          </div>
-        </Col>
         <Col xs={12} xl={4}>
           <div className="large-card-data">
+          <Title level={5}>{branchName}</Title>
+          </div>
+        </Col>
+        <Col xs={12} xl={5}>
+          <div className="large-card-data-text">
+          <Text strong type="secondary">Last Changed: {lastChangedDate}</Text><br/>
           <Text strong type="secondary">Due on: {dueDate}</Text>
           </div>
         </Col>

@@ -11,6 +11,7 @@ import "./templates.style.less"
 // vehicleNo = Part's Vehicle number
 // vehicleModel = Parts's Vehicle model
 // branch = Part's Branch
+// lastChangedDate = Part's last changed date
 // dueDate = Part's due date
 // cardOnClick = function when click card
 // updateButton = function when click update button
@@ -33,6 +34,7 @@ interface CardType {
   vehicleNo?: string;
   vehicleModel?: string;
   branchName?: string;
+  lastChangedDate?: string;
   dueDate?: string;
   cardOnClick?: any;
   updateButton?: any;
@@ -75,6 +77,7 @@ function MasterTemplateWithLargeCard({
                   vehicleNo={data.vehicleNo}
                   vehicleModel={data.vehicleModel}
                   branchName={data.branchName}
+                  lastChangedDate={data.lastChangedDate}
                   dueDate={data.dueDate}
                   cardOnClick={() => cardOnClick(data.id)}
                   updateButton={() => updateButton(data.id)}
