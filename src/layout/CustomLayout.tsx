@@ -90,7 +90,7 @@ export default function CustomLayout() {
         <Content>
           <div
             className="site-layout-background"
-            style={{ padding: "20px", minHeight: "100vh", maxHeight: "100vh" }}
+            style={{ padding: "20px", minHeight: "100vh", maxHeight: "100vh"}}
           >
             <MasterTemplateWithLargeCard
               data={data}
