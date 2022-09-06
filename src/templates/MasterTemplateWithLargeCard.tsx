@@ -2,7 +2,7 @@ import React from "react";
 import CardLarge from "../components/organisms/Cards/CardLarge";
 import MasterHeader from "../components/organisms/MasterHeader/MasterHeader";
 import { List } from "antd";
-import "./templates.style.less"
+import "./templates.style.less";
 
 // Component prop data array object contain following properties
 // name = Part | Document | Service name
@@ -18,13 +18,13 @@ import "./templates.style.less"
 // deleteButton = function when click delete button
 
 interface TemplateType {
-  data: CardType[];
-  headerOnSearch: any;
-  headerOnClickAdd: any;
-  dataCount: number;
-  cardOnClick?: any;
-  updateButton?: any;
-  deleteButton?: any;
+    data: CardType[];
+    headerOnSearch: any;
+    headerOnClickAdd: any;
+    dataCount: number;
+    cardOnClick?: any;
+    updateButton?: any;
+    deleteButton?: any;
 }
 
 interface CardType {
@@ -42,13 +42,13 @@ interface CardType {
 }
 
 function MasterTemplateWithLargeCard({
-  data,
-  headerOnSearch,
-  headerOnClickAdd,
-  dataCount,
-  cardOnClick,
-  updateButton,
-  deleteButton,
+    data,
+    headerOnSearch,
+    headerOnClickAdd,
+    dataCount,
+    cardOnClick,
+    updateButton,
+    deleteButton,
 }: TemplateType) {
   return (
     <div className="master-template-large-card">
