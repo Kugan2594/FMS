@@ -11,8 +11,7 @@ const SubModule = (props:any) => {
 
     return (
             <div className="sidebar-submenu">
-                {/* <SubModuleHeaderLogo /> */}
-                <div style={{ marginLeft: 10 }}>
+                <div>
                     {props.data.map((x: any, index: any) => {
                         return (
                             <button

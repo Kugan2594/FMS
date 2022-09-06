@@ -2,12 +2,17 @@ import React, { useState } from "react";
 import { Avatar } from "antd";
 import { UserOutlined } from '@ant-design/icons';
 
-function UserProfile() {
+interface UserProfileType {
+  onClickProfile: any;
+  onClickLogout: any;
+}
+
+function UserProfile({onClickProfile, onClickLogout}: UserProfileType) {
   const [userProfile, setUserProfile] = useState("");
 
   return (
     <div className="user-profile">
-      <div style={{cursor: "pointer"}}>
+      <div className="profile" onClick={onClickProfile}>
         {userProfile != "" ? (
           <Avatar src={userProfile} shape="square" size="large" />
         ) : (
@@ -15,7 +20,7 @@ function UserProfile() {
         )}
         <div>Profile</div>
       </div>
-      <div className="logout" style={{ marginTop: "15px", cursor: "pointer" }}>
+      <div className="logout" onClick={onClickLogout}>
         <h4>Logout</h4>
       </div>
     </div>

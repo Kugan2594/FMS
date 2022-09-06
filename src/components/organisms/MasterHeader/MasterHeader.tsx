@@ -14,7 +14,7 @@ interface MasterHeaderType {
 function MasterHeader({onSearch,onClickAdd,dataCount}: MasterHeaderType) {
   return (
     <div className="master-header">
-      <Row gutter={8} align="middle" style={{ width: "100%" }}>
+      <Row gutter={8}>
         <Col span={10}>
           <div>
             <Search
