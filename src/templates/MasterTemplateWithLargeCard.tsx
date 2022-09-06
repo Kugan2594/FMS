@@ -2,7 +2,7 @@ import React from "react";
 import CardLarge from "../components/organisms/Cards/CardLarge";
 import MasterHeader from "../components/organisms/MasterHeader/MasterHeader";
 import { List } from "antd";
-import "./templates.style.less"
+import "./templates.style.less";
 
 // Component prop data array object contain following properties
 // name = Part | Document | Service name
@@ -17,76 +17,80 @@ import "./templates.style.less"
 // deleteButton = function when click delete button
 
 interface TemplateType {
-  data: CardType[];
-  headerOnSearch: any;
-  headerOnClickAdd: any;
-  dataCount: number;
-  cardOnClick?: any;
-  updateButton?: any;
-  deleteButton?: any;
+    data: CardType[];
+    headerOnSearch: any;
+    headerOnClickAdd: any;
+    dataCount: number;
+    cardOnClick?: any;
+    updateButton?: any;
+    deleteButton?: any;
 }
 
 interface CardType {
-  id?: string;
-  name?: string;
-  progressData?: number;
-  vehicleNo?: string;
-  vehicleModel?: string;
-  branchName?: string;
-  dueDate?: string;
-  cardOnClick?: any;
-  updateButton?: any;
-  deleteButton?: any;
+    id?: string;
+    name?: string;
+    progressData?: number;
+    vehicleNo?: string;
+    vehicleModel?: string;
+    branchName?: string;
+    dueDate?: string;
+    cardOnClick?: any;
+    updateButton?: any;
+    deleteButton?: any;
 }
 
 function MasterTemplateWithLargeCard({
-  data,
-  headerOnSearch,
-  headerOnClickAdd,
-  dataCount,
-  cardOnClick,
-  updateButton,
-  deleteButton,
+    data,
+    headerOnSearch,
+    headerOnClickAdd,
+    dataCount,
+    cardOnClick,
+    updateButton,
+    deleteButton,
 }: TemplateType) {
-  return (
-    <div className="master-template-large-card">
-      <div className="master-template-large-card-header">
-        <MasterHeader onSearch={headerOnSearch} onClickAdd={headerOnClickAdd} dataCount={dataCount} />
-      </div>
-      <div className="master-template-large-card-content">
-        <List
-        style={{ height: "100%"}}
-          itemLayout="vertical"
-          size="default"
-          pagination={{
-            onChange: (page) => {
-              console.log(page);
-            },
-            pageSize: 5,
-          }}
-          dataSource={data}
-          renderItem={(data) => (
-            <List.Item style={{ padding: 0 }} key={data.id}>
-              {
-                <CardLarge
-                  key={data.id}
-                  name={data.name}
-                  progressData={data.progressData}
-                  vehicleNo={data.vehicleNo}
-                  vehicleModel={data.vehicleModel}
-                  branchName={data.branchName}
-                  dueDate={data.dueDate}
-                  cardOnClick={() => cardOnClick(data.id)}
-                  updateButton={() => updateButton(data.id)}
-                  deleteButton={() => deleteButton(data.id)}
+    return (
+        <div className="master-template-large-card">
+            <div className="master-template-large-card-header">
+                <MasterHeader
+                    onSearch={headerOnSearch}
+                    onClickAdd={headerOnClickAdd}
+                    dataCount={dataCount}
                 />
-              }
-            </List.Item>
-          )}
-        />
-      </div>
-    </div>
-  );
+            </div>
+            <div className="master-template-large-card-content">
+                <List
+                    style={{ height: "100%" }}
+                    itemLayout="vertical"
+                    size="default"
+                    pagination={{
+                        onChange: (page) => {
+                            console.log(page);
+                        },
+                        pageSize: 5,
+                    }}
+                    dataSource={data}
+                    renderItem={(data) => (
+                        <List.Item style={{ padding: 0 }} key={data.id}>
+                            {
+                                <CardLarge
+                                    key={data.id}
+                                    name={data.name}
+                                    progressData={data.progressData}
+                                    vehicleNo={data.vehicleNo}
+                                    vehicleModel={data.vehicleModel}
+                                    branchName={data.branchName}
+                                    dueDate={data.dueDate}
+                                    cardOnClick={() => cardOnClick(data.id)}
+                                    updateButton={() => updateButton(data.id)}
+                                    deleteButton={() => deleteButton(data.id)}
+                                />
+                            }
+                        </List.Item>
+                    )}
+                />
+            </div>
+        </div>
+    );
 }
 
 export default MasterTemplateWithLargeCard;

@@ -11,6 +11,7 @@ interface TemplateType {
     cardOnClick?: any;
     onClickUpdate?: any;
     onClickDelete?: any;
+    isProgressBar?: boolean;
 }
 interface CardType {
     id?: string;
@@ -33,6 +34,7 @@ function MasterTemplateWithSmallCard({
     cardOnClick,
     onClickUpdate,
     onClickDelete,
+    isProgressBar,
 }: TemplateType) {
     return (
         <div>
@@ -50,7 +52,7 @@ function MasterTemplateWithSmallCard({
                         itemLayout="vertical"
                         size="default"
                         pagination={{
-                            onChange: (page) => {
+                            onChange: (page: any) => {
                                 console.log(page);
                             },
                             pageSize: 6,
@@ -75,6 +77,7 @@ function MasterTemplateWithSmallCard({
                                         image={data.image}
                                         progressData={data.progressData}
                                         adminName={data.adminName}
+                                        isProgressBar={isProgressBar}
                                     />
                                 }
                             </List.Item>

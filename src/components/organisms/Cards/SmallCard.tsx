@@ -1,10 +1,10 @@
 import Icon from "@ant-design/icons/lib/components/AntdIcon";
 import { Button, Card, Col, Image, Progress, Row, Typography } from "antd";
 import Title from "antd/lib/skeleton/Title";
-import { number } from "prop-types";
+
 import React from "react";
 import "./card.style.less";
-interface CardLargeType {
+interface CardSmallType {
     id?: string;
     numberOfVehicles?: number;
     progressData?: number;
@@ -16,6 +16,7 @@ interface CardLargeType {
     onClickUpdate?: any;
     onClickDelete?: any;
     image?: any;
+    isProgressBar?: boolean;
 }
 
 function SmallCard({
@@ -30,7 +31,8 @@ function SmallCard({
     onClickUpdate,
     onClickDelete,
     image,
-}: CardLargeType) {
+    isProgressBar,
+}: CardSmallType) {
     const { Title, Text } = Typography;
     return (
         <Card className="small-card" onClick={cardOnClick}>
@@ -40,7 +42,9 @@ function SmallCard({
                         src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
                         style={{ borderRadius: 10 }}
                     />
-                    <Progress percent={progressData} size="small" />
+                    {isProgressBar && (
+                        <Progress percent={progressData} size="small" />
+                    )}
                 </Col>
                 <Col xs={24} xl={9} className="content-2">
                     <div className="content-2-item">
