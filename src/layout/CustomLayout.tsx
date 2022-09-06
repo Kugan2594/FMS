@@ -82,16 +82,15 @@ const data = [
 export default function CustomLayout() {
   return (
     <Layout>
-      <div className="sidebar">
+        <div>
         <SideBar />
-      </div>
-
+        </div>
       <Layout>
         {/* <CustomHeader /> */}
         <Content>
           <div
             className="site-layout-background"
-            style={{ padding: "20px 20px 20px 0", minHeight: 400 }}
+            style={{ padding: "20px", minHeight: "100vh", maxHeight: "100vh" }}
           >
             <MasterTemplateWithLargeCard
               data={data}

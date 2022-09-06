@@ -20,30 +20,30 @@ const { Title,Text } = Typography;
 function CardLarge({id,name,progressData,vehicleNo,vehicleModel,branchName,dueDate,updateButton,deleteButton,cardOnClick}: CardLargeType) {
   return (
     <Card key={id} className="large-card">
-      <Row className="large-card-row" gutter={4} align="middle">
-        <Col span={6} >
+      <Row className="large-card-row" gutter={{xs:12, xl:8}} align="middle" justify="space-between">
+        <Col xs={24} xl={6}>
           <div className="large-card-name" onClick={() => cardOnClick(id)}>
             <Title style={{margin:0}} level={5}>{name}</Title>
-            <Progress style={{width:"200px"}} percent={progressData} size="small" />
+            <Progress percent={progressData} size="small" />
           </div>
         </Col>
-        <Col span={4}>
+        <Col xs={12} xl={4}>
           <div>
           <Title level={5}>{vehicleNo}</Title>
           <Text>{vehicleModel}</Text>
           </div>
         </Col>
-        <Col span={5}>
-          <div>
+        <Col xs={12} xl={5}>
+          <div className="large-card-data">
           <Text strong>{branchName}</Text>
           </div>
         </Col>
-        <Col span={4}>
-          <div>
+        <Col xs={12} xl={4}>
+          <div className="large-card-data">
           <Text strong type="secondary">Due on: {dueDate}</Text>
           </div>
         </Col>
-        <Col span={5}>
+        <Col xs={12} xl={5}>
           <div className="large-card-button">
             <Button onClick={() => updateButton(id)} type="primary">Update</Button>
             <Button onClick={() => deleteButton(id)}>Delete</Button>

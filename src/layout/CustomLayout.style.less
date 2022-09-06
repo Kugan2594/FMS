@@ -11,46 +11,89 @@
 .site-layout-background {
 }
 
-.sidebar-header-logo {
-  height: 50px;
-  width: 50px;
-  text-align: center;
-  margin: 25px;
-}
-
-.sidebar {
-  width: 260px;
-  margin-right: 20px;
-  box-shadow: 3px 0 10px rgb(0 0 0 / 0.2);
-}
-
-.main-sidebar{
-  box-shadow: 3px 0 10px rgb(0 0 0 / 0.2);
-}
-
-.sidebar-menu {
+.main-sidebar {
   display: flex;
+  height: 100vh;
+  min-width: 38vh !important;
+  box-shadow: 3px 0 10px rgb(0 0 0 / 0.2);
+
+  .sidebar-header-logo {
+    border-bottom: 1px solid #eee;
+    height: 15%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+  img {
+      height: 60px;
+      width: 60px;
+    }
+  }
+
+  .menu {
+    display: flex;
+    height: 85%;
+    width: 38vh;
+
+    .main-menu {
+      height: 70%;
+      width: 40%;
+    }
+    
+    .sub-menu {
+      height: 100%;
+      width: 60%;
+      background-color: rgb(245, 245, 245);
+    }
+  }
 }
 
-.sidebar-mainmenu {
-  width: 110px;
-}
+.main-menu-item {
+  text-align: center;
+  line-height: 0;
+  margin: 20px 0;
+  align-items: center;
 
-.sidebar-submenu {
-  width: 140px;
-  position: absolute;
-  margin-left: 110px;
+  button {
+    border: 0;
+    height: 70px;
+    width: 100%;
+  cursor: pointer;
+  transition-duration: 0.4s;
+  background-color: #fff
+  }
+
+  button:focus {
+    color: blue;
+    background-color: lightblue;
+  }
+  
+  button:hover {
+    color: blue;
+  }
+
+  .main-menu-item-logo {
+    font-size: 25px;
+    height: 40px;
+    margin: 0;
+  }
+
+  .main-menu-item-label {
+    font-weight: 600;
+  }
 }
 
 .list {
   height: 40px;
-  width: 140px;
+  width: 100%;
   text-align: left;
   display: block;
   cursor: pointer;
-  margin: 10px 0 10px 0;
+  margin: 10px 0;
   border: 0;
   transition-duration: 0.4s;
+  background-color: rgb(245, 245, 245);
 }
 
 .list:focus {
@@ -64,10 +107,21 @@
 }
 
 .user-profile {
+  text-align: center;
+
+  .profile{
+    cursor: pointer;
+  }
+
+  .logout {
+    cursor: pointer;
+    margin-top: 10px;
+  }
+}
+
+.user {
   display: flex;
-  flex-direction: column;
+  height: 45%;
   align-items: center;
-height: 110px;
-width: 110px;
-margin-top: 50px;
+  justify-content: center;
 }
