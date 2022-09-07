@@ -31,7 +31,7 @@ const beforeUpload = (file: RcFile) => {
     return isJpgOrPng && isLt2M;
 };
 
-function AddRevenueLicense(){
+function AddRevenueLicense() {
 
     const [form] = Form.useForm();
     const [loading, setLoading] = useState(false);
@@ -92,9 +92,7 @@ function AddRevenueLicense(){
                         <Form.Item>
                             <DatePicker
                                 placeholder="Issued Date"
-                                style={{
-                                    width: "100%",
-                                }}
+                                style={{ borderBottom: "1px solid #ccccb3", borderTop: "0px", borderLeft: "0px", borderRight: "0px", width: "100%" }}
                             />
                         </Form.Item>
                         {/* </Col> */}
@@ -103,9 +101,7 @@ function AddRevenueLicense(){
                         <Form.Item>
                             <DatePicker
                                 placeholder="Expire Date"
-                                style={{
-                                    width: "100%",
-                                }}
+                                style={{ borderBottom: "1px solid #ccccb3", borderTop: "0px", borderLeft: "0px", borderRight: "0px", width: "100%" }}
                             />
                         </Form.Item>
                         {/* </Col> */}
