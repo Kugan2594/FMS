@@ -108,7 +108,7 @@ function AddInsurance() {
                         <Form.Item>
                             <DatePicker
                                 placeholder="Issued Date"
-                                style={{ borderBottom: "1px solid #ccccb3", borderTop: "0px", borderLeft: "0px", width: "100%" }}
+                                style={{ borderBottom: "1px solid #ccccb3", borderTop: "0px", borderLeft: "0px", borderRight: "0px", width: "100%" }}
                             />
                         </Form.Item>
                     </Col>
@@ -129,7 +129,7 @@ function AddInsurance() {
                         <Form.Item>
                             <DatePicker
                                 placeholder="Expire Date"
-                                style={{ borderBottom: "1px solid #ccccb3", borderTop: "0px", borderLeft: "0px", width: "100%" }}
+                                style={{ borderBottom: "1px solid #ccccb3", borderTop: "0px", borderLeft: "0px", borderRight: "0px", width: "100%" }}
                             />
                         </Form.Item>
                     </Col>
