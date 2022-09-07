@@ -7,11 +7,9 @@ import MasterTemplateWithLargeCard from "../../../templates/MasterTemplateWithLa
 const data = [
     {
         id: "1",
-        name: "Accident",
+        name: "Water Service",
         progressData: 40,
         vehicleNo: "NP CAR 5245",
-        vehicleModel: "TOYOTA aqua",
-        branchName: "Jaffna Branch",
         dueDate: "23 Mar 2022",
     },
 
