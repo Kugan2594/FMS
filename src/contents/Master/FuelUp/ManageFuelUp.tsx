@@ -29,7 +29,7 @@ function ManageFuelUp() {
                 Fuel Up
             </Button>
             <Modal
-                open={isModalOpen}
+                // open={isModalOpen}
                 onOk={handleOk}
                 onCancel={handleCancel}
                 closable={false}
