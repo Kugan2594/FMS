@@ -86,8 +86,6 @@ function AddEco() {
                                 style={{ borderBottom: "1px solid #ccccb3" }}
                             />
                         </Form.Item>
-                        {/* <Row> */}
-                        {/* <Col span={11}> */}
                         <Form.Item>
                             <DatePicker
                                 placeholder="Issued Date"
@@ -96,9 +94,6 @@ function AddEco() {
                                 }}
                             />
                         </Form.Item>
-                        {/* </Col> */}
-                        {/* <Col span={2}></Col> */}
-                        {/* <Col span={11}> */}
                         <Form.Item>
                             <DatePicker
                                 placeholder="Expire Date"
@@ -107,9 +102,6 @@ function AddEco() {
                                 }}
                             />
                         </Form.Item>
-                        {/* </Col> */}
-                        {/* </Row> */}
-
                         <Form.Item>
                             <Input
                                 placeholder="Price"
