@@ -1,5 +1,6 @@
 import { Suspense } from "react";
 import { RouteObject } from "react-router-dom";
+import LoginTemplate from "../templates/LoginTemplate";
 import SuspenseLoader from "../components/molecules/SuspenseLoader";
 const Loader = (Component: any) => (props: any) =>
     (
@@ -8,10 +9,10 @@ const Loader = (Component: any) => (props: any) =>
         </Suspense>
     );
 
-const PublicRoute: RouteObject[] = [
+const PublicRoute = [
     {
         path: "/",
-        element: "<Login />",
+        element: <LoginTemplate />,
     },
 ];
 

@@ -1,4 +1,5 @@
-import { Button, Col, Image, InputNumber, Modal, Row } from "antd";
+import { Col, Image, InputNumber, Modal, Row } from "antd";
+import { Button } from "../../../components/atoms/Button";
 import "antd/dist/antd.css";
 import React, { useState } from "react";
 // import InfiniteScroll from "react-infinite-scroll-component";
@@ -25,9 +26,8 @@ function ManageFuelUp() {
 
     return (
         <>
-            <Button type="primary" onClick={showModal}>
-                Fuel Up
-            </Button>
+            <Button title="Fuel Up" type="primary" onClick={showModal} />
+
             <Modal
                 // open={isModalOpen}
                 onOk={handleOk}
@@ -73,10 +73,9 @@ function ManageFuelUp() {
                                 <Col span={8}>
                                     <Button
                                         type="link"
+                                        title="Edit"
                                         onClick={handleOpenEdit}
-                                    >
-                                        Edit
-                                    </Button>
+                                    />
                                 </Col>
                             </Row>
                             <Row>
@@ -100,9 +99,8 @@ function ManageFuelUp() {
                                     <Button
                                         type="link"
                                         onClick={handleOpenEdit}
-                                    >
-                                        Edit
-                                    </Button>
+                                        title=" Edit"
+                                    />
                                 </Col>
                             </Row>
 
@@ -131,9 +129,8 @@ function ManageFuelUp() {
                                     <Button
                                         type="link"
                                         onClick={handleOpenEdit}
-                                    >
-                                        Edit
-                                    </Button>
+                                        title=" Edit"
+                                    />
                                 </Col>
                             </Row>
                             <Row>
@@ -157,9 +154,8 @@ function ManageFuelUp() {
                                     <Button
                                         type="link"
                                         onClick={handleOpenEdit}
-                                    >
-                                        Edit
-                                    </Button>
+                                        title="Edit"
+                                    />
                                 </Col>
                             </Row>
                             <Row>
@@ -183,9 +179,8 @@ function ManageFuelUp() {
                                     <Button
                                         type="link"
                                         onClick={handleOpenEdit}
-                                    >
-                                        Edit
-                                    </Button>
+                                        title=" Edit"
+                                    />
                                 </Col>
                             </Row>
                             <Row>
@@ -209,9 +204,8 @@ function ManageFuelUp() {
                                     <Button
                                         type="link"
                                         onClick={handleOpenEdit}
-                                    >
-                                        Edit
-                                    </Button>
+                                        title="Edit"
+                                    />
                                 </Col>
                             </Row>
                         </Col>
@@ -289,9 +283,8 @@ function ManageFuelUp() {
                                         <Button
                                             type="link"
                                             onClick={handleOpenEdit}
-                                        >
-                                            Edit
-                                        </Button>
+                                            title="Edit"
+                                        />
                                     </Col>
                                 </Row>
                             )}
@@ -320,9 +313,8 @@ function ManageFuelUp() {
                                                 onClick={() => {
                                                     seteditOpen(false);
                                                 }}
-                                            >
-                                                Cancel
-                                            </Button>
+                                                title="Cancel"
+                                            />
                                         )}
                                     </Col>
                                     <Col span={12}>
@@ -330,9 +322,8 @@ function ManageFuelUp() {
                                             style={{ width: "200" }}
                                             type="primary"
                                             onClick={showModal}
-                                        >
-                                            Update
-                                        </Button>
+                                            title="Update"
+                                        />
                                     </Col>
                                 </Row>
                             ) : (
@@ -340,9 +331,8 @@ function ManageFuelUp() {
                                     style={{ width: "200" }}
                                     type="primary"
                                     onClick={showModal}
-                                >
-                                    Update
-                                </Button>
+                                    title="Update"
+                                />
                             )}
                         </Col>
                     </Row>

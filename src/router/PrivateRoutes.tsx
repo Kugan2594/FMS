@@ -1,3 +1,4 @@
+import CustomLayout from "../layout/CustomLayout";
 import { Suspense } from "react";
 import { RouteObject } from "react-router";
 import SuspenseLoader from "../components/molecules/SuspenseLoader";
@@ -9,14 +10,14 @@ const Loader = (Component: any) => (props: any) =>
         </Suspense>
     );
 
-const PrivateRoute: RouteObject[] = [
+const PrivateRoute = [
     {
         path: "/",
-        element: "",
+        element: <CustomLayout />,
     },
     {
         path: "master",
-        element: "<SidebarLayout />",
+        element: <CustomLayout />,
         children: [
             {
                 path: "/",
