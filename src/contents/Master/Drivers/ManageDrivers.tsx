@@ -43,6 +43,8 @@ function ManageDrivers() {
       />
       <Modal
         visible={showAddModel}
+        title="Add New Driver"
+        width="50%"
         onCancel={() =>setShowAddModel(false)}
         footer={[
           <Button onClick={() =>setShowAddModel(false)}>
@@ -56,7 +58,7 @@ function ManageDrivers() {
           </Button>,
         ]}
       >
-        <AddDriver />
+        {<AddDriver />}
       </Modal>
     </div>
   );
