@@ -31,7 +31,7 @@ const beforeUpload = (file: RcFile) => {
     return isJpgOrPng && isLt2M;
 };
 
-function AddEco() {
+function AddAccident() {
     const [form] = Form.useForm();
     const [loading, setLoading] = useState(false);
     const [imageUrl, setImageUrl] = useState<string>();
@@ -63,7 +63,9 @@ function AddEco() {
 
     return (
         <>
-            <Form id="form" name="basic" form={form}>
+            <Form id="form" name="basic" form={form}  style={{
+                                    width: "50%"
+                                }} >
                 <Row style={{ paddingLeft: "35px", paddingRight: "35px" }}>
                     <Col span={24}>
                         <Form.Item>
@@ -78,33 +80,46 @@ function AddEco() {
                                 <Option value="tom">Tom</Option>
                             </Select>
                         </Form.Item>
+        
+                        {/* <Row> */}
+                        {/* <Col span={11}> */}
+                        <Form.Item>
+                            <DatePicker
+                                placeholder="  Accident Date"
+                                style={{ borderBottom: "1px solid #ccccb3" }}
+                            />
+                        </Form.Item>
+                        {/* </Col> */}
+                        {/* <Col span={2}></Col> */}
+                        {/* <Col span={11}> */}
+            
                         <Form.Item>
                             <Input
-                                placeholder="Region"
-                                required
+                                placeholder="Estimated Cost"
                                 bordered={false}
+                                required
                                 style={{ borderBottom: "1px solid #ccccb3" }}
                             />
                         </Form.Item>
                         <Form.Item>
-                            <DatePicker
-                                placeholder="Issued Date"
-                                style={{
-                                    width: "100%",
-                                }}
-                            />
-                        </Form.Item>
-                        <Form.Item>
-                            <DatePicker
-                                placeholder="Expire Date"
-                                style={{
-                                    width: "100%",
-                                }}
+                            <Input
+                                placeholder="Accident Location"
+                                bordered={false}
+                                required
+                                style={{ borderBottom: "1px solid #ccccb3" }}
                             />
                         </Form.Item>
                         <Form.Item>
                             <Input
-                                placeholder="Price"
+                                placeholder="Claim Details"
+                                bordered={false}
+                                required
+                                style={{ borderBottom: "1px solid #ccccb3" }}
+                            />
+                        </Form.Item>
+                        <Form.Item>
+                            <Input
+                                placeholder="Description"
                                 bordered={false}
                                 required
                                 style={{ borderBottom: "1px solid #ccccb3" }}
@@ -136,4 +151,4 @@ function AddEco() {
     );
 }
 
-export default AddEco;
+export default AddAccident;
