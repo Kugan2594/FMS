@@ -1,7 +1,8 @@
 import CustomLayout from "../layout/CustomLayout";
 import { Suspense } from "react";
-import { RouteObject } from "react-router";
 import SuspenseLoader from "../components/molecules/SuspenseLoader";
+import { RouteObject } from "react-router-dom";
+import ManageBranch from "../contents/Master/Branch/ManageBranch";
 
 const Loader = (Component: any) => (props: any) =>
     (
@@ -10,20 +11,14 @@ const Loader = (Component: any) => (props: any) =>
         </Suspense>
     );
 
-const PrivateRoute = [
+const PrivateRoute: RouteObject[] = [
     {
         path: "/",
-        element: <CustomLayout />,
+        element: "",
     },
     {
-        path: "master",
-        element: <CustomLayout />,
-        children: [
-            {
-                path: "/",
-                element: "<Dashboard />",
-            },
-        ],
+        path: "Master",
+        element: <ManageBranch />,
     },
 ];
 
