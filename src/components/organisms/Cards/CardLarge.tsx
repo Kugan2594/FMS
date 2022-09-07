@@ -1,6 +1,6 @@
 import React from "react";
 import { Button, Card, Col, Progress, Row, Typography } from "antd";
-import "./card.style.less"
+import "./card.style.less";
 
 interface CardLargeType {
     id?: string;
