@@ -63,7 +63,7 @@ function MasterTemplateWithLargeCard({
                     itemLayout="vertical"
                     size="default"
                     pagination={{
-                        onChange: (page) => {
+                        onChange: (page: any) => {
                             console.log(page);
                         },
                         pageSize: 5,
