@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import {
     Col,
     DatePicker,
@@ -11,7 +12,6 @@ import {
 import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
 import type { UploadChangeParam } from "antd/es/upload";
 import type { RcFile, UploadFile, UploadProps } from "antd/es/upload/interface";
-import React, { useState } from "react";
 
 const getBase64 = (img: RcFile, callback: (url: string) => void) => {
     const reader = new FileReader();
@@ -31,7 +31,8 @@ const beforeUpload = (file: RcFile) => {
     return isJpgOrPng && isLt2M;
 };
 
-function AddEco() {
+function AddRevenueLicense(){
+
     const [form] = Form.useForm();
     const [loading, setLoading] = useState(false);
     const [imageUrl, setImageUrl] = useState<string>();
@@ -86,6 +87,8 @@ function AddEco() {
                                 style={{ borderBottom: "1px solid #ccccb3" }}
                             />
                         </Form.Item>
+                        {/* <Row> */}
+                        {/* <Col span={11}> */}
                         <Form.Item>
                             <DatePicker
                                 placeholder="Issued Date"
@@ -94,6 +97,9 @@ function AddEco() {
                                 }}
                             />
                         </Form.Item>
+                        {/* </Col> */}
+                        {/* <Col span={2}></Col> */}
+                        {/* <Col span={11}> */}
                         <Form.Item>
                             <DatePicker
                                 placeholder="Expire Date"
@@ -102,6 +108,9 @@ function AddEco() {
                                 }}
                             />
                         </Form.Item>
+                        {/* </Col> */}
+                        {/* </Row> */}
+
                         <Form.Item>
                             <Input
                                 placeholder="Price"
@@ -136,4 +145,4 @@ function AddEco() {
     );
 }
 
-export default AddEco;
+export default AddRevenueLicense;

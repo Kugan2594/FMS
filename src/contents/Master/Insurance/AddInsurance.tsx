@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import {
     Col,
     DatePicker,
@@ -11,7 +12,6 @@ import {
 import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
 import type { UploadChangeParam } from "antd/es/upload";
 import type { RcFile, UploadFile, UploadProps } from "antd/es/upload/interface";
-import React, { useState } from "react";
 
 const getBase64 = (img: RcFile, callback: (url: string) => void) => {
     const reader = new FileReader();
@@ -31,8 +31,10 @@ const beforeUpload = (file: RcFile) => {
     return isJpgOrPng && isLt2M;
 };
 
-function AddEco() {
+function AddInsurance() {
+
     const [form] = Form.useForm();
+    const { Option } = Select;
     const [loading, setLoading] = useState(false);
     const [imageUrl, setImageUrl] = useState<string>();
 
@@ -59,13 +61,12 @@ function AddEco() {
         </div>
     );
 
-    const { Option } = Select;
 
     return (
         <>
             <Form id="form" name="basic" form={form}>
-                <Row style={{ paddingLeft: "35px", paddingRight: "35px" }}>
-                    <Col span={24}>
+                <Row>
+                    <Col span={11}>
                         <Form.Item>
                             <Select
                                 placeholder="Vehicle"
@@ -73,35 +74,14 @@ function AddEco() {
                                 bordered={false}
                                 style={{ borderBottom: "1px solid #ccccb3" }}
                             >
-                                <Option value="jack">Jack</Option>
-                                <Option value="lucy">Lucy</Option>
-                                <Option value="tom">Tom</Option>
+                                <Option value="Toyata Aqua NP CAD 4135">Toyata Aqua NP CAD 4135</Option>
+                                <Option value="Honda Suv NP AKM 5684">Honda Suv NP AKM 5684</Option>
+                                <Option value="Honda NP BAT 9480">Honda NP BAT 9480</Option>
                             </Select>
                         </Form.Item>
-                        <Form.Item>
-                            <Input
-                                placeholder="Region"
-                                required
-                                bordered={false}
-                                style={{ borderBottom: "1px solid #ccccb3" }}
-                            />
-                        </Form.Item>
-                        <Form.Item>
-                            <DatePicker
-                                placeholder="Issued Date"
-                                style={{
-                                    width: "100%",
-                                }}
-                            />
-                        </Form.Item>
-                        <Form.Item>
-                            <DatePicker
-                                placeholder="Expire Date"
-                                style={{
-                                    width: "100%",
-                                }}
-                            />
-                        </Form.Item>
+                    </Col>
+                    <Col span={2}> </Col>
+                    <Col span={11}>
                         <Form.Item>
                             <Input
                                 placeholder="Price"
@@ -110,7 +90,64 @@ function AddEco() {
                                 style={{ borderBottom: "1px solid #ccccb3" }}
                             />
                         </Form.Item>
-                        <Upload
+                    </Col>
+                </Row>
+                <Row>
+                    <Col span={11}>
+                        <Form.Item>
+                            <Input
+                                placeholder="Provider"
+                                bordered={false}
+                                required
+                                style={{ borderBottom: "1px solid #ccccb3" }}
+                            />
+                        </Form.Item>
+                    </Col>
+                    <Col span={2}> </Col>
+                    <Col span={11}>
+                        <Form.Item>
+                            <DatePicker
+                                placeholder="Issued Date"
+                                style={{ borderBottom: "1px solid #ccccb3", borderTop: "0px", borderLeft: "0px", width: "100%" }}
+                            />
+                        </Form.Item>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col span={11}>
+                        <Form.Item>
+                            <Input
+                                placeholder="Policy Number"
+                                bordered={false}
+                                required
+                                style={{ borderBottom: "1px solid #ccccb3" }}
+                            />
+                        </Form.Item>
+                    </Col>
+                    <Col span={2}></Col>
+                    <Col span={11}>
+                        <Form.Item>
+                            <DatePicker
+                                placeholder="Expire Date"
+                                style={{ borderBottom: "1px solid #ccccb3", borderTop: "0px", borderLeft: "0px", width: "100%" }}
+                            />
+                        </Form.Item>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col span={11}>
+                    <Form.Item>
+                            <Input
+                                placeholder="Policy Holder Name"
+                                bordered={false}
+                                required
+                                style={{ borderBottom: "1px solid #ccccb3" }}
+                            />
+                        </Form.Item>
+                    </Col>
+                    <Col span={2}></Col>
+                    <Col span={11}>
+                    <Upload
                             name="avatar"
                             listType="picture-card"
                             className="avatar-uploader"
@@ -129,11 +166,28 @@ function AddEco() {
                                 uploadButton
                             )}
                         </Upload>
+                </Col>
+                </Row>
+                <Row>
+                <Col span={11}>
+                        <Form.Item>
+                            <Select
+                                placeholder="Policy Type"
+                                optionFilterProp="children"
+                                bordered={false}
+                                style={{ borderBottom: "1px solid #ccccb3" }}
+                            >
+                                <Option value="Third Party">Third Party</Option>
+                                <Option value="Fully Insurance">Fully Insurance</Option>
+                            </Select>
+                        </Form.Item>
                     </Col>
                 </Row>
             </Form>
         </>
     );
+
+
 }
 
-export default AddEco;
+export default AddInsurance;
