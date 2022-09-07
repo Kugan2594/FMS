@@ -1,8 +1,14 @@
-import { Modal } from "antd";
+import { Col, Modal, Row } from "antd";
 import React from "react";
 
 function AddBranch() {
-    return <Modal></Modal>;
+    return (
+        <div className="addBranch">
+            <Row className="">
+                <Col></Col>
+            </Row>
+        </div>
+    );
 }
 
 export default AddBranch;

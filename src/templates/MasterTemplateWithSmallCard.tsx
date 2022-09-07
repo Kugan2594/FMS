@@ -1,10 +1,13 @@
 import { List } from "antd";
 import CardLarge from "../components/organisms/Cards/CardLarge";
-import SmallCard from "../components/organisms/Cards/SmallCard";
+import SmallCard, {
+    CardSmallType,
+} from "../components/organisms/Cards/SmallCard";
 import MasterHeader from "../components/organisms/MasterHeader/MasterHeader";
+
 import React from "react";
 interface TemplateType {
-    data: CardType[];
+    data: CardSmallType[];
     headerOnSearch: any;
     headerOnClickAdd: any;
     dataCount: number;
@@ -13,19 +16,7 @@ interface TemplateType {
     onClickDelete?: any;
     isProgressBar?: boolean;
 }
-interface CardType {
-    id?: string;
-    numberOfVehicles?: number;
-    progressData?: number;
-    itemName?: string;
-    branchLocation?: string;
-    branchName?: string;
-    adminName?: string;
-    cardOnClick?: any;
-    onClickUpdate?: any;
-    onClickDelete?: any;
-    image?: any;
-}
+
 function MasterTemplateWithSmallCard({
     data,
     headerOnSearch,

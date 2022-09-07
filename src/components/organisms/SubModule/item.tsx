@@ -1,19 +1,18 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import SubModuleHeaderLogo from "./SubModuleHeader";
 
-
-
-const SubModule = (props:any) => {
-
+const SubModule = (props: any) => {
     const onClickActive = (x: string) => {
         console.log(x);
     };
 
     return (
-            <div className="sidebar-submenu">
-                <div>
-                    {props.data.map((x: any, index: any) => {
-                        return (
+        <div className="sidebar-submenu">
+            <div>
+                {props.data.map((x: any, index: any) => {
+                    return (
+                        <Link to={`branch/${x.id}`}>
                             <button
                                 className="list"
                                 key={index}
@@ -21,10 +20,11 @@ const SubModule = (props:any) => {
                             >
                                 {x.name}
                             </button>
-                        );
-                    })}
-                </div>
+                        </Link>
+                    );
+                })}
             </div>
+        </div>
     );
 };
 

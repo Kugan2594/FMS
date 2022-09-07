@@ -12,10 +12,10 @@ import PublicRoute from "./router/PublicRoutes";
 // import { SideBar } from "organisms";
 
 function App() {
-    const privatecontent = useRoutes(routes);
+    // const privatecontent = useRoutes(routes);
     const publiccontent = useRoutes(PublicRoute);
     const auth = true;
-    return <div> {auth ? privatecontent : publiccontent}</div>;
+    return <div> {publiccontent}</div>;
 }
 
 export default App;

@@ -7,6 +7,8 @@ import MasterHeader from "../components/organisms/MasterHeader/MasterHeader";
 import MasterTemplateWithLargeCard from "../templates/MasterTemplateWithLargeCard";
 import MasterTemplateWithSmallCard from "../templates/MasterTemplateWithSmallCard";
 import SmallCard from "../components/organisms/Cards/SmallCard";
+import { useRoutes } from "react-router-dom";
+import routes from "../router/PrivateRoutes";
 
 const { Content, Footer } = Layout;
 
@@ -717,30 +719,27 @@ const data = [
 //     },
 // ];
 export default function CustomLayout() {
-  return (
-    <Layout>
-        <div>
-        <SideBar />
-        </div>
-      <Layout>
-        {/* <CustomHeader /> */}
-        <Content>
-          <div
-            className="site-layout-background"
-            style={{ padding: "20px", minHeight: "100vh", maxHeight: "100vh"}}
-          >
-            <MasterTemplateWithLargeCard
-              data={data}
-              dataCount={data.length}
-              headerOnSearch={() => console.log("SEARCHED")}
-              headerOnClickAdd={() => console.log("ADDED")}
-              cardOnClick={(id: string) => console.log("CLICKED " + id)}
-              deleteButton={(id: string) => console.log("DELETED " + id)}
-              updateButton={(id: string) => console.log("UPDATED " + id)}
-            />
-          </div>
-        </Content>
-      </Layout>
-    </Layout>
-  );
+    const privatecontent = useRoutes(routes);
+    return (
+        <Layout>
+            <div>
+                <SideBar />
+            </div>
+            <Layout>
+                {/* <CustomHeader /> */}
+                <Content>
+                    <div
+                        className="site-layout-background"
+                        style={{
+                            padding: "20px",
+                            minHeight: "100vh",
+                            maxHeight: "100vh",
+                        }}
+                    >
+                        {privatecontent}
+                    </div>
+                </Content>
+            </Layout>
+        </Layout>
+    );
 }

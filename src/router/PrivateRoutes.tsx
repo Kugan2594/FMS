@@ -13,11 +13,7 @@ const Loader = (Component: any) => (props: any) =>
 
 const PrivateRoute: RouteObject[] = [
     {
-        path: "/",
-        element: "",
-    },
-    {
-        path: "Master",
+        path: "/branch/:branchId",
         element: <ManageBranch />,
     },
 ];

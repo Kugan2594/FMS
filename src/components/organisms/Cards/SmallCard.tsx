@@ -2,9 +2,10 @@ import Icon from "@ant-design/icons/lib/components/AntdIcon";
 import { Button, Card, Col, Image, Progress, Row, Typography } from "antd";
 import Title from "antd/lib/skeleton/Title";
 
-import React from "react";
+import React, { useState } from "react";
 import "./card.style.less";
-interface CardSmallType {
+
+export interface CardSmallType {
     id?: string;
     numberOfVehicles?: number;
     progressData?: number;
@@ -17,8 +18,23 @@ interface CardSmallType {
     onClickDelete?: any;
     image?: any;
     isProgressBar?: boolean;
+    onClickProfile?: any;
 }
-
+let intialValue: CardSmallType = {
+    id: "",
+    adminName: "",
+    branchLocation: "",
+    branchName: "",
+    image: "",
+    isProgressBar: false,
+    itemName: "",
+    progressData: 0,
+    cardOnClick: null,
+    numberOfVehicles: 0,
+    onClickDelete: null,
+    onClickProfile: null,
+    onClickUpdate: null,
+};
 function SmallCard({
     id,
     numberOfVehicles,
@@ -32,16 +48,25 @@ function SmallCard({
     onClickDelete,
     image,
     isProgressBar,
+    onClickProfile,
 }: CardSmallType) {
     const { Title, Text } = Typography;
+
+    const [profile, setProfile] = useState(image);
     return (
         <Card className="small-card" onClick={cardOnClick}>
             <Row className="main-row" justify="center" align="top" gutter={8}>
                 <Col xs={24} xl={4}>
-                    <Image
-                        src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
-                        style={{ borderRadius: 10 }}
-                    />
+                    <div className="profile" onClick={onClickProfile}>
+                        {profile === "" ? (
+                            <Image
+                                src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
+                                style={{ borderRadius: 10 }}
+                            />
+                        ) : (
+                            <Image src={image} style={{ borderRadius: 10 }} />
+                        )}
+                    </div>
                     {isProgressBar && (
                         <Progress percent={progressData} size="small" />
                     )}
