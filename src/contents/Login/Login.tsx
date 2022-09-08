@@ -24,6 +24,7 @@ import {
     setUserRolePermission,
 } from "./LoginAuthentication";
 import { signIn } from "./ServiceLogin";
+import { useNavigate } from "react-router-dom";
 const { Text, Title } = Typography;
 
 function Login() {
@@ -31,6 +32,7 @@ function Login() {
     const [emailError, setEmailError] = React.useState("");
     const [passwordError, setPasswordError] = React.useState("");
     const [loading, setLoading] = useState(false);
+    let navigate = useNavigate();
 
     const onChangeHandler = () => { };
     const ForgotPasswordHandler = () => {
@@ -40,11 +42,14 @@ function Login() {
         console.log("signUp");
     };
 
+
+    const handleError = (res:any) => {
+    };
+
     const handleSubmit = (event: any) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
-
-        let emailId = "cude1995son@gmail.com";
+        let emailId:any = data.get("email");
         let body = {
             userName: data.get("email"),
             password: data.get("password"),
@@ -69,7 +74,8 @@ function Login() {
                 (res: any) => {
                     let response = res.data;
                     console.log({ response });
-                    var decoded_token: any = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsYXN0TmFtZSI6IkN1ZGVzb24iLCJ1c2VyX25hbWUiOiJjdWRlMTk5NXNvbkBnbWFpbC5jb20iLCJyb2xlSWQiOjQsImNvbXBhbnlOYW1lIjoiU0dJQyIsImNvbXBhbnlCcmFuY2hOYW1lIjoiU0dJQyIsInVzZXJJZCI6NSwiYXV0aG9yaXRpZXMiOlsiQ09NUEFOWURSSVZFUiJdLCJjbGllbnRfaWQiOiJjbGllbnQxIiwiZmlyc3ROYW1lIjoiQ3VkZW1hcml5YW4iLCJhdWQiOlsicmVzb3VyY2Utc2VydmVyLXJlc3QtYXBpIl0sImNvbXBhbnlJZCI6MiwiY29tcGFueUJyYW5jaElkIjoyLCJzY29wZSI6WyJyZWFkIiwid3JpdGUiXSwiZXhwIjoxNjYyODA0MzU2LCJqdGkiOiIzMGM4ZDI4Ny1hMTA5LTQ3MDEtYmM2OS01OTg5ZWRkZTM0ZTUifQ.A18AJVbIFPwCPxIlhyZpcj-GMHsCT86z1dE8qqwIT3g";
+                    var decoded_token: any = "";
+                    navigate("/home"); 
                     if (response.access_token) {
                         setAuthentication("true");
                         setToken(response.access_token);
@@ -92,7 +98,7 @@ function Login() {
                 (error: any) => {
                     console.log(error.data);
 
-                    // handleError(error.data);
+                    handleError(error.data);
                     setLoading(false);
                     setAuthentication("false");
                 }
@@ -120,7 +126,7 @@ function Login() {
                 <Row>
                     <Col span={20} offset={2}>
                         <Form
-                        onFinish={handleSubmit}
+                       onClick={handleSubmit}
                             labelCol={{
                                 span: 24,
                             }}
@@ -137,10 +143,12 @@ function Login() {
                                     placeholder="Email ,Mobile number"
                                     maxLength={400}
                                     onChange={onChangeHandler}
+                                    name="email"
                                 />
                             </Form.Item>
                             <Form.Item>
                                 <Input.Password
+                                name = "password"
                                     placeholder="Password"
                                     iconRender={(visible) =>
                                         visible ? (
@@ -152,14 +160,13 @@ function Login() {
                                 />
                             </Form.Item>
                             <Form.Item>
-                                <Button
+                                <Button htmlType="submit"
                                     className="login-button"
                                     type="primary"
                                     loading={loading}
                                     // onClick={() => {
                                     //     setLoading(!loading);
-                                    // }}
-                                    onClick={handleSubmit}
+                                    // }}   
                                 >
                                     Login
                                 </Button>

@@ -3,7 +3,7 @@ import "antd/dist/antd.css";
 import React, { useState } from "react";
 import { Button } from "../../../components/atoms/Button";
 
-function ManageFuelUp() {
+function ManageMileage() {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [editOpen, seteditOpen] = useState(false);
 
@@ -25,7 +25,7 @@ function ManageFuelUp() {
 
     return (
         <>
-            <Button title="Fuel Up" type="primary" onClick={showModal} />
+            <Button title="Mileage" type="primary" onClick={showModal} />
 
             <Modal
                 open={isModalOpen}
@@ -39,60 +39,52 @@ function ManageFuelUp() {
                     <Row>
                         <Col span={12} style={{ paddingRight: "20px" }}>
                             <h2 style={{ textAlign: "left", color: "#3385FF" }}>
-                                Fuel Up History
+                                Mileage History
                             </h2>
                             <h5 style={{ textAlign: "left", color: "#3385FF" }}>
                                 {" "}
                                 Recent
                             </h5>
                             <Row>
-                                <Col span={6}>
-                                    <div style={{ fontSize: "12px" }}>
+                                <Col span={8}>
+                                    <div
+                                        style={{
+                                            fontSize: "12px",
+                                        }}
+                                    >
                                         15 Jun 2022
                                     </div>
                                 </Col>
-                                <Col span={10}>
+                                <Col span={16}>
                                     <div
                                         style={{
                                             fontSize: "14px",
                                             fontWeight: "bold",
-                                            textAlign: "right",
                                         }}
                                     >
-                                        3000 Rs
+                                        52415 km
                                     </div>
-                                </Col>
-                                <Col span={8}>
-                                    <Button
-                                        type="link"
-                                        title="Edit"
-                                        onClick={handleOpenEdit}
-                                    />
                                 </Col>
                             </Row>
                             <Row>
-                                <Col span={6}>
-                                    <div style={{ fontSize: "12px" }}>
+                                <Col span={8}>
+                                    <div
+                                        style={{
+                                            fontSize: "12px",
+                                        }}
+                                    >
                                         15 Jun 2022
                                     </div>
                                 </Col>
-                                <Col span={10}>
+                                <Col span={16}>
                                     <div
                                         style={{
                                             fontSize: "14px",
                                             fontWeight: "bold",
-                                            textAlign: "right",
                                         }}
                                     >
-                                        3000 Rs
+                                        52400 km
                                     </div>
-                                </Col>
-                                <Col span={8}>
-                                    <Button
-                                        type="link"
-                                        onClick={handleOpenEdit}
-                                        title=" Edit"
-                                    />
                                 </Col>
                             </Row>
 
@@ -101,103 +93,87 @@ function ManageFuelUp() {
                                 Last Month
                             </h5>
                             <Row>
-                                <Col span={6}>
-                                    <div style={{ fontSize: "12px" }}>
+                                <Col span={8}>
+                                    <div
+                                        style={{
+                                            fontSize: "12px",
+                                        }}
+                                    >
                                         15 Jun 2022
                                     </div>
                                 </Col>
-                                <Col span={10}>
+                                <Col span={16}>
                                     <div
                                         style={{
                                             fontSize: "14px",
                                             fontWeight: "bold",
-                                            textAlign: "right",
                                         }}
                                     >
-                                        3000 Rs
+                                        51530 km
                                     </div>
-                                </Col>
-                                <Col span={8}>
-                                    <Button
-                                        type="link"
-                                        onClick={handleOpenEdit}
-                                        title=" Edit"
-                                    />
                                 </Col>
                             </Row>
                             <Row>
-                                <Col span={6}>
-                                    <div style={{ fontSize: "12px" }}>
+                                <Col span={8}>
+                                    <div
+                                        style={{
+                                            fontSize: "12px",
+                                        }}
+                                    >
                                         15 Jun 2022
                                     </div>
                                 </Col>
-                                <Col span={10}>
+                                <Col span={16}>
                                     <div
                                         style={{
                                             fontSize: "14px",
                                             fontWeight: "bold",
-                                            textAlign: "right",
                                         }}
                                     >
-                                        3000 Rs
+                                        50500 km
                                     </div>
-                                </Col>
-                                <Col span={8}>
-                                    <Button
-                                        type="link"
-                                        onClick={handleOpenEdit}
-                                        title="Edit"
-                                    />
                                 </Col>
                             </Row>
                             <Row>
-                                <Col span={6}>
-                                    <div style={{ fontSize: "12px" }}>
+                                <Col span={8}>
+                                    <div
+                                        style={{
+                                            fontSize: "12px",
+                                        }}
+                                    >
                                         15 Jun 2022
                                     </div>
                                 </Col>
-                                <Col span={10}>
+                                <Col span={16}>
                                     <div
                                         style={{
                                             fontSize: "14px",
                                             fontWeight: "bold",
-                                            textAlign: "right",
                                         }}
                                     >
-                                        3000 Rs
+                                        50400 km
                                     </div>
-                                </Col>
-                                <Col span={8}>
-                                    <Button
-                                        type="link"
-                                        onClick={handleOpenEdit}
-                                        title=" Edit"
-                                    />
                                 </Col>
                             </Row>
                             <Row>
-                                <Col span={6}>
-                                    <div style={{ fontSize: "12px" }}>
+                                <Col span={8}>
+                                    <div
+                                        style={{
+                                            fontSize: "12px",
+                                        }}
+                                    >
                                         15 Jun 2022
                                     </div>
                                 </Col>
-                                <Col span={10}>
+                                <Col span={16}>
                                     <div
                                         style={{
                                             fontSize: "14px",
                                             fontWeight: "bold",
-                                            textAlign: "right",
                                         }}
                                     >
-                                        3000 Rs
+                                        50000 km
                                     </div>
-                                </Col>
-                                <Col span={8}>
-                                    <Button
-                                        type="link"
-                                        onClick={handleOpenEdit}
-                                        title="Edit"
-                                    />
                                 </Col>
                             </Row>
                         </Col>
@@ -249,92 +225,30 @@ function ManageFuelUp() {
                                     paddingTop: "5px",
                                 }}
                             >
-                                Petrol 92
+                                Mileage
                             </div>
-
-                            {!editOpen && (
-                                <Row>
-                                    <Col span={12}>
-                                        <div style={{ fontSize: "12px" }}>
-                                            Last Refilled: 15 Jun 2022
-                                        </div>
-                                    </Col>
-                                    <Col span={7}>
-                                        <div
-                                            style={{
-                                                fontSize: "14px",
-                                                fontWeight: "bold",
-                                                textAlign: "right",
-                                            }}
-                                        >
-                                            3000 Rs
-                                        </div>
-                                    </Col>
-                                    <Col span={5}>
-                                        <Button
-                                            type="link"
-                                            onClick={handleOpenEdit}
-                                            title="Edit"
-                                        />
-                                    </Col>
-                                </Row>
-                            )}
-                            {editOpen && (
-                                <div style={{ fontSize: "12px" }}>
-                                    Refilled Amount on 15 Jun 2022
-                                </div>
-                            )}
-                            <InputNumber
-                                placeholder="Latest Refilled Amount"
-                                addonAfter="Rs"
+                            <br />
+                            <div style={{ fontSize: "12px", color: "gray" }}>
+                                Latest Meter Reading
+                            </div>
+                            <InputNumber addonAfter="km" />
+                            <br />
+                            <br />
+                            <Button
+                                style={{ width: "200" }}
+                                type="primary"
+                                onClick={showModal}
+                                title="Update"
                             />
-                            <br />
-                            <br />
-                            {editOpen ? (
-                                <Row>
-                                    <Col span={12}>
-                                        {editOpen && (
-                                            <Button
-                                                style={{
-                                                    width: "200",
-                                                    border: "1px solid #3385FF",
-                                                    color: "#3385FF",
-                                                }}
-                                                type="default"
-                                                onClick={() => {
-                                                    seteditOpen(false);
-                                                }}
-                                                title="Cancel"
-                                            />
-                                        )}
-                                    </Col>
-                                    <Col span={12}>
-                                        <Button
-                                            style={{ width: "200" }}
-                                            type="primary"
-                                            onClick={showModal}
-                                            title="Update"
-                                        />
-                                    </Col>
-                                </Row>
-                            ) : (
-                                <Button
-                                    style={{ width: "200" }}
-                                    type="primary"
-                                    onClick={showModal}
-                                    title="Update"
-                                />
-                            )}
                         </Col>
                     </Row>
                 </div>
             </Modal>
-            {console.log(editOpen)}
         </>
     );
 }
 
-export default ManageFuelUp;
+export default ManageMileage;
 
 const gridStyle: React.CSSProperties = {
     width: "100%",

@@ -1,6 +1,6 @@
 import api from '../../services/AxiosService';
 import { SYSTEM_CONFIG } from '../../utils/StytemConfig';
-// import { Buffer } from 'buffer';
+import { Buffer } from 'buffer';
 const signIn = (data: any) => {
   let grant = {
     name: 'grant_type',
@@ -21,7 +21,7 @@ const signIn = (data: any) => {
   let body: any = `${grant.name}=${grant.type}&username=${data.userName}&password=${data.password}`;
 
   return new Promise((resolve, reject) => {
-    api('post', '', myHeaders, `/oauth/token`, 'token', body, '')
+    api('post','', myHeaders, `/oauth/token`, '', body, '')
       .then((response: any) => {
         resolve(response);
       })
