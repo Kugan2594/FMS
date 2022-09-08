@@ -1,18 +1,18 @@
 import api from "../../../services/AxiosService";
 
-const getAllEmissionTestDocumentByUserId = (employeeId: number) => {
+const getAllEmissionTestDocumentByUserId = (userId: number) => {
   return new Promise((resolve, reject) => {
     api(
       "get",
       "fm-web",
       null,
-      `/emissionTestByUserId/${employeeId}`,
+      `/emissionTestByUserId/${userId}`,
       "",
       "",
       ""
     )
       .then((response: any) => {
-        resolve(response.data.results.getEmployeeleavetypeByEmployeeId);
+        resolve(response.data);
       })
       .catch((error) => {
         reject(error);

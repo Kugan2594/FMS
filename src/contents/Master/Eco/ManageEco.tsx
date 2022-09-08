@@ -7,28 +7,18 @@ import { createDeflateRaw } from "zlib";
 import {
     getAllEmissionTestDocumentByUserId
   } from "./ServicesEco";
-const data = [
-    {
-        id: "1",
-        name: "Emission Test",
-        progressData: 40,
-        vehicleNo: "NP CAR 5245",
-        vehicleModel: "TOYOTA aqua",
-        branchName: "Jaffna Branch",
-        dueDate: "23 Mar 2022",
-    }
-
-];
+  import { getUserDetails} from "../../Login/LoginAuthentication";
 function createData(data:any){
     let convertData=data.map((post:any,index:any)=>{
 return {
-    id: "1",
-    name: "Insurance",
-    progressData: 40,
-    vehicleNo: "NP CAR 5245",
-    vehicleModel: "TOYOTA aqua",
+    id: post.id,
+    name: "EmissionTest",
+    progressData: post.emissionTestValidity,
+    vehicleNo: post.vehicleResponseDto.vehicleOwner,
+    vehicleModel: post.vehicleResponseDto.resourceVehicleDto.vehicleModel
+    ,
     branchName: "Jaffna Branch",
-    dueDate: "23 Mar 2022",
+    dueDate: post.emissionTestExpiryDate,
 }
     })
     return convertData
@@ -36,7 +26,6 @@ return {
 function ManageEco() {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isEdit, setisEdit] = useState(false);
-    const [userId, setuserId] = useState(1);
     const [eco,setEco]=useState([]);
     const showModal = () => {
         setIsModalOpen(true);
@@ -57,13 +46,14 @@ function ManageEco() {
     };
 
     useEffect(()=>{
-        getAllEmissionTestData(userId);
-    })
-    const getAllEmissionTestData=(userId:any)=>{
+        getAllEmissionTestData(getUserDetails().user_id);
+    }, [])
+    const getAllEmissionTestData=(userId: number)=>{
         let data: any=[];
+
         getAllEmissionTestDocumentByUserId(userId).then(
             (res:any) => {
-                data=createData(res);
+                data=createData(res.results.emissionTest);
                 setEco(data);
             },(error:any)=>{
                 setEco([]);
@@ -73,8 +63,8 @@ function ManageEco() {
     return (
         <>
             <MasterTemplateWithLargeCard
-                data={data}
-                dataCount={data.length}
+                data={eco}
+                dataCount={eco.length}
                 headerOnSearch={() => {}}
                 headerOnClickAdd={showModal}
                 cardOnClick={(id: string) => console.log("CLICKED " + id)}
