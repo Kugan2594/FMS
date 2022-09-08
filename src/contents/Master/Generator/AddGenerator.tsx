@@ -31,7 +31,7 @@ const beforeUpload = (file: RcFile) => {
     return isJpgOrPng && isLt2M;
 };
 
-function AddEco() {
+function AddGenerator() {
     const [form] = Form.useForm();
     const [loading, setLoading] = useState(false);
     const [imageUrl, setImageUrl] = useState<string>();
@@ -63,48 +63,8 @@ function AddEco() {
     return (
         <>
             <Form id="form" name="basic" form={form}>
-                <Row style={{ paddingLeft: "35px", paddingRight: "35px" }}>
-                    <Col span={24}>
-                        <Form.Item>
-                            <Select
-                                placeholder="Vehicle"
-                                optionFilterProp="children"
-                                bordered={false}
-                                style={{ borderBottom: "1px solid #ccccb3" }}
-                            >
-                                <Option value="jack">Jack</Option>
-                                <Option value="lucy">Lucy</Option>
-                                <Option value="tom">Tom</Option>
-                            </Select>
-                        </Form.Item>
-                        <Form.Item>
-                            <Input
-                                placeholder="Region"
-                                required
-                                bordered={false}
-                                style={{ borderBottom: "1px solid #ccccb3" }}
-                            />
-                        </Form.Item>
-                        <Form.Item>
-                            <DatePicker
-                                placeholder="Issued Date"
-                                style={datePickerStyle}
-                            />
-                        </Form.Item>
-                        <Form.Item>
-                            <DatePicker
-                                placeholder="Expire Date"
-                                style={datePickerStyle}
-                            />
-                        </Form.Item>
-                        <Form.Item>
-                            <Input
-                                placeholder="Price"
-                                bordered={false}
-                                required
-                                style={{ borderBottom: "1px solid #ccccb3" }}
-                            />
-                        </Form.Item>
+                <Row>
+                    <Col span={12}>
                         <Upload
                             name="avatar"
                             listType="picture-card"
@@ -126,17 +86,53 @@ function AddEco() {
                         </Upload>
                     </Col>
                 </Row>
+                <Row>
+                    <Col span={12}>
+                        <Form.Item>
+                            <Input
+                                placeholder="Generator Brand"
+                                required
+                                bordered={false}
+                                style={{ borderBottom: "1px solid #ccccb3" }}
+                            />
+                        </Form.Item>
+                        <Form.Item>
+                            <Select
+                                placeholder="Fuel Type"
+                                optionFilterProp="children"
+                                bordered={false}
+                                style={{ borderBottom: "1px solid #ccccb3" }}
+                            >
+                                <Option value="jack">Petrol</Option>
+                                <Option value="lucy">Diesal</Option>
+                            </Select>
+                        </Form.Item>
+                    </Col>
+                    <Col span={12}>
+                        <Form.Item>
+                            <Input
+                                placeholder="Generator Name"
+                                required
+                                bordered={false}
+                                style={{ borderBottom: "1px solid #ccccb3" }}
+                            />
+                        </Form.Item>
+                        <Form.Item>
+                            <Select
+                                placeholder="Company Branch"
+                                optionFilterProp="children"
+                                bordered={false}
+                                style={{ borderBottom: "1px solid #ccccb3" }}
+                            >
+                                <Option value="jack">Jaffna</Option>
+                                <Option value="lucy">Colombo</Option>
+                            </Select>
+                        </Form.Item>
+                    </Col>
+                </Row>
             </Form>
         </>
     );
 }
 
-export default AddEco;
-
-const datePickerStyle: React.CSSProperties = {
-    width: "100%",
-    borderLeft: "0px",
-    borderRight: "0px",
-    borderTop: "0px",
-    borderBottom: "1px solid #ccccb3",
-};
+export default AddGenerator;
