@@ -89,17 +89,13 @@ function AddEco() {
                         <Form.Item>
                             <DatePicker
                                 placeholder="Issued Date"
-                                style={{
-                                    width: "100%",
-                                }}
+                                style={datePickerStyle}
                             />
                         </Form.Item>
                         <Form.Item>
                             <DatePicker
                                 placeholder="Expire Date"
-                                style={{
-                                    width: "100%",
-                                }}
+                                style={datePickerStyle}
                             />
                         </Form.Item>
                         <Form.Item>
@@ -137,3 +133,11 @@ function AddEco() {
 }
 
 export default AddEco;
+
+const datePickerStyle: React.CSSProperties = {
+    width: "100%",
+    borderLeft: "0px",
+    borderRight: "0px",
+    borderTop: "0px",
+    borderBottom: "1px solid #ccccb3",
+};
