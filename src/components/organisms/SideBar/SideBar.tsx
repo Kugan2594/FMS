@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import CustomMenu from "./CustomMenu";
-import { Divider, Layout } from "antd";
+import { Layout } from "antd";
 import HeaderLogo from "./HeaderLogo";
 import UserProfile from "./UserProfile";
 import MainMenuItem from "../../molecules/MainMenuItem";
 import mainMenuItems from "./items";
 import SubModule from "../SubModule/item";
+import { useNavigate } from "react-router-dom";
 
 const { Sider } = Layout;
 
@@ -21,18 +21,20 @@ function SideBar() {
 
   const home: any = [{ id: "allBranches", name: "All Branches" }, ...homeItems];
 
+  const navigate = useNavigate();
+
   const ClickHandler = (item: any) => {
     if (item.id === "home") {
-      console.log("This is home");
       setSubmenuItems(home);
     } else {
       setSubmenuItems(item.children);
     }
     console.log(submenuItems);
+    navigate(item.link);
   };
 
   return (
-    <Sider  theme="light" breakpoint="lg" className="main-sidebar">
+    <Sider theme="light" breakpoint="lg" className="main-sidebar">
       <HeaderLogo />
       <div className="menu">
         <div className="main-menu">
@@ -46,7 +48,10 @@ function SideBar() {
             );
           })}
           <div className="user">
-          <UserProfile onClickProfile={() => console.log("PROFILE")} onClickLogout={() => console.log("LOGOUT")} />
+            <UserProfile
+              onClickProfile={() => console.log("PROFILE")}
+              onClickLogout={() => console.log("LOGOUT")}
+            />
           </div>
         </div>
         <div className="sub-menu">
