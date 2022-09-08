@@ -11,6 +11,7 @@ import "./templates.style.less";
 // vehicleNo = Part's Vehicle number
 // vehicleModel = Parts's Vehicle model
 // branch = Part's Branch
+// lastChangedDate = Part's last changed date
 // dueDate = Part's due date
 // cardOnClick = function when click card
 // updateButton = function when click update button
@@ -27,16 +28,17 @@ interface TemplateType {
 }
 
 interface CardType {
-    id?: string;
-    name?: string;
-    progressData?: number;
-    vehicleNo?: string;
-    vehicleModel?: string;
-    branchName?: string;
-    dueDate?: string;
-    cardOnClick?: any;
-    updateButton?: any;
-    deleteButton?: any;
+  id?: string;
+  name?: string;
+  progressData?: number;
+  vehicleNo?: string;
+  vehicleModel?: string;
+  branchName?: string;
+  lastChangedDate?: string;
+  dueDate?: string;
+  cardOnClick?: any;
+  updateButton?: any;
+  deleteButton?: any;
 }
 
 function MasterTemplateWithLargeCard({
@@ -48,49 +50,46 @@ function MasterTemplateWithLargeCard({
     updateButton,
     deleteButton,
 }: TemplateType) {
-    return (
-        <div className="master-template-large-card">
-            <div className="master-template-large-card-header">
-                <MasterHeader
-                    onSearch={headerOnSearch}
-                    onClickAdd={headerOnClickAdd}
-                    dataCount={dataCount}
+  return (
+    <div className="master-template-large-card">
+      <div className="master-template-large-card-header">
+        <MasterHeader onSearch={headerOnSearch} onClickAdd={headerOnClickAdd} dataCount={dataCount} />
+      </div>
+      <div className="master-template-large-card-content">
+        <List
+        style={{ height: "100%"}}
+          itemLayout="vertical"
+          size="default"
+          pagination={{
+            onChange: (page) => {
+              console.log(page);
+            },
+            pageSize: 5,
+          }}
+          dataSource={data}
+          renderItem={(data) => (
+            <List.Item style={{ padding: 0 }} key={data.id}>
+              {
+                <CardLarge
+                  key={data.id}
+                  name={data.name}
+                  progressData={data.progressData}
+                  vehicleNo={data.vehicleNo}
+                  vehicleModel={data.vehicleModel}
+                  branchName={data.branchName}
+                  lastChangedDate={data.lastChangedDate}
+                  dueDate={data.dueDate}
+                  cardOnClick={() => cardOnClick(data.id)}
+                  updateButton={() => updateButton(data.id)}
+                  deleteButton={() => deleteButton(data.id)}
                 />
-            </div>
-            <div className="master-template-large-card-content">
-                <List
-                    style={{ height: "100%" }}
-                    itemLayout="vertical"
-                    size="default"
-                    pagination={{
-                        onChange: (page: any) => {
-                            console.log(page);
-                        },
-                        pageSize: 5,
-                    }}
-                    dataSource={data}
-                    renderItem={(data) => (
-                        <List.Item style={{ padding: 0 }} key={data.id}>
-                            {
-                                <CardLarge
-                                    key={data.id}
-                                    name={data.name}
-                                    progressData={data.progressData}
-                                    vehicleNo={data.vehicleNo}
-                                    vehicleModel={data.vehicleModel}
-                                    branchName={data.branchName}
-                                    dueDate={data.dueDate}
-                                    cardOnClick={() => cardOnClick(data.id)}
-                                    updateButton={() => updateButton(data.id)}
-                                    deleteButton={() => deleteButton(data.id)}
-                                />
-                            }
-                        </List.Item>
-                    )}
-                />
-            </div>
-        </div>
-    );
+              }
+            </List.Item>
+          )}
+        />
+      </div>
+    </div>
+  );
 }
 
 export default MasterTemplateWithLargeCard;
