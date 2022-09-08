@@ -4,6 +4,7 @@ import SuspenseLoader from "../components/molecules/SuspenseLoader";
 import { RouteObject } from "react-router-dom";
 import CustomLayout from "../layout/CustomLayout";
 import ManageDrivers from "../contents/Master/Drivers/ManageDrivers";
+import ManageBranch from "../contents/Master/Branch/ManageBranch";
 const Loader = (Component: any) => (props: any) =>
   (
     <Suspense fallback={<SuspenseLoader />}>
@@ -19,12 +20,7 @@ const PublicRoute: RouteObject[] = [
   {
     path: "home",
     element: <CustomLayout />,
-    children: [
-      {
-        path: "drivers",
-        element: "<ManageDrivers />",
-      },
-    ],
+    children: [],
   },
   {
     path: "master",
@@ -33,6 +29,10 @@ const PublicRoute: RouteObject[] = [
       {
         path: "drivers",
         element: <ManageDrivers />,
+      },
+      {
+        path: "branches",
+        element: <ManageBranch />,
       },
     ],
   },
