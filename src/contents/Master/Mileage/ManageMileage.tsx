@@ -5,7 +5,6 @@ import { Button } from "../../../components/atoms/Button";
 
 function ManageMileage() {
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [editOpen, seteditOpen] = useState(false);
 
     const showModal = () => {
         setIsModalOpen(true);
@@ -19,10 +18,6 @@ function ManageMileage() {
         setIsModalOpen(false);
     };
 
-    const handleOpenEdit = () => {
-        seteditOpen(!editOpen);
-    };
-
     return (
         <>
             <Button title="Mileage" type="primary" onClick={showModal} />
@@ -31,7 +26,6 @@ function ManageMileage() {
                 open={isModalOpen}
                 onOk={handleOk}
                 onCancel={handleCancel}
-                closable={false}
                 footer={null}
                 width={800}
             >
