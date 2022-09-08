@@ -1,6 +1,6 @@
 import api from '../../services/AxiosService';
 import { SYSTEM_CONFIG } from '../../utils/StytemConfig';
-// import { Buffer } from 'buffer';
+import { Buffer } from 'buffer';
 const signIn = (data: any) => {
   let grant = {
     name: 'grant_type',
