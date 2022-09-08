@@ -31,7 +31,6 @@ function ManageFuelUp() {
                 open={isModalOpen}
                 onOk={handleOk}
                 onCancel={handleCancel}
-                closable={false}
                 footer={null}
                 width={800}
             >

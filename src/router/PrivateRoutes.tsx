@@ -6,6 +6,7 @@ import ManageBranch from "../contents/Master/Branch/ManageBranch";
 import ManageEco from "../contents/Master/Eco/ManageEco";
 import ManageFuelUp from "../contents/Master/FuelUp/ManageFuelUp";
 import ManageMileage from "../contents/Master/Mileage/ManageMileage";
+import ManageGenerator from "../contents/Master/Generator/ManageGenerator";
 
 const Loader = (Component: any) => (props: any) =>
     (
@@ -13,7 +14,6 @@ const Loader = (Component: any) => (props: any) =>
             <Component {...props} />
         </Suspense>
     );
-
 const PrivateRoute: RouteObject[] = [
     {
         path: "/",
@@ -34,6 +34,10 @@ const PrivateRoute: RouteObject[] = [
     {
         path: "master/emission",
         element: <ManageEco />,
+    },
+    {
+        path: "master/generator",
+        element: <ManageGenerator />,
     },
 ];
 
