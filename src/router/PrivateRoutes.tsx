@@ -4,6 +4,8 @@ import SuspenseLoader from "../components/molecules/SuspenseLoader";
 import { RouteObject } from "react-router-dom";
 import ManageBranch from "../contents/Master/Branch/ManageBranch";
 import ManageEco from "../contents/Master/Eco/ManageEco";
+import ManageFuelUp from "../contents/Master/FuelUp/ManageFuelUp";
+import ManageMileage from "../contents/Master/Mileage/ManageMileage";
 
 const Loader = (Component: any) => (props: any) =>
     (
@@ -21,7 +23,14 @@ const PrivateRoute: RouteObject[] = [
         path: "Master",
         element: <ManageBranch />,
     },
-
+    {
+        path: "fuelup",
+        element: <ManageFuelUp />,
+    },
+    {
+        path: "mileage",
+        element: <ManageMileage />,
+    },
     {
         path: "master/emission",
         element: <ManageEco />,
