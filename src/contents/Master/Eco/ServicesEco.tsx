@@ -1,4 +1,4 @@
-import api from "services/AxiosService";
+import api from "../../../services/AxiosService";
 
 const getAllEmissionTestDocumentByUserId = (employeeId: number) => {
   return new Promise((resolve, reject) => {
