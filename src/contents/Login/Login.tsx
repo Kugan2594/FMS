@@ -11,7 +11,7 @@ import {
     Typography,
 } from "antd";
 import Logo from "../../assets/Logo.svg";
-
+import jwt_decode from "jwt-decode";
 import React, { useState } from "react";
 import "./login.style.less";
 import { loadOptions } from "@babel/core";
@@ -43,13 +43,13 @@ function Login() {
     };
 
 
-    const handleError = (res:any) => {
+    const handleError = (res: any) => {
     };
 
     const handleSubmit = (event: any) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
-        let emailId:any = data.get("email");
+        let emailId: any = data.get("email");
         let body = {
             userName: data.get("email"),
             password: data.get("password"),
@@ -74,8 +74,8 @@ function Login() {
                 (res: any) => {
                     let response = res.data;
                     console.log({ response });
-                    var decoded_token: any = "";
-                    navigate("/home"); 
+                    var decoded_token: any = jwt_decode(response.access_token);
+                    navigate("/home");
                     if (response.access_token) {
                         setAuthentication("true");
                         setToken(response.access_token);
@@ -126,7 +126,7 @@ function Login() {
                 <Row>
                     <Col span={20} offset={2}>
                         <Form
-                       onClick={handleSubmit}
+                            onClick={handleSubmit}
                             labelCol={{
                                 span: 24,
                             }}
@@ -148,7 +148,7 @@ function Login() {
                             </Form.Item>
                             <Form.Item>
                                 <Input.Password
-                                name = "password"
+                                    name="password"
                                     placeholder="Password"
                                     iconRender={(visible) =>
                                         visible ? (
@@ -164,9 +164,9 @@ function Login() {
                                     className="login-button"
                                     type="primary"
                                     loading={loading}
-                                    // onClick={() => {
-                                    //     setLoading(!loading);
-                                    // }}   
+                                // onClick={() => {
+                                //     setLoading(!loading);
+                                // }}   
                                 >
                                     Login
                                 </Button>
