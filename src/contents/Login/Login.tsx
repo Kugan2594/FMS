@@ -11,7 +11,7 @@ import {
     Typography,
 } from "antd";
 import Logo from "../../assets/Logo.svg";
-import jwt_decode from "jwt-decode";
+
 import React, { useState } from "react";
 import "./login.style.less";
 import { loadOptions } from "@babel/core";
@@ -25,6 +25,7 @@ import {
 } from "./LoginAuthentication";
 import { signIn } from "./ServiceLogin";
 import { useNavigate } from "react-router-dom";
+import jwt_decode from "jwt-decode";
 const { Text, Title } = Typography;
 
 function Login() {
@@ -75,7 +76,7 @@ function Login() {
                     let response = res.data;
                     console.log({ response });
                     var decoded_token: any = jwt_decode(response.access_token);
-                    navigate("/home");
+                    navigate("/home"); 
                     if (response.access_token) {
                         setAuthentication("true");
                         setToken(response.access_token);
@@ -126,7 +127,7 @@ function Login() {
                 <Row>
                     <Col span={20} offset={2}>
                         <Form
-                            onClick={handleSubmit}
+                       onSubmitCapture={handleSubmit}
                             labelCol={{
                                 span: 24,
                             }}
@@ -164,9 +165,9 @@ function Login() {
                                     className="login-button"
                                     type="primary"
                                     loading={loading}
-                                // onClick={() => {
-                                //     setLoading(!loading);
-                                // }}   
+                                    onClick={() => {
+                                        setLoading(!loading);
+                                    }}   
                                 >
                                     Login
                                 </Button>
