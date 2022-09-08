@@ -1,8 +1,19 @@
 import React from "react";
-import { AutoComplete, Button, Col, Form, Input, Row, Select } from "antd";
+import {
+  AutoComplete,
+  Col,
+  Form,
+  Input,
+  Row,
+  Select,
+  Typography,
+  Upload,
+} from "antd";
 import "./driver.style.less";
 
 const { Option } = Select;
+
+const { Text } = Typography;
 
 const layout = {
   labelCol: { span: 8 },
@@ -36,7 +47,12 @@ function AddDriver() {
     form.resetFields();
   };
 
-  const branch = [{value: "Jaffna"}, {value:"Colombo"}, {value:"Kandy"}, {value:"Vavuniya"}];
+  const branch = [
+    { value: "Jaffna" },
+    { value: "Colombo" },
+    { value: "Kandy" },
+    { value: "Vavuniya" },
+  ];
 
   return (
     <div className="add-driver">
@@ -48,46 +64,46 @@ function AddDriver() {
         layout="vertical"
       >
         <Row>
-          <Col span={12}>
+          <Col span={8}>
             <Form.Item name="firstName" label="First Name">
               <Input />
             </Form.Item>
           </Col>
 
-          <Col span={12}>
+          <Col span={8}>
             <Form.Item name="lastName" label="Last Name">
               <Input />
             </Form.Item>
           </Col>
 
-          <Col span={12}>
+          <Col span={8}>
             <Form.Item name="nic" label="NIC Number">
               <Input />
             </Form.Item>
           </Col>
 
-          <Col span={12}>
+          <Col span={8}>
             <Form.Item name="email" label="Email">
               <Input />
             </Form.Item>
           </Col>
 
-          <Col span={12}>
+          <Col span={8}>
             <Form.Item name="contactNumber" label="Contact Number">
               <Input />
             </Form.Item>
           </Col>
 
-          <Col span={12}>
+          <Col span={8}>
             <Form.Item name="licenseNumber" label="License Number">
               <Input />
             </Form.Item>
           </Col>
 
-          <Col span={12}>
+          <Col span={8}>
             <Form.Item name="branch" label="Select Branch">
               <AutoComplete
-                style={{ width: 200 }}
+                className="autoComplete"
                 options={branch}
                 placeholder="Select Branch"
                 filterOption={(inputValue, option) =>
@@ -99,18 +115,36 @@ function AddDriver() {
             </Form.Item>
           </Col>
 
-          <Col span={12}>
+          <Col span={8}>
             <Form.Item name="vehicle" label="Select Vehicle">
-              <Select
-                className="select"
+              <AutoComplete
+                className="autoComplete"
+                options={branch}
                 placeholder="Select Vehicle"
-                onChange={onGenderChange}
-                allowClear
-              >
-                {branch.map((name) => {
-                  return <Option value="jaffna">{name.value}</Option>;
-                })}
-              </Select>
+                filterOption={(inputValue, option) =>
+                  option!.value
+                    .toUpperCase()
+                    .indexOf(inputValue.toUpperCase()) !== -1
+                }
+              />
+            </Form.Item>
+          </Col>
+        </Row>
+
+        <Text className="sub-title" strong>
+          User Creation
+        </Text>
+
+        <Row>
+          <Col span={8}>
+            <Form.Item name="userName" label="User Name">
+              <Input />
+            </Form.Item>
+          </Col>
+
+          <Col span={8}>
+            <Form.Item name="password" label="Password">
+              <Input type="password" />
             </Form.Item>
           </Col>
         </Row>

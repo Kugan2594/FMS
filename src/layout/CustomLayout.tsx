@@ -1,12 +1,14 @@
 import { Layout } from "antd";
 import SideBar from "../components/organisms/SideBar/SideBar";
 import "./CustomLayout.style.less";
-import { Outlet } from "react-router-dom";
-import ManageDrivers from "../contents/Master/Drivers/ManageDrivers";
+import { useRoutes } from "react-router-dom";
+import routes from "../router/PrivateRoutes";
 
 const { Content } = Layout;
 
 export default function CustomLayout() {
+  const privatecontent = useRoutes(routes);
+
   return (
     <Layout>
       <div>
@@ -18,7 +20,7 @@ export default function CustomLayout() {
             className="site-layout-background"
             style={{ padding: "20px", minHeight: "100vh", maxHeight: "100vh" }}
           >
-            <ManageDrivers />
+            {privatecontent}
           </div>
         </Content>
       </Layout>
