@@ -15,6 +15,22 @@ interface TemplateType {
     onClickUpdate?: any;
     onClickDelete?: any;
     isProgressBar?: boolean;
+    privilege?: boolean;
+    adminCard?: boolean;
+    branchCard?: boolean;
+    contactNumber?: string;
+    vehicleCard?: boolean;
+    vehicleNumber?: string;
+    vehicleType?: string;
+    designation?: string;
+    drivingLicense?: string;
+    vehicleModel?: string;
+    driverCard?: boolean;
+    generatorCard?: boolean;
+    generatorBrand?: string;
+    fuelType?: string;
+    drivercard?: boolean;
+    nic?: string;
 }
 
 function MasterTemplateWithSmallCard({
@@ -26,6 +42,12 @@ function MasterTemplateWithSmallCard({
     onClickUpdate,
     onClickDelete,
     isProgressBar,
+    privilege,
+    adminCard,
+    branchCard,
+    vehicleCard,
+    generatorCard,
+    driverCard,
 }: TemplateType) {
     return (
         <div>
@@ -46,7 +68,7 @@ function MasterTemplateWithSmallCard({
                             onChange: (page: any) => {
                                 console.log(page);
                             },
-                            pageSize: 6,
+                            pageSize: 8,
                         }}
                         dataSource={data}
                         renderItem={(data) => (
@@ -55,7 +77,7 @@ function MasterTemplateWithSmallCard({
                                     <SmallCard
                                         key={data.id}
                                         branchLocation={data.branchLocation}
-                                        branchName={data.branchName}
+                                        name={data.name}
                                         cardOnClick={() => cardOnClick(data.id)}
                                         onClickUpdate={() =>
                                             onClickUpdate(data.id)
@@ -69,6 +91,15 @@ function MasterTemplateWithSmallCard({
                                         progressData={data.progressData}
                                         adminName={data.adminName}
                                         isProgressBar={isProgressBar}
+                                        privilege={privilege}
+                                        adminCard={adminCard}
+                                        branchCard={branchCard}
+                                        vehicleCard={vehicleCard}
+                                        generatorCard={generatorCard}
+                                        contactNumber={data.contactNumber}
+                                        driverCard={driverCard}
+                                        designation={data.designation}
+                                        nic={data.nic}
                                     />
                                 }
                             </List.Item>

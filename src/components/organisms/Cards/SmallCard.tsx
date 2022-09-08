@@ -1,3 +1,4 @@
+import { SettingFilled, SettingOutlined } from "@ant-design/icons";
 import Icon from "@ant-design/icons/lib/components/AntdIcon";
 import { Button, Card, Col, Image, Progress, Row, Typography } from "antd";
 import Title from "antd/lib/skeleton/Title";
@@ -11,7 +12,7 @@ export interface CardSmallType {
     progressData?: number;
     itemName?: string;
     branchLocation?: string;
-    branchName?: string;
+    name?: string;
     adminName?: string;
     cardOnClick?: any;
     onClickUpdate?: any;
@@ -19,12 +20,27 @@ export interface CardSmallType {
     image?: any;
     isProgressBar?: boolean;
     onClickProfile?: any;
+    privilege?: boolean;
+    adminCard?: boolean;
+    branchCard?: boolean;
+    contactNumber?: string;
+    vehicleCard?: boolean;
+    vehicleNumber?: string;
+    vehicleType?: string;
+    designation?: string;
+    drivingLicense?: string;
+    vehicleModel?: string;
+    driverCard?: boolean;
+    generatorCard?: boolean;
+    generatorBrand?: string;
+    fuelType?: string;
+    nic?: string;
 }
 let intialValue: CardSmallType = {
     id: "",
     adminName: "",
     branchLocation: "",
-    branchName: "",
+    name: "",
     image: "",
     isProgressBar: false,
     itemName: "",
@@ -34,6 +50,19 @@ let intialValue: CardSmallType = {
     onClickDelete: null,
     onClickProfile: null,
     onClickUpdate: null,
+    privilege: false,
+    adminCard: false,
+    vehicleCard: false,
+    vehicleNumber: "",
+    vehicleType: "",
+    designation: "",
+    drivingLicense: "",
+    vehicleModel: "",
+    driverCard: false,
+    generatorCard: false,
+    generatorBrand: "",
+    fuelType: "",
+    nic: "",
 };
 function SmallCard({
     id,
@@ -41,7 +70,7 @@ function SmallCard({
     progressData,
     itemName,
     branchLocation,
-    branchName,
+    name,
     adminName,
     cardOnClick,
     onClickUpdate,
@@ -49,10 +78,26 @@ function SmallCard({
     image,
     isProgressBar,
     onClickProfile,
+    privilege,
+    adminCard,
+    branchCard,
+    contactNumber,
+    vehicleCard,
+    vehicleNumber,
+    vehicleType,
+    designation,
+    drivingLicense,
+    vehicleModel,
+    driverCard,
+    generatorBrand,
+    generatorCard,
+    fuelType,
+    nic,
 }: CardSmallType) {
     const { Title, Text } = Typography;
 
     const [profile, setProfile] = useState(image);
+
     return (
         <Card className="small-card" onClick={cardOnClick}>
             <Row className="main-row" justify="center" align="top" gutter={8}>
@@ -64,7 +109,12 @@ function SmallCard({
                                 style={{ borderRadius: 10 }}
                             />
                         ) : (
-                            <Image src={image} style={{ borderRadius: 10 }} />
+                            <Image
+                                src={
+                                    "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
+                                }
+                                style={{ borderRadius: 10 }}
+                            />
                         )}
                     </div>
                     {isProgressBar && (
@@ -73,14 +123,43 @@ function SmallCard({
                 </Col>
                 <Col xs={24} xl={9} className="content-2">
                     <div className="content-2-item">
-                        <Title level={5}> {branchName}</Title>
+                        {branchCard && <Title level={5}> {name}</Title>}
+                        {adminCard && <Title level={5}> {adminName}</Title>}
+                        {vehicleCard && (
+                            <Title level={5}> {vehicleNumber}</Title>
+                        )}
                         <div className="sub-content">
-                            <Text>{branchLocation}</Text>
-                            <div className="admin-name">
+                            {branchCard && <Text>{branchLocation}</Text>}
+                            {vehicleCard && (
+                                <Title level={5}> {vehicleType}</Title>
+                            )}
+                            {generatorCard && (
+                                <Title level={5}> {fuelType}</Title>
+                            )}
+                            {adminCard && (
                                 <Text strong type="secondary">
-                                    {adminName}
+                                    {" "}
+                                    {contactNumber}
                                 </Text>
-                            </div>
+                            )}
+                            {branchCard && (
+                                <div className="admin-name">
+                                    <Text strong type="secondary">
+                                        {adminName}
+                                    </Text>
+                                </div>
+                            )}
+                            {adminCard && (
+                                <div className="admin-name">
+                                    <Text strong type="secondary">
+                                        {nic}
+                                    </Text>
+                                    <br />
+                                    <Text strong type="secondary">
+                                        {name}
+                                    </Text>
+                                </div>
+                            )}
                         </div>
                     </div>
                 </Col>
@@ -94,24 +173,103 @@ function SmallCard({
                                 flexDirection: "column",
                             }}
                         >
-                            <div className="number-of-vehicles">
-                                <div
-                                    className="number"
-                                    style={{
-                                        fontSize: "24px",
-                                        padding: "0px",
-                                    }}
-                                >
-                                    {numberOfVehicles}
-                                </div>{" "}
-                                <div className="item-name">
-                                    <Text strong type="secondary">
-                                        {itemName}
-                                    </Text>{" "}
+                            {branchCard && (
+                                <div className="number-of-vehicles">
+                                    <div
+                                        className="number"
+                                        style={{
+                                            fontSize: "24px",
+                                            padding: "0px",
+                                        }}
+                                    >
+                                        {numberOfVehicles}
+                                    </div>{" "}
+                                    <div className="item-name">
+                                        <Text strong type="secondary">
+                                            {itemName}
+                                        </Text>{" "}
+                                    </div>
                                 </div>
-                            </div>
+                            )}
+                            {adminCard && (
+                                <div className="number-of-vehicles">
+                                    <div
+                                        className="number"
+                                        style={{
+                                            fontSize: "24px",
+                                            padding: "0px",
+                                        }}
+                                    >
+                                        {designation}
+                                    </div>{" "}
+                                    <div className="item-name">
+                                        <Text strong type="secondary">
+                                            Designation
+                                        </Text>{" "}
+                                    </div>
+                                </div>
+                            )}
+                            {vehicleCard && (
+                                <div className="number-of-vehicles">
+                                    <div
+                                        className="number"
+                                        style={{
+                                            fontSize: "24px",
+                                            padding: "0px",
+                                        }}
+                                    >
+                                        {vehicleModel}
+                                    </div>{" "}
+                                    <div className="item-name">
+                                        <Text strong type="secondary">
+                                            vehicle model
+                                        </Text>{" "}
+                                    </div>
+                                </div>
+                            )}
+                            {driverCard && (
+                                <div className="number-of-vehicles">
+                                    <div
+                                        className="number"
+                                        style={{
+                                            fontSize: "24px",
+                                            padding: "0px",
+                                        }}
+                                    >
+                                        {name}
+                                    </div>{" "}
+                                    <div className="item-name">
+                                        <Text strong type="secondary">
+                                            branch name
+                                        </Text>{" "}
+                                    </div>
+                                </div>
+                            )}
+                            {generatorCard && (
+                                <div className="number-of-vehicles">
+                                    <div
+                                        className="number"
+                                        style={{
+                                            fontSize: "24px",
+                                            padding: "0px",
+                                        }}
+                                    >
+                                        {generatorBrand}
+                                    </div>{" "}
+                                    <div className="item-name">
+                                        <Text strong type="secondary">
+                                            branch name
+                                        </Text>{" "}
+                                    </div>
+                                </div>
+                            )}
                         </div>
                         <div className="actions">
+                            {privilege && (
+                                <SettingOutlined
+                                    style={{ fontSize: "24px", opacity: "0.5" }}
+                                />
+                            )}
                             <Button
                                 style={{ borderRadius: 5 }}
                                 onClick={() => {

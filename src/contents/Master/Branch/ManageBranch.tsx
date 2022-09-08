@@ -8,89 +8,17 @@ const data = [
         progressData: 49,
         itemName: "Vehicles",
         branchLocation: "Colombo",
-        branchName: "Colombo Branch",
+        name: "Colombo Branch",
         adminName: "Michael Clarke",
-    },
-    {
-        id: "2",
-        numberOfVehicles: 34,
-        progressData: 49,
-        itemName: "Vehicles",
-        branchLocation: "Colombo",
-        branchName: "Colombo Branch",
-        adminName: "Michael Clarke",
-    },
-    {
-        id: "3",
-        numberOfVehicles: 34,
-        progressData: 49,
-        itemName: "Vehicles",
-        branchLocation: "Colombo",
-        branchName: "Colombo Branch",
-        adminName: "Michael Clarke",
-    },
-    {
-        id: "4",
-        numberOfVehicles: 34,
-        progressData: 49,
-        itemName: "Vehicles",
-        branchLocation: "Colombo",
-        branchName: "Colombo Branch",
-        adminName: "Michael Clarke",
-    },
-    {
-        id: "5",
-        numberOfVehicles: 34,
-        progressData: 49,
-        itemName: "Vehicles",
-        branchLocation: "Colombo",
-        branchName: "Colombo Branch",
-        adminName: "Michael Clarke",
-    },
-    {
-        id: "6",
-        numberOfVehicles: 34,
-        progressData: 49,
-        itemName: "Vehicles",
-        branchLocation: "Colombo",
-        branchName: "Colombo Branch",
-        adminName: "Michael Clarke",
-    },
-    {
-        id: "7",
-        numberOfVehicles: 34,
-        progressData: 49,
-        itemName: "Vehicles",
-        branchLocation: "Colombo",
-        branchName: "Colombo Branch",
-        adminName: "Michael Clarke",
-    },
-    {
-        id: "8",
-        numberOfVehicles: 34,
-        progressData: 49,
-        itemName: "Vehicles",
-        branchLocation: "Colombo",
-        branchName: "Colombo Branch",
-        adminName: "Michael Clarke",
-    },
-    {
-        id: "9",
-        numberOfVehicles: 34,
-        progressData: 49,
-        itemName: "Vehicles",
-        branchLocation: "Colombo",
-        branchName: "Colombo Branch",
-        adminName: "Michael Clarke",
-    },
-    {
-        id: "10",
-        numberOfVehicles: 34,
-        progressData: 49,
-        itemName: "Vehicles",
-        branchLocation: "Colombo",
-        branchName: "Colombo Branch",
-        adminName: "Michael Clarke",
+        contactNumber: "0772250114",
+        vehicleNumber: "dkfnsjk",
+        vehicleType: "car",
+        designation: "manager",
+        drivingLicense: "82763871",
+        vehicleModel: "dv231241",
+        generatorBrand: "Honda",
+        fuelType: "gasoline",
+        nic: "941234500V",
     },
 ];
 function ManageBranch() {
@@ -104,6 +32,11 @@ function ManageBranch() {
                 cardOnClick={(id: string) => console.log("CLICKED " + id)}
                 onClickDelete={(id: string) => console.log("DELETED " + id)}
                 onClickUpdate={(id: string) => console.log("UPDATED " + id)}
+                privilege={true}
+                branchCard={false}
+                adminCard={true}
+                isProgressBar={true}
+                vehicleCard={false}
             />
         </div>
     );
