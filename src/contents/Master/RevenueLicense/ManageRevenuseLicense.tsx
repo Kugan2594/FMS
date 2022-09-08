@@ -1,26 +1,39 @@
 import { Button, Modal } from "antd";
 import MasterHeader from "../../../components/organisms/MasterHeader/MasterHeader";
 import { useState } from "react";
-import AddService from "./AddService";
+import AddRevenueLicense from "./AddRevenueLicense";
 import MasterTemplateWithLargeCard from "../../../templates/MasterTemplateWithLargeCard";
 
 const data = [
     {
         id: "1",
-        name: "Water Service",
+        name: "Revenue License",
         progressData: 40,
         vehicleNo: "NP CAR 5245",
+        vehicleModel: "TOYOTA aqua",
+        branchName: "Jaffna Branch",
         dueDate: "23 Mar 2022",
     },
-
+    {
+        id: "67",
+        name: "Revenue License",
+        progressData: 40,
+        vehicleNo: "NP CAR 5245",
+        vehicleModel: "TOYOTA aqua",
+        branchName: "Jaffna Branch",
+        dueDate: "23 Mar 2022",
+    }
 ];
 
-function ManageService() {
+function ManageRevenueLicense() {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isEdit, setisEdit] = useState(false);
+
     const showModal = () => {
         setIsModalOpen(true);
+        setisEdit(false);
     };
+
     const showModalEdit = () => {
         setIsModalOpen(true);
         setisEdit(true);
@@ -46,17 +59,17 @@ function ManageService() {
             />
 
             <Modal
-                title={isEdit ? "Edit Service" : "Add Service"}
+                title={isEdit ? "Edit Revenue License" : "Add Revenue License"}
                 open={isModalOpen}
                 onOk={handleOk}
                 onCancel={handleCancel}
                 closable={false}
                 width={500}
             >
-                <AddService />
+                <AddRevenueLicense />
             </Modal>
         </>
     );
 }
 
-export default ManageService;
+export default ManageRevenueLicense;
