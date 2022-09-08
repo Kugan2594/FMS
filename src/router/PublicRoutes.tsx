@@ -1,6 +1,8 @@
 import { Suspense } from "react";
-import { RouteObject } from "react-router-dom";
+import LoginTemplate from "../templates/LoginTemplate";
 import SuspenseLoader from "../components/molecules/SuspenseLoader";
+import { RouteObject } from "react-router-dom";
+import ForgotPassword from "../contents/Login/ForgotPassword";
 const Loader = (Component: any) => (props: any) =>
     (
         <Suspense fallback={<SuspenseLoader />}>
@@ -11,7 +13,7 @@ const Loader = (Component: any) => (props: any) =>
 const PublicRoute: RouteObject[] = [
     {
         path: "/",
-        element: "<Login />",
+        element: <ForgotPassword />,
     },
 ];
 
