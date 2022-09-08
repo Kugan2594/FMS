@@ -21,7 +21,7 @@ const signIn = (data: any) => {
   let body: any = `${grant.name}=${grant.type}&username=${data.userName}&password=${data.password}`;
 
   return new Promise((resolve, reject) => {
-    api('post', '', myHeaders, `/oauth/token`, 'token', body, '')
+    api('post','', myHeaders, `/oauth/token`, '', body, '')
       .then((response: any) => {
         resolve(response);
       })

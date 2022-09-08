@@ -42,11 +42,14 @@ function Login() {
         console.log("signUp");
     };
 
+
+    const handleError = (res:any) => {
+    };
+
     const handleSubmit = (event: any) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
-
-        let emailId = "cude1995son@gmail.com";
+        let emailId:any = data.get("email");
         let body = {
             userName: data.get("email"),
             password: data.get("password"),
@@ -72,7 +75,7 @@ function Login() {
                     let response = res.data;
                     console.log({ response });
                     var decoded_token: any = "";
-                    navigate("ManageBranch");
+                    navigate("/home"); 
                     if (response.access_token) {
                         setAuthentication("true");
                         setToken(response.access_token);
@@ -95,7 +98,7 @@ function Login() {
                 (error: any) => {
                     console.log(error.data);
 
-                    // handleError(error.data);
+                    handleError(error.data);
                     setLoading(false);
                     setAuthentication("false");
                 }
@@ -157,14 +160,13 @@ function Login() {
                                 />
                             </Form.Item>
                             <Form.Item>
-                                <Button
+                                <Button htmlType="submit"
                                     className="login-button"
                                     type="primary"
                                     loading={loading}
                                     // onClick={() => {
                                     //     setLoading(!loading);
-                                    // }}
-                                    
+                                    // }}   
                                 >
                                     Login
                                 </Button>

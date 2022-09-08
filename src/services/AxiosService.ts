@@ -46,9 +46,10 @@ export default function api(
     params: any
 ) {
     let baseURL =
-        service === "lm-web"
+        service === "fm-web"
             ? SYSTEM_CONFIG.baseUrl
-            : service === "oauth-web"
+
+            : SYSTEM_CONFIG.loginBaseUrl;
     let customURL = addParamsToURL(baseURL + endPoint, params);
     let headers = getHeaders(token, header === null ? {} : header);
 
