@@ -1,7 +1,7 @@
-import CustomLayout from "../layout/CustomLayout";
 import { Suspense } from "react";
 import SuspenseLoader from "../components/molecules/SuspenseLoader";
 import { RouteObject } from "react-router-dom";
+import ManageDrivers from "../contents/Master/Drivers/ManageDrivers";
 import ManageBranch from "../contents/Master/Branch/ManageBranch";
 import ManageEco from "../contents/Master/Eco/ManageEco";
 import ManageFuelUp from "../contents/Master/FuelUp/ManageFuelUp";
@@ -14,29 +14,30 @@ const Loader = (Component: any) => (props: any) =>
             <Component {...props} />
         </Suspense>
     );
+
 const PrivateRoute: RouteObject[] = [
     {
-        path: "/",
-        element: "",
+        path: "/drivers",
+        element: <ManageDrivers />,
     },
     {
-        path: "Master",
+        path: "/branches",
         element: <ManageBranch />,
     },
     {
-        path: "fuelup",
+        path: "/fuelup",
         element: <ManageFuelUp />,
     },
     {
-        path: "mileage",
+        path: "/mileage",
         element: <ManageMileage />,
     },
     {
-        path: "master/emission",
+        path: "/emission",
         element: <ManageEco />,
     },
     {
-        path: "master/generator",
+        path: "/generator",
         element: <ManageGenerator />,
     },
 ];

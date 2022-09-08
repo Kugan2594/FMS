@@ -13,9 +13,7 @@ function AddService() {
 
     return (
         <>
-            <Form id="form" name="basic" form={form}  style={{
-                                    width: "50%"
-                                }} >
+            <Form id="form" name="basic" form={form}  >
                 <Row style={{ paddingLeft: "35px", paddingRight: "35px" }}>
                     <Col span={24}>
                         <Form.Item>
