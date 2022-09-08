@@ -1,12 +1,13 @@
-import { Modal } from "antd";
+import { Button, Modal } from "antd";
+import MasterHeader from "../../../components/organisms/MasterHeader/MasterHeader";
 import { useState } from "react";
+import AddParts from "./AddParts";
 import MasterTemplateWithLargeCard from "../../../templates/MasterTemplateWithLargeCard";
-import AddEco from "./AddEco";
 
 const data = [
     {
         id: "1",
-        name: "Emission Test",
+        name: "Parts",
         progressData: 40,
         vehicleNo: "NP CAR 5245",
         vehicleModel: "TOYOTA aqua",
@@ -14,35 +15,8 @@ const data = [
         dueDate: "23 Mar 2022",
     },
     {
-        id: "2",
-        name: "Emission Test",
-        progressData: 40,
-        vehicleNo: "NP CAR 5245",
-        vehicleModel: "TOYOTA aqua",
-        branchName: "Jaffna Branch",
-        dueDate: "23 Mar 2022",
-    },
-    {
-        id: "3",
-        name: "Emission Test",
-        progressData: 40,
-        vehicleNo: "NP CAR 5245",
-        vehicleModel: "TOYOTA aqua",
-        branchName: "Jaffna Branch",
-        dueDate: "23 Mar 2022",
-    },
-    {
-        id: "4",
-        name: "Emission Test",
-        progressData: 40,
-        vehicleNo: "NP CAR 5245",
-        vehicleModel: "TOYOTA aqua",
-        branchName: "Jaffna Branch",
-        dueDate: "23 Mar 2022",
-    },
-    {
-        id: "5",
-        name: "Emission Test",
+        id: "67",
+        name: "Parts",
         progressData: 40,
         vehicleNo: "NP CAR 5245",
         vehicleModel: "TOYOTA aqua",
@@ -51,7 +25,7 @@ const data = [
     }
 ];
 
-function ManageEco() {
+function ManageParts() {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isEdit, setisEdit] = useState(false);
 
@@ -77,7 +51,7 @@ function ManageEco() {
             <MasterTemplateWithLargeCard
                 data={data}
                 dataCount={data.length}
-                headerOnSearch={() => {}}
+                headerOnSearch={() => { }}
                 headerOnClickAdd={showModal}
                 cardOnClick={(id: string) => console.log("CLICKED " + id)}
                 deleteButton={(id: string) => console.log("DELETED " + id)}
@@ -85,17 +59,17 @@ function ManageEco() {
             />
 
             <Modal
-                title={isEdit ? "Edit Emission Test" : "Add Emission Test"}
+                title={isEdit ? "Edit Parts" : "Add  Parts"}
                 open={isModalOpen}
                 onOk={handleOk}
                 onCancel={handleCancel}
                 closable={false}
                 width={500}
             >
-                <AddEco />
+                <AddParts />
             </Modal>
         </>
     );
 }
 
-export default ManageEco;
+export default ManageParts;
