@@ -3,6 +3,8 @@ import { Suspense } from "react";
 import SuspenseLoader from "../components/molecules/SuspenseLoader";
 import { RouteObject } from "react-router-dom";
 import ManageBranch from "../contents/Master/Branch/ManageBranch";
+import LoginTemplate from "../templates/LoginTemplate";
+import ForgotPassword from "../contents/Login/ForgotPassword";
 
 const Loader = (Component: any) => (props: any) =>
     (
@@ -18,7 +20,7 @@ const PrivateRoute: RouteObject[] = [
     },
     {
         path: "Master",
-        element: <ManageBranch />,
+        element: <LoginTemplate />,
     },
 ];
 
