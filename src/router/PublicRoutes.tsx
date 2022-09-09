@@ -12,6 +12,8 @@ import ManageInsurance from "../contents/Master/Insurance/ManageInsurance";
 import ManageRevenueLicense from "../contents/Master/RevenueLicense/ManageRevenuseLicense";
 import ManageParts from "../contents/Master/Parts/ManageParts";
 import ManageBranchAdmin from "../contents/Master/BranchAdmin/ManageBranchAdmin";
+import ForgotPassword from "../contents/Login/ForgotPassword";
+import ChangePassword from "../contents/Profile/ChangePassword";
 const Loader = (Component: any) => (props: any) =>
     (
         <Suspense fallback={<SuspenseLoader />}>
@@ -23,6 +25,10 @@ const PublicRoute: RouteObject[] = [
     {
         path: "/",
         element: <LoginTemplate />,
+    },
+    {
+        path: "/forgot-password",
+        element: <ForgotPassword />,
     },
     {
         path: "home",
@@ -77,6 +83,10 @@ const PublicRoute: RouteObject[] = [
         path: "settings",
         element: <CustomLayout />,
         children: [],
+    },
+    {
+        path: "/change-password",
+        element: <ChangePassword />,
     },
 ];
 
