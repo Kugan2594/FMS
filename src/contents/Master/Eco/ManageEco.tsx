@@ -1,60 +1,32 @@
-import { Modal } from "antd";
-import { useState } from "react";
-import MasterTemplateWithLargeCard from "../../../templates/MasterTemplateWithLargeCard";
+import { Button, Modal } from "antd";
+import MasterHeader from "../../../components/organisms/MasterHeader/MasterHeader";
+import { useEffect, useState } from "react";
 import AddEco from "./AddEco";
-
-const data = [
-    {
-        id: "1",
-        name: "Emission Test",
-        progressData: 40,
-        vehicleNo: "NP CAR 5245",
-        vehicleModel: "TOYOTA aqua",
-        branchName: "Jaffna Branch",
-        dueDate: "23 Mar 2022",
-    },
-    {
-        id: "2",
-        name: "Emission Test",
-        progressData: 40,
-        vehicleNo: "NP CAR 5245",
-        vehicleModel: "TOYOTA aqua",
-        branchName: "Jaffna Branch",
-        dueDate: "23 Mar 2022",
-    },
-    {
-        id: "3",
-        name: "Emission Test",
-        progressData: 40,
-        vehicleNo: "NP CAR 5245",
-        vehicleModel: "TOYOTA aqua",
-        branchName: "Jaffna Branch",
-        dueDate: "23 Mar 2022",
-    },
-    {
-        id: "4",
-        name: "Emission Test",
-        progressData: 40,
-        vehicleNo: "NP CAR 5245",
-        vehicleModel: "TOYOTA aqua",
-        branchName: "Jaffna Branch",
-        dueDate: "23 Mar 2022",
-    },
-    {
-        id: "5",
-        name: "Emission Test",
-        progressData: 40,
-        vehicleNo: "NP CAR 5245",
-        vehicleModel: "TOYOTA aqua",
-        branchName: "Jaffna Branch",
-        dueDate: "23 Mar 2022",
-    }
-];
-
+import MasterTemplateWithLargeCard from "../../../templates/MasterTemplateWithLargeCard";
+import { createDeflateRaw } from "zlib";
+import {
+    getAllEmissionTestDocumentByUserId
+  } from "./ServicesEco";
+  import { getUserDetails} from "../../Login/LoginAuthentication";
+function createData(data:any){
+    let convertData=data.map((post:any,index:any)=>{
+return {
+    id: post.id,
+    name: "EmissionTest",
+    progressData: post.emissionTestValidity,
+    vehicleNo: post.vehicleResponseDto.vehicleOwner,
+    vehicleModel: post.vehicleResponseDto.resourceVehicleDto.vehicleModel
+    ,
+    branchName: "Jaffna Branch",
+    dueDate: post.emissionTestExpiryDate,
+}
+    })
+    return convertData
+}
 function ManageEco() {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isEdit, setisEdit] = useState(false);
-
+    const [eco,setEco]=useState([]);
     const showModal = () => {
         setIsModalOpen(true);
         setisEdit(false);
@@ -72,11 +44,27 @@ function ManageEco() {
     const handleCancel = () => {
         setIsModalOpen(false);
     };
+
+    useEffect(()=>{
+        getAllEmissionTestData(getUserDetails().user_id);
+    }, [])
+    const getAllEmissionTestData=(userId: number)=>{
+        let data: any=[];
+
+        getAllEmissionTestDocumentByUserId(userId).then(
+            (res:any) => {
+                data=createData(res.results.emissionTest);
+                setEco(data);
+            },(error:any)=>{
+                setEco([]);
+            }
+        )
+    }
     return (
         <>
             <MasterTemplateWithLargeCard
-                data={data}
-                dataCount={data.length}
+                data={eco}
+                dataCount={eco.length}
                 headerOnSearch={() => {}}
                 headerOnClickAdd={showModal}
                 cardOnClick={(id: string) => console.log("CLICKED " + id)}
