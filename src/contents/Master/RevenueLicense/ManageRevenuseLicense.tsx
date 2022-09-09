@@ -1,34 +1,47 @@
 import { Button, Modal } from "antd";
 import MasterHeader from "../../../components/organisms/MasterHeader/MasterHeader";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import AddRevenueLicense from "./AddRevenueLicense";
 import MasterTemplateWithLargeCard from "../../../templates/MasterTemplateWithLargeCard";
-
-const data = [
-    {
-        id: "1",
-        name: "Revenue License",
-        progressData: 40,
-        vehicleNo: "NP CAR 5245",
-        vehicleModel: "TOYOTA aqua",
-        branchName: "Jaffna Branch",
-        dueDate: "23 Mar 2022",
-    },
-    {
-        id: "67",
-        name: "Revenue License",
-        progressData: 40,
-        vehicleNo: "NP CAR 5245",
-        vehicleModel: "TOYOTA aqua",
-        branchName: "Jaffna Branch",
-        dueDate: "23 Mar 2022",
-    }
-];
+import {
+    getAllRevenueLicenseByUserId
+  } from "./ServicesRevenueLicense";
+  import { getUserDetails} from "../../Login/LoginAuthentication";
+  function createData(data:any){
+    let convertData=data.map((post:any,index:any)=>{
+return {
+    id: post.id,
+    name: "Revenue license",
+    progressData: post.revenueLicenseTestValidity,
+    vehicleNo: post.vehicleResponseDto.vehicleNumber,
+    vehicleModel: post.vehicleResponseDto.resourceVehicleDto.vehicleModel
+    ,
+    branchName: "Jaffna Branch",
+    dueDate: post.taxExpiryDate,
+}
+    })
+    return convertData
+}
 
 function ManageRevenueLicense() {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isEdit, setisEdit] = useState(false);
+    const [revenueLicense,setRevenueLicense]=useState([]);
+    useEffect(()=>{
+        getAllRevenueLicenseData(getUserDetails().user_id);
+    }, [])
+    const getAllRevenueLicenseData=(userId: number)=>{
+        let data: any=[];
 
+        getAllRevenueLicenseByUserId(userId).then(
+            (res:any) => {
+                data=createData(res.results.revenueLicense);
+                setRevenueLicense(data);
+            },(error:any)=>{
+                setRevenueLicense([]);
+            }
+        )
+    }
     const showModal = () => {
         setIsModalOpen(true);
         setisEdit(false);
@@ -49,8 +62,8 @@ function ManageRevenueLicense() {
     return (
         <>
             <MasterTemplateWithLargeCard
-                data={data}
-                dataCount={data.length}
+                data={revenueLicense}
+                dataCount={revenueLicense.length}
                 headerOnSearch={() => { }}
                 headerOnClickAdd={showModal}
                 cardOnClick={(id: string) => console.log("CLICKED " + id)}
