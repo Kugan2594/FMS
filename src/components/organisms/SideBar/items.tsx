@@ -25,7 +25,7 @@ const mainMenuItems: MenuItem[] = [
     id: "master",
     icon: CarOutlined,
     name: "Master",
-    link: "/master",
+    link: "/master/branches",
     children: [
       { id: "branches", name: "Branches" },
       { id: "vehicles", name: "Vehicles" },
