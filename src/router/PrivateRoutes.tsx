@@ -7,13 +7,19 @@ import ManageEco from "../contents/Master/Eco/ManageEco";
 import ManageFuelUp from "../contents/Master/FuelUp/ManageFuelUp";
 import ManageMileage from "../contents/Master/Mileage/ManageMileage";
 import ManageGenerator from "../contents/Master/Generator/ManageGenerator";
+import ManageService from "../contents/Master/Services/ManageService";
+import ManageAccident from "../contents/Master/Accident/ManageAccident";
+import ManageInsurance from "../contents/Master/Insurance/ManageInsurance";
+import ManageRevenueLicense from "../contents/Master/RevenueLicense/ManageRevenuseLicense";
+import ManageParts from "../contents/Master/Parts/ManageParts";
+
 
 const Loader = (Component: any) => (props: any) =>
-    (
-        <Suspense fallback={<SuspenseLoader />}>
-            <Component {...props} />
-        </Suspense>
-    );
+(
+    <Suspense fallback={<SuspenseLoader />}>
+        <Component {...props} />
+    </Suspense>
+);
 
 const PrivateRoute: RouteObject[] = [
     {
@@ -33,12 +39,32 @@ const PrivateRoute: RouteObject[] = [
         element: <ManageMileage />,
     },
     {
-        path: "/emission",
+        path: "/generator",
+        element: <ManageGenerator />,
+    },
+    {
+        path: "/services",
+        element: <ManageService />,
+    },
+    {
+        path: "/accidentDocument",
+        element: <ManageAccident />,
+    },
+    {
+        path: "/emissionTest",
         element: <ManageEco />,
     },
     {
-        path: "/generator",
-        element: <ManageGenerator />,
+        path: "/insurance",
+        element: <ManageInsurance />,
+    },
+    {
+        path: "/revenueLicense",
+        element: <ManageRevenueLicense />,
+      },
+    {
+        path: "/parts",
+        element: <ManageParts/>,
     },
 ];
 
