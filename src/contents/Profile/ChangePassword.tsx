@@ -112,7 +112,11 @@ function ChangePassword() {
                         </Form.Item>
 
                         <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-                            <Button type="primary" htmlType="submit">
+                            <Button
+                                type="primary"
+                                htmlType="submit"
+                                style={{ width: "100%", marginLeft: "-20%" }}
+                            >
                                 Submit
                             </Button>
                         </Form.Item>
