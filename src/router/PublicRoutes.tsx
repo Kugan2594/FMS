@@ -2,9 +2,10 @@ import { Suspense } from "react";
 import LoginTemplate from "../templates/LoginTemplate";
 import SuspenseLoader from "../components/molecules/SuspenseLoader";
 import { RouteObject } from "react-router-dom";
-import ForgotPassword from "../contents/Login/ForgotPassword";
 import CustomLayout from "../layout/CustomLayout";
+import ManageDrivers from "../contents/Master/Drivers/ManageDrivers";
 import ManageBranch from "../contents/Master/Branch/ManageBranch";
+import ManageBranchAdmin from "../contents/Master/BranchAdmin/ManageBranchAdmin";
 const Loader = (Component: any) => (props: any) =>
     (
         <Suspense fallback={<SuspenseLoader />}>
@@ -15,17 +16,37 @@ const Loader = (Component: any) => (props: any) =>
 const PublicRoute: RouteObject[] = [
     {
         path: "/",
-        element: <ForgotPassword />,
+        element: <LoginTemplate />,
+    },
+    {
+        path: "home",
+        element: <CustomLayout />,
+        children: [],
     },
     {
         path: "master",
         element: <CustomLayout />,
         children: [
             {
-                path: "branch/:branchId",
+                path: "drivers",
+                element: <ManageDrivers />,
+            },
+            {
+                path: "branches",
                 element: <ManageBranch />,
             },
+            { path: "branchAdmins", element: <ManageBranchAdmin /> },
         ],
+    },
+    {
+        path: "notification",
+        element: <CustomLayout />,
+        children: [],
+    },
+    {
+        path: "settings",
+        element: <CustomLayout />,
+        children: [],
     },
 ];
 

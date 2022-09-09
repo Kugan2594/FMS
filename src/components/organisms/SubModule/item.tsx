@@ -1,26 +1,35 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import SubModuleHeaderLogo from "./SubModuleHeader";
+import { useNavigate } from "react-router-dom";
 
-const SubModule = (props: any) => {
-    const onClickActive = (x: string) => {
+interface SubModuleDataType {
+    data: SubModuleType[];
+}
+
+interface SubModuleType {
+    id: string;
+    name: string;
+}
+
+const SubModule = ({ data }: SubModuleDataType) => {
+    const navigate = useNavigate();
+
+    const onClickActive = (x: SubModuleType) => {
+        navigate(x.id);
         console.log(x);
     };
 
     return (
         <div className="sidebar-submenu">
             <div>
-                {props.data.map((x: any, index: any) => {
+                {data.map((x) => {
                     return (
-                        <Link to={`branch/${x.id}`}>
-                            <button
-                                className="list"
-                                key={index}
-                                onClick={() => onClickActive(x)}
-                            >
-                                {x.name}
-                            </button>
-                        </Link>
+                        <button
+                            className="list"
+                            key={x.id}
+                            onClick={() => onClickActive(x)}
+                        >
+                            {x.name}
+                        </button>
                     );
                 })}
             </div>

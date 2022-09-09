@@ -20,14 +20,20 @@ interface SubmenuItem {
 }
 
 const mainMenuItems: MenuItem[] = [
-    { id: "home", icon: HomeOutlined, name: "Home", link: "", children: [] },
+    {
+        id: "home",
+        icon: HomeOutlined,
+        name: "Home",
+        link: "/home",
+        children: [],
+    },
     {
         id: "master",
         icon: CarOutlined,
         name: "Master",
-        link: "",
+        link: "/master",
         children: [
-            { id: "branch", name: "Branches" },
+            { id: "branches", name: "Branches" },
             { id: "vehicles", name: "Vehicles" },
             { id: "generators", name: "Genarators" },
             { id: "parts", name: "Parts" },
@@ -42,14 +48,14 @@ const mainMenuItems: MenuItem[] = [
         id: "notification",
         icon: BellOutlined,
         name: "Notification",
-        link: "",
+        link: "/notification",
         children: [],
     },
     {
         id: "settings",
         icon: SettingOutlined,
         name: "Settings",
-        link: "",
+        link: "/settings",
         children: [
             { id: "settings", name: "Settings" },
             { id: "changePassword", name: "Change Password" },

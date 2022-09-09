@@ -1,4 +1,8 @@
-import { SettingFilled, SettingOutlined } from "@ant-design/icons";
+import {
+    RocketOutlined,
+    SettingFilled,
+    SettingOutlined,
+} from "@ant-design/icons";
 import Icon from "@ant-design/icons/lib/components/AntdIcon";
 import { Button, Card, Col, Image, Progress, Row, Typography } from "antd";
 import Title from "antd/lib/skeleton/Title";
@@ -33,8 +37,11 @@ export interface CardSmallType {
     driverCard?: boolean;
     generatorCard?: boolean;
     generatorBrand?: string;
+    generatorName?: string;
     fuelType?: string;
     nic?: string;
+    driverName?: string;
+    vehicleIcon?: any;
 }
 let intialValue: CardSmallType = {
     id: "",
@@ -63,6 +70,9 @@ let intialValue: CardSmallType = {
     generatorBrand: "",
     fuelType: "",
     nic: "",
+    generatorName: "",
+    driverName: "",
+    vehicleIcon: "",
 };
 function SmallCard({
     id,
@@ -93,6 +103,9 @@ function SmallCard({
     generatorCard,
     fuelType,
     nic,
+    generatorName,
+    driverName,
+    vehicleIcon,
 }: CardSmallType) {
     const { Title, Text } = Typography;
 
@@ -102,21 +115,28 @@ function SmallCard({
         <Card className="small-card" onClick={cardOnClick}>
             <Row className="main-row" justify="center" align="top" gutter={8}>
                 <Col xs={24} xl={4}>
-                    <div className="profile" onClick={onClickProfile}>
-                        {profile === "" ? (
-                            <Image
-                                src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
-                                style={{ borderRadius: 10 }}
-                            />
-                        ) : (
-                            <Image
-                                src={
-                                    "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
-                                }
-                                style={{ borderRadius: 10 }}
-                            />
-                        )}
-                    </div>
+                    {
+                        <div className="profile" onClick={onClickProfile}>
+                            {profile === "" ? (
+                                <Image
+                                    src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
+                                    style={{
+                                        borderRadius: 10,
+                                    }}
+                                />
+                            ) : (
+                                <Image
+                                    src={
+                                        "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
+                                    }
+                                    style={{
+                                        borderRadius: 10,
+                                    }}
+                                />
+                            )}
+                        </div>
+                    }
+
                     {isProgressBar && (
                         <Progress percent={progressData} size="small" />
                     )}
@@ -124,18 +144,25 @@ function SmallCard({
                 <Col xs={24} xl={9} className="content-2">
                     <div className="content-2-item">
                         {branchCard && <Title level={5}> {name}</Title>}
+                        {driverCard && <Title level={5}> {driverName}</Title>}
                         {adminCard && <Title level={5}> {adminName}</Title>}
                         {vehicleCard && (
                             <Title level={5}> {vehicleNumber}</Title>
                         )}
+                        {generatorCard && (
+                            <Title
+                                style={{ fontSize: "18px", marginBottom: "5%" }}
+                                level={5}
+                            >
+                                {" "}
+                                {generatorName}
+                            </Title>
+                        )}
                         <div className="sub-content">
                             {branchCard && <Text>{branchLocation}</Text>}
-                            {vehicleCard && (
-                                <Title level={5}> {vehicleType}</Title>
-                            )}
-                            {generatorCard && (
+                            {/* {generatorCard && (
                                 <Title level={5}> {fuelType}</Title>
-                            )}
+                            )} */}
                             {adminCard && (
                                 <Text strong type="secondary">
                                     {" "}
@@ -153,6 +180,39 @@ function SmallCard({
                                 <div className="admin-name">
                                     <Text strong type="secondary">
                                         {nic}
+                                    </Text>
+                                    <br />
+                                    <Text strong type="secondary">
+                                        {name}
+                                    </Text>
+                                </div>
+                            )}
+                            {driverCard && (
+                                <div className="admin-name">
+                                    <Text strong type="secondary">
+                                        {drivingLicense}
+                                    </Text>
+                                    <br />
+                                    <Text strong type="secondary">
+                                        {name}
+                                    </Text>
+                                </div>
+                            )}
+                            {vehicleCard && (
+                                <div className="admin-name">
+                                    <Text strong type="secondary">
+                                        {vehicleType}
+                                    </Text>
+                                    <br />
+                                    <Text strong type="secondary">
+                                        {name}
+                                    </Text>
+                                </div>
+                            )}
+                            {generatorCard && (
+                                <div className="admin-name">
+                                    <Text strong type="secondary">
+                                        {fuelType}
                                     </Text>
                                     <br />
                                     <Text strong type="secondary">
@@ -214,7 +274,7 @@ function SmallCard({
                                     <div
                                         className="number"
                                         style={{
-                                            fontSize: "24px",
+                                            fontSize: "18px",
                                             padding: "0px",
                                         }}
                                     >
@@ -227,24 +287,7 @@ function SmallCard({
                                     </div>
                                 </div>
                             )}
-                            {driverCard && (
-                                <div className="number-of-vehicles">
-                                    <div
-                                        className="number"
-                                        style={{
-                                            fontSize: "24px",
-                                            padding: "0px",
-                                        }}
-                                    >
-                                        {name}
-                                    </div>{" "}
-                                    <div className="item-name">
-                                        <Text strong type="secondary">
-                                            branch name
-                                        </Text>{" "}
-                                    </div>
-                                </div>
-                            )}
+
                             {generatorCard && (
                                 <div className="number-of-vehicles">
                                     <div
@@ -259,6 +302,24 @@ function SmallCard({
                                     <div className="item-name">
                                         <Text strong type="secondary">
                                             branch name
+                                        </Text>{" "}
+                                    </div>
+                                </div>
+                            )}
+                            {driverCard && (
+                                <div className="number-of-vehicles">
+                                    <div
+                                        className="number"
+                                        style={{
+                                            fontSize: "24px",
+                                            padding: "0px",
+                                        }}
+                                    >
+                                        {vehicleIcon}
+                                    </div>{" "}
+                                    <div className="item-name">
+                                        <Text strong type="secondary">
+                                            {vehicleType}
                                         </Text>{" "}
                                     </div>
                                 </div>
