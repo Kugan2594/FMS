@@ -6,8 +6,8 @@ import PublicRoute from "./router/PublicRoutes";
 // import { SideBar } from "organisms";
 
 function App() {
-  const publiccontent = useRoutes(PublicRoute);
-  return <div>{publiccontent}</div>;
+    const publiccontent = useRoutes(PublicRoute);
+    return <div>{publiccontent}</div>;
 }
 
 export default App;
