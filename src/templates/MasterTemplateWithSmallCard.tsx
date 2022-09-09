@@ -31,6 +31,8 @@ interface TemplateType {
     fuelType?: string;
     drivercard?: boolean;
     nic?: string;
+    generatorName?: string;
+    driverName?: string;
 }
 
 function MasterTemplateWithSmallCard({
@@ -100,6 +102,15 @@ function MasterTemplateWithSmallCard({
                                         driverCard={driverCard}
                                         designation={data.designation}
                                         nic={data.nic}
+                                        vehicleNumber={data.vehicleNumber}
+                                        vehicleModel={data.vehicleModel}
+                                        vehicleType={data.vehicleType}
+                                        generatorBrand={data.generatorBrand}
+                                        generatorName={data.generatorName}
+                                        fuelType={data.fuelType}
+                                        driverName={data.driverName}
+                                        vehicleIcon={data.vehicleIcon}
+                                        drivingLicense={data.drivingLicense}
                                     />
                                 }
                             </List.Item>
