@@ -1,4 +1,4 @@
-import { getToken } from '../contents/Login/LoginAuthentication';
+import { getToken } from "../contents/Login/LoginAuthentication";
 
 import { SYSTEM_CONFIG } from "../utils/StytemConfig";
 
@@ -13,8 +13,8 @@ function addParamsToURL(url: string, params: any) {
     return url;
 }
 
-const getHeaders = (token: any, adHeaders: object) => {
-    if (token !== null) {
+const getHeaders = (token: string | null, adHeaders: object) => {
+    if (token) {
         return {
             headers: {
                 "Access-Control-Allow-Origin": "*",
@@ -48,7 +48,6 @@ export default function api(
     let baseURL =
         service === "fm-web"
             ? SYSTEM_CONFIG.baseUrl
-
             : SYSTEM_CONFIG.loginBaseUrl;
     let customURL = addParamsToURL(baseURL + endPoint, params);
     let headers = getHeaders(token, header === null ? {} : header);

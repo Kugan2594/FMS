@@ -14,6 +14,7 @@ import ManageParts from "../contents/Master/Parts/ManageParts";
 import ManageBranchAdmin from "../contents/Master/BranchAdmin/ManageBranchAdmin";
 import ForgotPassword from "../contents/Login/ForgotPassword";
 import ChangePassword from "../contents/Profile/ChangePassword";
+import ResetPassword from "../contents/Login/ResetPassword";
 const Loader = (Component: any) => (props: any) =>
     (
         <Suspense fallback={<SuspenseLoader />}>
@@ -87,6 +88,10 @@ const PublicRoute: RouteObject[] = [
     {
         path: "/change-password",
         element: <ChangePassword />,
+    },
+    {
+        path: "/reset-password",
+        element: <ResetPassword />,
     },
 ];
 
