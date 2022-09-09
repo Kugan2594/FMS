@@ -1,10 +1,13 @@
 import { List } from "antd";
 import CardLarge from "../components/organisms/Cards/CardLarge";
-import SmallCard from "../components/organisms/Cards/SmallCard";
+import SmallCard, {
+    CardSmallType,
+} from "../components/organisms/Cards/SmallCard";
 import MasterHeader from "../components/organisms/MasterHeader/MasterHeader";
+
 import React from "react";
 interface TemplateType {
-    data: CardType[];
+    data: CardSmallType[];
     headerOnSearch: any;
     headerOnClickAdd: any;
     dataCount: number;
@@ -12,20 +15,26 @@ interface TemplateType {
     onClickUpdate?: any;
     onClickDelete?: any;
     isProgressBar?: boolean;
+    privilege?: boolean;
+    adminCard?: boolean;
+    branchCard?: boolean;
+    contactNumber?: string;
+    vehicleCard?: boolean;
+    vehicleNumber?: string;
+    vehicleType?: string;
+    designation?: string;
+    drivingLicense?: string;
+    vehicleModel?: string;
+    driverCard?: boolean;
+    generatorCard?: boolean;
+    generatorBrand?: string;
+    fuelType?: string;
+    drivercard?: boolean;
+    nic?: string;
+    generatorName?: string;
+    driverName?: string;
 }
-interface CardType {
-    id?: string;
-    numberOfVehicles?: number;
-    progressData?: number;
-    itemName?: string;
-    branchLocation?: string;
-    branchName?: string;
-    adminName?: string;
-    cardOnClick?: any;
-    onClickUpdate?: any;
-    onClickDelete?: any;
-    image?: any;
-}
+
 function MasterTemplateWithSmallCard({
     data,
     headerOnSearch,
@@ -35,6 +44,12 @@ function MasterTemplateWithSmallCard({
     onClickUpdate,
     onClickDelete,
     isProgressBar,
+    privilege,
+    adminCard,
+    branchCard,
+    vehicleCard,
+    generatorCard,
+    driverCard,
 }: TemplateType) {
     return (
         <div>
@@ -55,7 +70,7 @@ function MasterTemplateWithSmallCard({
                             onChange: (page: any) => {
                                 console.log(page);
                             },
-                            pageSize: 6,
+                            pageSize: 8,
                         }}
                         dataSource={data}
                         renderItem={(data) => (
@@ -64,7 +79,7 @@ function MasterTemplateWithSmallCard({
                                     <SmallCard
                                         key={data.id}
                                         branchLocation={data.branchLocation}
-                                        branchName={data.branchName}
+                                        name={data.name}
                                         cardOnClick={() => cardOnClick(data)}
                                         onClickUpdate={() =>
                                             onClickUpdate(data)
@@ -78,6 +93,24 @@ function MasterTemplateWithSmallCard({
                                         progressData={data.progressData}
                                         adminName={data.adminName}
                                         isProgressBar={isProgressBar}
+                                        privilege={privilege}
+                                        adminCard={adminCard}
+                                        branchCard={branchCard}
+                                        vehicleCard={vehicleCard}
+                                        generatorCard={generatorCard}
+                                        contactNumber={data.contactNumber}
+                                        driverCard={driverCard}
+                                        designation={data.designation}
+                                        nic={data.nic}
+                                        vehicleNumber={data.vehicleNumber}
+                                        vehicleModel={data.vehicleModel}
+                                        vehicleType={data.vehicleType}
+                                        generatorBrand={data.generatorBrand}
+                                        generatorName={data.generatorName}
+                                        fuelType={data.fuelType}
+                                        driverName={data.driverName}
+                                        vehicleIcon={data.vehicleIcon}
+                                        drivingLicense={data.drivingLicense}
                                     />
                                 }
                             </List.Item>

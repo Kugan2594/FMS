@@ -1,7 +1,6 @@
 import { RocketOutlined } from "@ant-design/icons";
 import React from "react";
 import MasterTemplateWithSmallCard from "../../../templates/MasterTemplateWithSmallCard";
-
 const data = [
     {
         id: "1",
@@ -119,7 +118,7 @@ const data = [
         contactNumber: "0772250114",
         vehicleNumber: "MJ2200",
         vehicleType: "car",
-        designation: "manager",
+        designation: "Manager",
         drivingLicense: "82763871",
         vehicleModel: "Tyota MT",
         generatorBrand: "Honda",
@@ -130,7 +129,7 @@ const data = [
         vehicleIcon: <RocketOutlined />,
     },
 ];
-function ManageBranch() {
+function ManageBranchAdmin() {
     return (
         <div>
             <MasterTemplateWithSmallCard
@@ -142,9 +141,9 @@ function ManageBranch() {
                 onClickDelete={(id: string) => console.log("DELETED " + id)}
                 onClickUpdate={(id: string) => console.log("UPDATED " + id)}
                 privilege={false}
-                branchCard={true}
-                adminCard={false}
-                isProgressBar={true}
+                branchCard={false}
+                adminCard={true}
+                isProgressBar={false}
                 vehicleCard={false}
                 generatorCard={false}
                 driverCard={false}
@@ -153,4 +152,4 @@ function ManageBranch() {
     );
 }
 
-export default ManageBranch;
+export default ManageBranchAdmin;

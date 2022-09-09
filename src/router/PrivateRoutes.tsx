@@ -3,6 +3,7 @@ import SuspenseLoader from "../components/molecules/SuspenseLoader";
 import { RouteObject } from "react-router-dom";
 import ManageDrivers from "../contents/Master/Drivers/ManageDrivers";
 import ManageBranch from "../contents/Master/Branch/ManageBranch";
+import ManageBranchAdmin from "../contents/Master/BranchAdmin/ManageBranchAdmin";
 import ManageEco from "../contents/Master/Eco/ManageEco";
 import ManageFuelUp from "../contents/Master/FuelUp/ManageFuelUp";
 import ManageMileage from "../contents/Master/Mileage/ManageMileage";
@@ -13,13 +14,12 @@ import ManageInsurance from "../contents/Master/Insurance/ManageInsurance";
 import ManageRevenueLicense from "../contents/Master/RevenueLicense/ManageRevenuseLicense";
 import ManageParts from "../contents/Master/Parts/ManageParts";
 
-
 const Loader = (Component: any) => (props: any) =>
-(
-    <Suspense fallback={<SuspenseLoader />}>
-        <Component {...props} />
-    </Suspense>
-);
+    (
+        <Suspense fallback={<SuspenseLoader />}>
+            <Component {...props} />
+        </Suspense>
+    );
 
 const PrivateRoute: RouteObject[] = [
     {
@@ -29,6 +29,10 @@ const PrivateRoute: RouteObject[] = [
     {
         path: "/branches",
         element: <ManageBranch />,
+    },
+    {
+        path: "/branchAdmins",
+        element: <ManageBranchAdmin />,
     },
     {
         path: "/fuelup",
@@ -61,10 +65,10 @@ const PrivateRoute: RouteObject[] = [
     {
         path: "/revenueLicense",
         element: <ManageRevenueLicense />,
-      },
+    },
     {
         path: "/parts",
-        element: <ManageParts/>,
+        element: <ManageParts />,
     },
 ];
 

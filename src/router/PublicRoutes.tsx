@@ -11,71 +11,73 @@ import ManageEco from "../contents/Master/Eco/ManageEco";
 import ManageInsurance from "../contents/Master/Insurance/ManageInsurance";
 import ManageRevenueLicense from "../contents/Master/RevenueLicense/ManageRevenuseLicense";
 import ManageParts from "../contents/Master/Parts/ManageParts";
+import ManageBranchAdmin from "../contents/Master/BranchAdmin/ManageBranchAdmin";
 const Loader = (Component: any) => (props: any) =>
-(
-  <Suspense fallback={<SuspenseLoader />}>
-    <Component {...props} />
-  </Suspense>
-);
+    (
+        <Suspense fallback={<SuspenseLoader />}>
+            <Component {...props} />
+        </Suspense>
+    );
 
 const PublicRoute: RouteObject[] = [
-  {
-    path: "/",
-    element: <LoginTemplate />,
-  },
-  {
-    path: "home",
-    element: <CustomLayout />,
-    children: [],
-  },
-  {
-    path: "master",
-    element: <CustomLayout />,
-    children: [
-      {
-        path: "drivers",
-        element: <ManageDrivers />,
-      },
-      {
-        path: "branches",
-        element: <ManageBranch />,
-      },
-      {
-        path: "services",
-        element: <ManageService />,
-      },
-      {
-        path: "accidentDocument",
-        element: <ManageAccident />,
-      },
-      {
-        path: "emissionTest",
-        element: <ManageEco />,
-      },
-      {
-        path: "insurance",
-        element: <ManageInsurance />,
-      },
-      {
-        path: "revenueLicense",
-        element: <ManageRevenueLicense />,
-      },
-      {
-        path: "parts",
-        element: <ManageParts />,
-      },
-    ],
-  },
-  {
-    path: "notification",
-    element: <CustomLayout />,
-    children: [],
-  },
-  {
-    path: "settings",
-    element: <CustomLayout />,
-    children: [],
-  },
+    {
+        path: "/",
+        element: <LoginTemplate />,
+    },
+    {
+        path: "home",
+        element: <CustomLayout />,
+        children: [],
+    },
+    {
+        path: "master",
+        element: <CustomLayout />,
+        children: [
+            {
+                path: "drivers",
+                element: <ManageDrivers />,
+            },
+            {
+                path: "branches",
+                element: <ManageBranch />,
+            },
+            { path: "branchAdmins", element: <ManageBranchAdmin /> },
+            {
+                path: "services",
+                element: <ManageService />,
+            },
+            {
+                path: "accidentDocument",
+                element: <ManageAccident />,
+            },
+            {
+                path: "emissionTest",
+                element: <ManageEco />,
+            },
+            {
+                path: "insurance",
+                element: <ManageInsurance />,
+            },
+            {
+                path: "revenueLicense",
+                element: <ManageRevenueLicense />,
+            },
+            {
+                path: "parts",
+                element: <ManageParts />,
+            },
+        ],
+    },
+    {
+        path: "notification",
+        element: <CustomLayout />,
+        children: [],
+    },
+    {
+        path: "settings",
+        element: <CustomLayout />,
+        children: [],
+    },
 ];
 
 export default PublicRoute;
