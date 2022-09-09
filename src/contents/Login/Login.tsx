@@ -44,13 +44,13 @@ function Login() {
     };
 
 
-    const handleError = (res:any) => {
+    const handleError = (res: any) => {
     };
 
     const handleSubmit = (event: any) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
-        let emailId:any = data.get("email");
+        let emailId: any = data.get("email");
         let body = {
             userName: data.get("email"),
             password: data.get("password"),
@@ -149,7 +149,7 @@ function Login() {
                             </Form.Item>
                             <Form.Item>
                                 <Input.Password
-                                name = "password"
+                                    name="password"
                                     placeholder="Password"
                                     iconRender={(visible) =>
                                         visible ? (
