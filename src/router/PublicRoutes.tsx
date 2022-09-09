@@ -5,6 +5,12 @@ import { RouteObject } from "react-router-dom";
 import CustomLayout from "../layout/CustomLayout";
 import ManageDrivers from "../contents/Master/Drivers/ManageDrivers";
 import ManageBranch from "../contents/Master/Branch/ManageBranch";
+import ManageService from "../contents/Master/Services/ManageService";
+import ManageAccident from "../contents/Master/Accident/ManageAccident";
+import ManageEco from "../contents/Master/Eco/ManageEco";
+import ManageInsurance from "../contents/Master/Insurance/ManageInsurance";
+import ManageRevenueLicense from "../contents/Master/RevenueLicense/ManageRevenuseLicense";
+import ManageParts from "../contents/Master/Parts/ManageParts";
 import ManageBranchAdmin from "../contents/Master/BranchAdmin/ManageBranchAdmin";
 const Loader = (Component: any) => (props: any) =>
     (
@@ -36,6 +42,30 @@ const PublicRoute: RouteObject[] = [
                 element: <ManageBranch />,
             },
             { path: "branchAdmins", element: <ManageBranchAdmin /> },
+            {
+                path: "services",
+                element: <ManageService />,
+            },
+            {
+                path: "accidentDocument",
+                element: <ManageAccident />,
+            },
+            {
+                path: "emissionTest",
+                element: <ManageEco />,
+            },
+            {
+                path: "insurance",
+                element: <ManageInsurance />,
+            },
+            {
+                path: "revenueLicense",
+                element: <ManageRevenueLicense />,
+            },
+            {
+                path: "parts",
+                element: <ManageParts />,
+            },
         ],
     },
     {

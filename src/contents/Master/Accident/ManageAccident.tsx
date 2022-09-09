@@ -27,10 +27,17 @@ const data = [
 
 function ManageAccident() {
     const [isModalOpen, setIsModalOpen] = useState(false);
-
+    const [isEdit, setisEdit] = useState(false);
     const showModal = () => {
         setIsModalOpen(true);
+        setisEdit(false);
     };
+
+    const showModalEdit = () => {
+        setIsModalOpen(true);
+        setisEdit(true);
+    };
+
 
     const handleOk = () => {
         setIsModalOpen(false);
@@ -48,11 +55,11 @@ function ManageAccident() {
                 headerOnClickAdd={showModal}
                 cardOnClick={(id: string) => console.log("CLICKED " + id)}
                 deleteButton={(id: string) => console.log("DELETED " + id)}
-                updateButton={(id: string) => console.log("UPDATED " + id)}
+                updateButton={showModalEdit}
             />
 
             <Modal
-                title="Add Accident"
+                title={isEdit ? "Edit Accident" : "Add Accident"}
                 open={isModalOpen}
                 onOk={handleOk}
                 onCancel={handleCancel}
