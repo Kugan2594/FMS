@@ -1,6 +1,8 @@
 import { RocketOutlined } from "@ant-design/icons";
+import CustomInput from "../../../components/atoms/Input/CustomInput";
 import React from "react";
 import MasterTemplateWithSmallCard from "../../../templates/MasterTemplateWithSmallCard";
+import { Input } from "antd";
 
 const data = [
     {
@@ -132,24 +134,26 @@ const data = [
 ];
 function ManageBranch() {
     return (
-        <div>
-            <MasterTemplateWithSmallCard
-                data={data}
-                dataCount={data.length}
-                headerOnSearch={() => console.log("SEARCHED")}
-                headerOnClickAdd={() => console.log("ADDED")}
-                cardOnClick={(id: string) => console.log("CLICKED " + id)}
-                onClickDelete={(id: string) => console.log("DELETED " + id)}
-                onClickUpdate={(id: string) => console.log("UPDATED " + id)}
-                privilege={false}
-                branchCard={true}
-                adminCard={false}
-                isProgressBar={true}
-                vehicleCard={false}
-                generatorCard={false}
-                driverCard={false}
-            />
-        </div>
+        <>
+            {/* <div>
+                <MasterTemplateWithSmallCard
+                    data={data}
+                    dataCount={data.length}
+                    headerOnSearch={() => console.log("SEARCHED")}
+                    headerOnClickAdd={() => console.log("ADDED")}
+                    cardOnClick={(id: string) => console.log("CLICKED " + id)}
+                    onClickDelete={(id: string) => console.log("DELETED " + id)}
+                    onClickUpdate={(id: string) => console.log("UPDATED " + id)}
+                    privilege={false}
+                    branchCard={false}
+                    adminCard={false}
+                    isProgressBar={true}
+                    vehicleCard={false}
+                    generatorCard={false}
+                    driverCard={true}
+                />
+            </div> */}
+        </>
     );
 }
 
