@@ -1,16 +1,34 @@
 import React, { useState } from "react";
-import { Layout } from "antd";
+import { Layout, Modal } from "antd";
 import HeaderLogo from "./HeaderLogo";
 import UserProfile from "./UserProfile";
 import MainMenuItem from "../../molecules/MainMenuItem";
 import mainMenuItems from "./items";
 import SubModule from "../SubModule/item";
 import { useNavigate } from "react-router-dom";
+import { ExclamationCircleOutlined } from '@ant-design/icons';
 
 const { Sider } = Layout;
+const { confirm } = Modal;
 
 function SideBar() {
+
   const [submenuItems, setSubmenuItems] = useState([]);
+
+  const navigate = useNavigate();
+
+  const LogoutClickHandler = () => {
+    confirm({
+      title: "Do you want to Logout?",
+      icon: <ExclamationCircleOutlined />,
+      okText: "Logout",
+      okType: "default",
+      cancelButtonProps: {type: "primary"},
+      onOk() {
+        navigate("/")
+      },
+    });
+  };
 
   const homeItems: any = [
     { id: "1", name: "a" },
@@ -20,8 +38,6 @@ function SideBar() {
   ];
 
   const home: any = [{ id: "allBranches", name: "All Branches" }, ...homeItems];
-
-  const navigate = useNavigate();
 
   const ClickHandler = (item: any) => {
     if (item.id === "home") {
@@ -50,7 +66,7 @@ function SideBar() {
           <div className="user">
             <UserProfile
               onClickProfile={() => console.log("PROFILE")}
-              onClickLogout={() => console.log("LOGOUT")}
+              onClickLogout={LogoutClickHandler}
             />
           </div>
         </div>

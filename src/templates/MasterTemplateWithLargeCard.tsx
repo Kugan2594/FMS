@@ -61,7 +61,7 @@ function MasterTemplateWithLargeCard({
           itemLayout="vertical"
           size="default"
           pagination={{
-            onChange: (page) => {
+            onChange: (page: number) => {
               console.log(page);
             },
             pageSize: 5,
@@ -79,8 +79,8 @@ function MasterTemplateWithLargeCard({
                   branchName={data.branchName}
                   lastChangedDate={data.lastChangedDate}
                   dueDate={data.dueDate}
-                  cardOnClick={() => cardOnClick(data.id)}
-                  updateButton={() => updateButton(data.id)}
+                  cardOnClick={() => cardOnClick(data)}
+                  updateButton={() => updateButton(data)}
                   deleteButton={() => deleteButton(data.id)}
                 />
               }
