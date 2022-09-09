@@ -225,14 +225,13 @@ function SmallCard({
                 </Col>
 
                 <Col xs={24} xl={11}>
-                    <Row justify="end" className="content-3" align="bottom">
-                        <div
-                            className="vehicles"
-                            style={{
-                                display: "flex",
-                                flexDirection: "column",
-                            }}
-                        >
+                    <Row
+                        justify="end"
+                        className="content-3"
+                        align="bottom"
+                        // style={{ display: "flex", flexDirection: "column" }}
+                    >
+                        <div className="vehicles" style={{}}>
                             {branchCard && (
                                 <div className="number-of-vehicles">
                                     <div
