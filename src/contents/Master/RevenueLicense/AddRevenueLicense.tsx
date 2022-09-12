@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
     Col,
     DatePicker,
@@ -12,6 +12,10 @@ import {
 import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
 import type { UploadChangeParam } from "antd/es/upload";
 import type { RcFile, UploadFile, UploadProps } from "antd/es/upload/interface";
+import { addRevenueLicense, getAllRevenueLicenseByUserId, getAllVehiclesAllocationsForDropDown } from "./ServicesRevenueLicense";
+import { getUserDetails } from "../../../contents/Login/LoginAuthentication";
+import axios from "axios";
+
 
 const getBase64 = (img: RcFile, callback: (url: string) => void) => {
     const reader = new FileReader();
@@ -36,6 +40,7 @@ function AddRevenueLicense() {
     const [form] = Form.useForm();
     const [loading, setLoading] = useState(false);
     const [imageUrl, setImageUrl] = useState<string>();
+    const [vehicle, setVehicle] = useState([]);
 
     const handleChange: UploadProps["onChange"] = (
         info: UploadChangeParam<UploadFile>
@@ -53,6 +58,21 @@ function AddRevenueLicense() {
         }
     };
 
+    useEffect(() => {
+        getVehicleSelectData(getUserDetails().user_id);
+    }, [])
+
+    const getVehicleSelectData = (userId: number) => {
+        let data: any = [];
+        getAllVehiclesAllocationsForDropDown(userId).then((res: any) => {
+            res.map((post: any) => {
+                data.push({ value: post.vehicleNumber, label: `${post.resourceVehicleDto.vehicleModel} ${post.resourceVehicleDto.vehicleBodyTypeResponseDto} ${post.resourceVehicleDto.vehicleTypeName} ${post.resourceVehicleDto.fuelTypeName} ${post.vehicleNumber}` });
+                return null;
+            });
+            setVehicle(data);
+        });
+    };
+
     const uploadButton = (
         <div>
             {loading ? <LoadingOutlined /> : <PlusOutlined />}
@@ -60,11 +80,14 @@ function AddRevenueLicense() {
         </div>
     );
 
+
     const { Option } = Select;
 
     return (
         <>
-            <Form id="form" name="basic" form={form}>
+            <Form id="form" name="basic" form={form}
+                initialValues={{ remember: true }}
+                >
                 <Row style={{ paddingLeft: "35px", paddingRight: "35px" }}>
                     <Col span={24}>
                         <Form.Item>
@@ -73,13 +96,13 @@ function AddRevenueLicense() {
                                 optionFilterProp="children"
                                 bordered={false}
                                 style={{ borderBottom: "1px solid #ccccb3" }}
+                                options={vehicle}
                             >
-                                <Option value="jack">Jack</Option>
-                                <Option value="lucy">Lucy</Option>
-                                <Option value="tom">Tom</Option>
                             </Select>
                         </Form.Item>
-                        <Form.Item>
+                        <Form.Item
+                            name="region"
+                        >
                             <Input
                                 placeholder="Region"
                                 required
@@ -89,7 +112,9 @@ function AddRevenueLicense() {
                         </Form.Item>
                         {/* <Row> */}
                         {/* <Col span={11}> */}
-                        <Form.Item>
+                        <Form.Item
+                            name="taxIssuedDate"
+                        >
                             <DatePicker
                                 placeholder="Issued Date"
                                 style={{ borderBottom: "1px solid #ccccb3", borderTop: "0px", borderLeft: "0px", borderRight: "0px", width: "100%" }}
@@ -98,7 +123,9 @@ function AddRevenueLicense() {
                         {/* </Col> */}
                         {/* <Col span={2}></Col> */}
                         {/* <Col span={11}> */}
-                        <Form.Item>
+                        <Form.Item
+                            name="taxExpiryDate"
+                        >
                             <DatePicker
                                 placeholder="Expire Date"
                                 style={{ borderBottom: "1px solid #ccccb3", borderTop: "0px", borderLeft: "0px", borderRight: "0px", width: "100%" }}
@@ -107,7 +134,9 @@ function AddRevenueLicense() {
                         {/* </Col> */}
                         {/* </Row> */}
 
-                        <Form.Item>
+                        <Form.Item
+                            name="taxAmount"
+                        >
                             <Input
                                 placeholder="Price"
                                 bordered={false}
@@ -134,6 +163,16 @@ function AddRevenueLicense() {
                                 uploadButton
                             )}
                         </Upload>
+
+                        <Form.Item hidden={true}
+                            name="id"
+                        >
+                        </Form.Item>
+
+                        <Form.Item hidden={true}
+                            name="userId"
+                        >
+                        </Form.Item>
                     </Col>
                 </Row>
             </Form>
