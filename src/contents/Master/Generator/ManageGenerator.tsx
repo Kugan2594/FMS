@@ -134,7 +134,7 @@ function ManageGenerator() {
                 onOk={handleOk}
                 onCancel={handleCancel}
                 closable={false}
-                width={500}
+                width={600}
             >
                 <AddGenerator />
             </Modal>

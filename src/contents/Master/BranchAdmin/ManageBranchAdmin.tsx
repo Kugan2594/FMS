@@ -1,11 +1,10 @@
-import { RocketOutlined } from "@ant-design/icons";
-
 import React from "react";
 import MasterTemplateWithSmallCard from "../../../templates/MasterTemplateWithSmallCard";
 import { useState } from "react";
 import { Modal, Space } from "antd";
 import AddBranch from "../Branch/AddBranch";
 import AddBranchAdmin from "../BranchAdmin/AddBranchAdmin";
+import { RocketOutlined } from "@ant-design/icons";
 const data = [
     {
         id: "1",

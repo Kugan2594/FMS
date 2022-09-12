@@ -1,30 +1,31 @@
-import {
-    EyeInvisibleOutlined,
-    EyeTwoTone,
-    LockFilled,
-    LockOutlined,
-    LockTwoTone,
-    MessageOutlined,
-} from "@ant-design/icons";
-import { Button, Card, Col, Form, Image, Input, Row, Typography } from "antd";
-import React from "react";
-import Logo from "../../assets/Logo.svg";
+import { LockTwoTone } from "@ant-design/icons";
+import { Button, Card, Col, Form, Input, Row, Typography } from "antd";
+import * as React from "react";
+import { useNavigate } from "react-router-dom";
 import "./login.style.less";
+import { addItemApi } from "./ServiceForgotPassword";
 const { Title, Text } = Typography;
 
 function ForgotPassword() {
-    const onClickBack = () => {};
-    const OTPhandler = () => {
-        console.log("send OTP");
+    const [form] = Form.useForm();
+    let navigate = useNavigate();
+
+    const onFinish = (values: any) => {
+        addItemApi(values.email)
+            .then((res) => {})
+            .then(() => {
+                navigate("/reset-password");
+            })
+            .catch((err) => {});
+
+        form.resetFields();
     };
-    const onChangeHandler = () => {};
+
+    const onFinishFailed = (errorInfo: any) => {};
+    const onClickBack = () => {};
     return (
         <div className="forgot-password-template">
-            <Row
-                className="forgot-password-content"
-                // justify="space-around"
-                // align="middle"
-            >
+            <Row className="forgot-password-content">
                 <Col xs={24} xl={6} className="grid-1">
                     <div></div>
                 </Col>
@@ -47,7 +48,6 @@ function ForgotPassword() {
                                         }}
                                     >
                                         <Col span={22} offset={2}>
-                                            {/* <div className="logo"> */}
                                             <LockTwoTone
                                                 style={{
                                                     fontSize: "28px",
@@ -55,7 +55,6 @@ function ForgotPassword() {
                                                     margin: "20%",
                                                 }}
                                             />
-                                            {/* </div> */}
                                         </Col>
                                     </Row>
                                 </Col>
@@ -89,23 +88,38 @@ function ForgotPassword() {
                                             span: 24,
                                         }}
                                         layout="horizontal"
-                                        // onValuesChange={onFormLayoutChange}
-                                        // disabled={componentDisabled}
+                                        id="form"
+                                        form={form}
+                                        name="basic"
                                         size="large"
+                                        onFinish={onFinish}
+                                        onFinishFailed={onFinishFailed}
                                     >
-                                        <Form.Item>
+                                        <Form.Item
+                                            name="email"
+                                            rules={[
+                                                {
+                                                    required: true,
+                                                    message:
+                                                        "Please input your email!",
+                                                },
+                                                {
+                                                    type: "email",
+                                                    message:
+                                                        "Enter valid email address",
+                                                },
+                                            ]}
+                                        >
                                             <Input
                                                 placeholder="Email ,Mobile number"
                                                 maxLength={400}
-                                                onChange={onChangeHandler}
                                             />
                                         </Form.Item>
+
                                         <Form.Item>
                                             <Button
                                                 className="login-button"
                                                 type="primary"
-                                                // loading={loading}
-                                                onClick={OTPhandler}
                                                 htmlType="submit"
                                             >
                                                 Send OTP

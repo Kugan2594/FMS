@@ -151,7 +151,6 @@ function AddBranchAdmin({
                         </div>
                     </Col>
                 </Row>
-
                 <Row
                     justify="end"
                     className="Actions"

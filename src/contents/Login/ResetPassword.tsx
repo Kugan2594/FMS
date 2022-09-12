@@ -1,31 +1,35 @@
 import {
     EyeInvisibleOutlined,
     EyeTwoTone,
-    LockFilled,
-    LockOutlined,
-    LockTwoTone,
-    MessageOutlined,
     SmileTwoTone,
 } from "@ant-design/icons";
-import { Button, Card, Col, Form, Image, Input, Row, Typography } from "antd";
-import React from "react";
-import Logo from "../../assets/Logo.svg";
+import { Button, Card, Col, Form, Input, Row, Typography } from "antd";
+import { useNavigate } from "react-router-dom";
 import "./login.style.less";
+import { resetPasswordApi } from "./ServiceForgotPassword";
+
 const { Title, Text } = Typography;
 
 function ResetPassword() {
-    const onClickBack = () => {};
-    const ResetHandler = () => {
-        console.log("send OTP");
+    const [form] = Form.useForm();
+    const navigate = useNavigate();
+
+    const onFinish = (values: any) => {
+        resetPasswordApi(values)
+            .then((res) => {})
+            .then(() => {
+                navigate("/");
+            })
+            .catch((err) => {});
+
+        form.resetFields();
     };
-    const onChangeHandler = () => {};
+
+    const onFinishFailed = (errorInfo: any) => {};
+    const ResetHandler = () => {};
     return (
         <div className="forgot-password-template">
-            <Row
-                className="forgot-password-content"
-                // justify="space-around"
-                // align="middle"
-            >
+            <Row className="forgot-password-content">
                 <Col xs={24} xl={6} className="grid-1">
                     <div></div>
                 </Col>
@@ -48,7 +52,6 @@ function ResetPassword() {
                                         }}
                                     >
                                         <Col span={22} offset={2}>
-                                            {/* <div className="logo"> */}
                                             <SmileTwoTone
                                                 style={{
                                                     fontSize: "28px",
@@ -56,7 +59,6 @@ function ResetPassword() {
                                                     margin: "20%",
                                                 }}
                                             />
-                                            {/* </div> */}
                                         </Col>
                                     </Row>
                                 </Col>
@@ -85,19 +87,35 @@ function ResetPassword() {
                                             span: 24,
                                         }}
                                         layout="horizontal"
-                                        // onValuesChange={onFormLayoutChange}
-                                        // disabled={componentDisabled}
+                                        onFinish={onFinish}
+                                        onFinishFailed={onFinishFailed}
                                         size="large"
                                     >
-                                        <Form.Item>
+                                        <Form.Item
+                                            name="token"
+                                            rules={[
+                                                {
+                                                    required: true,
+                                                    message:
+                                                        "Please input your Token!",
+                                                },
+                                            ]}
+                                        >
                                             <Input
-                                                placeholder="OTP"
+                                                placeholder="Token"
                                                 maxLength={400}
-                                                onChange={onChangeHandler}
-                                                type="number"
                                             />
                                         </Form.Item>
-                                        <Form.Item>
+                                        <Form.Item
+                                            name="password"
+                                            rules={[
+                                                {
+                                                    required: true,
+                                                    message:
+                                                        "Please input your New Password!",
+                                                },
+                                            ]}
+                                        >
                                             <Input.Password
                                                 name="password"
                                                 placeholder="Password"
@@ -114,7 +132,6 @@ function ResetPassword() {
                                             <Button
                                                 className="login-button"
                                                 type="primary"
-                                                // loading={loading}
                                                 onClick={ResetHandler}
                                                 htmlType="submit"
                                             >
