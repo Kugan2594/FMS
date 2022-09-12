@@ -80,10 +80,7 @@ function ManageDrivers() {
       okType: "danger",
       cancelText: "No",
       onOk() {
-        console.log(id);
-      },
-      onCancel() {
-        console.log("Cancel");
+        //Delete API
       },
     });
   };

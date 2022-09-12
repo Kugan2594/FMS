@@ -1,6 +1,5 @@
 import { Col, Form, Input, Row, Select } from "antd";
-import React, { useState } from "react";
-import { useEffect } from "react";
+import React from "react";
 import CustomButton from "../../../components/atoms/Button/CustomButton";
 import "./driver.style.less";
 
@@ -143,11 +142,3 @@ function AddDriver({
 }
 
 export default AddDriver;
-
-const datePickerStyle: React.CSSProperties = {
-  width: "100%",
-  borderLeft: "0px",
-  borderRight: "0px",
-  borderTop: "0px",
-  borderBottom: "1px solid #ccccb3",
-};

@@ -41,11 +41,10 @@ function SideBar() {
 
   const ClickHandler = (item: any) => {
     if (item.id === "home") {
-      setSubmenuItems(home);
+      setSubmenuItems(home)
     } else {
-      setSubmenuItems(item.children);
-    }
-    console.log(submenuItems);
+      setSubmenuItems(item.children)
+    };
     navigate(item.link);
   };
 
@@ -66,7 +65,7 @@ function SideBar() {
           })}
           <div className="user">
             <UserProfile
-              onClickProfile={() => console.log("PROFILE")}
+              onClickProfile={""}
               onClickLogout={LogoutClickHandler}
             />
           </div>
