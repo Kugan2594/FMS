@@ -57,6 +57,7 @@ function SideBar() {
           {mainMenuItems.map((item) => {
             return (
               <MainMenuItem
+                key={item.id}
                 icon={item.icon}
                 label={item.name}
                 onClick={() => ClickHandler(item)}
