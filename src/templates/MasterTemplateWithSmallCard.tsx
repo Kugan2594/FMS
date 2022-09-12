@@ -80,9 +80,9 @@ function MasterTemplateWithSmallCard({
                                         key={data.id}
                                         branchLocation={data.branchLocation}
                                         name={data.name}
-                                        cardOnClick={() => cardOnClick(data.id)}
+                                        cardOnClick={() => cardOnClick(data)}
                                         onClickUpdate={() =>
-                                            onClickUpdate(data.id)
+                                            onClickUpdate(data)
                                         }
                                         onClickDelete={() =>
                                             onClickDelete(data.id)

@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Avatar } from "antd";
 import { UserOutlined } from '@ant-design/icons';
+import { Button } from "../../atoms/Button";
+import CustomButton from "../../atoms/Button/CustomButton";
 
 interface UserProfileType {
   onClickProfile: any;
@@ -20,8 +22,8 @@ function UserProfile({onClickProfile, onClickLogout}: UserProfileType) {
         )}
         <div>Profile</div>
       </div>
-      <div className="logout" onClick={onClickLogout}>
-        <h4>Logout</h4>
+      <div className="logout">
+        <CustomButton title="Logout" onClick={onClickLogout} type="default"/>
       </div>
     </div>
   );
