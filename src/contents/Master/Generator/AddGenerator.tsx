@@ -7,6 +7,7 @@ import {
     Select,
     message,
     Upload,
+    Checkbox,
 } from "antd";
 import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
 import type { UploadChangeParam } from "antd/es/upload";
@@ -87,7 +88,7 @@ function AddGenerator() {
                     </Col>
                 </Row>
                 <Row>
-                    <Col span={12}>
+                    <Col span={11}>
                         <Form.Item>
                             <Input
                                 placeholder="Generator Brand"
@@ -107,8 +108,30 @@ function AddGenerator() {
                                 <Option value="lucy">Diesal</Option>
                             </Select>
                         </Form.Item>
+                        <Form.Item>
+                            <Input
+                                placeholder="Maximum Power kVA"
+                                required
+                                bordered={false}
+                                style={{
+                                    borderBottom: "1px solid #ccccb3",
+                                }}
+                            />
+                        </Form.Item>
+                        <Form.Item>
+                            <Input
+                                placeholder="Tank Capacity in Litre"
+                                required
+                                bordered={false}
+                                style={{
+                                    borderBottom: "1px solid #ccccb3",
+                                    marginTop: "9%",
+                                }}
+                            />
+                        </Form.Item>
                     </Col>
-                    <Col span={12}>
+                    <Col span={2}></Col>
+                    <Col span={11}>
                         <Form.Item>
                             <Input
                                 placeholder="Generator Name"
@@ -128,6 +151,41 @@ function AddGenerator() {
                                 <Option value="lucy">Colombo</Option>
                             </Select>
                         </Form.Item>
+                        <Form.Item>
+                            <Input
+                                placeholder="Continuous Operating Hours"
+                                required
+                                bordered={false}
+                                style={{ borderBottom: "1px solid #ccccb3" }}
+                            />
+                            <span style={{ color: "blue", marginLeft: "4%" }}>
+                                Warranty{" "}
+                            </span>
+                            <Checkbox />
+                        </Form.Item>
+                        <Row>
+                            <Col span={11}>
+                                <Form.Item>
+                                    <DatePicker
+                                        placeholder="Issued Date"
+                                        style={datePickerStyle}
+                                    />
+                                </Form.Item>
+                            </Col>
+                            <Col span={2}></Col>
+                            <Col span={11}>
+                                <Form.Item>
+                                    <Input
+                                        placeholder="Warranty Period"
+                                        required
+                                        bordered={false}
+                                        style={{
+                                            borderBottom: "1px solid #ccccb3",
+                                        }}
+                                    />
+                                </Form.Item>
+                            </Col>
+                        </Row>
                     </Col>
                 </Row>
             </Form>
@@ -136,3 +194,11 @@ function AddGenerator() {
 }
 
 export default AddGenerator;
+
+const datePickerStyle: React.CSSProperties = {
+    width: "100%",
+    borderLeft: "0px",
+    borderRight: "0px",
+    borderTop: "0px",
+    borderBottom: "1px solid #ccccb3",
+};
