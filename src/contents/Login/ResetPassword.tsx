@@ -1,20 +1,24 @@
-import { LockTwoTone } from "@ant-design/icons";
+import {
+    EyeInvisibleOutlined,
+    EyeTwoTone,
+    SmileTwoTone,
+} from "@ant-design/icons";
 import { Button, Card, Col, Form, Input, Row, Typography } from "antd";
-import * as React from "react";
 import { useNavigate } from "react-router-dom";
 import "./login.style.less";
-import { addItemApi } from "./ServiceForgotPassword";
+import { resetPasswordApi } from "./ServiceForgotPassword";
+
 const { Title, Text } = Typography;
 
-function ForgotPassword() {
+function ResetPassword() {
     const [form] = Form.useForm();
-    let navigate = useNavigate();
+    const navigate = useNavigate();
 
     const onFinish = (values: any) => {
-        addItemApi(values.email)
+        resetPasswordApi(values)
             .then((res) => {})
             .then(() => {
-                navigate("/reset-password");
+                navigate("/");
             })
             .catch((err) => {});
 
@@ -22,7 +26,7 @@ function ForgotPassword() {
     };
 
     const onFinishFailed = (errorInfo: any) => {};
-    const onClickBack = () => {};
+    const ResetHandler = () => {};
     return (
         <div className="forgot-password-template">
             <Row className="forgot-password-content">
@@ -48,7 +52,7 @@ function ForgotPassword() {
                                         }}
                                     >
                                         <Col span={22} offset={2}>
-                                            <LockTwoTone
+                                            <SmileTwoTone
                                                 style={{
                                                     fontSize: "28px",
                                                     color: "#08c",
@@ -65,14 +69,9 @@ function ForgotPassword() {
                                     span={20}
                                     offset={2}
                                 >
-                                    <Title level={4}> Forgot Password?</Title>
+                                    <Title level={4}> Reset Password?</Title>
 
-                                    <Text>
-                                        {" "}
-                                        Enter your email, phone, or username and
-                                        we'll send you a link to get back into
-                                        your account.
-                                    </Text>
+                                    <Text> Enter your OTP and Password</Text>
                                 </Col>
                             </Row>
                             <Row>
@@ -88,56 +87,56 @@ function ForgotPassword() {
                                             span: 24,
                                         }}
                                         layout="horizontal"
-                                        id="form"
-                                        form={form}
-                                        name="basic"
-                                        size="large"
                                         onFinish={onFinish}
                                         onFinishFailed={onFinishFailed}
+                                        size="large"
                                     >
                                         <Form.Item
-                                            name="email"
+                                            name="token"
                                             rules={[
                                                 {
                                                     required: true,
                                                     message:
-                                                        "Please input your email!",
-                                                },
-                                                {
-                                                    type: "email",
-                                                    message:
-                                                        "Enter valid email address",
+                                                        "Please input your Token!",
                                                 },
                                             ]}
                                         >
                                             <Input
-                                                placeholder="Email ,Mobile number"
+                                                placeholder="Token"
                                                 maxLength={400}
                                             />
                                         </Form.Item>
-
+                                        <Form.Item
+                                            name="password"
+                                            rules={[
+                                                {
+                                                    required: true,
+                                                    message:
+                                                        "Please input your New Password!",
+                                                },
+                                            ]}
+                                        >
+                                            <Input.Password
+                                                name="password"
+                                                placeholder="Password"
+                                                iconRender={(visible) =>
+                                                    visible ? (
+                                                        <EyeTwoTone />
+                                                    ) : (
+                                                        <EyeInvisibleOutlined />
+                                                    )
+                                                }
+                                            />
+                                        </Form.Item>
                                         <Form.Item>
                                             <Button
                                                 className="login-button"
                                                 type="primary"
+                                                onClick={ResetHandler}
                                                 htmlType="submit"
                                             >
-                                                Send OTP
+                                                Reset Password
                                             </Button>
-                                        </Form.Item>
-                                        <Form.Item>
-                                            <div className="forgot-password">
-                                                <Text
-                                                    onClick={onClickBack}
-                                                    strong
-                                                    style={{
-                                                        color: "blue",
-                                                        cursor: "pointer",
-                                                    }}
-                                                >
-                                                    Back to Login
-                                                </Text>
-                                            </div>
                                         </Form.Item>
                                     </Form>
                                 </Col>
@@ -153,4 +152,4 @@ function ForgotPassword() {
     );
 }
 
-export default ForgotPassword;
+export default ResetPassword;

@@ -24,7 +24,7 @@ import {
     setUserRolePermission,
 } from "./LoginAuthentication";
 import { signIn } from "./ServiceLogin";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import jwt_decode from "jwt-decode";
 const { Text, Title } = Typography;
 
@@ -35,7 +35,7 @@ function Login() {
     const [loading, setLoading] = useState(false);
     let navigate = useNavigate();
 
-    const onChangeHandler = () => { };
+    const onChangeHandler = () => {};
     const ForgotPasswordHandler = () => {
         console.log("forgot password");
     };
@@ -43,9 +43,7 @@ function Login() {
         console.log("signUp");
     };
 
-
-    const handleError = (res: any) => {
-    };
+    const handleError = (res: any) => {};
 
     const handleSubmit = (event: any) => {
         event.preventDefault();
@@ -76,7 +74,7 @@ function Login() {
                     let response = res.data;
                     console.log({ response });
                     var decoded_token: any = jwt_decode(response.access_token);
-                    navigate("/home"); 
+                    navigate("/home");
                     if (response.access_token) {
                         setAuthentication("true");
                         setToken(response.access_token);
@@ -107,7 +105,6 @@ function Login() {
         }
     };
 
-
     return (
         <div className="login-Component">
             <Card className="login-card">
@@ -127,7 +124,7 @@ function Login() {
                 <Row>
                     <Col span={20} offset={2}>
                         <Form
-                       onSubmitCapture={handleSubmit}
+                            onSubmitCapture={handleSubmit}
                             labelCol={{
                                 span: 24,
                             }}
@@ -161,13 +158,14 @@ function Login() {
                                 />
                             </Form.Item>
                             <Form.Item>
-                                <Button htmlType="submit"
+                                <Button
+                                    htmlType="submit"
                                     className="login-button"
                                     type="primary"
                                     loading={loading}
                                     onClick={() => {
                                         setLoading(!loading);
-                                    }}   
+                                    }}
                                 >
                                     Login
                                 </Button>
@@ -182,7 +180,9 @@ function Login() {
                                             cursor: "pointer",
                                         }}
                                     >
-                                        Forgot Password?
+                                        <Link to="/forgot-password">
+                                            Forgot Password?
+                                        </Link>
                                     </Text>
                                 </div>
                             </Form.Item>
