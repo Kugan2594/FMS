@@ -5,7 +5,7 @@ import CustomButton from "../../../components/atoms/Button/CustomButton";
 import "./driver.style.less";
 
 interface AddDriversPropType {
-  isEditProp: boolean;
+  isEdit: boolean;
   updateDriverData: any;
   branches: any[];
   licenseTypes: any[];
@@ -13,7 +13,7 @@ interface AddDriversPropType {
 }
 
 function AddDriver({
-  isEditProp,
+  isEdit,
   updateDriverData,
   branches,
   licenseTypes,
@@ -33,7 +33,7 @@ function AddDriver({
         id="addDriver-form"
         name="basic"
         form={form}
-        initialValues={isEditProp ? updateDriverData : {}}
+        initialValues={isEdit ? updateDriverData : {}}
       >
         <Row className="add-driver" gutter={16}>
           <Col span={12}>
@@ -129,7 +129,7 @@ function AddDriver({
               <CustomButton className="form-button" title="Cancel" onClick={cancelClickHandler} />
               <CustomButton
                 className="form-button"
-                title="Update"
+                title={isEdit ? "Update" : "Add"}
                 type="primary"
                 htmlType="submit"
                 onClick={handleSubmit}

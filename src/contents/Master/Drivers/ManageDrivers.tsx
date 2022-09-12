@@ -136,7 +136,7 @@ function ManageDrivers() {
           footer={false}
         >
           <AddDriver
-            isEditProp={isEdit}
+            isEdit={isEdit}
             updateDriverData={updateDriverData}
             branches={branches}
             licenseTypes={licenseType}
