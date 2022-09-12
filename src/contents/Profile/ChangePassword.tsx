@@ -10,18 +10,23 @@ import {
     Typography,
 } from "antd";
 import React from "react";
+import { changeUserPassword } from "./ServiceProfile";
 const { Title, Text } = Typography;
 
 function ChangePassword() {
     const onFinish = (values: any) => {
-        if (values.newPassword === values.confirmPassword)
-            console.log("Password Change Success:", values);
-        else console.log("Password Change Fail");
+        let data: object = {
+            oldPassword: values.oldPassword,
+            newPassword: values.newPassword,
+        };
+        if (values.newPassword === values.confirmPassword) {
+            changeUserPassword(data)
+                .then((res) => {})
+                .catch((error) => {});
+        }
     };
 
-    const onFinishFailed = (errorInfo: any) => {
-        console.log("Failed:", errorInfo);
-    };
+    const onFinishFailed = (errorInfo: any) => {};
 
     return (
         <>
