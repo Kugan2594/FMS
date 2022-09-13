@@ -19,7 +19,7 @@ import ManageGenerator from "../contents/Master/Generator/ManageGenerator";
 import ManageFuelUp from "../contents/Master/FuelUp/ManageFuelUp";
 import ManageMileage from "../contents/Master/Mileage/ManageMileage";
 import SignUp from "../contents/Home/SignUp/SignUp";
-import OTPVarification from "../contents/Home/OTPVerification/OTPVerification";
+import OTPVerification from "../contents/Home/OTPVerification/OTPVerification";
 const Loader = (Component: any) => (props: any) =>
     (
         <Suspense fallback={<SuspenseLoader />}>
@@ -42,7 +42,7 @@ const PublicRoute: RouteObject[] = [
     },
     {
         path: "/otp-verification",
-        element: <OTPVarification />,
+        element: <OTPVerification />,
     },
 
     {
