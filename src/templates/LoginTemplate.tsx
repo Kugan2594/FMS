@@ -6,7 +6,7 @@ function LoginTemplate() {
     return (
         <div className="login-template-grid">
             <Row>
-                <Col xs={24} xl={12} style={{ border: "1px solid red" }}></Col>
+                <Col xs={24} xl={12}></Col>
                 <Col xs={24} xl={12}>
                     <Login />
                 </Col>
