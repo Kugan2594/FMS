@@ -18,6 +18,7 @@ import ResetPassword from "../contents/Login/ResetPassword";
 import ManageGenerator from "../contents/Master/Generator/ManageGenerator";
 import ManageFuelUp from "../contents/Master/FuelUp/ManageFuelUp";
 import ManageMileage from "../contents/Master/Mileage/ManageMileage";
+import SignUp from "../contents/Home/SignUp/SignUp";
 const Loader = (Component: any) => (props: any) =>
     (
         <Suspense fallback={<SuspenseLoader />}>
@@ -34,6 +35,11 @@ const PublicRoute: RouteObject[] = [
         path: "/forgot-password",
         element: <ForgotPassword />,
     },
+    {
+        path: "/sign-up",
+        element: <SignUp />,
+    },
+
     {
         path: "home",
         element: <CustomLayout />,
