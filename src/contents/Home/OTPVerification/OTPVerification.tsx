@@ -9,7 +9,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 const { Text, Title } = Typography;
 
-function OTPVarification() {
+function OTPVerification() {
     const [form] = Form.useForm();
     const navigate = useNavigate();
     const onFinish = (values: any) => {};
@@ -249,4 +249,4 @@ function OTPVarification() {
         </div>
     );
 }
-export default OTPVarification;
+export default OTPVerification;
