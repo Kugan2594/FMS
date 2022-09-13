@@ -4,33 +4,15 @@ import MasterTemplateWithSmallCard from "../../../templates/MasterTemplateWithSm
 import AddDriver from "./AddDriver";
 import { ExclamationCircleOutlined } from "@ant-design/icons";
 import { RocketOutlined } from "@ant-design/icons";
+import DriverProfile from "./DriverProfile";
 
 const { confirm } = Modal;
 
 function ManageDrivers() {
-  const [updateDriverData, setUpdateDriverData] = useState({
-    id: "",
-    name: "",
-    contactNumber: "",
-    vehicleType: "",
-    drivingLicense: "",
-    nic: "",
-    driverName: "",
-  });
-
-  const licenseType = [
-    { id: 1, name: "Heavy Vehicle" },
-    { id: 2, name: "Light Vehicle" },
-  ];
-
-  const branches = [
-    { id: 1, name: "Jaffna" },
-    { id: 2, name: "Vavuniya" },
-    { id: 3, name: "Colombo" },
-    { id: 4, name: "Kandy" },
-  ];
+  const [updateDriverData, setUpdateDriverData] = useState({});
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isEdit, setisEdit] = useState(false);
+  const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
 
   const showModal = () => {
     setIsModalOpen(true);
@@ -46,30 +28,11 @@ function ManageDrivers() {
   const handleOk = () => {
     setIsModalOpen(false);
     setisEdit(false);
-    setUpdateDriverData({
-      id: "",
-      name: "",
-      contactNumber: "",
-      vehicleType: "",
-      drivingLicense: "",
-      nic: "",
-      driverName: "",
-    });
   };
 
   const handleCancel = () => {
     setIsModalOpen(false);
     setisEdit(false);
-
-    setUpdateDriverData({
-      id: "",
-      name: "",
-      contactNumber: "",
-      vehicleType: "",
-      drivingLicense: "",
-      nic: "",
-      driverName: "",
-    });
   };
 
   const deleteClickHandler = (id: any) => {
@@ -84,6 +47,18 @@ function ManageDrivers() {
       },
     });
   };
+
+  const licenseType = [
+    { id: 1, name: "Heavy Vehicle" },
+    { id: 2, name: "Light Vehicle" },
+  ];
+
+  const branches = [
+    { id: 1, name: "Jaffna" },
+    { id: 2, name: "Vavuniya" },
+    { id: 3, name: "Colombo" },
+    { id: 4, name: "Kandy" },
+  ];
 
   const data = [
     {
@@ -139,6 +114,19 @@ function ManageDrivers() {
             licenseTypes={licenseType}
             cancelClickHandler={handleCancel}
           />
+        </Modal>
+      )}
+      {isProfileModalOpen && (
+        <Modal
+          title={isEdit ? "Edit Driver" : "Add New Driver"}
+          open={isProfileModalOpen}
+          onOk={handleOk}
+          onCancel={handleCancel}
+          closable={false}
+          width={"50%"}
+          footer={false}
+        >
+          <DriverProfile />
         </Modal>
       )}
     </div>
