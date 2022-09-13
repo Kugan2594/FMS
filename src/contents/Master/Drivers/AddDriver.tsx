@@ -36,7 +36,7 @@ function AddDriver({
       >
         <Row className="add-driver" gutter={16}>
           <Col span={12}>
-            <Form.Item name="driverName">
+            <Form.Item name="driverFirstName">
               <Input
                 placeholder="First Name"
                 required
@@ -46,7 +46,7 @@ function AddDriver({
             </Form.Item>
           </Col>
           <Col span={12}>
-            <Form.Item name="">
+            <Form.Item name="driverLastName">
               <Input
                 placeholder="Last Name"
                 required
@@ -86,7 +86,7 @@ function AddDriver({
             </Form.Item>
           </Col>
           <Col span={12}>
-            <Form.Item name="branch">
+            <Form.Item name="branchName">
               <Select
                 placeholder="Branch"
                 optionFilterProp="children"

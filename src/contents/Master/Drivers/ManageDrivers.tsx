@@ -9,7 +9,7 @@ import DriverProfile from "./DriverProfile";
 const { confirm } = Modal;
 
 function ManageDrivers() {
-  const [updateDriverData, setUpdateDriverData] = useState({});
+  const [driverData, setDriverData] = useState({});
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isEdit, setisEdit] = useState(false);
   const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
@@ -22,7 +22,7 @@ function ManageDrivers() {
   const updateClickHandler = (data: any) => {
     setIsModalOpen(true);
     setisEdit(true);
-    setUpdateDriverData(data);
+    setDriverData(data);
   };
 
   const handleOk = () => {
@@ -33,6 +33,7 @@ function ManageDrivers() {
   const handleCancel = () => {
     setIsModalOpen(false);
     setisEdit(false);
+    setIsProfileModalOpen(false);
   };
 
   const deleteClickHandler = (id: any) => {
@@ -46,6 +47,11 @@ function ManageDrivers() {
         //Delete API
       },
     });
+  };
+
+  const profileOnClickHandler = (data: any) => {
+    setIsProfileModalOpen(true);
+    setDriverData(data);
   };
 
   const licenseType = [
@@ -63,25 +69,31 @@ function ManageDrivers() {
   const data = [
     {
       id: "1",
-      name: "Colombo Branch",
+      branchName: "Colombo",
       contactNumber: "0772250114",
       vehicleType: "car",
       drivingLicense: "82763871",
+      drivingLicenseType: "Light Vehicle",
       nic: "941234500V",
-      driverName: "Kugan",
+      driverFirstName: "Kugan",
+      driverLastName: "Kuga",
       vehicleIcon: <RocketOutlined />,
-      test: "test1",
+      email: "kugan@gmail.com",
+      image:
+        "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
     },
     {
       id: "2",
-      name: "Jaffna Branch",
+      branchName: "Jaffna",
       contactNumber: "0772250114",
       vehicleType: "car",
       drivingLicense: "82763871",
+      drivingLicenseType: "Light Vehicle",
       nic: "941234500V",
-      driverName: "Cudeson",
+      driverFirstName: "Cudeson",
+      driverLastName: "Cudeson",
       vehicleIcon: <RocketOutlined />,
-      test: "test2",
+      email: "Cudeson@gmail.com",
     },
   ];
 
@@ -92,7 +104,7 @@ function ManageDrivers() {
         dataCount={data.length}
         headerOnClickAdd={showModal}
         headerOnSearch={() => {}}
-        cardOnClick={() => {}}
+        cardOnClick={(data: any) => profileOnClickHandler(data)}
         onClickDelete={(id: any) => deleteClickHandler(id)}
         onClickUpdate={(data: any) => updateClickHandler(data)}
         driverCard={true}
@@ -109,7 +121,7 @@ function ManageDrivers() {
         >
           <AddDriver
             isEdit={isEdit}
-            updateDriverData={updateDriverData}
+            updateDriverData={driverData}
             branches={branches}
             licenseTypes={licenseType}
             cancelClickHandler={handleCancel}
@@ -118,15 +130,14 @@ function ManageDrivers() {
       )}
       {isProfileModalOpen && (
         <Modal
-          title={isEdit ? "Edit Driver" : "Add New Driver"}
           open={isProfileModalOpen}
           onOk={handleOk}
           onCancel={handleCancel}
           closable={false}
-          width={"50%"}
+          width={"25%"}
           footer={false}
         >
-          <DriverProfile />
+          <DriverProfile driverProfileData={driverData} />
         </Modal>
       )}
     </div>

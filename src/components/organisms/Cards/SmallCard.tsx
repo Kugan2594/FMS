@@ -210,7 +210,7 @@ function SmallCard({
                                     </Text>
                                     <br />
                                     <Text strong type="secondary">
-                                        {driverFirstName}
+                                        {nic}
                                     </Text>
                                 </div>
                             )}
