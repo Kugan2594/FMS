@@ -16,8 +16,7 @@ export interface CardSmallType {
     progressData?: number;
     itemName?: string;
     branchLocation?: string;
-    name?: string;
-    adminName?: string;
+    branchName?: string;
     cardOnClick?: any;
     onClickUpdate?: any;
     onClickDelete?: any;
@@ -40,14 +39,18 @@ export interface CardSmallType {
     generatorName?: string;
     fuelType?: string;
     nic?: string;
-    driverName?: string;
     vehicleIcon?: any;
+    email?: string;
+    adminFirstName?: string;
+    adminLastName?: string;
+    driverFirstName?: string;
+    driverLastName?: string;
+    onCardClick?: React.MouseEventHandler<HTMLDivElement> | undefined;
 }
 let intialValue: CardSmallType = {
     id: "",
-    adminName: "",
     branchLocation: "",
-    name: "",
+    branchName: "",
     image: "",
     isProgressBar: false,
     itemName: "",
@@ -71,8 +74,13 @@ let intialValue: CardSmallType = {
     fuelType: "",
     nic: "",
     generatorName: "",
-    driverName: "",
     vehicleIcon: "",
+    email: "",
+    adminFirstName: "",
+    adminLastName: "",
+    driverFirstName: "",
+    driverLastName: "",
+    contactNumber: "'",
 };
 function SmallCard({
     id,
@@ -80,8 +88,7 @@ function SmallCard({
     progressData,
     itemName,
     branchLocation,
-    name,
-    adminName,
+    branchName,
     cardOnClick,
     onClickUpdate,
     onClickDelete,
@@ -91,7 +98,6 @@ function SmallCard({
     privilege,
     adminCard,
     branchCard,
-    contactNumber,
     vehicleCard,
     vehicleNumber,
     vehicleType,
@@ -104,8 +110,14 @@ function SmallCard({
     fuelType,
     nic,
     generatorName,
-    driverName,
     vehicleIcon,
+    email,
+    adminFirstName,
+    adminLastName,
+    driverFirstName,
+    driverLastName,
+    contactNumber,
+    onCardClick,
 }: CardSmallType) {
     const { Title, Text } = Typography;
 
@@ -141,11 +153,15 @@ function SmallCard({
                         <Progress percent={progressData} size="small" />
                     )}
                 </Col>
-                <Col xs={24} xl={9} className="content-2">
+                <Col xs={24} xl={9} className="content-2" onClick={onCardClick}>
                     <div className="content-2-item">
-                        {branchCard && <Title level={5}> {name}</Title>}
-                        {driverCard && <Title level={5}> {driverName}</Title>}
-                        {adminCard && <Title level={5}> {adminName}</Title>}
+                        {branchCard && <Title level={5}> {branchName}</Title>}
+                        {driverCard && (
+                            <Title level={5}> {driverFirstName}</Title>
+                        )}
+                        {adminCard && (
+                            <Title level={5}> {adminFirstName}</Title>
+                        )}
                         {vehicleCard && (
                             <Title level={5}> {vehicleNumber}</Title>
                         )}
@@ -172,7 +188,7 @@ function SmallCard({
                             {branchCard && (
                                 <div className="admin-name">
                                     <Text strong type="secondary">
-                                        {adminName}
+                                        {adminFirstName}
                                     </Text>
                                 </div>
                             )}
@@ -183,7 +199,7 @@ function SmallCard({
                                     </Text>
                                     <br />
                                     <Text strong type="secondary">
-                                        {name}
+                                        {branchName}
                                     </Text>
                                 </div>
                             )}
@@ -194,7 +210,7 @@ function SmallCard({
                                     </Text>
                                     <br />
                                     <Text strong type="secondary">
-                                        {name}
+                                        {driverFirstName}
                                     </Text>
                                 </div>
                             )}
@@ -205,7 +221,7 @@ function SmallCard({
                                     </Text>
                                     <br />
                                     <Text strong type="secondary">
-                                        {name}
+                                        {itemName}
                                     </Text>
                                 </div>
                             )}
@@ -216,7 +232,7 @@ function SmallCard({
                                     </Text>
                                     <br />
                                     <Text strong type="secondary">
-                                        {name}
+                                        {itemName}
                                     </Text>
                                 </div>
                             )}

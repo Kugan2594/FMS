@@ -196,18 +196,16 @@ function Login() {
                         <Text style={{ fontSize: "16px" }}>
                             Don't have an account?{" "}
                         </Text>
-                        <div
-                            onClick={SignUpHandler}
-                            className="sign-up-link"
-                            style={{
-                                color: "blue",
-                                fontSize: "16px",
-                                fontWeight: "bold",
-                                marginLeft: "10px",
-                                cursor: "pointer",
-                            }}
-                        >
-                            SignUp
+                        <div className="forgot-password">
+                            <Text
+                                strong
+                                style={{
+                                    color: "blue",
+                                    cursor: "pointer",
+                                }}
+                            >
+                                <Link to="/sign-up">Sign Up</Link>
+                            </Text>
                         </div>
                     </Col>
                 </Row>

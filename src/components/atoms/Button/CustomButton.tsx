@@ -13,11 +13,19 @@ interface ButtonPropsType {
         | "default"
         | "dashed"
         | undefined;
+    className?: string;
+    htmlType?: "submit" | "button" | "reset";
 }
 
 const CustomButton = (props: ButtonPropsType) => {
     return (
-        <Button style={props.style} type={props.type} onClick={props.onClick}>
+        <Button
+            style={props.style}
+            type={props.type}
+            onClick={props.onClick}
+            className={props.className}
+            htmlType={props.htmlType}
+        >
             {props.title}
         </Button>
     );
