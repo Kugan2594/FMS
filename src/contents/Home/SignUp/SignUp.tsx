@@ -30,12 +30,7 @@ function SignUp() {
         <div>
             <Row className="signup-container">
                 <Col xs={24} xl={8}></Col>
-                <Col
-                    xs={24}
-                    xl={8}
-                    // style={{ border: "1px solid red" }}
-                    className="main-grid"
-                >
+                <Col xs={24} xl={8} className="main-grid">
                     <Card className="signup-card">
                         <Row>
                             <Col span={4} offset={10} className="login-title">
@@ -87,7 +82,6 @@ function SignUp() {
                                     <Form.Item>
                                         <Select
                                             showSearch
-                                            // placeholder={<EyeTwoTone />}
                                             placeholder="Select A Country"
                                             optionFilterProp="children"
                                             onChange={onChange}
@@ -122,14 +116,14 @@ function SignUp() {
                                     <Form.Item>
                                         <Button
                                             htmlType="submit"
-                                            className="login-button"
+                                            className="signup-button"
                                             type="primary"
                                         >
                                             Sign Up
                                         </Button>
                                     </Form.Item>
                                     <Form.Item>
-                                        <div className="forgot-password">
+                                        <div className="login">
                                             <Text
                                                 strong
                                                 style={{
