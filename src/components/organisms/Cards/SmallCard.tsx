@@ -153,7 +153,13 @@ function SmallCard({
                         <Progress percent={progressData} size="small" />
                     )}
                 </Col>
-                <Col xs={24} xl={9} className="content-2" onClick={onCardClick}>
+                <Col
+                    xs={24}
+                    xl={9}
+                    className="content-2"
+                    onClick={onCardClick}
+                    style={{ cursor: "pointer" }}
+                >
                     <div className="content-2-item">
                         {branchCard && <Title level={5}> {branchName}</Title>}
                         {driverCard && (
@@ -241,12 +247,7 @@ function SmallCard({
                 </Col>
 
                 <Col xs={24} xl={11}>
-                    <Row
-                        justify="end"
-                        className="content-3"
-                        align="bottom"
-                        // style={{ display: "flex", flexDirection: "column" }}
-                    >
+                    <Row justify="end" className="content-3" align="bottom">
                         <div className="vehicles" style={{}}>
                             {branchCard && (
                                 <div className="number-of-vehicles">

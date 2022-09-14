@@ -9,6 +9,7 @@ import MasterTemplateWithSmallCard from "../../../templates/MasterTemplateWithSm
 import { Input } from "../../../components/atoms/index";
 import AddBranch from "./AddBranch";
 import { Button, Modal, Space } from "antd";
+import ViewBranch from "./ViewBranch";
 const { confirm } = Modal;
 const data = [
     {
@@ -173,6 +174,7 @@ function ManageBranch() {
     const [visible, setVisible] = useState(false);
     const [ok, setOk] = useState(false);
     const [edit, setEdit] = useState(false);
+    const [view, setView] = useState(false);
     const onClickAddBranch = () => {};
     const showModal = () => {
         setVisible(!visible);
@@ -203,7 +205,13 @@ function ManageBranch() {
             },
         });
     };
-
+    const showViewModal = (data: string) => {
+        setView(true);
+        console.log(view);
+    };
+    const handleViewCancel = () => {
+        setView(false);
+    };
     return (
         <>
             <MasterTemplateWithSmallCard
@@ -211,7 +219,7 @@ function ManageBranch() {
                 dataCount={data.length}
                 headerOnSearch={() => console.log("SEARCHED")}
                 headerOnClickAdd={showModal}
-                cardOnClick={(id: string) => console.log("CLICKED " + id)}
+                cardOnClick={(data: string) => showViewModal(data)}
                 onClickDelete={(id: string) => onDeleteHandler(id)}
                 onClickUpdate={(data: any) => showEditModal(data)}
                 privilege={false}
@@ -253,6 +261,16 @@ function ManageBranch() {
                             onClickCancel={handleCancel}
                             initialValues={edit ? formValues : {}}
                         />
+                    </Modal>
+                )}
+                {view && (
+                    <Modal
+                        visible={view}
+                        maskStyle={{ borderRadius: "25" }}
+                        footer={false}
+                        onCancel={handleViewCancel}
+                    >
+                        <ViewBranch />
                     </Modal>
                 )}
             </div>
