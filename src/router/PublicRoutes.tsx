@@ -18,8 +18,9 @@ import ResetPassword from "../contents/Login/ResetPassword";
 import ManageGenerator from "../contents/Master/Generator/ManageGenerator";
 import ManageFuelUp from "../contents/Master/FuelUp/ManageFuelUp";
 import ManageMileage from "../contents/Master/Mileage/ManageMileage";
-import SignUp from "../contents/Home/SignUp/SignUp";
-import OTPVerification from "../contents/Home/OTPVerification/OTPVerification";
+import SignUp from "../contents/Login/SignUp/SignUp";
+import OTPVerification from "../contents/Login/OTPVerification/OTPVerification";
+
 const Loader = (Component: any) => (props: any) =>
     (
         <Suspense fallback={<SuspenseLoader />}>
