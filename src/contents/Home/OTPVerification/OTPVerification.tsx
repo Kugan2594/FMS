@@ -65,7 +65,7 @@ function OTPVerification() {
     };
     const [verifyCode, setVerifyCode]: any = useState("");
     const confirmHandler = () => {
-        setVerifyCode(vcode.join(" "));
+        setVerifyCode(vcode.join(""));
         // let code = vcode.join(" ");
         console.log(verifyCode);
     };
