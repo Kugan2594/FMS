@@ -16,16 +16,13 @@ function OTPVerification() {
     const onFinishFailed = (errorInfo: any) => {};
 
     const [vcode, setVCode]: any[] = useState([]);
-    const [verifyCode, setVerifyCode]: any = useState("");
+
     const [disabled1, setDisabled1] = useState(true);
     const [disabled2, setDisabled2] = useState(true);
     const [disabled3, setDisabled3] = useState(true);
     const [disabled4, setDisabled4] = useState(true);
     const [disabled5, setDisabled5] = useState(true);
-    const confirmHandler = () => {
-        setVerifyCode(vcode.join(" "));
-        console.log(verifyCode);
-    };
+
     const onChangeHandler1 = (e: any) => {
         vcode[0] = e.target.value;
         setVCode(vcode);
@@ -66,14 +63,24 @@ function OTPVerification() {
         setVCode(vcode);
         console.log(vcode);
     };
-
+    const [verifyCode, setVerifyCode]: any = useState("");
+    const confirmHandler = () => {
+        setVerifyCode(vcode.join(" "));
+        // let code = vcode.join(" ");
+        console.log(verifyCode);
+    };
     return (
         <div className="forgot-password-template">
             <Row className="forgot-password-content">
                 <Col xs={24} xl={6} className="grid-1">
                     <div></div>
                 </Col>
-                <Col xs={24} xl={12} className="grid-2">
+                <Col
+                    xs={24}
+                    xl={12}
+                    className="grid-2"
+                    style={{ marginLeft: "10%" }}
+                >
                     <div>
                         <Card className="login-card">
                             <Row className="lock-logo">

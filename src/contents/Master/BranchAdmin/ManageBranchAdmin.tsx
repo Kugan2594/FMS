@@ -4,7 +4,8 @@ import { useState } from "react";
 import { Modal, Space } from "antd";
 import AddBranch from "../Branch/AddBranch";
 import AddBranchAdmin from "../BranchAdmin/AddBranchAdmin";
-import { RocketOutlined } from "@ant-design/icons";
+import { ExclamationCircleOutlined, RocketOutlined } from "@ant-design/icons";
+const { confirm } = Modal;
 const data = [
     {
         id: "1",
@@ -189,6 +190,18 @@ function ManageBranchAdmin() {
         setVisible(!visible);
         setFormValues(data);
     };
+    const deleteHandler = (id: any) => {
+        confirm({
+            title: "Are you sure do you want to delete this Branch Admin?",
+            icon: <ExclamationCircleOutlined />,
+            okText: "Yes",
+            okType: "danger",
+            cancelText: "No",
+            onOk() {
+                //Delete API
+            },
+        });
+    };
     return (
         <div>
             <MasterTemplateWithSmallCard
@@ -197,7 +210,7 @@ function ManageBranchAdmin() {
                 headerOnSearch={() => console.log("SEARCHED")}
                 headerOnClickAdd={showModal}
                 cardOnClick={(id: string) => console.log("CLICKED " + id)}
-                onClickDelete={(id: string) => console.log("DELETED " + id)}
+                onClickDelete={(id: string) => deleteHandler(id)}
                 onClickUpdate={(data: any) => showEditModal(data)}
                 privilege={false}
                 branchCard={false}

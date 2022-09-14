@@ -1,11 +1,15 @@
-import { RocketOutlined, ShopTwoTone } from "@ant-design/icons";
+import {
+    ExclamationCircleOutlined,
+    RocketOutlined,
+    ShopTwoTone,
+} from "@ant-design/icons";
 import CustomInput from "../../../components/atoms/Input/CustomInput";
 import React, { useState } from "react";
 import MasterTemplateWithSmallCard from "../../../templates/MasterTemplateWithSmallCard";
 import { Input } from "../../../components/atoms/index";
 import AddBranch from "./AddBranch";
 import { Button, Modal, Space } from "antd";
-
+const { confirm } = Modal;
 const data = [
     {
         id: "1",
@@ -187,6 +191,19 @@ function ManageBranch() {
         console.log("DATA", data);
     };
 
+    const onDeleteHandler = (id: any) => {
+        confirm({
+            title: "Are you sure do you want to delete this Branch?",
+            icon: <ExclamationCircleOutlined />,
+            okText: "Yes",
+            okType: "danger",
+            cancelText: "No",
+            onOk() {
+                //Delete API
+            },
+        });
+    };
+
     return (
         <>
             <MasterTemplateWithSmallCard
@@ -195,7 +212,7 @@ function ManageBranch() {
                 headerOnSearch={() => console.log("SEARCHED")}
                 headerOnClickAdd={showModal}
                 cardOnClick={(id: string) => console.log("CLICKED " + id)}
-                onClickDelete={(id: string) => console.log("DELETED " + id)}
+                onClickDelete={(id: string) => onDeleteHandler(id)}
                 onClickUpdate={(data: any) => showEditModal(data)}
                 privilege={false}
                 branchCard={true}
@@ -209,7 +226,6 @@ function ManageBranch() {
                 {visible && (
                     <Modal
                         visible={visible}
-                        // confirmLoading={confirmLoading}
                         maskStyle={{ borderRadius: "25" }}
                         footer={false}
                     >
@@ -240,7 +256,6 @@ function ManageBranch() {
                     </Modal>
                 )}
             </div>
-            {/* <Input label="name" /> */}
         </>
     );
 }
