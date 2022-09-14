@@ -7,7 +7,7 @@ const getAllRevenueLicenseByUserId = (userId: number) => {//cudeson
       "fm-web",
       null,
       `/revenueLicense/${userId}`,
-      "",
+      "token",
       "",
       ""
     )

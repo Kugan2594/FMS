@@ -8,6 +8,7 @@ import {
     Select,
     message,
     Upload,
+    Button,
 } from "antd";
 import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
 import type { UploadChangeParam } from "antd/es/upload";
@@ -15,6 +16,7 @@ import type { RcFile, UploadFile, UploadProps } from "antd/es/upload/interface";
 import { addRevenueLicense, getAllRevenueLicenseByUserId, getAllVehiclesAllocationsForDropDown } from "./ServicesRevenueLicense";
 import { getUserDetails } from "../../../contents/Login/LoginAuthentication";
 import axios from "axios";
+import { getValue } from "@testing-library/user-event/dist/utils";
 
 
 const getBase64 = (img: RcFile, callback: (url: string) => void) => {
@@ -35,12 +37,17 @@ const beforeUpload = (file: RcFile) => {
     return isJpgOrPng && isLt2M;
 };
 
+
 function AddRevenueLicense() {
 
     const [form] = Form.useForm();
     const [loading, setLoading] = useState(false);
     const [imageUrl, setImageUrl] = useState<string>();
     const [vehicle, setVehicle] = useState([]);
+    const [fileList, setFileList] = useState([]);
+    const [vehicleNumbers, setvehicleNumbers] = useState("");
+
+    let vehicleNum: string;
 
     const handleChange: UploadProps["onChange"] = (
         info: UploadChangeParam<UploadFile>
@@ -63,13 +70,18 @@ function AddRevenueLicense() {
     }, [])
 
     const getVehicleSelectData = (userId: number) => {
-        let data: any = [];
+        
         getAllVehiclesAllocationsForDropDown(userId).then((res: any) => {
+            let data: any = [];
             res.map((post: any) => {
                 data.push({ value: post.vehicleNumber, label: `${post.resourceVehicleDto.vehicleModel} ${post.resourceVehicleDto.vehicleBodyTypeResponseDto} ${post.resourceVehicleDto.vehicleTypeName} ${post.resourceVehicleDto.fuelTypeName} ${post.vehicleNumber}` });
+                vehicleNum = post.vehicleNumber
                 return null;
             });
             setVehicle(data);
+            setvehicleNumbers(vehicleNum);
+          
+            
         });
     };
 
@@ -83,11 +95,45 @@ function AddRevenueLicense() {
 
     const { Option } = Select;
 
+    const onFinishAdd = (values:any) => {
+        
+        const formData = new FormData();
+        let revenueLicenseData = values;
+        const data = {
+            id:1,
+            taxIssuedDate: revenueLicenseData.taxIssuedDate,
+            taxExpiryDate: revenueLicenseData.taxExpiryDate,
+            region: revenueLicenseData.region,
+            vehicleNumber: vehicleNumbers,
+            taxAmount: revenueLicenseData.taxAmount,
+            userId:getUserDetails().user_id
+        };
+
+        fileList.map((post, index) => {
+            formData.append("files", post);
+            console.log(post);
+        });
+
+        formData.append("addRevenueLicense", JSON.stringify(data));
+
+        addRevenueLicense(formData).then(
+            (res: any) => {
+                
+            }
+        )
+    };
+
+    const onFinishFailed = () => {
+        console.log("add cancel");   
+    }
+    
     return (
         <>
             <Form id="form" name="basic" form={form}
                 initialValues={{ remember: true }}
-                >
+                onFinish={onFinishAdd}
+                onFinishFailed={onFinishFailed}
+            >
                 <Row style={{ paddingLeft: "35px", paddingRight: "35px" }}>
                     <Col span={24}>
                         <Form.Item>
@@ -175,6 +221,7 @@ function AddRevenueLicense() {
                         </Form.Item>
                     </Col>
                 </Row>
+                <Button htmlType="submit" type="primary">Add</Button>
             </Form>
         </>
     );

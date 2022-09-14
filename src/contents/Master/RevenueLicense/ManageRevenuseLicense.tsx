@@ -1,15 +1,12 @@
-import { Button, Modal } from "antd";
-import MasterHeader from "../../../components/organisms/MasterHeader/MasterHeader";
+import { Modal } from "antd";
 import { useState, useEffect } from "react";
 import AddRevenueLicense from "./AddRevenueLicense";
 import MasterTemplateWithLargeCard from "../../../templates/MasterTemplateWithLargeCard";
 import {
-    addRevenueLicense,
-    getAllRevenueLicenseByUserId, getAllVehiclesAllocationsForDropDown
+    getAllRevenueLicenseByUserId
 } from "./ServicesRevenueLicense";
 import { getUserDetails } from "../../Login/LoginAuthentication";
 import moment from "moment";
-import axios from "axios";
 
 
 function createData(data: any) {
@@ -32,7 +29,6 @@ function ManageRevenueLicense() {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isEdit, setisEdit] = useState(false);
     const [revenueLicense, setRevenueLicense] = useState([]);
-    const [fileList, setFileList] = useState([]);
 
     useEffect(() => {
         getAllRevenueLicenseData(getUserDetails().user_id);
@@ -65,45 +61,9 @@ function ManageRevenueLicense() {
         setIsModalOpen(false);
     };
 
-    const onFinishAdd = (values:any) => {
+    const onFinishAdd = () => {
         
-        const formData = new FormData();
-        let revenueLicenseData = values;
-        // formData.append("id", values.id);
-        // formData.append("taxIssuedDate", values.taxIssuedDate);
-        // formData.append("taxExpiryDate", values.taxExpiryDate);
-        // formData.append("region", values.region);
-        // formData.append("userId", values.userId);
-        // formData.append("vehicleNumber", values.vehicleNumber);
-        // formData.append("taxAmount", values.taxAmount);
-        const data = {
-            id: revenueLicenseData.id,
-            taxIssuedDate: revenueLicenseData.taxIssuedDate,
-            taxExpiryDate: revenueLicenseData.taxExpiryDate,
-            region: revenueLicenseData.region,
-            userId: revenueLicenseData.userId,
-            vehicleNumber: revenueLicenseData.vehicleNumber,
-            taxAmount: revenueLicenseData.taxAmount
-        };
-
-        fileList.map((post, index) => {
-            formData.append("files", post);
-            console.log(post);
-        });
-
-        formData.append("addRevenueLicense", JSON.stringify(data));
-
-        axios({
-            method: "post",
-            url : `http://localhost:1014/fleet-management-oauth/fleet-management-corporate/api/v1/revenueLicense`,
-            data: formData,
-            headers: {
-                "Access-Control-Allow-Origin": "*",
-                Authorization: `Bearer ${localStorage.getItem("TOKEN")}`
-            }
-
-        })
-    };
+    }
 
     return (
         <>
@@ -125,6 +85,7 @@ function ManageRevenueLicense() {
                 onCancel={handleCancel}
                 closable={false}
                 width={500}
+                footer={null}
             >
                 <AddRevenueLicense  />
             </Modal>
