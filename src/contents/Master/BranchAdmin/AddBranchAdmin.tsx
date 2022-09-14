@@ -179,40 +179,6 @@ function AddBranchAdmin({
                                         <Option value="6">Cancelled</Option>
                                     </Select>
                                 </Form.Item>
-                                {/* <Form.Item>
-                                    <Select
-                                        showSearch
-                                        style={{ width: 200 }}
-                                        placeholder="Select Vehicles"
-                                        optionFilterProp="children"
-                                        filterOption={(input, option) =>
-                                            (
-                                                option!
-                                                    .children as unknown as string
-                                            ).includes(input)
-                                        }
-                                        filterSort={(optionA, optionB) =>
-                                            (
-                                                optionA!
-                                                    .children as unknown as string
-                                            )
-                                                .toLowerCase()
-                                                .localeCompare(
-                                                    (
-                                                        optionB!
-                                                            .children as unknown as string
-                                                    ).toLowerCase()
-                                                )
-                                        }
-                                    >
-                                        <Option value="1">Colombo</Option>
-                                        <Option value="2">Jaffna</Option>
-                                        <Option value="3">Singapore</Option>
-                                        <Option value="4">Identified</Option>
-                                        <Option value="5">Resolved</Option>
-                                        <Option value="6">Cancelled</Option>
-                                    </Select>
-                                </Form.Item> */}
                             </div>
                         </div>
                     </Col>

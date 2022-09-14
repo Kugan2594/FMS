@@ -1,12 +1,6 @@
-import {
-    ExclamationCircleOutlined,
-    RocketOutlined,
-    ShopTwoTone,
-} from "@ant-design/icons";
-import CustomInput from "../../../components/atoms/Input/CustomInput";
+import { ExclamationCircleOutlined, RocketOutlined } from "@ant-design/icons";
 import React, { useState } from "react";
 import MasterTemplateWithSmallCard from "../../../templates/MasterTemplateWithSmallCard";
-import { Input } from "../../../components/atoms/index";
 import AddBranch from "./AddBranch";
 import { Button, Modal, Space } from "antd";
 import ViewBranch from "./ViewBranch";
@@ -168,14 +162,12 @@ const mockData = {
     adminName: "Michael Clarke",
     contactNumber: "0772250114",
 };
-
 function ManageBranch() {
     const [formValues, setFormValues]: any = useState("");
     const [visible, setVisible] = useState(false);
     const [ok, setOk] = useState(false);
     const [edit, setEdit] = useState(false);
     const [view, setView] = useState(false);
-    const onClickAddBranch = () => {};
     const showModal = () => {
         setVisible(!visible);
     };
@@ -200,9 +192,7 @@ function ManageBranch() {
             okText: "Yes",
             okType: "danger",
             cancelText: "No",
-            onOk() {
-                //Delete API
-            },
+            onOk() {},
         });
     };
     const showViewModal = (data: string) => {
@@ -277,5 +267,4 @@ function ManageBranch() {
         </>
     );
 }
-
 export default ManageBranch;

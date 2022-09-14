@@ -1,4 +1,3 @@
-import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
 import {
     Button,
     Card,
@@ -10,7 +9,6 @@ import {
     Select,
     Typography,
 } from "antd";
-import React from "react";
 import { Link } from "react-router-dom";
 import Logo from "../../../assets/Logo.svg";
 import "./signup.style.less";

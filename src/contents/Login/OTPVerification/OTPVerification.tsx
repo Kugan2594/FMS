@@ -1,9 +1,4 @@
-import {
-    EyeInvisibleOutlined,
-    EyeTwoTone,
-    SmileTwoTone,
-    ThunderboltTwoTone,
-} from "@ant-design/icons";
+import { ThunderboltTwoTone } from "@ant-design/icons";
 import { Button, Card, Col, Form, Input, Row, Typography } from "antd";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -66,7 +61,6 @@ function OTPVerification() {
     const [verifyCode, setVerifyCode]: any = useState("");
     const confirmHandler = () => {
         setVerifyCode(vcode.join(""));
-        // let code = vcode.join(" ");
         console.log(verifyCode);
     };
     return (
