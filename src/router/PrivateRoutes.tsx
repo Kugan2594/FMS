@@ -13,6 +13,7 @@ import ManageAccident from "../contents/Master/Accident/ManageAccident";
 import ManageInsurance from "../contents/Master/Insurance/ManageInsurance";
 import ManageRevenueLicense from "../contents/Master/RevenueLicense/ManageRevenuseLicense";
 import ManageParts from "../contents/Master/Parts/ManageParts";
+import ManageVehicles from "../contents/Master/Vehicles/ManageVehicles";
 
 const Loader = (Component: any) => (props: any) =>
     (
@@ -69,6 +70,10 @@ const PrivateRoute: RouteObject[] = [
     {
         path: "/parts",
         element: <ManageParts />,
+    },
+    {
+        path: "/vehicles",
+        element: <ManageVehicles />,
     },
 ];
 
