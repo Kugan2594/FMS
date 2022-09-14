@@ -124,7 +124,7 @@ function AddDriver({
             </Form.Item>
           </Col>
           <Col className="form-button-content" span={24}>
-            <Form.Item name="drivingLicenseType">
+            <Form.Item>
               <CustomButton className="form-button" title="Cancel" onClick={cancelClickHandler} />
               <CustomButton
                 className="form-button"
