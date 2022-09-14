@@ -19,6 +19,7 @@ import ManageGenerator from "../contents/Master/Generator/ManageGenerator";
 import ManageFuelUp from "../contents/Master/FuelUp/ManageFuelUp";
 import ManageMileage from "../contents/Master/Mileage/ManageMileage";
 import SignUp from "../contents/Login/SignUp/SignUp";
+import ManageVehicles from "../contents/Master/Vehicles/ManageVehicles";
 import OTPVerification from "../contents/Login/OTPVerification/OTPVerification";
 
 const Loader = (Component: any) => (props: any) =>
@@ -99,6 +100,10 @@ const PublicRoute: RouteObject[] = [
             {
                 path: "mileage",
                 element: <ManageMileage />,
+            },
+            {
+                path: "vehicles",
+                element: <ManageVehicles />,
             },
         ],
     },

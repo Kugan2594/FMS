@@ -1,29 +1,33 @@
-import { Col, Form, Input, Row, Select } from "antd";
-import React from "react";
+import { AutoComplete, Col, Form, Input, Row, Select } from "antd";
 import CustomButton from "../../../components/atoms/Button/CustomButton";
-import "./driver.style.less";
+import React from "react";
+import { Option } from "antd/lib/mentions";
 
-interface AddDriversPropType {
+interface AddVehiclePropsType {
   isEdit: boolean;
-  updateDriverData: any;
+  updateVehicleData: any;
   branches: any[];
-  licenseTypes: any[];
   cancelClickHandler: any;
 }
 
-function AddDriver({
+function AddVehicle({
   isEdit,
-  updateDriverData,
+  updateVehicleData,
   branches,
-  licenseTypes,
   cancelClickHandler,
-}: AddDriversPropType) {
+}: AddVehiclePropsType) {
   const [form] = Form.useForm();
-
-  const { Option } = Select;
 
   const handleSubmit = () => {
     cancelClickHandler();
+  };
+
+  const onChange = (value: string) => {
+    console.log(`selected ${value}`);
+  };
+
+  const onSearch = (value: string) => {
+    console.log("search:", value);
   };
 
   return (
@@ -32,17 +36,29 @@ function AddDriver({
         id="addDriver-form"
         name="basic"
         form={form}
-        initialValues={isEdit ? updateDriverData : {}}
+        initialValues={isEdit ? updateVehicleData : {}}
       >
         <Row className="add-driver" gutter={16}>
-          <Col span={12}>
+          <Col span={24}>
             <Form.Item name="driverFirstName">
-              <Input
-                placeholder="First Name"
-                required
-                bordered={false}
+              <Select
                 style={{ borderBottom: "1px solid #ccccb3" }}
-              />
+                bordered={false}
+                showSearch
+                placeholder="Select Vehicle Model"
+                optionFilterProp="children"
+                onChange={onChange}
+                onSearch={onSearch}
+                filterOption={(input, option) =>
+                  (option!.children as unknown as string)
+                    .toLowerCase()
+                    .includes(input.toLowerCase())
+                }
+              >
+                <Option value="jack">Jack</Option>
+                <Option value="lucy">Lucy</Option>
+                <Option value="tom">Tom</Option>
+              </Select>
             </Form.Item>
           </Col>
           <Col span={12}>
@@ -94,7 +110,7 @@ function AddDriver({
                 style={{ borderBottom: "1px solid #ccccb3" }}
               >
                 {branches.map((branch) => {
-                  return <Option value={branch.name}>{branch.name}</Option>;
+                  return <Option>{branch.name}</Option>;
                 })}
               </Select>
             </Form.Item>
@@ -116,16 +132,16 @@ function AddDriver({
                 optionFilterProp="children"
                 bordered={false}
                 style={{ borderBottom: "1px solid #ccccb3" }}
-              >
-                {licenseTypes.map((type) => {
-                  return <Option value={type.name}>{type.name}</Option>;
-                })}
-              </Select>
+              ></Select>
             </Form.Item>
           </Col>
           <Col className="form-button-content" span={24}>
             <Form.Item name="drivingLicenseType">
-              <CustomButton className="form-button" title="Cancel" onClick={cancelClickHandler} />
+              <CustomButton
+                className="form-button"
+                title="Cancel"
+                onClick={cancelClickHandler}
+              />
               <CustomButton
                 className="form-button"
                 title={isEdit ? "Update" : "Add"}
@@ -141,4 +157,4 @@ function AddDriver({
   );
 }
 
-export default AddDriver;
+export default AddVehicle;
