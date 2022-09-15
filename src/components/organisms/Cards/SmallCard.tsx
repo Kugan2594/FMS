@@ -1,15 +1,7 @@
-import {
-    RocketOutlined,
-    SettingFilled,
-    SettingOutlined,
-} from "@ant-design/icons";
-import Icon from "@ant-design/icons/lib/components/AntdIcon";
+import { SettingOutlined } from "@ant-design/icons";
 import { Button, Card, Col, Image, Progress, Row, Typography } from "antd";
-import Title from "antd/lib/skeleton/Title";
-
 import React, { useState } from "react";
 import "./card.style.less";
-
 export interface CardSmallType {
     id?: string;
     numberOfVehicles?: number;
@@ -153,7 +145,13 @@ function SmallCard({
                         <Progress percent={progressData} size="small" />
                     )}
                 </Col>
-                <Col xs={24} xl={9} className="content-2" onClick={onCardClick}>
+                <Col
+                    xs={24}
+                    xl={9}
+                    className="content-2"
+                    onClick={onCardClick}
+                    style={{ cursor: "pointer" }}
+                >
                     <div className="content-2-item">
                         {branchCard && <Title level={5}> {branchName}</Title>}
                         {driverCard && (
@@ -176,9 +174,6 @@ function SmallCard({
                         )}
                         <div className="sub-content">
                             {branchCard && <Text>{branchLocation}</Text>}
-                            {/* {generatorCard && (
-                                <Title level={5}> {fuelType}</Title>
-                            )} */}
                             {adminCard && (
                                 <Text strong type="secondary">
                                     {" "}
@@ -241,12 +236,7 @@ function SmallCard({
                 </Col>
 
                 <Col xs={24} xl={11}>
-                    <Row
-                        justify="end"
-                        className="content-3"
-                        align="bottom"
-                        // style={{ display: "flex", flexDirection: "column" }}
-                    >
+                    <Row justify="end" className="content-3" align="bottom">
                         <div className="vehicles" style={{}}>
                             {branchCard && (
                                 <div className="number-of-vehicles">
