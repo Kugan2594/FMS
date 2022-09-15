@@ -1,13 +1,28 @@
-import { Col, Image, InputNumber, Modal, Row } from "antd";
+import { Button, Col, Form, Image, Input, InputNumber, Modal, Row } from "antd";
 import "antd/dist/antd.css";
-import React, { useState } from "react";
-import { Button } from "../../../components/atoms/Button";
+import React, { useState, useEffect } from "react";
+// import { Button } from "../../../components/atoms/Button";
+import { getUserDetails } from "../../../contents/Login/LoginAuthentication";
+import { addMileage, getAllMileageHistoryById } from "./ServiceMileage";
 
 function ManageMileage() {
-    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+    const [dataSource, setdataSource] = useState<any>([]);
+
+    const createData = (data: any) => {
+        let convertData = data.map((post: any) => {
+            return {
+                id: post.id,
+                kilometer: post.kilometer,
+                userId: post.userId,
+            };
+        });
+        return convertData;
+    };
 
     const showModal = () => {
         setIsModalOpen(true);
+        getMileageHistoryById("BAT-9470");
     };
 
     const handleOk = () => {
@@ -18,10 +33,41 @@ function ManageMileage() {
         setIsModalOpen(false);
     };
 
+    const onFinishFailed = () => {
+        console.log("mileage add cancel");
+    };
+
+    const getMileageHistoryById = (vehicleId: string) => {
+        getAllMileageHistoryById(vehicleId).then((res: any) => {
+            let data: [] = createData(res.results.mileage);
+            setdataSource(data);
+            console.log(data);
+        });
+    };
+    console.log("-------------", getUserDetails().user_id);
+
+    const onFinish = (values: any) => {
+        console.log(values);
+
+        let data: object = {
+            kilometer: values.kilometer,
+            userId: getUserDetails().user_id,
+            vehicleNumber: "BAT-9470",
+        };
+        addMileage(data)
+            .then((res) => {
+                console.log(res);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    };
+
     return (
         <>
-            <Button title="Mileage" type="primary" onClick={showModal} />
-
+            <Button type="primary" onClick={showModal}>
+                Mileage
+            </Button>
             <Modal
                 open={isModalOpen}
                 onOk={handleOk}
@@ -32,57 +78,55 @@ function ManageMileage() {
                 <div style={gridStyle}>
                     <Row>
                         <Col span={12} style={{ paddingRight: "20px" }}>
-                            <h2 style={{ textAlign: "left", color: "#3385FF" }}>
+                            <h2
+                                style={{
+                                    textAlign: "left",
+                                    color: "#3385FF",
+                                }}
+                            >
                                 Mileage History
                             </h2>
-                            <h5 style={{ textAlign: "left", color: "#3385FF" }}>
+                            <h5
+                                style={{
+                                    textAlign: "left",
+                                    color: "#3385FF",
+                                }}
+                            >
                                 {" "}
                                 Recent
                             </h5>
-                            <Row>
-                                <Col span={8}>
-                                    <div
-                                        style={{
-                                            fontSize: "12px",
-                                        }}
-                                    >
-                                        15 Jun 2022
-                                    </div>
-                                </Col>
-                                <Col span={16}>
-                                    <div
-                                        style={{
-                                            fontSize: "14px",
-                                            fontWeight: "bold",
-                                        }}
-                                    >
-                                        52415 km
-                                    </div>
-                                </Col>
-                            </Row>
-                            <Row>
-                                <Col span={8}>
-                                    <div
-                                        style={{
-                                            fontSize: "12px",
-                                        }}
-                                    >
-                                        15 Jun 2022
-                                    </div>
-                                </Col>
-                                <Col span={16}>
-                                    <div
-                                        style={{
-                                            fontSize: "14px",
-                                            fontWeight: "bold",
-                                        }}
-                                    >
-                                        52400 km
-                                    </div>
-                                </Col>
-                            </Row>
+                            {dataSource.map((post: any) => {
+                                return (
+                                    <Row>
+                                        <Col span={8}>
+                                            <div
+                                                style={{
+                                                    fontSize: "12px",
+                                                }}
+                                            >
+                                                15 Jun 2022
+                                            </div>
+                                        </Col>
+                                        <Col span={16}>
+                                            <div
+                                                style={{
+                                                    fontSize: "14px",
+                                                    fontWeight: "bold",
+                                                }}
+                                            >
+                                                {post.kilometer} km
+                                            </div>
+                                        </Col>
+                                    </Row>
+                                );
+                            })}
 
-                            <h5 style={{ textAlign: "left", color: "#3385FF" }}>
+                            <h5
+                                style={{
+                                    textAlign: "left",
+                                    color: "#3385FF",
+                                }}
+                            >
                                 {" "}
                                 Last Month
                             </h5>
@@ -104,69 +148,6 @@ function ManageMileage() {
                                         }}
                                     >
                                         51530 km
-                                    </div>
-                                </Col>
-                            </Row>
-                            <Row>
-                                <Col span={8}>
-                                    <div
-                                        style={{
-                                            fontSize: "12px",
-                                        }}
-                                    >
-                                        15 Jun 2022
-                                    </div>
-                                </Col>
-                                <Col span={16}>
-                                    <div
-                                        style={{
-                                            fontSize: "14px",
-                                            fontWeight: "bold",
-                                        }}
-                                    >
-                                        50500 km
-                                    </div>
-                                </Col>
-                            </Row>
-                            <Row>
-                                <Col span={8}>
-                                    <div
-                                        style={{
-                                            fontSize: "12px",
-                                        }}
-                                    >
-                                        15 Jun 2022
-                                    </div>
-                                </Col>
-                                <Col span={16}>
-                                    <div
-                                        style={{
-                                            fontSize: "14px",
-                                            fontWeight: "bold",
-                                        }}
-                                    >
-                                        50400 km
-                                    </div>
-                                </Col>
-                            </Row>
-                            <Row>
-                                <Col span={8}>
-                                    <div
-                                        style={{
-                                            fontSize: "12px",
-                                        }}
-                                    >
-                                        15 Jun 2022
-                                    </div>
-                                </Col>
-                                <Col span={16}>
-                                    <div
-                                        style={{
-                                            fontSize: "14px",
-                                            fontWeight: "bold",
-                                        }}
-                                    >
-                                        50000 km
                                     </div>
                                 </Col>
                             </Row>
@@ -222,18 +203,37 @@ function ManageMileage() {
                                 Mileage
                             </div>
                             <br />
-                            <div style={{ fontSize: "12px", color: "gray" }}>
+                            <div
+                                style={{
+                                    fontSize: "12px",
+                                    color: "gray",
+                                }}
+                            >
                                 Latest Meter Reading
                             </div>
-                            <InputNumber addonAfter="km" />
-                            <br />
-                            <br />
-                            <Button
-                                style={{ width: "200" }}
-                                type="primary"
-                                onClick={showModal}
-                                title="Update"
-                            />
+                            <Form
+                                name="basic"
+                                onFinish={onFinish}
+                                onFinishFailed={onFinishFailed}
+                            >
+                                <Form.Item name="userId" hidden>
+                                    <Input />
+                                </Form.Item>
+                                <Form.Item name="vehicleNumber" hidden>
+                                    <Input />
+                                </Form.Item>
+                                <Form.Item name="kilometer">
+                                    <InputNumber addonAfter="km" />
+                                </Form.Item>
+                                <br />
+                                <Button
+                                    style={{ width: "200" }}
+                                    type="primary"
+                                    htmlType="submit"
+                                >
+                                    Update
+                                </Button>
+                            </Form>
                         </Col>
                     </Row>
                 </div>
