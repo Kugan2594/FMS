@@ -105,7 +105,6 @@ function AddEco() {
 
         fileList.map((post, index) => {
             formData.append("files", post);
-            console.log(post);
         });
 
         formData.append("addEmissionTest", JSON.stringify(data));
@@ -118,7 +117,6 @@ function AddEco() {
     };
 
     const onFinishFailed = () => {
-        console.log("add cancel");   
     }
 
     return (

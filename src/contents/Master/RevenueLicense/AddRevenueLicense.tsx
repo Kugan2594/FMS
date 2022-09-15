@@ -111,7 +111,6 @@ function AddRevenueLicense() {
 
         fileList.map((post, index) => {
             formData.append("files", post);
-            console.log(post);
         });
 
         formData.append("addRevenueLicense", JSON.stringify(data));
@@ -124,7 +123,6 @@ function AddRevenueLicense() {
     };
 
     const onFinishFailed = () => {
-        console.log("add cancel");   
     }
     
     return (
@@ -156,8 +154,6 @@ function AddRevenueLicense() {
                                 style={{ borderBottom: "1px solid #ccccb3" }}
                             />
                         </Form.Item>
-                        {/* <Row> */}
-                        {/* <Col span={11}> */}
                         <Form.Item
                             name="taxIssuedDate"
                         >
@@ -166,9 +162,6 @@ function AddRevenueLicense() {
                                 style={{ borderBottom: "1px solid #ccccb3", borderTop: "0px", borderLeft: "0px", borderRight: "0px", width: "100%" }}
                             />
                         </Form.Item>
-                        {/* </Col> */}
-                        {/* <Col span={2}></Col> */}
-                        {/* <Col span={11}> */}
                         <Form.Item
                             name="taxExpiryDate"
                         >
@@ -177,9 +170,6 @@ function AddRevenueLicense() {
                                 style={{ borderBottom: "1px solid #ccccb3", borderTop: "0px", borderLeft: "0px", borderRight: "0px", width: "100%" }}
                             />
                         </Form.Item>
-                        {/* </Col> */}
-                        {/* </Row> */}
-
                         <Form.Item
                             name="taxAmount"
                         >
