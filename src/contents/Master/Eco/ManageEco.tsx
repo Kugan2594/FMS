@@ -6,6 +6,8 @@ import MasterTemplateWithLargeCard from "../../../templates/MasterTemplateWithLa
 import { createDeflateRaw } from "zlib";
 import { getAllEmissionTestDocumentByUserId } from "./ServicesEco";
 import { getUserDetails } from "../../Login/LoginAuthentication";
+import moment from "moment";
+
 function createData(data: any) {
     let convertData = data.map((post: any, index: any) => {
         return {
@@ -16,7 +18,8 @@ function createData(data: any) {
             vehicleModel:
                 post.vehicleResponseDto.resourceVehicleDto.vehicleModel,
             branchName: "Jaffna Branch",
-            dueDate: post.emissionTestExpiryDate,
+            dueDate: moment(post.emissionTestExpiryDate).format("DD-MM-yyyy"),
+            lastChangedDate:moment(post.updatedAt).format("DD-MM-yyyy")
         };
     });
     return convertData;
@@ -78,6 +81,7 @@ function ManageEco() {
                 onCancel={handleCancel}
                 closable={false}
                 width={500}
+                footer={null}
             >
                 <AddEco />
             </Modal>
