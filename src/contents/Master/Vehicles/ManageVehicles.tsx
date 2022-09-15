@@ -1,28 +1,25 @@
 import { Modal } from "antd";
 import React, { useState } from "react";
 import MasterTemplateWithSmallCard from "../../../templates/MasterTemplateWithSmallCard";
-import AddDriver from "./AddDriver";
 import { ExclamationCircleOutlined } from "@ant-design/icons";
-import { RocketOutlined } from "@ant-design/icons";
-import DriverProfile from "./DriverProfile";
+import AddVehicle from "./AddVehicle";
 
 const { confirm } = Modal;
 
-function ManageDrivers() {
-  const [driverData, setDriverData] = useState({});
+function ManageVehicles() {
+  const [vehicleData, setVehicleData] = useState({});
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isEdit, setisEdit] = useState(false);
   const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
 
+  const profileOnClickHandler = (data: any) => {
+    setIsProfileModalOpen(true);
+    setVehicleData(data);
+  };
+
   const showModal = () => {
     setIsModalOpen(true);
     setisEdit(false);
-  };
-
-  const updateClickHandler = (data: any) => {
-    setIsModalOpen(true);
-    setisEdit(true);
-    setDriverData(data);
   };
 
   const handleOk = () => {
@@ -36,9 +33,9 @@ function ManageDrivers() {
     setIsProfileModalOpen(false);
   };
 
-  const deleteClickHandler = (id: any) => {
+  const deleteClickHandler = (id: string) => {
     confirm({
-      title: "Are you sure delete this Driver?",
+      title: "Are you sure delete this Vehicle?",
       icon: <ExclamationCircleOutlined />,
       okText: "Yes",
       okType: "danger",
@@ -49,9 +46,10 @@ function ManageDrivers() {
     });
   };
 
-  const profileOnClickHandler = (data: any) => {
-    setIsProfileModalOpen(true);
-    setDriverData(data);
+  const updateClickHandler = (data: any) => {
+    setIsModalOpen(true);
+    setisEdit(true);
+    setVehicleData(data);
   };
 
   const licenseType = [
@@ -69,31 +67,37 @@ function ManageDrivers() {
   const data = [
     {
       id: "1",
-      branchName: "Colombo",
-      contactNumber: "0772250114",
-      vehicleType: "car",
-      drivingLicense: "82763871",
-      drivingLicenseType: "Light Vehicle",
-      nic: "941234500V",
-      driverFirstName: "Kugan",
-      driverLastName: "Kuga",
-      vehicleIcon: <RocketOutlined />,
-      email: "kugan@gmail.com",
-      image:
-        "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
+      vehicleNumber: "BAT-9470",
+      lease: true,
+      color: "red",
+      vehicleOwner: "Cudeson",
+      tankCapacity: 10.1,
+      reserveTankCapacity: 10.2,
+      maximumWeightCarriable: 10.2,
+      vehicleIdFromResource: 1,
+      vehicleModel: "TOYOTA aqua",
+      vehicleType: "Car",
+      branchLocation: "Jaffna",
+      companyId: 1,
+      branchId: 1,
+      progressData: 80,
     },
     {
       id: "2",
-      branchName: "Jaffna",
-      contactNumber: "0772250114",
-      vehicleType: "car",
-      drivingLicense: "82763871",
-      drivingLicenseType: "Light Vehicle",
-      nic: "941234500V",
-      driverFirstName: "Cudeson",
-      driverLastName: "Cudeson",
-      vehicleIcon: <RocketOutlined />,
-      email: "Cudeson@gmail.com",
+      vehicleNumber: "BAT-9470",
+      lease: true,
+      color: "red",
+      vehicleOwner: "Cudeson",
+      tankCapacity: 10.1,
+      reserveTankCapacity: 10.2,
+      maximumWeightCarriable: 10.2,
+      vehicleIdFromResource: 1,
+      vehicleModel: "TOYOTA aqua",
+      vehicleType: "Car",
+      branchLocation: "Jaffna",
+      companyId: 1,
+      branchName: "Colombo",
+      progressData: 40,
     },
   ];
 
@@ -107,11 +111,12 @@ function ManageDrivers() {
         cardOnClick={(data: any) => profileOnClickHandler(data)}
         onClickDelete={(id: any) => deleteClickHandler(id)}
         onClickUpdate={(data: any) => updateClickHandler(data)}
-        driverCard={true}
+        vehicleCard={true}
+        isProgressBar={false}
       />
       {isModalOpen && (
         <Modal
-          title={isEdit ? "Edit Driver" : "Add New Driver"}
+          title={isEdit ? "Edit Vehicle" : "Add New Vehicle"}
           open={isModalOpen}
           onOk={handleOk}
           onCancel={handleCancel}
@@ -119,29 +124,16 @@ function ManageDrivers() {
           width={"50%"}
           footer={false}
         >
-          <AddDriver
+          <AddVehicle
             isEdit={isEdit}
-            updateDriverData={driverData}
             branches={branches}
-            licenseTypes={licenseType}
             cancelClickHandler={handleCancel}
+            updateVehicleData={vehicleData}
           />
-        </Modal>
-      )}
-      {isProfileModalOpen && (
-        <Modal
-          open={isProfileModalOpen}
-          onOk={handleOk}
-          onCancel={handleCancel}
-          closable={false}
-          width={"25%"}
-          footer={false}
-        >
-          <DriverProfile driverProfileData={driverData} />
         </Modal>
       )}
     </div>
   );
 }
 
-export default ManageDrivers;
+export default ManageVehicles;
