@@ -1,7 +1,6 @@
 import { Button, Col, Form, Image, Input, InputNumber, Modal, Row } from "antd";
 import "antd/dist/antd.css";
-import React, { useState, useEffect } from "react";
-// import { Button } from "../../../components/atoms/Button";
+import React, { useState } from "react";
 import { getUserDetails } from "../../../contents/Login/LoginAuthentication";
 import { addMileage, getAllMileageHistoryById } from "./ServiceMileage";
 
@@ -33,34 +32,24 @@ function ManageMileage() {
         setIsModalOpen(false);
     };
 
-    const onFinishFailed = () => {
-        console.log("mileage add cancel");
-    };
+    const onFinishFailed = () => {};
 
     const getMileageHistoryById = (vehicleId: string) => {
         getAllMileageHistoryById(vehicleId).then((res: any) => {
             let data: [] = createData(res.results.mileage);
             setdataSource(data);
-            console.log(data);
         });
     };
-    console.log("-------------", getUserDetails().user_id);
 
     const onFinish = (values: any) => {
-        console.log(values);
-
         let data: object = {
             kilometer: values.kilometer,
             userId: getUserDetails().user_id,
             vehicleNumber: "BAT-9470",
         };
         addMileage(data)
-            .then((res) => {
-                console.log(res);
-            })
-            .catch((error) => {
-                console.log(error);
-            });
+            .then((res) => {})
+            .catch((error) => {});
     };
 
     return (
