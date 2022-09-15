@@ -1,17 +1,44 @@
 .add-driver {
-    Input {
-        width: 280px;
+  .form-button-content {
+    text-align: right;
+    height: 40px;
+    .form-button {
+      margin-left: 10px;
     }
+  }
+}
 
-    .select {
-        width: 280px;
-    }
+.driver-profile {
+  .driver-profile-image-container {
+    display: flex;
+    justify-content: center;
 
-    .autoComplete {
-        width: 280px;
+    .driver-profile-image {
+      width: 40%;
+      height: 40%;
     }
+  }
 
-    .sub-title {
-        color: blue;
+  .driver-profile-detail-header {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    margin: 20px;
+
+    .driver-profile-detail-title {
+      line-height: 0;
     }
+  }
+
+  .driver-profile-detail-content {
+    margin: 20px 0 0 60px;
+
+    .driver-detail {
+      margin-bottom: 8px;
+
+      .data {
+        font-size: medium;
+      }
+    }
+  }
 }

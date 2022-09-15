@@ -70,7 +70,7 @@ function MasterTemplateWithSmallCard({
                             onChange: (page: any) => {
                                 console.log(page);
                             },
-                            pageSize: 8,
+                            pageSize: 6,
                         }}
                         dataSource={data}
                         renderItem={(data) => (
@@ -79,10 +79,10 @@ function MasterTemplateWithSmallCard({
                                     <SmallCard
                                         key={data.id}
                                         branchLocation={data.branchLocation}
-                                        name={data.name}
-                                        cardOnClick={() => cardOnClick(data.id)}
+                                        branchName={data.branchName}
+                                        onCardClick={() => cardOnClick(data)}
                                         onClickUpdate={() =>
-                                            onClickUpdate(data.id)
+                                            onClickUpdate(data)
                                         }
                                         onClickDelete={() =>
                                             onClickDelete(data.id)
@@ -91,7 +91,10 @@ function MasterTemplateWithSmallCard({
                                         itemName={data.itemName}
                                         image={data.image}
                                         progressData={data.progressData}
-                                        adminName={data.adminName}
+                                        adminFirstName={data.adminFirstName}
+                                        adminLastName={data.adminLastName}
+                                        driverFirstName={data.driverFirstName}
+                                        driverLastName={data.driverLastName}
                                         isProgressBar={isProgressBar}
                                         privilege={privilege}
                                         adminCard={adminCard}
@@ -108,7 +111,6 @@ function MasterTemplateWithSmallCard({
                                         generatorBrand={data.generatorBrand}
                                         generatorName={data.generatorName}
                                         fuelType={data.fuelType}
-                                        driverName={data.driverName}
                                         vehicleIcon={data.vehicleIcon}
                                         drivingLicense={data.drivingLicense}
                                     />

@@ -1,6 +1,5 @@
 import { LockTwoTone } from "@ant-design/icons";
 import { Button, Card, Col, Form, Input, Row, Typography } from "antd";
-import * as React from "react";
 import { useNavigate } from "react-router-dom";
 import "./login.style.less";
 import { addItemApi } from "./ServiceForgotPassword";

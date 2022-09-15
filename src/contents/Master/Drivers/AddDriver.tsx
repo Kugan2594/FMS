@@ -1,189 +1,143 @@
+import { Col, Form, Input, Row, Select } from "antd";
 import React from "react";
-import {
-  AutoComplete,
-  Col,
-  Form,
-  Input,
-  Row,
-  Select,
-  Typography,
-  Upload,
-} from "antd";
+import CustomButton from "../../../components/atoms/Button/CustomButton";
 import "./driver.style.less";
 
-const { Option } = Select;
+interface AddDriversPropType {
+  isEdit: boolean;
+  updateDriverData: any;
+  branches: any[];
+  licenseTypes: any[];
+  cancelClickHandler: any;
+}
 
-const { Text } = Typography;
-
-const layout = {
-  labelCol: { span: 8 },
-  wrapperCol: { span: 16 },
-};
-const tailLayout = {
-  wrapperCol: { offset: 8, span: 16 },
-};
-
-function AddDriver() {
+function AddDriver({
+  isEdit,
+  updateDriverData,
+  branches,
+  licenseTypes,
+  cancelClickHandler,
+}: AddDriversPropType) {
   const [form] = Form.useForm();
 
-  const onGenderChange = (value: string) => {
-    switch (value) {
-      case "male":
-        form.setFieldsValue({ note: "Hi, man!" });
-        return;
-      case "female":
-        form.setFieldsValue({ note: "Hi, lady!" });
-        return;
-      case "other":
-        form.setFieldsValue({ note: "Hi there!" });
-    }
-  };
+  const { Option } = Select;
 
-  const onFinish = (values: any) => {
-    console.log(values);
+  const handleSubmit = () => {
+    cancelClickHandler();
   };
-
-  const onReset = () => {
-    form.resetFields();
-  };
-
-  const branch = [
-    { value: "Jaffna" },
-    { value: "Colombo" },
-    { value: "Kandy" },
-    { value: "Vavuniya" },
-  ];
 
   return (
-    <div className="add-driver">
+    <>
       <Form
-        {...layout}
+        id="addDriver-form"
+        name="basic"
         form={form}
-        name="control-hooks"
-        onFinish={onFinish}
-        layout="vertical"
+        initialValues={isEdit ? updateDriverData : {}}
       >
-        <Row>
-          <Col span={8}>
-            <Form.Item name="firstName" label="First Name">
-              <Input />
-            </Form.Item>
-          </Col>
-
-          <Col span={8}>
-            <Form.Item name="lastName" label="Last Name">
-              <Input />
-            </Form.Item>
-          </Col>
-
-          <Col span={8}>
-            <Form.Item name="nic" label="NIC Number">
-              <Input />
-            </Form.Item>
-          </Col>
-
-          <Col span={8}>
-            <Form.Item name="email" label="Email">
-              <Input />
-            </Form.Item>
-          </Col>
-
-          <Col span={8}>
-            <Form.Item name="contactNumber" label="Contact Number">
-              <Input />
-            </Form.Item>
-          </Col>
-
-          <Col span={8}>
-            <Form.Item name="licenseNumber" label="License Number">
-              <Input />
-            </Form.Item>
-          </Col>
-
-          <Col span={8}>
-            <Form.Item name="branch" label="Select Branch">
-              <AutoComplete
-                className="autoComplete"
-                options={branch}
-                placeholder="Select Branch"
-                filterOption={(inputValue, option) =>
-                  option!.value
-                    .toUpperCase()
-                    .indexOf(inputValue.toUpperCase()) !== -1
-                }
+        <Row className="add-driver" gutter={16}>
+          <Col span={12}>
+            <Form.Item name="driverFirstName">
+              <Input
+                placeholder="First Name"
+                required
+                bordered={false}
+                style={{ borderBottom: "1px solid #ccccb3" }}
               />
             </Form.Item>
           </Col>
-
-          <Col span={8}>
-            <Form.Item name="vehicle" label="Select Vehicle">
-              <AutoComplete
-                className="autoComplete"
-                options={branch}
-                placeholder="Select Vehicle"
-                filterOption={(inputValue, option) =>
-                  option!.value
-                    .toUpperCase()
-                    .indexOf(inputValue.toUpperCase()) !== -1
-                }
+          <Col span={12}>
+            <Form.Item name="driverLastName">
+              <Input
+                placeholder="Last Name"
+                required
+                bordered={false}
+                style={{ borderBottom: "1px solid #ccccb3" }}
+              />
+            </Form.Item>
+          </Col>
+          <Col span={12}>
+            <Form.Item name="contactNumber">
+              <Input
+                placeholder="Contact Number"
+                required
+                bordered={false}
+                style={{ borderBottom: "1px solid #ccccb3" }}
+              />
+            </Form.Item>
+          </Col>
+          <Col span={12}>
+            <Form.Item name="email">
+              <Input
+                placeholder="Email"
+                required
+                bordered={false}
+                style={{ borderBottom: "1px solid #ccccb3" }}
+              />
+            </Form.Item>
+          </Col>
+          <Col span={12}>
+            <Form.Item name="nic">
+              <Input
+                placeholder="NIC Number"
+                required
+                bordered={false}
+                style={{ borderBottom: "1px solid #ccccb3" }}
+              />
+            </Form.Item>
+          </Col>
+          <Col span={12}>
+            <Form.Item name="branchName">
+              <Select
+                placeholder="Branch"
+                optionFilterProp="children"
+                bordered={false}
+                style={{ borderBottom: "1px solid #ccccb3" }}
+              >
+                {branches.map((branch) => {
+                  return <Option value={branch.name}>{branch.name}</Option>;
+                })}
+              </Select>
+            </Form.Item>
+          </Col>
+          <Col span={12}>
+            <Form.Item name="drivingLicense">
+              <Input
+                placeholder="License Number"
+                required
+                bordered={false}
+                style={{ borderBottom: "1px solid #ccccb3" }}
+              />
+            </Form.Item>
+          </Col>
+          <Col span={12}>
+            <Form.Item name="drivingLicenseType">
+              <Select
+                placeholder="License Type"
+                optionFilterProp="children"
+                bordered={false}
+                style={{ borderBottom: "1px solid #ccccb3" }}
+              >
+                {licenseTypes.map((type) => {
+                  return <Option value={type.name}>{type.name}</Option>;
+                })}
+              </Select>
+            </Form.Item>
+          </Col>
+          <Col className="form-button-content" span={24}>
+            <Form.Item>
+              <CustomButton className="form-button" title="Cancel" onClick={cancelClickHandler} />
+              <CustomButton
+                className="form-button"
+                title={isEdit ? "Update" : "Add"}
+                type="primary"
+                htmlType="submit"
+                onClick={handleSubmit}
               />
             </Form.Item>
           </Col>
         </Row>
-
-        <Text className="sub-title" strong>
-          User Creation
-        </Text>
-
-        <Row>
-          <Col span={8}>
-            <Form.Item name="userName" label="User Name">
-              <Input />
-            </Form.Item>
-          </Col>
-
-          <Col span={8}>
-            <Form.Item name="password" label="Password">
-              <Input type="password" />
-            </Form.Item>
-          </Col>
-        </Row>
-        {/* <Form.Item name="note" label="Note" rules={[{ required: true }]}>
-        <Input />
-      </Form.Item>
-      <Form.Item name="gender" label="Gender" rules={[{ required: true }]}>
-        <Select
-          placeholder="Select a option and change input text above"
-          onChange={onGenderChange}
-          allowClear
-        >
-          <Option value="male">male</Option>
-          <Option value="female">female</Option>
-          <Option value="other">other</Option>
-        </Select>
-      </Form.Item>
-      <Form.Item
-        noStyle
-        shouldUpdate={(prevValues, currentValues) => prevValues.gender !== currentValues.gender}
-      >
-        {({ getFieldValue }) =>
-          getFieldValue('gender') === 'other' ? (
-            <Form.Item name="customizeGender" label="Customize Gender" rules={[{ required: true }]}>
-              <Input />
-            </Form.Item>
-          ) : null
-        }
-      </Form.Item>
-      <Form.Item {...tailLayout}>
-        <Button type="primary" htmlType="submit">
-          Submit
-        </Button>
-        <Button htmlType="button" onClick={onReset}>
-          Reset
-        </Button>
-      </Form.Item> */}
       </Form>
-    </div>
+    </>
   );
 }
 
