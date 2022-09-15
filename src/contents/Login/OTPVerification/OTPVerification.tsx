@@ -1,12 +1,10 @@
 import { ThunderboltTwoTone } from "@ant-design/icons";
 import { Button, Card, Col, Form, Input, Row, Typography } from "antd";
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 const { Text, Title } = Typography;
 
 function OTPVerification() {
     const [form] = Form.useForm();
-    const navigate = useNavigate();
     const onFinish = (values: any) => {};
     const onFinishFailed = (errorInfo: any) => {};
 
@@ -21,47 +19,39 @@ function OTPVerification() {
     const onChangeHandler1 = (e: any) => {
         vcode[0] = e.target.value;
         setVCode(vcode);
-        console.log(vcode);
         setDisabled1(false);
     };
-    const reSend = () => {
-        console.log("resend password");
-    };
+    const reSend = () => {};
     const onChangeHandler2 = (e: any) => {
         vcode[1] = e.target.value;
         setVCode(vcode);
-        console.log(vcode);
         setDisabled2(false);
     };
     const onChangeHandler3 = (e: any) => {
         vcode[2] = e.target.value;
         setVCode(vcode);
-        console.log(vcode);
         setDisabled3(false);
     };
     const onChangeHandler4 = (e: any) => {
         vcode[3] = e.target.value;
         setVCode(vcode);
-        console.log(vcode);
+
         setDisabled4(false);
     };
 
     const onChangeHandler5 = (e: any) => {
         vcode[4] = e.target.value;
         setVCode(vcode);
-        console.log(vcode);
         setDisabled5(false);
     };
 
     const onChangeHandler6 = (e: any) => {
         vcode[5] = e.target.value;
         setVCode(vcode);
-        console.log(vcode);
     };
     const [verifyCode, setVerifyCode]: any = useState("");
     const confirmHandler = () => {
         setVerifyCode(vcode.join(""));
-        console.log(verifyCode);
     };
     return (
         <div className="forgot-password-template">

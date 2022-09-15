@@ -13,11 +13,14 @@ import {
 import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
 import type { UploadChangeParam } from "antd/es/upload";
 import type { RcFile, UploadFile, UploadProps } from "antd/es/upload/interface";
-import { addRevenueLicense, getAllRevenueLicenseByUserId, getAllVehiclesAllocationsForDropDown } from "./ServicesRevenueLicense";
+import {
+    addRevenueLicense,
+    getAllRevenueLicenseByUserId,
+    getAllVehiclesAllocationsForDropDown,
+} from "./ServicesRevenueLicense";
 import { getUserDetails } from "../../../contents/Login/LoginAuthentication";
 import axios from "axios";
 import { getValue } from "@testing-library/user-event/dist/utils";
-
 
 const getBase64 = (img: RcFile, callback: (url: string) => void) => {
     const reader = new FileReader();
@@ -37,9 +40,7 @@ const beforeUpload = (file: RcFile) => {
     return isJpgOrPng && isLt2M;
 };
 
-
 function AddRevenueLicense() {
-
     const [form] = Form.useForm();
     const [loading, setLoading] = useState(false);
     const [imageUrl, setImageUrl] = useState<string>();
@@ -67,21 +68,21 @@ function AddRevenueLicense() {
 
     useEffect(() => {
         getVehicleSelectData(getUserDetails().user_id);
-    }, [])
+    }, []);
 
     const getVehicleSelectData = (userId: number) => {
-        
         getAllVehiclesAllocationsForDropDown(userId).then((res: any) => {
             let data: any = [];
             res.map((post: any) => {
-                data.push({ value: post.vehicleNumber, label: `${post.resourceVehicleDto.vehicleModel} ${post.resourceVehicleDto.vehicleBodyTypeResponseDto} ${post.resourceVehicleDto.vehicleTypeName} ${post.resourceVehicleDto.fuelTypeName} ${post.vehicleNumber}` });
-                vehicleNum = post.vehicleNumber
+                data.push({
+                    value: post.vehicleNumber,
+                    label: `${post.resourceVehicleDto.vehicleModel} ${post.resourceVehicleDto.vehicleBodyTypeResponseDto} ${post.resourceVehicleDto.vehicleTypeName} ${post.resourceVehicleDto.fuelTypeName} ${post.vehicleNumber}`,
+                });
+                vehicleNum = post.vehicleNumber;
                 return null;
             });
             setVehicle(data);
             setvehicleNumbers(vehicleNum);
-          
-            
         });
     };
 
@@ -92,21 +93,19 @@ function AddRevenueLicense() {
         </div>
     );
 
-
     const { Option } = Select;
 
-    const onFinishAdd = (values:any) => {
-        
+    const onFinishAdd = (values: any) => {
         const formData = new FormData();
         let revenueLicenseData = values;
         const data = {
-            id:1,
+            id: 1,
             taxIssuedDate: revenueLicenseData.taxIssuedDate,
             taxExpiryDate: revenueLicenseData.taxExpiryDate,
             region: revenueLicenseData.region,
             vehicleNumber: vehicleNumbers,
             taxAmount: revenueLicenseData.taxAmount,
-            userId:getUserDetails().user_id
+            userId: getUserDetails().user_id,
         };
 
         fileList.map((post, index) => {
@@ -115,19 +114,17 @@ function AddRevenueLicense() {
 
         formData.append("addRevenueLicense", JSON.stringify(data));
 
-        addRevenueLicense(formData).then(
-            (res: any) => {
-                
-            }
-        )
+        addRevenueLicense(formData).then((res: any) => {});
     };
 
-    const onFinishFailed = () => {
-    }
-    
+    const onFinishFailed = () => {};
+
     return (
         <>
-            <Form id="form" name="basic" form={form}
+            <Form
+                id="form"
+                name="basic"
+                form={form}
                 initialValues={{ remember: true }}
                 onFinish={onFinishAdd}
                 onFinishFailed={onFinishFailed}
@@ -141,12 +138,9 @@ function AddRevenueLicense() {
                                 bordered={false}
                                 style={{ borderBottom: "1px solid #ccccb3" }}
                                 options={vehicle}
-                            >
-                            </Select>
+                            ></Select>
                         </Form.Item>
-                        <Form.Item
-                            name="region"
-                        >
+                        <Form.Item name="region">
                             <Input
                                 placeholder="Region"
                                 required
@@ -154,25 +148,31 @@ function AddRevenueLicense() {
                                 style={{ borderBottom: "1px solid #ccccb3" }}
                             />
                         </Form.Item>
-                        <Form.Item
-                            name="taxIssuedDate"
-                        >
+                        <Form.Item name="taxIssuedDate">
                             <DatePicker
                                 placeholder="Issued Date"
-                                style={{ borderBottom: "1px solid #ccccb3", borderTop: "0px", borderLeft: "0px", borderRight: "0px", width: "100%" }}
+                                style={{
+                                    borderBottom: "1px solid #ccccb3",
+                                    borderTop: "0px",
+                                    borderLeft: "0px",
+                                    borderRight: "0px",
+                                    width: "100%",
+                                }}
                             />
                         </Form.Item>
-                        <Form.Item
-                            name="taxExpiryDate"
-                        >
+                        <Form.Item name="taxExpiryDate">
                             <DatePicker
                                 placeholder="Expire Date"
-                                style={{ borderBottom: "1px solid #ccccb3", borderTop: "0px", borderLeft: "0px", borderRight: "0px", width: "100%" }}
+                                style={{
+                                    borderBottom: "1px solid #ccccb3",
+                                    borderTop: "0px",
+                                    borderLeft: "0px",
+                                    borderRight: "0px",
+                                    width: "100%",
+                                }}
                             />
                         </Form.Item>
-                        <Form.Item
-                            name="taxAmount"
-                        >
+                        <Form.Item name="taxAmount">
                             <Input
                                 placeholder="Price"
                                 bordered={false}
@@ -200,18 +200,14 @@ function AddRevenueLicense() {
                             )}
                         </Upload>
 
-                        <Form.Item hidden={true}
-                            name="id"
-                        >
-                        </Form.Item>
+                        <Form.Item hidden={true} name="id"></Form.Item>
 
-                        <Form.Item hidden={true}
-                            name="userId"
-                        >
-                        </Form.Item>
+                        <Form.Item hidden={true} name="userId"></Form.Item>
                     </Col>
                 </Row>
-                <Button htmlType="submit" type="primary">Add</Button>
+                <Button htmlType="submit" type="primary">
+                    Add
+                </Button>
             </Form>
         </>
     );
