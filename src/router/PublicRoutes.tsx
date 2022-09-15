@@ -20,6 +20,7 @@ import ManageFuelUp from "../contents/Master/FuelUp/ManageFuelUp";
 import ManageMileage from "../contents/Master/Mileage/ManageMileage";
 import SignUp from "../contents/Home/SignUp/SignUp";
 import ManageVehicles from "../contents/Master/Vehicles/ManageVehicles";
+import ManageNotifications from "../contents/Notification/ManageNotifications";
 const Loader = (Component: any) => (props: any) =>
   (
     <Suspense fallback={<SuspenseLoader />}>
@@ -104,7 +105,12 @@ const PublicRoute: RouteObject[] = [
   {
     path: "notification",
     element: <CustomLayout />,
-    children: [],
+    children: [
+      {
+        path: "notification",
+        element: <ManageNotifications />,
+    },
+    ],
   },
   {
     path: "settings",
