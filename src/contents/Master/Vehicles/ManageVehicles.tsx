@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import MasterTemplateWithSmallCard from "../../../templates/MasterTemplateWithSmallCard";
 import { ExclamationCircleOutlined } from "@ant-design/icons";
 import AddVehicle from "./AddVehicle";
+import VehicleProfile from "./VehicleProfile";
 
 const { confirm } = Modal;
 
@@ -51,11 +52,6 @@ function ManageVehicles() {
     setisEdit(true);
     setVehicleData(data);
   };
-
-  const licenseType = [
-    { id: 1, name: "Heavy Vehicle" },
-    { id: 2, name: "Light Vehicle" },
-  ];
 
   const branches = [
     { id: 1, name: "Jaffna" },
@@ -158,6 +154,18 @@ function ManageVehicles() {
             cancelClickHandler={handleCancel}
             updateVehicleData={vehicleData}
           />
+        </Modal>
+      )}
+      {isProfileModalOpen && (
+        <Modal
+          open={isProfileModalOpen}
+          onOk={handleOk}
+          onCancel={handleCancel}
+          closable={false}
+          width={"25%"}
+          footer={false}
+        >
+          <VehicleProfile />
         </Modal>
       )}
     </div>
