@@ -1,3 +1,4 @@
+import { notification } from "antd";
 import { getToken } from "../contents/Login/LoginAuthentication";
 
 import { SYSTEM_CONFIG } from "../utils/StytemConfig";
@@ -65,7 +66,17 @@ export default function api(
                 resolve(response);
             })
             .catch(function (error: any) {
-                reject(error.response);
+                if (error.response) {
+                    if (error.response.data.statusCode === 40000) {
+                        reject(error.response.data);
+                    } else if (error.response.status === 403) {
+                        notification.error({
+                            message:
+                                error.response.data.error_description,
+                            duration: 3
+                        });
+                    }
+                }
             });
     });
 }

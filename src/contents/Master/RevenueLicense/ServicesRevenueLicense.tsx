@@ -1,16 +1,9 @@
 import api from "../../../services/AxiosService";
 
-const getAllRevenueLicenseByUserId = (userId: number) => {//cudeson
+const getAllRevenueLicenseByUserId = (userId: number) => {
+  //cudeson
   return new Promise((resolve, reject) => {
-    api(
-      "get",
-      "fm-web",
-      null,
-      `/revenueLicense/${userId}`,
-      "token",
-      "",
-      ""
-    )
+    api("get", "co-web", null, `/revenueLicense/${userId}`, "token", "", "")
       .then((response: any) => {
         resolve(response.data);
       })
@@ -22,14 +15,7 @@ const getAllRevenueLicenseByUserId = (userId: number) => {//cudeson
 
 const getAllVehiclesAllocationsForDropDown = (userId: number) => {
   return new Promise((resolve, reject) => {
-    api(
-      "get",
-      "fm-web",
-      null,
-      `/vehicleAllocation/${userId}`,
-      "token",
-      "",
-      "")
+    api("get", "co-web", null, `/vehicleAllocation/${userId}`, "token", "", "")
       .then((response: any) => {
         resolve(response.data.results.vehicleAllocation);
       })
@@ -41,14 +27,7 @@ const getAllVehiclesAllocationsForDropDown = (userId: number) => {
 
 const addRevenueLicense = (data: object) => {
   return new Promise((resolve, reject) => {
-    api(
-      "post",
-      "fm-web",
-      null,
-      `/revenueLicense`,
-      "token",
-      data,
-      "")
+    api("post", "co-web", null, `/revenueLicense`, "token", data, "")
       .then((response: any) => {
         resolve(response.data);
       })
@@ -58,4 +37,20 @@ const addRevenueLicense = (data: object) => {
   });
 };
 
-export { getAllRevenueLicenseByUserId, getAllVehiclesAllocationsForDropDown, addRevenueLicense };
+export const deleteRevenueLicense = (id: number) => {
+  return new Promise((resolve, reject) => {
+    api("delete", "co-web", null, `/revenueLicense/${id}`, "token", "", "")
+      .then((response: any) => {
+        resolve(response.data);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+};
+
+export {
+  getAllRevenueLicenseByUserId,
+  getAllVehiclesAllocationsForDropDown,
+  addRevenueLicense,
+};
