@@ -14,9 +14,9 @@ function DriverProfile({ driverProfileData }: DriverProfileType) {
       <div className="driver-profile-image-container">
         <div className="driver-profile-image">
           {driverProfileData.image != null ? (
-            <Image width="100%" src={driverProfileData.image} />
+            <Image width="100%" style={{borderRadius:"50%"}} src={driverProfileData.image} />
           ) : (
-            <Image width="100%" preview={false} src={User} />
+            <Image width="100%" style={{borderRadius:"50%"}} preview={false} src={User} />
           )}
         </div>
       </div>
