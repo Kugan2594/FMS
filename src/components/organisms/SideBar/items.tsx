@@ -45,7 +45,7 @@ const mainMenuItems: MenuItem[] = [
     id: "notification",
     icon: BellOutlined,
     name: "Notification",
-    link: "/notification",
+    link: "/notification/notification",
     children: [],
   },
   {

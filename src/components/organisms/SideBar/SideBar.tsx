@@ -7,6 +7,8 @@ import mainMenuItems from "./items";
 import SubModule from "../SubModule/item";
 import { useNavigate } from "react-router-dom";
 import { ExclamationCircleOutlined } from '@ant-design/icons';
+import { useSelector } from "react-redux";
+import { RootState } from "Redux/store";
 
 const { Sider } = Layout;
 const { confirm } = Modal;
@@ -29,6 +31,10 @@ function SideBar() {
       },
     });
   };
+
+  const notificationData = useSelector((state: RootState) => state.notification.value);
+
+  const badgeCount = notificationData.filter(data => data.isRead == false);
 
   const homeItems: any = [
     { id: "1", name: "a" },
@@ -60,6 +66,7 @@ function SideBar() {
                 icon={item.icon}
                 label={item.name}
                 onClick={() => ClickHandler(item)}
+                badgeCount={badgeCount.length}
               />
             );
           })}

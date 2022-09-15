@@ -36,12 +36,8 @@ function Login() {
     let navigate = useNavigate();
 
     const onChangeHandler = () => {};
-    const ForgotPasswordHandler = () => {
-        console.log("forgot password");
-    };
-    const SignUpHandler = () => {
-        console.log("signUp");
-    };
+    const ForgotPasswordHandler = () => {};
+    const SignUpHandler = () => {};
 
     const handleError = (res: any) => {};
 
@@ -53,12 +49,6 @@ function Login() {
             userName: data.get("email"),
             password: data.get("password"),
         };
-        console.log(body);
-
-        console.log({
-            email: data.get("email"),
-            password: data.get("password"),
-        });
         if (data.get("email") === "") {
             setEmailError("Email is required");
         } else if (
@@ -67,18 +57,17 @@ function Login() {
         ) {
             setEmailError("Email is not valid");
         } else {
-            console.log({ body });
             setLoading(true);
             signIn(body).then(
                 (res: any) => {
                     let response = res.data;
-                    console.log({ response });
+
                     var decoded_token: any = jwt_decode(response.access_token);
                     navigate("/home");
                     if (response.access_token) {
                         setAuthentication("true");
                         setToken(response.access_token);
-                        console.log("decoded_token", decoded_token);
+
                         let userdata = {
                             user_name: decoded_token.user_name,
                             user_id: decoded_token.userId,
@@ -87,16 +76,17 @@ function Login() {
                             roleName:
                                 decoded_token.authorities &&
                                 decoded_token.authorities[0],
+                            company_id: decoded_token.companyId,
+                            company_name: decoded_token.companyName,
+                            company_branch_id: decoded_token.companyBranchId,
+                            company_branch_name:
+                                decoded_token.companyBranchName,
                         };
                         setUserName(userdata.firstName);
                         setUserDetails(JSON.stringify(userdata));
                     }
-                    // console.log(getUserDetails());
-                    console.log(res);
                 },
                 (error: any) => {
-                    console.log(error.data);
-
                     handleError(error.data);
                     setLoading(false);
                     setAuthentication("false");
