@@ -1,17 +1,18 @@
-import React from "react";
 import MasterTemplateWithSmallCard from "../../../templates/MasterTemplateWithSmallCard";
 import { useState } from "react";
 import { Modal, Space } from "antd";
-import AddBranch from "../Branch/AddBranch";
 import AddBranchAdmin from "../BranchAdmin/AddBranchAdmin";
-import { RocketOutlined } from "@ant-design/icons";
+import { ExclamationCircleOutlined, RocketOutlined } from "@ant-design/icons";
+import ViewBranchAdmin from "../BranchAdmin/ViewBranchAdmin";
+
+const { confirm } = Modal;
 const data = [
     {
         id: "1",
         numberOfVehicles: 34,
         progressData: 49,
         itemName: "Vehicles",
-        branchLocation: "Colombo",
+        branchLocation: "Colombo 06,Colombo",
         branchName: "Colombo Branch",
         adminName: "Michael Clarke",
         contactNumber: "0772250114",
@@ -37,7 +38,7 @@ const data = [
         numberOfVehicles: 34,
         progressData: 49,
         itemName: "Vehicles",
-        branchLocation: "Colombo",
+        branchLocation: "Triplicane",
         branchName: "Colombo Branch",
         adminName: "Michael Clarke",
         contactNumber: "0772250114",
@@ -176,17 +177,34 @@ function ManageBranchAdmin() {
     };
     const handleOk = () => {
         setVisible(!visible);
-        console.log("Added");
         setEdit(false);
     };
     const handleCancel = () => {
         setVisible(!visible);
         setEdit(false);
-        console.log("cancelled");
     };
     const showEditModal = (data: any) => {
         setEdit(true);
         setVisible(!visible);
+        setFormValues(data);
+    };
+
+    const [view, setView] = useState(false);
+    const deleteHandler = (id: any) => {
+        confirm({
+            title: "Are you sure do you want to delete this Branch Admin?",
+            icon: <ExclamationCircleOutlined />,
+            okText: "Yes",
+            okType: "danger",
+            cancelText: "No",
+            onOk() {},
+        });
+    };
+    const handleViewCancel = () => {
+        setView(false);
+    };
+    const showViewModal = (data: string) => {
+        setView(true);
         setFormValues(data);
     };
     return (
@@ -196,8 +214,8 @@ function ManageBranchAdmin() {
                 dataCount={data.length}
                 headerOnSearch={() => console.log("SEARCHED")}
                 headerOnClickAdd={showModal}
-                cardOnClick={(id: string) => console.log("CLICKED " + id)}
-                onClickDelete={(id: string) => console.log("DELETED " + id)}
+                cardOnClick={(data: string) => showViewModal(data)}
+                onClickDelete={(id: string) => deleteHandler(id)}
                 onClickUpdate={(data: any) => showEditModal(data)}
                 privilege={false}
                 branchCard={false}
@@ -211,7 +229,6 @@ function ManageBranchAdmin() {
                 {visible && (
                     <Modal
                         visible={visible}
-                        // confirmLoading={confirmLoading}
                         maskStyle={{ borderRadius: "25" }}
                         footer={false}
                         bodyStyle={{ borderRadius: "10" }}
@@ -241,6 +258,17 @@ function ManageBranchAdmin() {
                             onClickCancel={handleCancel}
                             initialValues={edit ? formValues : {}}
                         />
+                    </Modal>
+                )}
+                {view && (
+                    <Modal
+                        visible={view}
+                        maskStyle={{ borderRadius: "25" }}
+                        footer={false}
+                        onCancel={handleViewCancel}
+                        width={400}
+                    >
+                        <ViewBranchAdmin branchData={formValues} />
                     </Modal>
                 )}
             </div>

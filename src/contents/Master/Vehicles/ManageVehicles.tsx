@@ -64,6 +64,13 @@ function ManageVehicles() {
     { id: 4, name: "Kandy" },
   ];
 
+  const vehicleModels = [
+    { id: 1, name: "TOYOTA aqua" },
+    { id: 2, name: "HONDA suv" },
+    { id: 3, name: "AUDI a6" },
+    { id: 4, name: "FORD" },
+  ];
+
   const data = [
     {
       id: "1",
@@ -81,11 +88,31 @@ function ManageVehicles() {
       companyId: 1,
       branchId: 1,
       progressData: 80,
+      image:
+        "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
     },
     {
       id: "2",
       vehicleNumber: "BAT-9470",
-      lease: true,
+      lease: false,
+      color: "red",
+      vehicleOwner: "Cudeson",
+      tankCapacity: 10.1,
+      reserveTankCapacity: 10.2,
+      maximumWeightCarriable: 10.2,
+      vehicleIdFromResource: 1,
+      vehicleModel: "TOYOTA aqua",
+      vehicleType: "Car",
+      branchLocation: "Jaffna",
+      companyId: 1,
+      branchName: "Colombo",
+      progressData: 40,
+      image: "https://picsum.photos/200",
+    },
+    {
+      id: "3",
+      vehicleNumber: "BAT-9470",
+      lease: false,
       color: "red",
       vehicleOwner: "Cudeson",
       tankCapacity: 10.1,
@@ -112,7 +139,7 @@ function ManageVehicles() {
         onClickDelete={(id: any) => deleteClickHandler(id)}
         onClickUpdate={(data: any) => updateClickHandler(data)}
         vehicleCard={true}
-        isProgressBar={false}
+        isProgressBar={true}
       />
       {isModalOpen && (
         <Modal
@@ -127,6 +154,7 @@ function ManageVehicles() {
           <AddVehicle
             isEdit={isEdit}
             branches={branches}
+            vehicleModels={vehicleModels}
             cancelClickHandler={handleCancel}
             updateVehicleData={vehicleData}
           />

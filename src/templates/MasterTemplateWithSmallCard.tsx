@@ -70,7 +70,7 @@ function MasterTemplateWithSmallCard({
                             onChange: (page: any) => {
                                 console.log(page);
                             },
-                            pageSize: 8,
+                            pageSize: 6,
                         }}
                         dataSource={data}
                         renderItem={(data) => (
