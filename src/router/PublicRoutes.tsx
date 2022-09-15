@@ -18,9 +18,11 @@ import ResetPassword from "../contents/Login/ResetPassword";
 import ManageGenerator from "../contents/Master/Generator/ManageGenerator";
 import ManageFuelUp from "../contents/Master/FuelUp/ManageFuelUp";
 import ManageMileage from "../contents/Master/Mileage/ManageMileage";
-import SignUp from "../contents/Home/SignUp/SignUp";
+import SignUp from "../contents/Login/SignUp/SignUp";
 import ManageVehicles from "../contents/Master/Vehicles/ManageVehicles";
 import ManageNotifications from "../contents/Notification/ManageNotifications";
+import OTPVerification from "../contents/Login/OTPVerification/OTPVerification";
+
 const Loader = (Component: any) => (props: any) =>
   (
     <Suspense fallback={<SuspenseLoader />}>
@@ -41,7 +43,10 @@ const PublicRoute: RouteObject[] = [
     path: "/sign-up",
     element: <SignUp />,
   },
-
+  {
+    path: "/otp-verification",
+    element: <OTPVerification />,
+  },
   {
     path: "home",
     element: <CustomLayout />,
@@ -109,7 +114,7 @@ const PublicRoute: RouteObject[] = [
       {
         path: "notification",
         element: <ManageNotifications />,
-    },
+      },
     ],
   },
   {

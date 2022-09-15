@@ -1,11 +1,10 @@
-import { RocketOutlined, ShopTwoTone } from "@ant-design/icons";
-import CustomInput from "../../../components/atoms/Input/CustomInput";
-import React, { useState } from "react";
+import { ExclamationCircleOutlined, RocketOutlined } from "@ant-design/icons";
+import { useState } from "react";
 import MasterTemplateWithSmallCard from "../../../templates/MasterTemplateWithSmallCard";
-import { Input } from "../../../components/atoms/index";
 import AddBranch from "./AddBranch";
-import { Button, Modal, Space } from "antd";
-
+import { Modal, Space } from "antd";
+import ViewBranch from "./ViewBranch";
+const { confirm } = Modal;
 const data = [
     {
         id: "1",
@@ -163,13 +162,12 @@ const mockData = {
     adminName: "Michael Clarke",
     contactNumber: "0772250114",
 };
-
 function ManageBranch() {
     const [formValues, setFormValues]: any = useState("");
     const [visible, setVisible] = useState(false);
     const [ok, setOk] = useState(false);
     const [edit, setEdit] = useState(false);
-    const onClickAddBranch = () => {};
+    const [view, setView] = useState(false);
     const showModal = () => {
         setVisible(!visible);
     };
@@ -184,9 +182,24 @@ function ManageBranch() {
         setEdit(true);
         setVisible(!visible);
         setFormValues(data);
-        console.log("DATA", data);
     };
 
+    const onDeleteHandler = (id: any) => {
+        confirm({
+            title: "Are you sure do you want to delete this Branch?",
+            icon: <ExclamationCircleOutlined />,
+            okText: "Yes",
+            okType: "danger",
+            cancelText: "No",
+            onOk() {},
+        });
+    };
+    const showViewModal = (data: string) => {
+        setView(true);
+    };
+    const handleViewCancel = () => {
+        setView(false);
+    };
     return (
         <>
             <MasterTemplateWithSmallCard
@@ -194,8 +207,8 @@ function ManageBranch() {
                 dataCount={data.length}
                 headerOnSearch={() => console.log("SEARCHED")}
                 headerOnClickAdd={showModal}
-                cardOnClick={(id: string) => console.log("CLICKED " + id)}
-                onClickDelete={(id: string) => console.log("DELETED " + id)}
+                cardOnClick={(data: string) => showViewModal(data)}
+                onClickDelete={(id: string) => onDeleteHandler(id)}
                 onClickUpdate={(data: any) => showEditModal(data)}
                 privilege={false}
                 branchCard={true}
@@ -209,7 +222,6 @@ function ManageBranch() {
                 {visible && (
                     <Modal
                         visible={visible}
-                        // confirmLoading={confirmLoading}
                         maskStyle={{ borderRadius: "25" }}
                         footer={false}
                     >
@@ -239,10 +251,18 @@ function ManageBranch() {
                         />
                     </Modal>
                 )}
+                {view && (
+                    <Modal
+                        visible={view}
+                        maskStyle={{ borderRadius: "25" }}
+                        footer={false}
+                        onCancel={handleViewCancel}
+                    >
+                        <ViewBranch />
+                    </Modal>
+                )}
             </div>
-            {/* <Input label="name" /> */}
         </>
     );
 }
-
 export default ManageBranch;

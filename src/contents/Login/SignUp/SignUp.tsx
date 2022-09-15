@@ -1,4 +1,3 @@
-import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
 import {
     Button,
     Card,
@@ -10,7 +9,6 @@ import {
     Select,
     Typography,
 } from "antd";
-import React from "react";
 import { Link } from "react-router-dom";
 import Logo from "../../../assets/Logo.svg";
 import "./signup.style.less";
@@ -18,13 +16,9 @@ function SignUp() {
     const { Text, Title } = Typography;
     const { Option } = Select;
 
-    const onChange = (value: string) => {
-        console.log(`selected ${value}`);
-    };
+    const onChange = (value: string) => {};
 
-    const onSearch = (value: string) => {
-        console.log("search:", value);
-    };
+    const onSearch = (value: string) => {};
     const handleSubmit = () => {};
     return (
         <div>

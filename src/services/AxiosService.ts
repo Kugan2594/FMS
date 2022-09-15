@@ -48,6 +48,8 @@ export default function api(
     let baseURL =
         service === "fm-web"
             ? SYSTEM_CONFIG.baseUrl
+            : service === "co-web"
+            ? SYSTEM_CONFIG.corporateUrl
             : SYSTEM_CONFIG.loginBaseUrl;
     let customURL = addParamsToURL(baseURL + endPoint, params);
     let headers = getHeaders(token, header === null ? {} : header);

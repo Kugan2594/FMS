@@ -7,11 +7,15 @@ import {
     Select,
     message,
     Upload,
+    Button,
 } from "antd";
 import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
 import type { UploadChangeParam } from "antd/es/upload";
 import type { RcFile, UploadFile, UploadProps } from "antd/es/upload/interface";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { getAllVehiclesAllocationsForDropDown } from "../RevenueLicense/ServicesRevenueLicense";
+import { getUserDetails } from "../../../contents/Login/LoginAuthentication";
+import { addEmissionTest } from "./ServicesEco";
 
 const getBase64 = (img: RcFile, callback: (url: string) => void) => {
     const reader = new FileReader();
@@ -35,6 +39,11 @@ function AddEco() {
     const [form] = Form.useForm();
     const [loading, setLoading] = useState(false);
     const [imageUrl, setImageUrl] = useState<string>();
+    const [vehicle, setVehicle] = useState([]);
+    const [vehicleNumbers, setvehicleNumbers] = useState("");
+    const [fileList, setFileList] = useState([]);
+
+    let vehicleNum: string;
 
     const handleChange: UploadProps["onChange"] = (
         info: UploadChangeParam<UploadFile>
@@ -60,9 +69,62 @@ function AddEco() {
 
     const { Option } = Select;
 
+    useEffect(() => {
+        getVehicleSelectData(getUserDetails().user_id);
+    }, [])
+
+    
+    const getVehicleSelectData = (userId: number) => {
+        
+        getAllVehiclesAllocationsForDropDown(userId).then((res: any) => {
+            let data: any = [];
+            res.map((post: any) => {
+                data.push({ value: post.vehicleNumber, label: `${post.resourceVehicleDto.vehicleModel} ${post.resourceVehicleDto.vehicleBodyTypeResponseDto} ${post.resourceVehicleDto.vehicleTypeName} ${post.resourceVehicleDto.fuelTypeName} ${post.vehicleNumber}` });
+                vehicleNum = post.vehicleNumber
+                return null;
+            });
+            setVehicle(data);
+            setvehicleNumbers(vehicleNum);
+          
+            
+        });
+    };
+
+    const onFinishAdd = (values:any) => {
+        
+        const formData = new FormData();
+        let emissionTestData = values;
+        const data = {
+            id:1,
+            emissionTestIssuedDate: emissionTestData.emissionTestIssuedDate,
+            emissionTestExpiryDate: emissionTestData.emissionTestExpiryDate,
+            emissionTestAmount: emissionTestData.emissionTestAmount,
+            vehicleNumber: vehicleNumbers,
+            userId:getUserDetails().user_id
+        };
+
+        fileList.map((post, index) => {
+            formData.append("files", post);
+        });
+
+        formData.append("addEmissionTest", JSON.stringify(data));
+
+        addEmissionTest(formData).then(
+            (res: any) => {
+                
+            }
+        )
+    };
+
+    const onFinishFailed = () => {
+    }
+
     return (
         <>
-            <Form id="form" name="basic" form={form}>
+            <Form id="form" name="basic" form={form}
+              onFinish={onFinishAdd}
+              onFinishFailed={onFinishFailed}
+            >
                 <Row style={{ paddingLeft: "35px", paddingRight: "35px" }}>
                     <Col span={24}>
                         <Form.Item>
@@ -71,33 +133,29 @@ function AddEco() {
                                 optionFilterProp="children"
                                 bordered={false}
                                 style={{ borderBottom: "1px solid #ccccb3" }}
-                            >
-                                <Option value="jack">Jack</Option>
-                                <Option value="lucy">Lucy</Option>
-                                <Option value="tom">Tom</Option>
+                                options={vehicle}
+                            >  
                             </Select>
                         </Form.Item>
-                        <Form.Item>
-                            <Input
-                                placeholder="Region"
-                                required
-                                bordered={false}
-                                style={{ borderBottom: "1px solid #ccccb3" }}
-                            />
-                        </Form.Item>
-                        <Form.Item>
+                        <Form.Item
+                            name = "emissionTestIssuedDate"
+                        >
                             <DatePicker
                                 placeholder="Issued Date"
                                 style={datePickerStyle}
                             />
                         </Form.Item>
-                        <Form.Item>
+                        <Form.Item
+                            name = "emissionTestExpiryDate"
+                        >
                             <DatePicker
                                 placeholder="Expire Date"
                                 style={datePickerStyle}
                             />
                         </Form.Item>
-                        <Form.Item>
+                        <Form.Item
+                            name = "emissionTestAmount"
+                        >
                             <Input
                                 placeholder="Price"
                                 bordered={false}
@@ -124,8 +182,18 @@ function AddEco() {
                                 uploadButton
                             )}
                         </Upload>
+                        <Form.Item hidden={true}
+                            name="id"
+                        >
+                        </Form.Item>
+
+                        <Form.Item hidden={true}
+                            name="userId"
+                        >
+                        </Form.Item>
                     </Col>
                 </Row>
+                <Button htmlType="submit" type="primary">Add</Button>
             </Form>
         </>
     );
