@@ -14,7 +14,7 @@ function createData(data: any) {
             id: post.id,
             name: "EmissionTest",
             progressData: post.emissionTestValidity,
-            vehicleNo: post.vehicleResponseDto.vehicleOwner,
+            vehicleNo: post.vehicleResponseDto.vehicleNumber,
             vehicleModel:
                 post.vehicleResponseDto.resourceVehicleDto.vehicleModel,
             branchName: "Jaffna Branch",

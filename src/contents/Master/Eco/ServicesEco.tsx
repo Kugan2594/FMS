@@ -4,7 +4,7 @@ const getAllEmissionTestDocumentByUserId = (userId: number) => {//keerthana
   return new Promise((resolve, reject) => {
     api(
       "get",
-      "fm-web",
+      "co-web",
       null,
       `/emissionTestByUserId/${userId}`,
       "token",
@@ -24,7 +24,7 @@ const addEmissionTest = (data: object) => {
   return new Promise((resolve, reject) => {
     api(
       "post",
-      "fm-web",
+      "co-web",
       null,
       `/emissionTest`,
       "token",
