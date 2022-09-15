@@ -1,8 +1,8 @@
 import { ExclamationCircleOutlined, RocketOutlined } from "@ant-design/icons";
-import React, { useState } from "react";
+import { useState } from "react";
 import MasterTemplateWithSmallCard from "../../../templates/MasterTemplateWithSmallCard";
 import AddBranch from "./AddBranch";
-import { Button, Modal, Space } from "antd";
+import { Modal, Space } from "antd";
 import ViewBranch from "./ViewBranch";
 const { confirm } = Modal;
 const data = [
@@ -182,7 +182,6 @@ function ManageBranch() {
         setEdit(true);
         setVisible(!visible);
         setFormValues(data);
-        console.log("DATA", data);
     };
 
     const onDeleteHandler = (id: any) => {
@@ -197,7 +196,6 @@ function ManageBranch() {
     };
     const showViewModal = (data: string) => {
         setView(true);
-        console.log(view);
     };
     const handleViewCancel = () => {
         setView(false);

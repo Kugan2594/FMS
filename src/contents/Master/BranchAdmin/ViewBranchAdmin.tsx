@@ -3,7 +3,6 @@ import React from "react";
 interface ViewBranch {
     branchData?: any;
 }
-
 function ViewBranchAdmin({ branchData }: ViewBranch) {
     return (
         <div>
@@ -84,5 +83,4 @@ function ViewBranchAdmin({ branchData }: ViewBranch) {
         </div>
     );
 }
-
 export default ViewBranchAdmin;

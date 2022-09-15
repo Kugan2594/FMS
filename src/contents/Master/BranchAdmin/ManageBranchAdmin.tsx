@@ -1,8 +1,6 @@
-import React from "react";
 import MasterTemplateWithSmallCard from "../../../templates/MasterTemplateWithSmallCard";
 import { useState } from "react";
 import { Modal, Space } from "antd";
-import AddBranch from "../Branch/AddBranch";
 import AddBranchAdmin from "../BranchAdmin/AddBranchAdmin";
 import { ExclamationCircleOutlined, RocketOutlined } from "@ant-design/icons";
 import ViewBranchAdmin from "../BranchAdmin/ViewBranchAdmin";
@@ -179,13 +177,11 @@ function ManageBranchAdmin() {
     };
     const handleOk = () => {
         setVisible(!visible);
-        console.log("Added");
         setEdit(false);
     };
     const handleCancel = () => {
         setVisible(!visible);
         setEdit(false);
-        console.log("cancelled");
     };
     const showEditModal = (data: any) => {
         setEdit(true);
@@ -201,9 +197,7 @@ function ManageBranchAdmin() {
             okText: "Yes",
             okType: "danger",
             cancelText: "No",
-            onOk() {
-                //Delete API
-            },
+            onOk() {},
         });
     };
     const handleViewCancel = () => {
@@ -211,7 +205,6 @@ function ManageBranchAdmin() {
     };
     const showViewModal = (data: string) => {
         setView(true);
-        console.log(view);
         setFormValues(data);
     };
     return (
@@ -236,7 +229,6 @@ function ManageBranchAdmin() {
                 {visible && (
                     <Modal
                         visible={visible}
-                        // confirmLoading={confirmLoading}
                         maskStyle={{ borderRadius: "25" }}
                         footer={false}
                         bodyStyle={{ borderRadius: "10" }}

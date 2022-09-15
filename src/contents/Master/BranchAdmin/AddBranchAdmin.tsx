@@ -1,13 +1,4 @@
-import {
-    Col,
-    Form,
-    Image,
-    message,
-    Row,
-    Select,
-    Typography,
-    Upload,
-} from "antd";
+import { Col, Form, message, Row, Select, Typography, Upload } from "antd";
 import { Input } from "../../../components/atoms/index";
 import { Button } from "../../../components/atoms/Button/index";
 import "./branchAdmin.style.less";

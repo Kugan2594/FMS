@@ -1,8 +1,9 @@
 import { Col, Image, Row } from "antd";
-import React from "react";
 import "./viewBranch.style.less";
 
-interface ViewBranch {}
+interface ViewBranch {
+    branchData: any;
+}
 function ViewBranch() {
     return (
         <div>
@@ -27,11 +28,15 @@ function ViewBranch() {
                     <Col xs={24} xl={4}></Col>
                 </Row>
                 <Row style={{ marginTop: "5%" }}>
-                    <Col xs={24} xl={4}></Col>
-                    <Col xs={24} xl={16}>
-                        kdmgdkkmdk
+                    <Col xs={24} xl={4}>
+                        jshdasjk
                     </Col>
-                    <Col xs={24} xl={4}></Col>
+                    <Col xs={24} xl={16}>
+                        djkhasjk
+                    </Col>
+                    <Col xs={24} xl={4}>
+                        jskdsjaj
+                    </Col>
                 </Row>
             </div>
         </div>

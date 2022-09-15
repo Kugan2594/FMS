@@ -1,15 +1,7 @@
-import {
-    RocketOutlined,
-    SettingFilled,
-    SettingOutlined,
-} from "@ant-design/icons";
-import Icon from "@ant-design/icons/lib/components/AntdIcon";
+import { SettingOutlined } from "@ant-design/icons";
 import { Button, Card, Col, Image, Progress, Row, Typography } from "antd";
-import Title from "antd/lib/skeleton/Title";
-
 import React, { useState } from "react";
 import "./card.style.less";
-
 export interface CardSmallType {
     id?: string;
     numberOfVehicles?: number;
@@ -182,9 +174,6 @@ function SmallCard({
                         )}
                         <div className="sub-content">
                             {branchCard && <Text>{branchLocation}</Text>}
-                            {/* {generatorCard && (
-                                <Title level={5}> {fuelType}</Title>
-                            )} */}
                             {adminCard && (
                                 <Text strong type="secondary">
                                     {" "}
