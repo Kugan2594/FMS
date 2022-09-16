@@ -20,6 +20,7 @@ import {
   errHandler,
   insuranceDocumentAddSuccess,
 } from "../../../helper/helper";
+import { noSplCharAndLetterRegex } from "../../../utils/Regex";
 
 const getBase64 = (img: RcFile, callback: (url: string) => void) => {
   const reader = new FileReader();
@@ -39,7 +40,7 @@ const beforeUpload = (file: RcFile) => {
   return isJpgOrPng && isLt2M;
 };
 
-function AddInsurance() {
+function AddInsurance(props: any) {
   const [form] = Form.useForm();
   const { Option } = Select;
   const [loading, setLoading] = useState(false);
@@ -132,12 +133,13 @@ function AddInsurance() {
         id="form"
         name="basic"
         form={form}
+        initialValues={props.isEdit ? props.updateData : {}}
         onFinish={onFinishAdd}
         onFinishFailed={onFinishFailed}
       >
         <Row>
           <Col span={11}>
-            <Form.Item>
+            <Form.Item name="vehicleNo">
               <Select
                 placeholder="Vehicle"
                 optionFilterProp="children"
@@ -149,7 +151,20 @@ function AddInsurance() {
           </Col>
           <Col span={2}> </Col>
           <Col span={11}>
-            <Form.Item name="insuranceAmount">
+            <Form.Item
+              rules={[
+                {
+                  max: 10,
+                  message: "Sorry you are exceeding the limit!",
+                },
+                {
+                  pattern: new RegExp(noSplCharAndLetterRegex),
+
+                  message: "Enter valid amount",
+                },
+              ]}
+              name="insuranceAmount"
+            >
               <Input
                 placeholder="Price"
                 bordered={false}
