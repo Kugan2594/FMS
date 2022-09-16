@@ -25,6 +25,7 @@ import {
   errHandler,
   revenueLicenseDocumentAddSuccess,
 } from "../../../helper/helper";
+import { noSplCharAndLetterRegex } from "../../../utils/Regex";
 
 const getBase64 = (img: RcFile, callback: (url: string) => void) => {
   const reader = new FileReader();
@@ -44,7 +45,7 @@ const beforeUpload = (file: RcFile) => {
   return isJpgOrPng && isLt2M;
 };
 
-function AddRevenueLicense() {
+function AddRevenueLicense(props: any) {
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
   const [imageUrl, setImageUrl] = useState<string>();
@@ -135,13 +136,13 @@ function AddRevenueLicense() {
         id="form"
         name="basic"
         form={form}
-        initialValues={{ remember: true }}
+        initialValues={props.isEdit ? props.updateData : {}}
         onFinish={onFinishAdd}
         onFinishFailed={onFinishFailed}
       >
         <Row style={{ paddingLeft: "35px", paddingRight: "35px" }}>
           <Col span={24}>
-            <Form.Item>
+            <Form.Item name="vehicleNo">
               <Select
                 placeholder="Vehicle"
                 optionFilterProp="children"
@@ -182,7 +183,20 @@ function AddRevenueLicense() {
                 }}
               />
             </Form.Item>
-            <Form.Item name="taxAmount">
+            <Form.Item
+              rules={[
+                {
+                  max: 10,
+                  message: "Sorry you are exceeding the limit!",
+                },
+                {
+                  pattern: new RegExp(noSplCharAndLetterRegex),
+
+                  message: "Enter valid amount",
+                },
+              ]}
+              name="taxAmount"
+            >
               <Input
                 placeholder="Price"
                 bordered={false}

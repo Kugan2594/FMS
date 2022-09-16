@@ -25,4 +25,28 @@ const getInsuranceByUserId = (userId: number) => {
   });
 };
 
-export { addInsurance, getInsuranceByUserId };
+const deleteInsurance = (id: number) => {
+  return new Promise((resolve, reject) => {
+    api("delete", "co-web", null, `/insurance/${id}`, "token", "", "")
+      .then((response: any) => {
+        resolve(response.data);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+};
+
+const updateInsurance = (data: object) => {
+  return new Promise((resolve, reject) => {
+    api("put", "co-web", null, `/insurance`, "token", data, "")
+      .then((response: any) => {
+        resolve(response.data);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+};
+
+export { addInsurance, getInsuranceByUserId, deleteInsurance, updateInsurance };
