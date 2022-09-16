@@ -4,85 +4,115 @@ import { useEffect, useState } from "react";
 import AddEco from "./AddEco";
 import MasterTemplateWithLargeCard from "../../../templates/MasterTemplateWithLargeCard";
 import { createDeflateRaw } from "zlib";
-import { getAllEmissionTestDocumentByUserId } from "./ServicesEco";
+import {
+  deleteEmissionTest,
+  getAllEmissionTestDocumentByUserId,
+} from "./ServicesEco";
 import { getUserDetails } from "../../Login/LoginAuthentication";
+import moment from "moment";
+import { ExclamationCircleOutlined } from "@ant-design/icons";
+
+const { confirm } = Modal;
+
 function createData(data: any) {
-    let convertData = data.map((post: any, index: any) => {
-        return {
-            id: post.id,
-            name: "EmissionTest",
-            progressData: post.emissionTestValidity,
-            vehicleNo: post.vehicleResponseDto.vehicleOwner,
-            vehicleModel:
-                post.vehicleResponseDto.resourceVehicleDto.vehicleModel,
-            branchName: "Jaffna Branch",
-            dueDate: post.emissionTestExpiryDate,
-        };
-    });
-    return convertData;
+  let convertData = data.map((post: any, index: any) => {
+    return {
+      id: post.id,
+      name: "EmissionTest",
+      progressData: post.emissionTestValidity,
+      vehicleNo: post.vehicleResponseDto.vehicleNumber,
+      vehicleModel: post.vehicleResponseDto.resourceVehicleDto.vehicleModel,
+      branchName: "Jaffna Branch",
+      dueDate: moment(post.emissionTestExpiryDate).format("DD-MM-yyyy"),
+      lastChangedDate: moment(post.updatedAt).format("DD-MM-yyyy"),
+      emissionTestAmount: post.emissionTestAmount,
+    };
+  });
+  return convertData;
 }
 function ManageEco() {
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    const [isEdit, setisEdit] = useState(false);
-    const [eco, setEco] = useState([]);
-    const showModal = () => {
-        setIsModalOpen(true);
-        setisEdit(false);
-    };
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isEdit, setisEdit] = useState(false);
+  const [eco, setEco] = useState([]);
+  const [updateData, setUpdataData] = useState({});
 
-    const showModalEdit = () => {
-        setIsModalOpen(true);
-        setisEdit(true);
-    };
+  const showModal = () => {
+    setIsModalOpen(true);
+    setisEdit(false);
+  };
 
-    const handleOk = () => {
-        setIsModalOpen(false);
-    };
+  const showModalEdit = (data: any) => {
+    setIsModalOpen(true);
+    setisEdit(true);
+    setUpdataData(data);
+  };
 
-    const handleCancel = () => {
-        setIsModalOpen(false);
-    };
+  const handleOk = () => {
+    setIsModalOpen(false);
+  };
 
-    useEffect(() => {
-        getAllEmissionTestData(getUserDetails().user_id);
-    }, []);
-    const getAllEmissionTestData = (userId: number) => {
-        let data: any = [];
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
 
-        getAllEmissionTestDocumentByUserId(userId).then(
-            (res: any) => {
-                data = createData(res.results.emissionTest);
-                setEco(data);
-            },
-            (error: any) => {
-                setEco([]);
-            }
-        );
-    };
-    return (
-        <>
-            <MasterTemplateWithLargeCard
-                data={eco}
-                dataCount={eco.length}
-                headerOnSearch={() => {}}
-                headerOnClickAdd={showModal}
-                cardOnClick={(id: string) => console.log("CLICKED " + id)}
-                deleteButton={(id: string) => console.log("DELETED " + id)}
-                updateButton={showModalEdit}
-            />
+  useEffect(() => {
+    getAllEmissionTestData(getUserDetails().user_id);
+  }, []);
+  const getAllEmissionTestData = (userId: number) => {
+    let data: any = [];
 
-            <Modal
-                title={isEdit ? "Edit Emission Test" : "Add Emission Test"}
-                open={isModalOpen}
-                onOk={handleOk}
-                onCancel={handleCancel}
-                closable={false}
-                width={500}
-            >
-                <AddEco />
-            </Modal>
-        </>
+    getAllEmissionTestDocumentByUserId(userId).then(
+      (res: any) => {
+        data = createData(res.results.emissionTest);
+        setEco(data);
+      },
+      (error: any) => {
+        setEco([]);
+      }
     );
+  };
+
+  const deleteClickHandler = (id: any) => {
+    confirm({
+      title: "Are you sure delete this Emission Test Document?",
+      icon: <ExclamationCircleOutlined />,
+      okText: "Yes",
+      okType: "danger",
+      cancelText: "No",
+      onOk() {
+        deleteEmissionTest(id);
+        getAllEmissionTestData(getUserDetails().user_id);
+      },
+    });
+  };
+
+  return (
+    <>
+      <MasterTemplateWithLargeCard
+        data={eco}
+        dataCount={eco.length}
+        headerOnSearch={() => {}}
+        headerOnClickAdd={showModal}
+        cardOnClick={(id: string) => console.log("CLICKED " + id)}
+        deleteButton={(id: string) => deleteClickHandler(id)}
+        updateButton={(data: any) => showModalEdit(data)}
+      />
+
+      {isModalOpen && (
+        <Modal
+          title={isEdit ? "Edit Emission Test" : "Add Emission Test"}
+          open={isModalOpen}
+          onOk={handleOk}
+          onCancel={handleCancel}
+          closable={false}
+          width={500}
+          footer={null}
+        >
+          <AddEco updateData={updateData} isEdit={isEdit} />
+        </Modal>
+      )}
+    </>
+  );
 }
 
 export default ManageEco;

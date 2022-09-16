@@ -1,17 +1,8 @@
 import api from "../../../services/AxiosService";
 
-const getAllEmissionTestDocumentByUserId = (userId: number) => {
-  //keerthana
+const addInsurance = (data: object) => {
   return new Promise((resolve, reject) => {
-    api(
-      "get",
-      "co-web",
-      null,
-      `/emissionTestByUserId/${userId}`,
-      "token",
-      "",
-      ""
-    )
+    api("post", "co-web", null, `/insurance`, "token", data, "")
       .then((response: any) => {
         resolve(response.data);
       })
@@ -21,9 +12,10 @@ const getAllEmissionTestDocumentByUserId = (userId: number) => {
   });
 };
 
-const addEmissionTest = (data: object) => {
+const getInsuranceByUserId = (userId: number) => {
+  //cudeson
   return new Promise((resolve, reject) => {
-    api("post", "co-web", null, `/emissionTest`, "token", data, "")
+    api("get", "co-web", null, `/userInsurance/${userId}`, "token", "", "")
       .then((response: any) => {
         resolve(response.data);
       })
@@ -33,9 +25,9 @@ const addEmissionTest = (data: object) => {
   });
 };
 
-const deleteEmissionTest = (id: number) => {
+const deleteInsurance = (id: number) => {
   return new Promise((resolve, reject) => {
-    api("delete", "co-web", null, `/emissionTest/${id}`, "token", "", "")
+    api("delete", "co-web", null, `/insurance/${id}`, "token", "", "")
       .then((response: any) => {
         resolve(response.data);
       })
@@ -45,9 +37,9 @@ const deleteEmissionTest = (id: number) => {
   });
 };
 
-const updateEmissionTest = (data: object) => {
+const updateInsurance = (data: object) => {
   return new Promise((resolve, reject) => {
-    api("put", "co-web", null, `/emissionTest`, "token", data, "")
+    api("put", "co-web", null, `/insurance`, "token", data, "")
       .then((response: any) => {
         resolve(response.data);
       })
@@ -57,9 +49,4 @@ const updateEmissionTest = (data: object) => {
   });
 };
 
-export {
-  getAllEmissionTestDocumentByUserId,
-  addEmissionTest,
-  deleteEmissionTest,
-  updateEmissionTest,
-};
+export { addInsurance, getInsuranceByUserId, deleteInsurance, updateInsurance };

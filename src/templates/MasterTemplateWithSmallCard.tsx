@@ -24,6 +24,8 @@ interface TemplateType {
     vehicleType?: string;
     designation?: string;
     drivingLicense?: string;
+    tankCapacity?: any;
+    maximumPower?: any;
     vehicleModel?: string;
     driverCard?: boolean;
     generatorCard?: boolean;
@@ -70,7 +72,7 @@ function MasterTemplateWithSmallCard({
                             onChange: (page: any) => {
                                 console.log(page);
                             },
-                            pageSize: 8,
+                            pageSize: 6,
                         }}
                         dataSource={data}
                         renderItem={(data) => (
@@ -113,6 +115,8 @@ function MasterTemplateWithSmallCard({
                                         fuelType={data.fuelType}
                                         vehicleIcon={data.vehicleIcon}
                                         drivingLicense={data.drivingLicense}
+                                        tankCapacity={data.tankCapacity}
+                                        maximumPower={data.maximumPower}
                                     />
                                 }
                             </List.Item>

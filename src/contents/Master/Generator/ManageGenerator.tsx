@@ -1,143 +1,138 @@
 import { Modal } from "antd";
-import React, { useState } from "react";
+import { getUserDetails } from "../../../contents/Login/LoginAuthentication";
+import React, { useState, useEffect } from "react";
 import MasterTemplateWithSmallCard from "../../../templates/MasterTemplateWithSmallCard";
 import AddGenerator from "./AddGenerator";
+import {
+    deleteGeneratorById,
+    getGeneratorByCompanyId,
+} from "./ServiceGenerator";
+import { generatorDeleteSuccess } from "../../../helper/helper";
+import { ExclamationCircleOutlined } from "@ant-design/icons";
 
-const data = [
-    {
-        id: "1",
-        numberOfVehicles: 34,
-        progressData: 49,
-        itemName: "Vehicles",
-        branchLocation: "Colombo",
-        branchName: "Colombo Branch",
-        adminName: "Michael Clarke",
-    },
-    {
-        id: "2",
-        numberOfVehicles: 34,
-        progressData: 49,
-        itemName: "Vehicles",
-        branchLocation: "Colombo",
-        branchName: "Colombo Branch",
-        adminName: "Michael Clarke",
-    },
-    {
-        id: "3",
-        numberOfVehicles: 34,
-        progressData: 49,
-        itemName: "Vehicles",
-        branchLocation: "Colombo",
-        branchName: "Colombo Branch",
-        adminName: "Michael Clarke",
-    },
-    {
-        id: "4",
-        numberOfVehicles: 34,
-        progressData: 49,
-        itemName: "Vehicles",
-        branchLocation: "Colombo",
-        branchName: "Colombo Branch",
-        adminName: "Michael Clarke",
-    },
-    {
-        id: "5",
-        numberOfVehicles: 34,
-        progressData: 49,
-        itemName: "Vehicles",
-        branchLocation: "Colombo",
-        branchName: "Colombo Branch",
-        adminName: "Michael Clarke",
-    },
-    {
-        id: "6",
-        numberOfVehicles: 34,
-        progressData: 49,
-        itemName: "Vehicles",
-        branchLocation: "Colombo",
-        branchName: "Colombo Branch",
-        adminName: "Michael Clarke",
-    },
-    {
-        id: "7",
-        numberOfVehicles: 34,
-        progressData: 49,
-        itemName: "Vehicles",
-        branchLocation: "Colombo",
-        branchName: "Colombo Branch",
-        adminName: "Michael Clarke",
-    },
-    {
-        id: "8",
-        numberOfVehicles: 34,
-        progressData: 49,
-        itemName: "Vehicles",
-        branchLocation: "Colombo",
-        branchName: "Colombo Branch",
-        adminName: "Michael Clarke",
-    },
-    {
-        id: "9",
-        numberOfVehicles: 34,
-        progressData: 49,
-        itemName: "Vehicles",
-        branchLocation: "Colombo",
-        branchName: "Colombo Branch",
-        adminName: "Michael Clarke",
-    },
-    {
-        id: "10",
-        numberOfVehicles: 34,
-        progressData: 49,
-        itemName: "Vehicles",
-        branchLocation: "Colombo",
-        branchName: "Colombo Branch",
-        adminName: "Michael Clarke",
-    },
-];
+const { confirm } = Modal;
 
 function ManageGenerator() {
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    const [isEdit, setisEdit] = useState(false);
+    const [addVisible, setAddVisible] = useState(false);
+    const [editVisible, seteditVisible] = useState(false);
+    const [generatorData, setgeneratorData] = useState([]);
+    const [updateData, setupdateData] = useState([]);
+    const [action, setaction] = useState<string>("add");
 
-    const showModal = () => {
-        setIsModalOpen(true);
-        setisEdit(false);
+    const createData = (data: any) => {
+        let convertData = data.map((post: any) => {
+            return {
+                id: post.id,
+                branchName: getUserDetails().company_branch_name,
+                progressData: 49,
+                itemName: "Generator",
+                adminFirstName: getUserDetails().firstName,
+                branchLocation: "Jaffna",
+                generatorBrand: post.generatorBrand,
+                tankCapacity: post.tankCapacity,
+                maximumPower: post.maximumPower,
+            };
+        });
+
+        return convertData;
     };
 
-    const showModalEdit = () => {
-        setIsModalOpen(true);
-        setisEdit(true);
+    const reloadTable = (res: any) => {
+        getAllGenerator(getUserDetails().company_id);
+    };
+
+    const openAdd = () => {
+        setaction("add");
+        setAddVisible(true);
+        seteditVisible(false);
+    };
+
+    const openEdit = (data: any) => {
+        setaction("edit");
+        seteditVisible(true);
+        setupdateData(data);
     };
 
     const handleOk = () => {
-        setIsModalOpen(false);
+        setAddVisible(false);
     };
 
     const handleCancel = () => {
-        setIsModalOpen(false);
+        setAddVisible(false);
+        seteditVisible(false);
     };
+
+    const getAllGenerator = (companyId: number) => {
+        getGeneratorByCompanyId(companyId).then((res: any) => {
+            let data: any = createData(res.results.Generator);
+            setgeneratorData(data);
+        });
+    };
+
+    const deleteGenerator = (id: number) => {
+        deleteGeneratorById(id).then((res: any) => {
+            generatorDeleteSuccess();
+            reloadTable(res);
+        });
+    };
+
+    const deleteClickHandler = (id: any) => {
+        confirm({
+            title: "Are you sure delete this Emission Test Document?",
+            icon: <ExclamationCircleOutlined />,
+            okText: "Yes",
+            okType: "danger",
+            cancelText: "No",
+            onOk() {
+                deleteGenerator(id);
+            },
+        });
+    };
+
+    useEffect(() => {
+        getAllGenerator(getUserDetails().company_id);
+    }, []);
+
     return (
         <>
             <MasterTemplateWithSmallCard
-                data={data}
-                dataCount={data.length}
-                headerOnSearch={() => console.log("SEARCHED")}
-                headerOnClickAdd={showModal}
-                cardOnClick={(id: string) => console.log("CLICKED " + id)}
-                onClickDelete={(id: string) => console.log("DELETED " + id)}
-                onClickUpdate={showModalEdit}
+                data={generatorData}
+                dataCount={generatorData.length}
+                headerOnSearch={() => {}}
+                headerOnClickAdd={openAdd}
+                cardOnClick={openAdd}
+                onClickDelete={(id: number) => {
+                    deleteClickHandler(id);
+                }}
+                onClickUpdate={(data: any) => openEdit(data)}
+                generatorCard={true}
             />
-            <Modal
-                title={isEdit ? "Edit Generator" : "Add Generator"}
-                open={isModalOpen}
-                onOk={handleOk}
-                onCancel={handleCancel}
-                closable={false}
-                width={600}
-            >
-                <AddGenerator />
-            </Modal>
+
+            {addVisible ? (
+                <AddGenerator
+                    title={"Add Generator"}
+                    visible={addVisible}
+                    handleCancel={handleCancel}
+                    handleOk={handleOk}
+                    setAddVisible={setAddVisible}
+                    updateData={editVisible ? updateData : null}
+                    reloadTable={reloadTable}
+                    action={action}
+                />
+            ) : editVisible ? (
+                <AddGenerator
+                    title={"Edit Generator"}
+                    visible={editVisible}
+                    handleCancel={handleCancel}
+                    handleOk={handleOk}
+                    setAddVisible={seteditVisible}
+                    updateData={editVisible ? updateData : null}
+                    reloadTable={reloadTable}
+                    action={action}
+                />
+            ) : (
+                <></>
+            )}
         </>
     );
 }

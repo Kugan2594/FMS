@@ -20,6 +20,7 @@ import ManageFuelUp from "../contents/Master/FuelUp/ManageFuelUp";
 import ManageMileage from "../contents/Master/Mileage/ManageMileage";
 import SignUp from "../contents/Login/SignUp/SignUp";
 import ManageVehicles from "../contents/Master/Vehicles/ManageVehicles";
+import ManageNotifications from "../contents/Notification/ManageNotifications";
 import OTPVerification from "../contents/Login/OTPVerification/OTPVerification";
 import Statistics from "../contents/Master/Statistics/Statistics";
 import Page from "../contents/Master/Statistics/Statistics";
@@ -48,7 +49,6 @@ const PublicRoute: RouteObject[] = [
         path: "/otp-verification",
         element: <OTPVerification />,
     },
-
     {
         path: "home",
         element: <CustomLayout />,
@@ -116,7 +116,12 @@ const PublicRoute: RouteObject[] = [
     {
         path: "notification",
         element: <CustomLayout />,
-        children: [],
+        children: [
+            {
+                path: "notification",
+                element: <ManageNotifications />,
+            },
+        ],
     },
     {
         path: "settings",

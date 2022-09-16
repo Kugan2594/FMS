@@ -15,7 +15,6 @@ const SubModule = ({ data }: SubModuleDataType) => {
 
     const onClickActive = (x: SubModuleType) => {
         navigate(x.id);
-        console.log(x);
     };
 
     return (

@@ -1,7 +1,8 @@
-import { Col, Image, InputNumber, Modal, Row } from "antd";
+import { Button, Col, Form, Image, Input, InputNumber, Modal, Row } from "antd";
 import "antd/dist/antd.css";
+import moment from "moment";
 import React, { useState } from "react";
-import { Button } from "../../../components/atoms/Button";
+import { addFuelUp } from "./ServiceFuelUp";
 
 function ManageFuelUp() {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -22,6 +23,21 @@ function ManageFuelUp() {
     const handleOpenEdit = () => {
         seteditOpen(!editOpen);
     };
+
+    const onFinish = (values: any) => {
+        let filledDate: any = moment(Date()).format("YYYY-MM-DD");
+        let data: object = {
+            filledAmount: values.filledAmount,
+            filledDate: filledDate,
+            userId: 5,
+            vehicleNumber: "BAT-9470",
+        };
+        addFuelUp(data)
+            .then((res) => {})
+            .catch((err) => {});
+    };
+
+    const onFinishFailed = () => {};
 
     return (
         <>
@@ -69,31 +85,6 @@ function ManageFuelUp() {
                                     />
                                 </Col>
                             </Row>
-                            <Row>
-                                <Col span={6}>
-                                    <div style={{ fontSize: "12px" }}>
-                                        15 Jun 2022
-                                    </div>
-                                </Col>
-                                <Col span={10}>
-                                    <div
-                                        style={{
-                                            fontSize: "14px",
-                                            fontWeight: "bold",
-                                            textAlign: "right",
-                                        }}
-                                    >
-                                        3000 Rs
-                                    </div>
-                                </Col>
-                                <Col span={8}>
-                                    <Button
-                                        type="link"
-                                        onClick={handleOpenEdit}
-                                        title=" Edit"
-                                    />
-                                </Col>
-                            </Row>
 
                             <h5 style={{ textAlign: "left", color: "#3385FF" }}>
                                 {" "}
@@ -121,81 +112,6 @@ function ManageFuelUp() {
                                         type="link"
                                         onClick={handleOpenEdit}
                                         title=" Edit"
-                                    />
-                                </Col>
-                            </Row>
-                            <Row>
-                                <Col span={6}>
-                                    <div style={{ fontSize: "12px" }}>
-                                        15 Jun 2022
-                                    </div>
-                                </Col>
-                                <Col span={10}>
-                                    <div
-                                        style={{
-                                            fontSize: "14px",
-                                            fontWeight: "bold",
-                                            textAlign: "right",
-                                        }}
-                                    >
-                                        3000 Rs
-                                    </div>
-                                </Col>
-                                <Col span={8}>
-                                    <Button
-                                        type="link"
-                                        onClick={handleOpenEdit}
-                                        title="Edit"
-                                    />
-                                </Col>
-                            </Row>
-                            <Row>
-                                <Col span={6}>
-                                    <div style={{ fontSize: "12px" }}>
-                                        15 Jun 2022
-                                    </div>
-                                </Col>
-                                <Col span={10}>
-                                    <div
-                                        style={{
-                                            fontSize: "14px",
-                                            fontWeight: "bold",
-                                            textAlign: "right",
-                                        }}
-                                    >
-                                        3000 Rs
-                                    </div>
-                                </Col>
-                                <Col span={8}>
-                                    <Button
-                                        type="link"
-                                        onClick={handleOpenEdit}
-                                        title=" Edit"
-                                    />
-                                </Col>
-                            </Row>
-                            <Row>
-                                <Col span={6}>
-                                    <div style={{ fontSize: "12px" }}>
-                                        15 Jun 2022
-                                    </div>
-                                </Col>
-                                <Col span={10}>
-                                    <div
-                                        style={{
-                                            fontSize: "14px",
-                                            fontWeight: "bold",
-                                            textAlign: "right",
-                                        }}
-                                    >
-                                        3000 Rs
-                                    </div>
-                                </Col>
-                                <Col span={8}>
-                                    <Button
-                                        type="link"
-                                        onClick={handleOpenEdit}
-                                        title="Edit"
                                     />
                                 </Col>
                             </Row>
@@ -283,10 +199,28 @@ function ManageFuelUp() {
                                     Refilled Amount on 15 Jun 2022
                                 </div>
                             )}
-                            <InputNumber
-                                placeholder="Latest Refilled Amount"
-                                addonAfter="Rs"
-                            />
+                            <Form
+                                name="basic"
+                                onFinish={onFinish}
+                                onFinishFailed={onFinishFailed}
+                            >
+                                <Form.Item name="filledAmount">
+                                    <InputNumber
+                                        placeholder="Latest Refilled Amount"
+                                        addonAfter="Rs"
+                                    />
+                                </Form.Item>
+                                <Form.Item name="userId" hidden>
+                                    <Input />
+                                </Form.Item>
+                                <Button
+                                    style={{ width: "200" }}
+                                    type="primary"
+                                    htmlType="submit"
+                                >
+                                    Update
+                                </Button>
+                            </Form>
                             <br />
                             <br />
                             {editOpen ? (
@@ -306,14 +240,6 @@ function ManageFuelUp() {
                                                 title="Cancel"
                                             />
                                         )}
-                                    </Col>
-                                    <Col span={12}>
-                                        <Button
-                                            style={{ width: "200" }}
-                                            type="primary"
-                                            onClick={showModal}
-                                            title="Update"
-                                        />
                                     </Col>
                                 </Row>
                             ) : (
