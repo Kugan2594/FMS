@@ -258,7 +258,7 @@ function ManageBranch() {
                         footer={false}
                         onCancel={handleViewCancel}
                     >
-                        <ViewBranch />
+                        <ViewBranch branchData={formValues} />
                     </Modal>
                 )}
             </div>

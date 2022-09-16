@@ -15,6 +15,8 @@ import ManageRevenueLicense from "../contents/Master/RevenueLicense/ManageRevenu
 import ManageParts from "../contents/Master/Parts/ManageParts";
 import ManageVehicles from "../contents/Master/Vehicles/ManageVehicles";
 import ManageNotifications from "../contents/Notification/ManageNotifications";
+import Statistics from "../contents/Master/Statistics/Statistics";
+import Page from "../contents/Master/Statistics/Statistics";
 
 const Loader = (Component: any) => (props: any) =>
     (
@@ -79,6 +81,10 @@ const PrivateRoute: RouteObject[] = [
     {
         path: "/notification",
         element: <ManageNotifications />,
+    },
+    {
+        path: "statistics",
+        element: <Page />,
     },
 ];
 
