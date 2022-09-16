@@ -32,4 +32,16 @@ const addGenerator = (data: any) => {
     });
 };
 
-export { getGeneratorByCompanyId, addGenerator };
+const updateGeneratorById = (data: any) => {
+    return new Promise((resolve, reject) => {
+        api("put", "co-web", null, "/updateGenerator", "token", data, "")
+            .then((reponse: any) => {
+                resolve(reponse.data);
+            })
+            .catch((error) => {
+                reject(error);
+            });
+    });
+};
+
+export { getGeneratorByCompanyId, addGenerator, updateGeneratorById };

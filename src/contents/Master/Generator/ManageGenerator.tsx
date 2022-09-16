@@ -6,9 +6,11 @@ import AddGenerator from "./AddGenerator";
 import { getGeneratorByCompanyId } from "./ServiceGenerator";
 
 function ManageGenerator() {
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    const [isEdit, setisEdit] = useState(false);
+    const [addVisible, setAddVisible] = useState(false);
+    const [editVisible, seteditVisible] = useState(false);
     const [generatorData, setgeneratorData] = useState([]);
+    const [updateData, setupdateData] = useState([]);
+    const [action, setaction] = useState<string>("add");
 
     const createData = (data: any) => {
         let convertData = data.map((post: any) => {
@@ -20,28 +22,37 @@ function ManageGenerator() {
                 adminFirstName: getUserDetails().firstName,
                 branchLocation: "Jaffna",
                 generatorBrand: post.generatorBrand,
+                tankCapacity: post.tankCapacity,
+                maximumPower: post.maximumPower,
             };
         });
 
         return convertData;
     };
 
-    const showModal = () => {
-        setIsModalOpen(true);
-        setisEdit(false);
+    const reloadTable = (res: any) => {
+        getAllGenerator(getUserDetails().company_id);
     };
 
-    const showModalEdit = () => {
-        setIsModalOpen(true);
-        setisEdit(true);
+    const openAdd = () => {
+        setaction("add");
+        setAddVisible(true);
+        seteditVisible(false);
+    };
+
+    const openEdit = (data: any) => {
+        setaction("edit");
+        seteditVisible(true);
+        setupdateData(data);
     };
 
     const handleOk = () => {
-        setIsModalOpen(false);
+        setAddVisible(false);
     };
 
     const handleCancel = () => {
-        setIsModalOpen(false);
+        setAddVisible(false);
+        seteditVisible(false);
     };
 
     const getAllGenerator = (companyId: number) => {
@@ -61,23 +72,36 @@ function ManageGenerator() {
                 data={generatorData}
                 dataCount={generatorData.length}
                 headerOnSearch={() => {}}
-                headerOnClickAdd={showModal}
-                cardOnClick={(id: string) => {}}
+                headerOnClickAdd={openAdd}
+                cardOnClick={openAdd}
                 onClickDelete={(id: string) => {}}
-                onClickUpdate={showModalEdit}
+                onClickUpdate={(data: any) => openEdit(data)}
                 generatorCard={true}
             />
-            <Modal
-                title={isEdit ? "Edit Generator" : "Add Generator"}
-                open={isModalOpen}
-                onOk={handleOk}
-                onCancel={handleCancel}
-                closable={false}
-                width={"35%"}
-                footer={null}
-            >
-                <AddGenerator />
-            </Modal>
+
+            {addVisible ? (
+                <AddGenerator
+                    title={"Add Generator"}
+                    visible={addVisible}
+                    handleCancel={handleCancel}
+                    handleOk={handleOk}
+                    setAddVisible={setAddVisible}
+                    updateData={editVisible ? updateData : null}
+                    reloadTable={reloadTable}
+                />
+            ) : editVisible ? (
+                <AddGenerator
+                    title={"Edit Generator"}
+                    visible={editVisible}
+                    handleCancel={handleCancel}
+                    handleOk={handleOk}
+                    setAddVisible={seteditVisible}
+                    updateData={editVisible ? updateData : null}
+                    reloadTable={reloadTable}
+                />
+            ) : (
+                <></>
+            )}
         </>
     );
 }
