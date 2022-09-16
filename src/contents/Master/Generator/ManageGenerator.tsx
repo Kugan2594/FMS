@@ -1,104 +1,30 @@
 import { Modal } from "antd";
-import React, { useState } from "react";
+import { getUserDetails } from "../../../contents/Login/LoginAuthentication";
+import React, { useState, useEffect } from "react";
 import MasterTemplateWithSmallCard from "../../../templates/MasterTemplateWithSmallCard";
 import AddGenerator from "./AddGenerator";
-
-const data = [
-    {
-        id: "1",
-        numberOfVehicles: 34,
-        progressData: 49,
-        itemName: "Vehicles",
-        branchLocation: "Colombo",
-        branchName: "Colombo Branch",
-        adminName: "Michael Clarke",
-    },
-    {
-        id: "2",
-        numberOfVehicles: 34,
-        progressData: 49,
-        itemName: "Vehicles",
-        branchLocation: "Colombo",
-        branchName: "Colombo Branch",
-        adminName: "Michael Clarke",
-    },
-    {
-        id: "3",
-        numberOfVehicles: 34,
-        progressData: 49,
-        itemName: "Vehicles",
-        branchLocation: "Colombo",
-        branchName: "Colombo Branch",
-        adminName: "Michael Clarke",
-    },
-    {
-        id: "4",
-        numberOfVehicles: 34,
-        progressData: 49,
-        itemName: "Vehicles",
-        branchLocation: "Colombo",
-        branchName: "Colombo Branch",
-        adminName: "Michael Clarke",
-    },
-    {
-        id: "5",
-        numberOfVehicles: 34,
-        progressData: 49,
-        itemName: "Vehicles",
-        branchLocation: "Colombo",
-        branchName: "Colombo Branch",
-        adminName: "Michael Clarke",
-    },
-    {
-        id: "6",
-        numberOfVehicles: 34,
-        progressData: 49,
-        itemName: "Vehicles",
-        branchLocation: "Colombo",
-        branchName: "Colombo Branch",
-        adminName: "Michael Clarke",
-    },
-    {
-        id: "7",
-        numberOfVehicles: 34,
-        progressData: 49,
-        itemName: "Vehicles",
-        branchLocation: "Colombo",
-        branchName: "Colombo Branch",
-        adminName: "Michael Clarke",
-    },
-    {
-        id: "8",
-        numberOfVehicles: 34,
-        progressData: 49,
-        itemName: "Vehicles",
-        branchLocation: "Colombo",
-        branchName: "Colombo Branch",
-        adminName: "Michael Clarke",
-    },
-    {
-        id: "9",
-        numberOfVehicles: 34,
-        progressData: 49,
-        itemName: "Vehicles",
-        branchLocation: "Colombo",
-        branchName: "Colombo Branch",
-        adminName: "Michael Clarke",
-    },
-    {
-        id: "10",
-        numberOfVehicles: 34,
-        progressData: 49,
-        itemName: "Vehicles",
-        branchLocation: "Colombo",
-        branchName: "Colombo Branch",
-        adminName: "Michael Clarke",
-    },
-];
+import { getGeneratorByCompanyId } from "./ServiceGenerator";
 
 function ManageGenerator() {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isEdit, setisEdit] = useState(false);
+    const [generatorData, setgeneratorData] = useState([]);
+
+    const createData = (data: any) => {
+        let convertData = data.map((post: any) => {
+            return {
+                id: post.id,
+                branchName: getUserDetails().company_branch_name,
+                progressData: 49,
+                itemName: "Generator",
+                adminFirstName: getUserDetails().firstName,
+                branchLocation: "Jaffna",
+                generatorBrand: post.generatorBrand,
+            };
+        });
+
+        return convertData;
+    };
 
     const showModal = () => {
         setIsModalOpen(true);
@@ -117,16 +43,29 @@ function ManageGenerator() {
     const handleCancel = () => {
         setIsModalOpen(false);
     };
+
+    const getAllGenerator = (companyId: number) => {
+        getGeneratorByCompanyId(companyId).then((res: any) => {
+            let data: any = createData(res.results.Generator);
+            setgeneratorData(data);
+        });
+    };
+
+    useEffect(() => {
+        getAllGenerator(getUserDetails().company_id);
+    }, []);
+
     return (
         <>
             <MasterTemplateWithSmallCard
-                data={data}
-                dataCount={data.length}
-                headerOnSearch={() => console.log("SEARCHED")}
+                data={generatorData}
+                dataCount={generatorData.length}
+                headerOnSearch={() => {}}
                 headerOnClickAdd={showModal}
-                cardOnClick={(id: string) => console.log("CLICKED " + id)}
-                onClickDelete={(id: string) => console.log("DELETED " + id)}
+                cardOnClick={(id: string) => {}}
+                onClickDelete={(id: string) => {}}
                 onClickUpdate={showModalEdit}
+                generatorCard={true}
             />
             <Modal
                 title={isEdit ? "Edit Generator" : "Add Generator"}
@@ -134,7 +73,8 @@ function ManageGenerator() {
                 onOk={handleOk}
                 onCancel={handleCancel}
                 closable={false}
-                width={600}
+                width={"35%"}
+                footer={null}
             >
                 <AddGenerator />
             </Modal>
