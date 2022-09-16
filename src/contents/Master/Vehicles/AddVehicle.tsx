@@ -112,7 +112,7 @@ function AddVehicle({
     return (
         <>
             <Form
-                id="addDriver-form"
+                id="addVehicle-form"
                 name="basic"
                 form={form}
                 initialValues={isEdit ? updateVehicleData : {}}
@@ -258,7 +258,7 @@ function AddVehicle({
                             Submit
                         </Button>
                         {/* wanted codes */}
-                        {/* <Form.Item name="drivingLicenseType">
+                        {/* <Form.Item>
                             <CustomButton
                                 className="form-button"
                                 title="Cancel"
