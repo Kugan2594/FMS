@@ -37,6 +37,8 @@ export interface CardSmallType {
     adminLastName?: string;
     driverFirstName?: string;
     driverLastName?: string;
+    tankCapacity?: any;
+    maximumPower?: any;
     onCardClick?: React.MouseEventHandler<HTMLDivElement> | undefined;
 }
 let intialValue: CardSmallType = {
@@ -72,7 +74,9 @@ let intialValue: CardSmallType = {
     adminLastName: "",
     driverFirstName: "",
     driverLastName: "",
-    contactNumber: "'",
+    contactNumber: "",
+    tankCapacity: "",
+    maximumPower: "",
 };
 function SmallCard({
     id,
@@ -108,6 +112,8 @@ function SmallCard({
     adminLastName,
     driverFirstName,
     driverLastName,
+    tankCapacity,
+    maximumPower,
     contactNumber,
     onCardClick,
 }: CardSmallType) {
@@ -306,7 +312,7 @@ function SmallCard({
                                     </div>{" "}
                                     <div className="item-name">
                                         <Text strong type="secondary">
-                                            branch name
+                                            {branchName}
                                         </Text>{" "}
                                     </div>
                                 </div>
