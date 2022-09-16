@@ -21,6 +21,8 @@ import ManageMileage from "../contents/Master/Mileage/ManageMileage";
 import SignUp from "../contents/Login/SignUp/SignUp";
 import ManageVehicles from "../contents/Master/Vehicles/ManageVehicles";
 import OTPVerification from "../contents/Login/OTPVerification/OTPVerification";
+import Statistics from "../contents/Master/Statistics/Statistics";
+import Page from "../contents/Master/Statistics/Statistics";
 
 const Loader = (Component: any) => (props: any) =>
     (
@@ -104,6 +106,10 @@ const PublicRoute: RouteObject[] = [
             {
                 path: "vehicles",
                 element: <ManageVehicles />,
+            },
+            {
+                path: "statistics",
+                element: <Page />,
             },
         ],
     },
