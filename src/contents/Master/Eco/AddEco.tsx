@@ -20,6 +20,7 @@ import {
   emissionTestDocumentAddSuccess,
   errHandler,
 } from "../../../helper/helper";
+import { noSplCharAndLetterRegex } from "../../../utils/Regex";
 
 const getBase64 = (img: RcFile, callback: (url: string) => void) => {
   const reader = new FileReader();
@@ -39,7 +40,7 @@ const beforeUpload = (file: RcFile) => {
   return isJpgOrPng && isLt2M;
 };
 
-function AddEco() {
+function AddEco(props: any) {
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
   const [imageUrl, setImageUrl] = useState<string>();
@@ -128,12 +129,13 @@ function AddEco() {
         id="form"
         name="basic"
         form={form}
+        initialValues={props.isEdit ? props.updateData : {}}
         onFinish={onFinishAdd}
         onFinishFailed={onFinishFailed}
       >
         <Row style={{ paddingLeft: "35px", paddingRight: "35px" }}>
           <Col span={24}>
-            <Form.Item>
+            <Form.Item name="vehicleNo">
               <Select
                 placeholder="Vehicle"
                 optionFilterProp="children"
@@ -148,7 +150,20 @@ function AddEco() {
             <Form.Item name="emissionTestExpiryDate">
               <DatePicker placeholder="Expire Date" style={datePickerStyle} />
             </Form.Item>
-            <Form.Item name="emissionTestAmount">
+            <Form.Item
+              rules={[
+                {
+                  max: 10,
+                  message: "Sorry you are exceeding the limit!",
+                },
+                {
+                  pattern: new RegExp(noSplCharAndLetterRegex),
+
+                  message: "Enter valid price",
+                },
+              ]}
+              name="emissionTestAmount"
+            >
               <Input
                 placeholder="Price"
                 bordered={false}

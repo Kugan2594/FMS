@@ -49,8 +49,21 @@ export const deleteRevenueLicense = (id: number) => {
   });
 };
 
+const updateRevenueLicense = (data: object) => {
+  return new Promise((resolve, reject) => {
+    api("put", "co-web", null, `/revenueLicense`, "token", data, "")
+      .then((response: any) => {
+        resolve(response.data);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+};
+
 export {
   getAllRevenueLicenseByUserId,
   getAllVehiclesAllocationsForDropDown,
   addRevenueLicense,
+  updateRevenueLicense,
 };
