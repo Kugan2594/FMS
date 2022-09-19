@@ -44,4 +44,21 @@ const updateGeneratorById = (data: any) => {
     });
 };
 
-export { getGeneratorByCompanyId, addGenerator, updateGeneratorById };
+const deleteGeneratorById = (id: number) => {
+    return new Promise((resolve, reject) => {
+        api("delete", "co-web", null, `/generator/${id}`, "token", "", "")
+            .then((response: any) => {
+                resolve(response.data);
+            })
+            .catch((error) => {
+                reject(error);
+            });
+    });
+};
+
+export {
+    getGeneratorByCompanyId,
+    addGenerator,
+    updateGeneratorById,
+    deleteGeneratorById,
+};

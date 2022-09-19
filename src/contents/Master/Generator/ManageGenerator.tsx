@@ -3,7 +3,14 @@ import { getUserDetails } from "../../../contents/Login/LoginAuthentication";
 import React, { useState, useEffect } from "react";
 import MasterTemplateWithSmallCard from "../../../templates/MasterTemplateWithSmallCard";
 import AddGenerator from "./AddGenerator";
-import { getGeneratorByCompanyId } from "./ServiceGenerator";
+import {
+    deleteGeneratorById,
+    getGeneratorByCompanyId,
+} from "./ServiceGenerator";
+import { generatorDeleteSuccess } from "../../../helper/helper";
+import { ExclamationCircleOutlined } from "@ant-design/icons";
+
+const { confirm } = Modal;
 
 function ManageGenerator() {
     const [addVisible, setAddVisible] = useState(false);
@@ -62,6 +69,26 @@ function ManageGenerator() {
         });
     };
 
+    const deleteGenerator = (id: number) => {
+        deleteGeneratorById(id).then((res: any) => {
+            generatorDeleteSuccess();
+            reloadTable(res);
+        });
+    };
+
+    const deleteClickHandler = (id: any) => {
+        confirm({
+            title: "Are you sure delete this Emission Test Document?",
+            icon: <ExclamationCircleOutlined />,
+            okText: "Yes",
+            okType: "danger",
+            cancelText: "No",
+            onOk() {
+                deleteGenerator(id);
+            },
+        });
+    };
+
     useEffect(() => {
         getAllGenerator(getUserDetails().company_id);
     }, []);
@@ -74,7 +101,9 @@ function ManageGenerator() {
                 headerOnSearch={() => {}}
                 headerOnClickAdd={openAdd}
                 cardOnClick={openAdd}
-                onClickDelete={(id: string) => {}}
+                onClickDelete={(id: number) => {
+                    deleteClickHandler(id);
+                }}
                 onClickUpdate={(data: any) => openEdit(data)}
                 generatorCard={true}
             />
@@ -88,6 +117,7 @@ function ManageGenerator() {
                     setAddVisible={setAddVisible}
                     updateData={editVisible ? updateData : null}
                     reloadTable={reloadTable}
+                    action={action}
                 />
             ) : editVisible ? (
                 <AddGenerator
@@ -98,6 +128,7 @@ function ManageGenerator() {
                     setAddVisible={seteditVisible}
                     updateData={editVisible ? updateData : null}
                     reloadTable={reloadTable}
+                    action={action}
                 />
             ) : (
                 <></>

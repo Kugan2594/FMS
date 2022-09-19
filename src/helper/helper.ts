@@ -81,6 +81,12 @@ export const generatorUpdateSuccess = () =>
         duration: 3,
     });
 
+export const generatorDeleteSuccess = () =>
+    notification.success({
+        message: "Generator Deleted Successfully",
+        duration: 3,
+    });
+
 export const vehicleAddSuccess = () =>
     notification.success({
         message: "Vehicle Added Successfully",
