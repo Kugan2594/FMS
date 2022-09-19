@@ -15,16 +15,12 @@ import { driverAddSuccess, errHandler } from "../../../helper/helper";
 interface AddDriversPropType {
   isEdit: boolean;
   updateDriverData: any;
-  branches: any[];
-  licenseTypes: any[];
   cancelClickHandler: any;
 }
 
 function AddDriver({
   isEdit,
   updateDriverData,
-  branches,
-  licenseTypes,
   cancelClickHandler,
 }: AddDriversPropType) {
   const [form] = Form.useForm();

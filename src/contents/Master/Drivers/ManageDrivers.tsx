@@ -99,18 +99,6 @@ function ManageDrivers() {
     );
   };
 
-  const licenseType = [
-    { id: 1, name: "Heavy Vehicle" },
-    { id: 2, name: "Light Vehicle" },
-  ];
-
-  const branches = [
-    { id: 1, name: "Jaffna" },
-    { id: 2, name: "Vavuniya" },
-    { id: 3, name: "Colombo" },
-    { id: 4, name: "Kandy" },
-  ];
-
   return (
     <div>
       <MasterTemplateWithSmallCard
@@ -136,8 +124,6 @@ function ManageDrivers() {
           <AddDriver
             isEdit={isEdit}
             updateDriverData={driverData}
-            branches={branches}
-            licenseTypes={licenseType}
             cancelClickHandler={handleCancel}
           />
         </Modal>
