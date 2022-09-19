@@ -70,7 +70,7 @@ function SignUpSplitScreen() {
           </Col>
         </Row>
       </div>
-      <div>
+      <div className="signUp-split-screen-login-container">
         <Text>Already have an account? </Text>
         <Text
           strong
