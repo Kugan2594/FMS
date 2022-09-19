@@ -194,7 +194,7 @@ function Login() {
                                     cursor: "pointer",
                                 }}
                             >
-                                <Link to="/sign-up">Sign Up</Link>
+                                <Link to="/sign-up-split-screen">Sign Up</Link>
                             </Text>
                         </div>
                     </Col>

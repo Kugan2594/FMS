@@ -13,6 +13,7 @@ function ManageNotifications() {
   );
 
   const notificationClickHandler = (id: any) => {
+    //Read API
     console.log(id);
   };
 
