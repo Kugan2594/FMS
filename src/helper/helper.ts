@@ -37,6 +37,8 @@ export const errHandler = (err: any) => {
     // Driver
     errorBox("100016", "Email Already Exists");
     errorBox("13025", "Driving License No Already Exists");
+    errorBox("100019", "Mobile No Already Exists");
+    errorBox("100020", "Nic No Already Exists");
 
 };
 
