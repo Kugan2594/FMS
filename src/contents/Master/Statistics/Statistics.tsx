@@ -4,26 +4,12 @@ import { useState, useEffect } from "react";
 import { Button, Card, Col, DatePicker, Row, Select } from "antd";
 import "./Statistics.style.less";
 import SelectOptions from "./SelectOptions";
-import { RangePicker } from "../../../components/atoms/index";
+
 import moment from "moment";
-
+import { any } from "prop-types";
+import { has } from "immer/dist/internal";
+const { RangePicker } = DatePicker;
 const Page: React.FC = () => {
-    // const [data, setData] = useState([]);
-
-    // useEffect(() => {
-    //     asyncFetch();
-    // }, []);
-
-    // const asyncFetch = () => {
-    //     fetch(
-    //         "https://gw.alipayobjects.com/os/bmw-prod/be63e0a2-d2be-4c45-97fd-c00f752a66d4.json"
-    //     )
-    //         .then((response) => response.json())
-    //         .then((json) => setData(json))
-    //         .catch((error) => {
-    //             console.log("fetch data failed", error);
-    //         });
-    // };
     const data1 = [
         {
             month: "Jan",
@@ -103,12 +89,26 @@ const Page: React.FC = () => {
         },
     ];
     const { Option } = Select;
+    const [xField, setXField] = useState("");
+    const [yField, setYField] = useState("");
+    interface Idata {
+        id: number;
+        amount: number;
+        date: string;
+        userId: number;
+        vehicleNumber: string;
+        expensesType: string;
+        branchId: number;
+        branchName: string;
+        companyId: number;
+        vehicleTypeId: string;
+    }
 
-    const data = [
+    const data: Idata[] = [
         {
             id: 10,
             amount: 250.0,
-            date: "Jan",
+            date: "2022-09-14T11:13:26.503+00:00",
             userId: 5,
             vehicleNumber: "BAT-9470",
             expensesType: "ECO_DOCUMENT",
@@ -120,7 +120,7 @@ const Page: React.FC = () => {
         {
             id: 11,
             amount: 150.0,
-            date: "Feb",
+            date: "2023-09-14T11:13:26.503+00:00",
             userId: 5,
             vehicleNumber: "BAT-9470",
             expensesType: "ECO_DOCUMENT",
@@ -132,7 +132,7 @@ const Page: React.FC = () => {
         {
             id: 12,
             amount: 230.0,
-            date: "March",
+            date: "2024-09-14T11:13:26.503+00:00",
             userId: 5,
             vehicleNumber: "BAT-9470",
             expensesType: "ECO_DOCUMENT",
@@ -144,7 +144,7 @@ const Page: React.FC = () => {
         {
             id: 13,
             amount: 350.0,
-            date: "April",
+            date: "2025-09-14T11:13:26.503+00:00",
             userId: 5,
             vehicleNumber: "BAT-9470",
             expensesType: "ECO_DOCUMENT",
@@ -155,20 +155,6 @@ const Page: React.FC = () => {
         },
     ];
 
-    const config = {
-        data,
-        xField: "date",
-        yField: "amount",
-        xAxis: {
-            label: {
-                autoRotate: true,
-            },
-        },
-        slider: {
-            start: 0.1,
-            end: 1,
-        },
-    };
     const [overAll, setOverAll] = useState(false);
     const [service, setService] = useState(false);
     const [part, setPart] = useState(false);
@@ -178,9 +164,16 @@ const Page: React.FC = () => {
     const [custom, setCustom] = useState(false);
     const [monthly, setMonthly] = useState(false);
     const [anually, setAnnually] = useState(false);
-
+    const [weekly, setWeekly] = useState(false);
+    const [startYearEndYear, setStartYearEndYear]: any = useState([0, 0]);
     const [chartData, setChartData] = useState("");
-
+    const [period, setPeriod]: any[] = useState([]);
+    const [newData, setNewData] = useState<any>(data);
+    const [grandData, setGrandData] = useState<any>();
+    console.log("newdata", newData);
+    useEffect(() => {
+        setGrandData(newData);
+    }, []);
     const onClickPart = () => {
         setOverAll(false);
         setPart(true);
@@ -251,9 +244,50 @@ const Page: React.FC = () => {
             setAnnually(false);
             setMonthly(false);
             setCustom(false);
+            setWeekly(true);
         }
     };
     const monthFormat = "YYYY/MM";
+    const yearFormat = "YYYY";
+    const handleMonthChange = (value: any) => {
+        console.log(value);
+    };
+    const handleYearChange = (value: any) => {
+        let graphData: any[] = data.filter(
+            (x) =>
+                moment(x.date).year() >= moment(value[0]._d).year() &&
+                moment(x.date).year() <= moment(value[1]._d).year()
+        );
+        console.log("graphdata", graphData);
+        setNewData(graphData);
+        const arrayData = data.map((x: any) => {
+            return moment(x.date).year();
+        });
+        console.log("....arrayData", arrayData);
+    };
+
+    // console.log("test", moment(data[0].date).year());
+    // console.log("period[1]", period[1]);
+    // console.log("data", data);
+    // console.log("outside", period);
+    // data.push(newData);
+    // console.log("graaandData", data);
+    const config = {
+        data: newData,
+        xField: "date",
+        yField: "amount",
+        key: "id",
+        xAxis: {
+            label: {
+                autoRotate: true,
+            },
+        },
+        slider: {
+            start: 0.1,
+            end: 1,
+        },
+    };
+
     return (
         <Card
             style={{
@@ -330,13 +364,26 @@ const Page: React.FC = () => {
                                 <Option value="Custom">Custom</Option>
                             </Select>
                             {custom ? <RangePicker /> : ""}
-                            {anually ? <RangePicker picker="year" /> : ""}
+                            {anually ? (
+                                <RangePicker
+                                    onChange={handleYearChange}
+                                    defaultValue={[
+                                        moment("2015", yearFormat),
+                                        moment("2016", yearFormat),
+                                    ]}
+                                    format={yearFormat}
+                                    picker="year"
+                                />
+                            ) : (
+                                ""
+                            )}
                             {monthly ? (
-                                <DatePicker
-                                    defaultValue={moment(
-                                        "2015/01",
-                                        monthFormat
-                                    )}
+                                <RangePicker
+                                    onChange={handleMonthChange}
+                                    defaultValue={[
+                                        moment("2015/01", monthFormat),
+                                        moment("2015/02", monthFormat),
+                                    ]}
                                     format={monthFormat}
                                     picker="month"
                                 />

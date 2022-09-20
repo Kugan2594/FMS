@@ -1,10 +1,7 @@
 import { notification } from "antd";
 import { getToken } from "../contents/Login/LoginAuthentication";
-
 import { SYSTEM_CONFIG } from "../utils/StytemConfig";
-
 const axios = require("axios").default;
-
 function addParamsToURL(url: string, params: any) {
     if (params) {
         let temp = url;
@@ -13,7 +10,6 @@ function addParamsToURL(url: string, params: any) {
     }
     return url;
 }
-
 const getHeaders = (token: string | null, adHeaders: object) => {
     if (token) {
         return {
@@ -71,9 +67,8 @@ export default function api(
                         reject(error.response.data);
                     } else if (error.response.status === 403) {
                         notification.error({
-                            message:
-                                error.response.data.error_description,
-                            duration: 3
+                            message: error.response.data.error_description,
+                            duration: 3,
                         });
                     }
                 }
