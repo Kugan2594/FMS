@@ -77,6 +77,13 @@ function DriverProfile({ driverProfileData }: DriverProfileType) {
             {driverProfileData.branchId}
           </Text>
         </div>
+        <div className="driver-detail">
+          <Text>Assign Vehicles: </Text>
+          <br />
+            {driverProfileData.assignedVehicles.map((vehicle: any) => {
+              return <Text className="data" strong>{vehicle}{" "}</Text>
+            })}
+        </div>
       </div>
     </div>
   );

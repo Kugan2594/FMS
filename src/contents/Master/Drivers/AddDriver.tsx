@@ -12,6 +12,8 @@ import {
   phoneNumberRegex,
 } from "../../../utils/Regex";
 import { driverAddSuccess, errHandler } from "../../../helper/helper";
+const { Option } = Select;
+
 interface AddDriversPropType {
   isEdit: boolean;
   updateDriverData: any;
@@ -27,8 +29,9 @@ function AddDriver({
   const { Option } = Select;
   const [branch, setBranch] = useState([]);
   const [drivingLicenseType, setDrivingLicenseType] = useState([]);
+  const [assignedVehicle, setAssignedVehicle] = useState([]);
 
-  const handleSubmit = (values: any) => {
+  const handleSubmit = () => {
     cancelClickHandler();
   };
 
@@ -36,6 +39,10 @@ function AddDriver({
     getBranchSelectData(getUserDetails().company_id);
     getDrivingLicenseTypeSelectData();
   }, []);
+
+  const handleChange = (data: any) => {
+    setAssignedVehicle(data);
+  };
 
   const getDrivingLicenseTypeSelectData = () => {
     getAllDrivingLicenseTypes().then((res: any) => {
@@ -238,6 +245,28 @@ function AddDriver({
                 {/* {licenseTypes.map((type) => {
                   return <Option value={type.name}>{type.name}</Option>;
                 })} */}
+              </Select>
+            </Form.Item>
+          </Col>
+          <Col  className="assign-vehicle-tag" span={6}>
+            <Form.Item>
+              <div>Assign Vehicle</div>
+            </Form.Item>
+          </Col>
+          <Col span={18}>
+            <Form.Item name="assignedVehicles">
+              <Select
+                mode="multiple"
+                allowClear
+                bordered={false}
+                style={{ width: "80%", borderBottom: "1px solid #ccccb3" }}
+                placeholder="Select Vehicles"
+                onChange={handleChange}
+              >
+                <Option value="v1">V1</Option>
+                <Option value="v2">V2</Option>
+                <Option value="v3">V3</Option>
+                <Option value="v4">V4</Option>
               </Select>
             </Form.Item>
           </Col>
