@@ -7,15 +7,15 @@ import CustomButton from "../../atoms/Button/CustomButton";
 interface UserProfileType {
   onClickProfile: any;
   onClickLogout: any;
+  userProfile: string;
 }
 
-function UserProfile({onClickProfile, onClickLogout}: UserProfileType) {
-  const [userProfile, setUserProfile] = useState("");
+function UserProfile({onClickProfile, onClickLogout, userProfile}: UserProfileType) {
 
   return (
     <div className="user-profile">
       <div className="profile" onClick={onClickProfile}>
-        {userProfile != "" ? (
+        {userProfile != null ? (
           <Avatar src={userProfile} shape="square" size="large" />
         ) : (
           <Avatar icon={<UserOutlined />} shape="square" size="large" />

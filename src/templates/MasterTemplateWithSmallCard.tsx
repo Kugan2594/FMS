@@ -56,8 +56,7 @@ function MasterTemplateWithSmallCard({
     driverCard,
 }: TemplateType) {
     return (
-        <div>
-            <div className="master-template-small-card">
+            <div className="master-template-small-card" style={{width:"100%"}}>
                 <div>
                     <MasterHeader
                         onSearch={headerOnSearch}
@@ -67,6 +66,7 @@ function MasterTemplateWithSmallCard({
                 </div>
                 <div>
                     <List
+                    style={{ height: "100%"}}
                         grid={{ gutter: 16, column: 2 }}
                         itemLayout="vertical"
                         size="default"
@@ -131,7 +131,6 @@ function MasterTemplateWithSmallCard({
                     />
                 </div>
             </div>
-        </div>
     );
 }
 
