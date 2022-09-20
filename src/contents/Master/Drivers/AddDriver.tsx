@@ -4,7 +4,7 @@ import "./driver.style.less";
 import { addDriver } from "./ServiceDriver";
 import { getUserDetails } from "../../../contents/Login/LoginAuthentication";
 import { Button } from "antd";
-import { getAllBranchesByCompanyId } from "../Branch/ServiceManage";
+import { getAllBranchesByCompanyId } from "../Branch/ServicesBranch";
 import { getAllDrivingLicenseTypes } from "../../../contents/Settings/DrivingLicenseType/ServiceDrivingLicenseType";
 import {
   drivingLicenseNoRegex,
