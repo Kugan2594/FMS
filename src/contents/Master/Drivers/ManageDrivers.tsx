@@ -81,6 +81,7 @@ function ManageDrivers() {
       email: "kugan@gmail.com",
       image:
         "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
+        assignedVehicles: ["V1","V2"]
     },
     {
       id: "2",
@@ -94,6 +95,7 @@ function ManageDrivers() {
       driverLastName: "Cudeson",
       vehicleIcon: <RocketOutlined />,
       email: "Cudeson@gmail.com",
+      assignedVehicles: ["V1"]
     },
   ];
 
