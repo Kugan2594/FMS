@@ -1,5 +1,5 @@
 import { Col, Form, Input, Row, Select } from "antd";
-import React, { useState }, { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./driver.style.less";
 import { addDriver } from "./ServiceDriver";
 import { getUserDetails } from "../../../contents/Login/LoginAuthentication";
@@ -17,16 +17,12 @@ const { Option } = Select;
 interface AddDriversPropType {
   isEdit: boolean;
   updateDriverData: any;
-  branches: any[];
-  licenseTypes: any[];
   cancelClickHandler: any;
 }
 
 function AddDriver({
   isEdit,
   updateDriverData,
-  branches,
-  licenseTypes,
   cancelClickHandler,
 }: AddDriversPropType) {
   const [form] = Form.useForm();
