@@ -32,4 +32,16 @@ const addDriver = (data: object) => {
   });
 };
 
-export {getAllDriverByCompanyIdAndBranchId, addDriver}
+const deleteDriver = (id: number) => {
+  return new Promise((resolve, reject) => {
+    api("delete", "fm-web", null, `/driver/${id}`, "token", "", "")
+      .then((response: any) => {
+        resolve(response.data);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+};
+
+export {getAllDriverByCompanyIdAndBranchId, addDriver,deleteDriver}
