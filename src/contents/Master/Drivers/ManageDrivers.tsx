@@ -5,8 +5,12 @@ import AddDriver from "./AddDriver";
 import { ExclamationCircleOutlined } from "@ant-design/icons";
 import { RocketOutlined } from "@ant-design/icons";
 import DriverProfile from "./DriverProfile";
-import { getAllDriverByCompanyIdAndBranchId } from "./ServiceDriver";
+import {
+  deleteDriver,
+  getAllDriverByCompanyIdAndBranchId,
+} from "./ServiceDriver";
 import { getUserDetails } from "../../Login/LoginAuthentication";
+import { driverDeleteSuccess } from "../../../helper/helper";
 
 const { confirm } = Modal;
 
@@ -14,18 +18,17 @@ function createData(data: any) {
   let convertData = data.map((post: any, index: any) => {
     return {
       id: post.id,
-      branchName: post.branchResponseDto.branchName,
-      contactNumber: post.userResponseDto.mobileNumber,
+      branchId: post.branchResponseDto.branchName,
+      mobileNumber: post.userResponseDto.mobileNumber,
       // vehicleType: "car",
-      drivingLicense: post.userResponseDto.drivingLicenseNo,
-      drivingLicenseType: "Light Vehicle",
+      drivingLicenseNo: post.userResponseDto.drivingLicenseNo,
+      drivingLicenseTypeId: post.userResponseDto.type,
       nic: post.userResponseDto.nic,
-      driverFirstName: post.userResponseDto.lastName,
-      driverLastName: post.userResponseDto.lastName,
+      firstName: post.userResponseDto.firstName,
+      lastName: post.userResponseDto.lastName,
       vehicleIcon: <RocketOutlined />,
       email: post.userResponseDto.email,
-      image:
-        "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
+      image: null,
     };
   });
   return convertData;
@@ -61,6 +64,8 @@ function ManageDrivers() {
   };
 
   const deleteClickHandler = (id: any) => {
+    console.log("iddd", id);
+
     confirm({
       title: "Are you sure delete this Driver?",
       icon: <ExclamationCircleOutlined />,
@@ -68,7 +73,12 @@ function ManageDrivers() {
       okType: "danger",
       cancelText: "No",
       onOk() {
-        //Delete API
+        deleteDriver(id);
+        getAllDriverByCompanyIdAndBranchId(
+          getUserDetails().company_id,
+          getUserDetails().company_branch_id
+        );
+        driverDeleteSuccess();
       },
     });
   };

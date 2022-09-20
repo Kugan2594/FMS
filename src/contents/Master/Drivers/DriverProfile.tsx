@@ -14,17 +14,24 @@ function DriverProfile({ driverProfileData }: DriverProfileType) {
       <div className="driver-profile-image-container">
         <div className="driver-profile-image">
           {driverProfileData.image != null ? (
-            <Image width="100%" style={{borderRadius:"50%"}} src={driverProfileData.image} />
+            <Image
+              width="100%"
+              style={{ borderRadius: "50%" }}
+              src={driverProfileData.image}
+            />
           ) : (
-            <Image width="100%" style={{borderRadius:"50%"}} preview={false} src={User} />
+            <Image
+              width="100%"
+              style={{ borderRadius: "50%" }}
+              preview={false}
+              src={User}
+            />
           )}
         </div>
       </div>
       <div className="driver-profile-detail-header">
         <Title className="driver-profile-detail-title" level={4}>
-          {driverProfileData.driverFirstName +
-            " " +
-            driverProfileData.driverLastName}
+          {driverProfileData.firstName + " " + driverProfileData.lastName}
         </Title>
         <Title
           className="driver-profile-detail-title"
@@ -38,7 +45,7 @@ function DriverProfile({ driverProfileData }: DriverProfileType) {
           level={5}
           type="secondary"
         >
-          {driverProfileData.contactNumber}
+          {driverProfileData.mobileNumber}
         </Title>
       </div>
       <div className="driver-profile-detail-content">
@@ -53,21 +60,21 @@ function DriverProfile({ driverProfileData }: DriverProfileType) {
           <Text>Driving License No: </Text>
           <br />
           <Text className="data" strong>
-            {driverProfileData.drivingLicense}
+            {driverProfileData.drivingLicenseNo}
           </Text>
         </div>
         <div className="driver-detail">
           <Text>Driving License Type: </Text>
           <br />
           <Text className="data" strong>
-            {driverProfileData.drivingLicenseType}
+            {driverProfileData.drivingLicenseTypeId}
           </Text>
         </div>
         <div className="driver-detail">
           <Text>Branch: </Text>
           <br />
           <Text className="data" strong>
-            {driverProfileData.branchName}
+            {driverProfileData.branchId}
           </Text>
         </div>
         <div className="driver-detail">
