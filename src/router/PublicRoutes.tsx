@@ -24,6 +24,7 @@ import ManageNotifications from "../contents/Notification/ManageNotifications";
 import OTPVerification from "../contents/Login/OTPVerification/OTPVerification";
 import Statistics from "../contents/Master/Statistics/Statistics";
 import Page from "../contents/Master/Statistics/Statistics";
+import SignUpSplitScreen from "../contents/Login/SignUp/SignUpSplitScreen";
 
 const Loader = (Component: any) => (props: any) =>
     (
@@ -42,7 +43,11 @@ const PublicRoute: RouteObject[] = [
         element: <ForgotPassword />,
     },
     {
-        path: "/sign-up",
+        path: "/sign-up-split-screen",
+    element: <SignUpSplitScreen />,
+  },
+  {
+    path: "/sign-up",
         element: <SignUp />,
     },
     {
