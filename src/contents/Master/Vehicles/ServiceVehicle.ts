@@ -32,4 +32,31 @@ const addVehicle = (data: any) => {
     });
 };
 
-export { addVehicle, getAllVehiclesByCompanyId };
+const deleteVehicleByVehicleNumberAndCompanyId = (
+    vehicleNumber: string,
+    companyId: number
+) => {
+    return new Promise((resolve, reject) => {
+        api(
+            "delete",
+            "co-web",
+            null,
+            `/vehicleCompany/${vehicleNumber}/${companyId}`,
+            "token",
+            "",
+            ""
+        )
+            .then((response: any) => {
+                resolve(response.data);
+            })
+            .catch((error) => {
+                reject(error);
+            });
+    });
+};
+
+export {
+    addVehicle,
+    getAllVehiclesByCompanyId,
+    deleteVehicleByVehicleNumberAndCompanyId,
+};

@@ -21,6 +21,13 @@ export const errHandler = (err: any) => {
 
     // Vehicle
     errorBox("1306", "Vehicle Number Already Exists");
+    errorBox("107", "Vehicle Depend");
+    errorBox("1300", "Vehicle doesn't exists in Resources");
+    errorBox("120002", "Invalid Resource Path");
+    errorBox("103", "Company Not Exists");
+    errorBox("102", "Branch Not Exists");
+    errorBox("120001", "Invalid OAUTH Path");
+    errorBox("104", "Vehicle Not Exists");
 
     // Insurance Document
     errorBox("12201", "Insurance Document already exist for this Vehicle");
@@ -90,6 +97,18 @@ export const generatorDeleteSuccess = () =>
 export const vehicleAddSuccess = () =>
     notification.success({
         message: "Vehicle Added Successfully",
+        duration: 3,
+    });
+
+export const vehicleUpdateSuccess = () =>
+    notification.success({
+        message: "Vehicle Updated Successfully",
+        duration: 3,
+    });
+
+export const vehicleDeleteSuccess = () =>
+    notification.success({
+        message: "Vehicle Deleted Successfully",
         duration: 3,
     });
 
