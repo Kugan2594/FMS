@@ -120,3 +120,9 @@ export const driverAddSuccess = () =>
         message: "Driver Added Successfully",
         duration: 3,
     });
+
+export const driverDeleteSuccess = () =>
+    notification.success({
+        message: "Driver Deleted Successfully",
+        duration: 3,
+    });
