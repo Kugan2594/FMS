@@ -6,18 +6,35 @@ import MainMenuItem from "../../molecules/MainMenuItem";
 import mainMenuItems from "./items";
 import SubModule from "../SubModule/item";
 import { useNavigate } from "react-router-dom";
-import { ExclamationCircleOutlined } from '@ant-design/icons';
+import { ExclamationCircleOutlined } from "@ant-design/icons";
 import { useSelector } from "react-redux";
 import { RootState } from "Redux/store";
+import Profile from "./Profile";
 
 const { Sider } = Layout;
 const { confirm } = Modal;
 
 function SideBar() {
-
   const [submenuItems, setSubmenuItems] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const userData = {companyName: "Invicta Innovations",
+    address: "Thirunelveli, Jaffna, Sri Lanka",
+    registrationNumber : "5645641",
+    companyPhoneNumber: "22560564",
+    companyEmail: "invicta@gmail.com",
+    licenceType: "Platinum",
+  image: "https://picsum.photos/200"}
 
   const navigate = useNavigate();
+
+  const profileOnClickHandler = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
 
   const LogoutClickHandler = () => {
     confirm({
@@ -25,16 +42,18 @@ function SideBar() {
       icon: <ExclamationCircleOutlined />,
       okText: "Logout",
       okType: "default",
-      cancelButtonProps: {type: "primary"},
+      cancelButtonProps: { type: "primary" },
       onOk() {
-        navigate("/")
+        navigate("/");
       },
     });
   };
 
-  const notificationData = useSelector((state: RootState) => state.notification.value);
+  const notificationData = useSelector(
+    (state: RootState) => state.notification.value
+  );
 
-  const badgeCount = notificationData.filter(data => data.isRead == false);
+  const badgeCount = notificationData.filter((data) => data.isRead == false);
 
   const homeItems: any = [
     { id: "1", name: "a" },
@@ -47,10 +66,10 @@ function SideBar() {
 
   const ClickHandler = (item: any) => {
     if (item.id === "home") {
-      setSubmenuItems(home)
+      setSubmenuItems(home);
     } else {
-      setSubmenuItems(item.children)
-    };
+      setSubmenuItems(item.children);
+    }
     navigate(item.link);
   };
 
@@ -72,7 +91,7 @@ function SideBar() {
           })}
           <div className="user">
             <UserProfile
-              onClickProfile={""}
+              onClickProfile={profileOnClickHandler}
               onClickLogout={LogoutClickHandler}
             />
           </div>
@@ -81,6 +100,18 @@ function SideBar() {
           <SubModule data={submenuItems} />
         </div>
       </div>
+      {isModalOpen && (
+        <Modal
+          open={isModalOpen}
+          title={false}
+          onCancel={handleCancel}
+          closable={false}
+          width={"25%"}
+          footer={false}
+        >
+          <Profile userProfileData={userData} closeOnClickHandler={handleCancel} />
+        </Modal>
+      )}
     </Sider>
   );
 }

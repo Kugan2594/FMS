@@ -19,6 +19,9 @@ export const errHandler = (err: any) => {
         }
     };
 
+    // Common
+    errorBox("120000", "Notify Account Balance Not Enough");
+
     // Vehicle
     errorBox("1306", "Vehicle Number Already Exists");
     errorBox("107", "Vehicle Depend");
@@ -37,6 +40,13 @@ export const errHandler = (err: any) => {
 
     // Emission Test
     errorBox("12101", "Emission Test Already Exist for this Vehicle");
+
+    // Driver
+    errorBox("100016", "Email Already Exists");
+    errorBox("13025", "Driving License No Already Exists");
+    errorBox("100019", "Mobile No Already Exists");
+    errorBox("100020", "Nic No Already Exists");
+
 };
 
 //success message popups
@@ -121,5 +131,11 @@ export const fuelUpAddSuccess = () =>
 export const mileageAddSuccess = () =>
     notification.success({
         message: "Mileage Added Successfully",
+        duration: 3,
+    });
+
+export const driverAddSuccess = () =>
+    notification.success({
+        message: "Driver Added Successfully",
         duration: 3,
     });

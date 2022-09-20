@@ -4,7 +4,7 @@ import "./viewBranch.style.less";
 interface ViewBranch {
     branchData: any;
 }
-function ViewBranch() {
+function ViewBranch({ branchData }: ViewBranch) {
     return (
         <div>
             <div className="viewBranch-container">
@@ -29,13 +29,13 @@ function ViewBranch() {
                 </Row>
                 <Row style={{ marginTop: "5%" }}>
                     <Col xs={24} xl={4}>
-                        jshdasjk
+                        {branchData.branchName}
                     </Col>
                     <Col xs={24} xl={16}>
-                        djkhasjk
+                        {branchData.branchLocation}
                     </Col>
                     <Col xs={24} xl={4}>
-                        jskdsjaj
+                        {branchData.email}
                     </Col>
                 </Row>
             </div>

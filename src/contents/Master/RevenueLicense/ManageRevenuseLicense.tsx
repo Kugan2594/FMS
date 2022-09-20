@@ -23,6 +23,9 @@ function createData(data: any) {
       branchName: "Jaffna Branch",
       lastChangedDate: moment(post.updatedAt).format("DD-MM-yyyy"),
       dueDate: moment(post.taxExpiryDate).format("DD-MM-yyyy"),
+      region: post.region,
+      issuedDate: post.taxIssuedDate,
+      taxAmount: post.taxAmount,
     };
   });
   return convertData;
@@ -32,6 +35,7 @@ function ManageRevenueLicense() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isEdit, setisEdit] = useState(false);
   const [revenueLicense, setRevenueLicense] = useState([]);
+  const [updateData, setUpdataData] = useState({});
 
   useEffect(() => {
     getAllRevenueLicenseData(getUserDetails().user_id);
@@ -71,13 +75,15 @@ function ManageRevenueLicense() {
     setisEdit(false);
   };
 
-  const showModalEdit = () => {
+  const showModalEdit = (data: any) => {
     setIsModalOpen(true);
     setisEdit(true);
+    setUpdataData(data);
   };
 
   const handleCancel = () => {
     setIsModalOpen(false);
+    setisEdit(false);
     getAllRevenueLicenseData(getUserDetails().user_id);
   };
 
@@ -93,20 +99,21 @@ function ManageRevenueLicense() {
         // cardOnClick={(id: string) => console.log("CLICKED " + id)}
         // cardOnClick={onFinishAdd}
         deleteButton={(id: number) => deleteClickHandler(id)}
-        updateButton={showModalEdit}
+        updateButton={(data: any) => showModalEdit(data)}
       />
-
-      <Modal
-        title={isEdit ? "Edit Revenue License" : "Add Revenue License"}
-        open={isModalOpen}
-        onOk={onFinishAdd}
-        onCancel={handleCancel}
-        closable={false}
-        width={500}
-        footer={null}
-      >
-        <AddRevenueLicense />
-      </Modal>
+      {isModalOpen && (
+        <Modal
+          title={isEdit ? "Edit Revenue License" : "Add Revenue License"}
+          open={isModalOpen}
+          onOk={onFinishAdd}
+          onCancel={handleCancel}
+          closable={false}
+          width={500}
+          footer={null}
+        >
+          <AddRevenueLicense updateData={updateData} isEdit={isEdit} />
+        </Modal>
+      )}
     </>
   );
 }

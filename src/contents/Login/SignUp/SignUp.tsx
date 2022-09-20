@@ -12,33 +12,76 @@ import {
 import { Link } from "react-router-dom";
 import Logo from "../../../assets/Logo.svg";
 import "./signup.style.less";
+import { useState } from "react";
+import { LeftOutlined, RightOutlined } from "@ant-design/icons";
 function SignUp() {
     const { Text, Title } = Typography;
     const { Option } = Select;
-
-    const onChange = (value: string) => {};
-
-    const onSearch = (value: string) => {};
+    const [form2, setForm2] = useState(false);
+    const [form1, setForm1] = useState(true);
     const handleSubmit = () => {};
+    const onCreateUser = () => {
+        setForm2(true);
+        setForm1(false);
+        console.log("form1" + form1);
+        console.log("form2" + form2);
+    };
+    const onClickBack = () => {
+        setForm1(true);
+        setForm2(false);
+        console.log("form1" + form1);
+        console.log("form2" + form2);
+    };
+
     return (
         <div>
             <Row className="signup-container">
                 <Col xs={24} xl={8}></Col>
                 <Col xs={24} xl={8} className="main-grid">
                     <Card className="signup-card">
-                        <Row>
-                            <Col span={4} offset={10} className="login-title">
-                                <Image src={Logo} />
-                            </Col>
-                        </Row>
-                        <Row justify="space-around" align="middle">
-                            <Col className="Fleet-management-app">
-                                <Title level={4}> Fleet Mangement System</Title>
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col className="gap"></Col>
-                        </Row>
+                        {form1 ? (
+                            <>
+                                <Row>
+                                    <Col
+                                        span={4}
+                                        offset={10}
+                                        className="login-title"
+                                    >
+                                        <Image src={Logo} />
+                                    </Col>
+                                </Row>
+                                <Row justify="space-around" align="middle">
+                                    <Col className="Fleet-management-app">
+                                        <Title level={4}>
+                                            {" "}
+                                            Fleet Mangement System
+                                        </Title>
+                                    </Col>
+                                </Row>
+                            </>
+                        ) : (
+                            <Row justify="start" align="bottom">
+                                <Col
+                                    className="Fleet-management-app"
+                                    style={{
+                                        marginLeft: "10%",
+                                        marginBottom: "5%",
+                                    }}
+                                >
+                                    <Title level={5} style={{ color: "blue" }}>
+                                        {" "}
+                                        Company Admin Details
+                                    </Title>
+                                </Col>
+                            </Row>
+                        )}
+                        {form1 ? (
+                            <Row>
+                                <Col className="gap"></Col>
+                            </Row>
+                        ) : (
+                            ""
+                        )}
                         <Row>
                             <Col span={20} offset={2}>
                                 <Form
@@ -52,83 +95,129 @@ function SignUp() {
                                     layout="horizontal"
                                     size="large"
                                 >
-                                    <Form.Item>
-                                        <Input
-                                            placeholder="Company Name"
-                                            maxLength={400}
-                                            name="Company Name"
-                                        />
-                                    </Form.Item>
-                                    <Form.Item>
-                                        <Input
-                                            placeholder="Registration Number"
-                                            maxLength={400}
-                                            name="Registration Number"
-                                        />
-                                    </Form.Item>
-                                    <Form.Item>
-                                        <Input
-                                            placeholder="Company Address"
-                                            maxLength={400}
-                                            name="Company Address"
-                                        />
-                                    </Form.Item>
-                                    <Form.Item>
-                                        <Select
-                                            showSearch
-                                            placeholder="Select A Country"
-                                            optionFilterProp="children"
-                                            onChange={onChange}
-                                            onSearch={onSearch}
-                                            bordered={false}
-                                            style={{ width: "150px" }}
-                                            filterOption={(input, option) =>
-                                                (
-                                                    option!
-                                                        .children as unknown as string
-                                                )
-                                                    .toLowerCase()
-                                                    .includes(
-                                                        input.toLowerCase()
-                                                    )
-                                            }
-                                        >
-                                            <Option value="Srilanka">
-                                                Srilanka
-                                            </Option>
-                                            <Option value="Singapore">
-                                                Singapore
-                                            </Option>
-                                            <Option value="United States">
-                                                United States
-                                            </Option>
-                                            <Option value="United States">
-                                                United Kingdom
-                                            </Option>
-                                        </Select>
-                                    </Form.Item>
-                                    <Form.Item>
-                                        <Button
-                                            htmlType="submit"
-                                            className="signup-button"
-                                            type="primary"
-                                        >
-                                            Sign Up
-                                        </Button>
-                                    </Form.Item>
-                                    <Form.Item>
-                                        <div className="login">
-                                            <Text
-                                                strong
-                                                style={{
-                                                    color: "blue",
-                                                    cursor: "pointer",
-                                                }}
-                                            >
-                                                <Link to="/">Login</Link>
-                                            </Text>
-                                        </div>
-                                    </Form.Item>
+                                    {form1 ? (
+                                        <>
+                                            {" "}
+                                            <Form.Item>
+                                                <Input
+                                                    placeholder="Company Name"
+                                                    maxLength={400}
+                                                    name="Company Name"
+                                                />
+                                            </Form.Item>
+                                            <Form.Item>
+                                                <Input
+                                                    placeholder="Registration Number"
+                                                    maxLength={400}
+                                                    name="Registration Number"
+                                                />
+                                            </Form.Item>
+                                            <Form.Item>
+                                                <Input
+                                                    placeholder="Company E-mail"
+                                                    maxLength={400}
+                                                    name="Company E-mail"
+                                                />
+                                            </Form.Item>
+                                            <Form.Item>
+                                                <Input
+                                                    placeholder="Company Address"
+                                                    maxLength={400}
+                                                    name="Company Address"
+                                                />
+                                            </Form.Item>
+                                            <Form.Item>
+                                                <div
+                                                    className="next"
+                                                    style={{
+                                                        display: "flex",
+                                                        flexDirection: "row",
+                                                        justifyContent: "right",
+                                                    }}
+                                                    onClick={onCreateUser}
+                                                >
+                                                    <Text
+                                                        strong
+                                                        style={{
+                                                            color: "blue",
+                                                            cursor: "pointer",
+                                                            fontSize: "18px",
+                                                        }}
+                                                    >
+                                                        Next {<RightOutlined />}
+                                                    </Text>
+                                                </div>
+                                            </Form.Item>
+                                        </>
+                                    ) : (
+                                        <>
+                                            <Form.Item>
+                                                <Input
+                                                    placeholder="First Name"
+                                                    maxLength={400}
+                                                    name="First Name"
+                                                />
+                                            </Form.Item>
+                                            <Form.Item>
+                                                <Input
+                                                    placeholder="Last Name"
+                                                    maxLength={400}
+                                                    name="Last Name"
+                                                />
+                                            </Form.Item>
+                                            <Form.Item>
+                                                <Input
+                                                    placeholder="NIC"
+                                                    maxLength={400}
+                                                    name="NIC"
+                                                />
+                                            </Form.Item>
+                                            <Form.Item>
+                                                <Input
+                                                    placeholder="E-Mail"
+                                                    maxLength={400}
+                                                    name="E-Mail"
+                                                />
+                                            </Form.Item>
+                                            <Form.Item>
+                                                <Input
+                                                    placeholder="Mobile Number"
+                                                    maxLength={400}
+                                                    name="Mobile Number"
+                                                />
+                                            </Form.Item>
+                                            <Form.Item>
+                                                <Button
+                                                    htmlType="submit"
+                                                    className="signup-button"
+                                                    type="primary"
+                                                >
+                                                    Sign Up
+                                                </Button>
+                                            </Form.Item>
+                                            <Form.Item>
+                                                <div
+                                                    className="login"
+                                                    onClick={onClickBack}
+                                                    style={{
+                                                        display: "flex",
+                                                        flexDirection: "row",
+                                                    }}
+                                                >
+                                                    <Text
+                                                        strong
+                                                        style={{
+                                                            color: "blue",
+                                                            cursor: "pointer",
+                                                            fontSize: "18px",
+                                                        }}
+                                                    >
+                                                        {<LeftOutlined />} Back
+                                                    </Text>
+                                                </div>
+                                            </Form.Item>
+                                        </>
+                                    )}
                                 </Form>
                             </Col>
                         </Row>

@@ -22,114 +22,125 @@ import SignUp from "../contents/Login/SignUp/SignUp";
 import ManageVehicles from "../contents/Master/Vehicles/ManageVehicles";
 import ManageNotifications from "../contents/Notification/ManageNotifications";
 import OTPVerification from "../contents/Login/OTPVerification/OTPVerification";
+import Statistics from "../contents/Master/Statistics/Statistics";
+import Page from "../contents/Master/Statistics/Statistics";
+import SignUpSplitScreen from "../contents/Login/SignUp/SignUpSplitScreen";
 
 const Loader = (Component: any) => (props: any) =>
-  (
-    <Suspense fallback={<SuspenseLoader />}>
-      <Component {...props} />
-    </Suspense>
-  );
+    (
+        <Suspense fallback={<SuspenseLoader />}>
+            <Component {...props} />
+        </Suspense>
+    );
 
 const PublicRoute: RouteObject[] = [
-  {
-    path: "/",
-    element: <LoginTemplate />,
-  },
-  {
-    path: "/forgot-password",
-    element: <ForgotPassword />,
+    {
+        path: "/",
+        element: <LoginTemplate />,
+    },
+    {
+        path: "/forgot-password",
+        element: <ForgotPassword />,
+    },
+    {
+        path: "/sign-up-split-screen",
+    element: <SignUpSplitScreen />,
   },
   {
     path: "/sign-up",
-    element: <SignUp />,
-  },
-  {
-    path: "/otp-verification",
-    element: <OTPVerification />,
-  },
-  {
-    path: "home",
-    element: <CustomLayout />,
-    children: [],
-  },
-  {
-    path: "master",
-    element: <CustomLayout />,
-    children: [
-      {
-        path: "drivers",
-        element: <ManageDrivers />,
-      },
-      {
-        path: "branches",
-        element: <ManageBranch />,
-      },
-      { path: "branchAdmins", element: <ManageBranchAdmin /> },
-      {
-        path: "services",
-        element: <ManageService />,
-      },
-      {
-        path: "accidentDocument",
-        element: <ManageAccident />,
-      },
-      {
-        path: "emissionTest",
-        element: <ManageEco />,
-      },
-      {
-        path: "insurance",
-        element: <ManageInsurance />,
-      },
-      {
-        path: "revenueLicense",
-        element: <ManageRevenueLicense />,
-      },
-      {
-        path: "parts",
-        element: <ManageParts />,
-      },
-      {
-        path: "generator",
-        element: <ManageGenerator />,
-      },
-      {
-        path: "fuelup",
-        element: <ManageFuelUp />,
-      },
-      {
-        path: "mileage",
-        element: <ManageMileage />,
-      },
-      {
-        path: "vehicles",
-        element: <ManageVehicles />,
-      },
-    ],
-  },
-  {
-    path: "notification",
-    element: <CustomLayout />,
-    children: [
-      {
+        element: <SignUp />,
+    },
+    {
+        path: "/otp-verification",
+        element: <OTPVerification />,
+    },
+    {
+        path: "home",
+        element: <CustomLayout />,
+        children: [],
+    },
+    {
+        path: "master",
+        element: <CustomLayout />,
+        children: [
+            {
+                path: "drivers",
+                element: <ManageDrivers />,
+            },
+            {
+                path: "branches",
+                element: <ManageBranch />,
+            },
+            { path: "branchAdmins", element: <ManageBranchAdmin /> },
+            {
+                path: "services",
+                element: <ManageService />,
+            },
+            {
+                path: "accidentDocument",
+                element: <ManageAccident />,
+            },
+            {
+                path: "emissionTest",
+                element: <ManageEco />,
+            },
+            {
+                path: "insurance",
+                element: <ManageInsurance />,
+            },
+            {
+                path: "revenueLicense",
+                element: <ManageRevenueLicense />,
+            },
+            {
+                path: "parts",
+                element: <ManageParts />,
+            },
+            {
+                path: "generator",
+                element: <ManageGenerator />,
+            },
+            {
+                path: "fuelup",
+                element: <ManageFuelUp />,
+            },
+            {
+                path: "mileage",
+                element: <ManageMileage />,
+            },
+            {
+                path: "vehicles",
+                element: <ManageVehicles />,
+            },
+            {
+                path: "statistics",
+                element: <Page />,
+            },
+        ],
+    },
+    {
         path: "notification",
-        element: <ManageNotifications />,
-      },
-    ],
-  },
-  {
-    path: "settings",
-    element: <CustomLayout />,
-    children: [],
-  },
-  {
-    path: "/change-password",
-    element: <ChangePassword />,
-  },
-  {
-    path: "/reset-password",
-    element: <ResetPassword />,
-  },
+        element: <CustomLayout />,
+        children: [
+            {
+                path: "notification",
+                element: <ManageNotifications />,
+            },
+        ],
+    },
+    {
+        path: "settings",
+        element: <CustomLayout />,
+        children: [],
+    },
+    {
+        path: "/change-password",
+        element: <ChangePassword />,
+    },
+    {
+        path: "/reset-password",
+        element: <ResetPassword />,
+    },
 ];
 
 export default PublicRoute;
