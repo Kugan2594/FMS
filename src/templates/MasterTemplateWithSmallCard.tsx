@@ -14,6 +14,7 @@ interface TemplateType {
     cardOnClick?: any;
     onClickUpdate?: any;
     onClickDelete?: any;
+    onClickVehicleDelete?: any;
     isProgressBar?: boolean;
     privilege?: boolean;
     adminCard?: boolean;
@@ -45,6 +46,7 @@ function MasterTemplateWithSmallCard({
     cardOnClick,
     onClickUpdate,
     onClickDelete,
+    onClickVehicleDelete,
     isProgressBar,
     privilege,
     adminCard,
@@ -89,6 +91,11 @@ function MasterTemplateWithSmallCard({
                                         onClickDelete={() =>
                                             onClickDelete(data.id)
                                         }
+                                        onClickVehicleDelete={() => {
+                                            onClickVehicleDelete(
+                                                data.vehicleNumber
+                                            );
+                                        }}
                                         numberOfVehicles={data.numberOfVehicles}
                                         itemName={data.itemName}
                                         image={data.image}

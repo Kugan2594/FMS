@@ -12,6 +12,7 @@ export interface CardSmallType {
     cardOnClick?: any;
     onClickUpdate?: any;
     onClickDelete?: any;
+    onClickVehicleDelete?: any;
     image?: any;
     isProgressBar?: boolean;
     onClickProfile?: any;
@@ -52,6 +53,7 @@ let intialValue: CardSmallType = {
     cardOnClick: null,
     numberOfVehicles: 0,
     onClickDelete: null,
+    onClickVehicleDelete: null,
     onClickProfile: null,
     onClickUpdate: null,
     privilege: false,
@@ -88,6 +90,7 @@ function SmallCard({
     cardOnClick,
     onClickUpdate,
     onClickDelete,
+    onClickVehicleDelete,
     image,
     isProgressBar,
     onClickProfile,
@@ -344,9 +347,17 @@ function SmallCard({
                             )}
                             <Button
                                 style={{ borderRadius: 5 }}
-                                onClick={() => {
-                                    onClickDelete(id);
-                                }}
+                                onClick={
+                                    vehicleCard
+                                        ? () => {
+                                              onClickVehicleDelete(
+                                                  vehicleNumber
+                                              );
+                                          }
+                                        : () => {
+                                              onClickDelete(id);
+                                          }
+                                }
                             >
                                 Delete
                             </Button>

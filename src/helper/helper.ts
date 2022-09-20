@@ -19,8 +19,18 @@ export const errHandler = (err: any) => {
         }
     };
 
+    // Common
+    errorBox("120000", "Notify Account Balance Not Enough");
+
     // Vehicle
     errorBox("1306", "Vehicle Number Already Exists");
+    errorBox("107", "Vehicle Depend");
+    errorBox("1300", "Vehicle doesn't exists in Resources");
+    errorBox("120002", "Invalid Resource Path");
+    errorBox("103", "Company Not Exists");
+    errorBox("102", "Branch Not Exists");
+    errorBox("120001", "Invalid OAUTH Path");
+    errorBox("104", "Vehicle Not Exists");
 
     // Insurance Document
     errorBox("12201", "Insurance Document already exist for this Vehicle");
@@ -30,6 +40,13 @@ export const errHandler = (err: any) => {
 
     // Emission Test
     errorBox("12101", "Emission Test Already Exist for this Vehicle");
+
+    // Driver
+    errorBox("100016", "Email Already Exists");
+    errorBox("13025", "Driving License No Already Exists");
+    errorBox("100019", "Mobile No Already Exists");
+    errorBox("100020", "Nic No Already Exists");
+
 };
 
 //success message popups
@@ -93,6 +110,18 @@ export const vehicleAddSuccess = () =>
         duration: 3,
     });
 
+export const vehicleUpdateSuccess = () =>
+    notification.success({
+        message: "Vehicle Updated Successfully",
+        duration: 3,
+    });
+
+export const vehicleDeleteSuccess = () =>
+    notification.success({
+        message: "Vehicle Deleted Successfully",
+        duration: 3,
+    });
+
 export const fuelUpAddSuccess = () =>
     notification.success({
         message: "Fuel Up Added Successfully",
@@ -102,5 +131,11 @@ export const fuelUpAddSuccess = () =>
 export const mileageAddSuccess = () =>
     notification.success({
         message: "Mileage Added Successfully",
+        duration: 3,
+    });
+
+export const driverAddSuccess = () =>
+    notification.success({
+        message: "Driver Added Successfully",
         duration: 3,
     });
