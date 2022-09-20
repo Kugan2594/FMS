@@ -1,19 +1,25 @@
 import { ExclamationCircleOutlined } from "@ant-design/icons";
 import { Modal } from "antd";
 import { useEffect, useState } from "react";
+import { vehicleDeleteSuccess } from "../../../helper/helper";
 import MasterTemplateWithSmallCard from "../../../templates/MasterTemplateWithSmallCard";
-import AddVehicle from "./AddVehicle";
-import { getAllVehiclesByCompanyId } from "./ServiceVehicle";
 import { getUserDetails } from "../../Login/LoginAuthentication";
+import AddVehicle from "./AddVehicle";
+import {
+    deleteVehicleByVehicleNumberAndCompanyId,
+    getAllVehiclesByCompanyId,
+} from "./ServiceVehicle";
 
 const { confirm } = Modal;
 
 function ManageVehicles() {
-    const [vehicleData, setVehicleData] = useState({});
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    const [isEdit, setisEdit] = useState(false);
     const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
     const [vehicles, setvehicles] = useState([]);
+    const [addVisible, setAddVisible] = useState(false);
+    const [editVisible, seteditVisible] = useState(false);
+    const [vehicleNum, setvehicleNum] = useState<string>("");
+    const [updateData, setupdateData] = useState({});
+    const [action, setaction] = useState<string>("add");
 
     const createData = (data: any) => {
         let convertData = data.map((post: any) => {
@@ -42,23 +48,29 @@ function ManageVehicles() {
 
     const profileOnClickHandler = (data: any) => {
         setIsProfileModalOpen(true);
-        setVehicleData(data);
+        setvehicles(data);
     };
 
-    const showModal = () => {
-        setIsModalOpen(true);
-        setisEdit(false);
+    const openAdd = () => {
+        setaction("add");
+        setAddVisible(true);
+        seteditVisible(false);
+    };
+
+    const openEdit = (data: any) => {
+        setaction("edit");
+        seteditVisible(true);
+        setupdateData(data);
+        setvehicleNum(data.vehicleNumber);
     };
 
     const handleOk = () => {
-        setIsModalOpen(false);
-        setisEdit(false);
+        setAddVisible(false);
     };
 
     const handleCancel = () => {
-        setIsModalOpen(false);
-        setisEdit(false);
-        setIsProfileModalOpen(false);
+        setAddVisible(false);
+        seteditVisible(false);
     };
 
     const getAllVehicles = (companyId: number) => {
@@ -68,11 +80,24 @@ function ManageVehicles() {
         });
     };
 
+    const reloadTable = (res: any) => {
+        getAllVehicles(getUserDetails().company_id);
+    };
+
+    const deleteVehicleData = (vehicleNumber: string, companyId: number) => {
+        deleteVehicleByVehicleNumberAndCompanyId(vehicleNumber, companyId).then(
+            (res) => {
+                vehicleDeleteSuccess();
+                reloadTable(res);
+            }
+        );
+    };
+
     useEffect(() => {
         getAllVehicles(getUserDetails().company_id);
     }, []);
 
-    const deleteClickHandler = (id: string) => {
+    const deleteClickHandler = (vehicleNumber: any) => {
         confirm({
             title: "Are you sure delete this Vehicle?",
             icon: <ExclamationCircleOutlined />,
@@ -80,15 +105,9 @@ function ManageVehicles() {
             okType: "danger",
             cancelText: "No",
             onOk() {
-                //Delete API
+                deleteVehicleData(vehicleNumber, getUserDetails().company_id);
             },
         });
-    };
-
-    const updateClickHandler = (data: any) => {
-        setIsModalOpen(true);
-        setisEdit(true);
-        setVehicleData(data);
     };
 
     const branches = [
@@ -110,32 +129,46 @@ function ManageVehicles() {
             <MasterTemplateWithSmallCard
                 data={vehicles}
                 dataCount={vehicles.length}
-                headerOnClickAdd={showModal}
+                headerOnClickAdd={openAdd}
                 headerOnSearch={() => {}}
                 cardOnClick={(data: any) => profileOnClickHandler(data)}
-                onClickDelete={(id: any) => deleteClickHandler(id)}
-                onClickUpdate={(data: any) => updateClickHandler(data)}
+                onClickVehicleDelete={(vehicleNumber: string) =>
+                    deleteClickHandler(vehicleNumber)
+                }
+                onClickUpdate={(data: any) => openEdit(data)}
                 vehicleCard={true}
                 isProgressBar={true}
             />
-            {isModalOpen &&
-            <Modal
-                title={isEdit ? "Edit Vehicle" : "Add New Vehicle"}
-                open={isModalOpen}
-                onOk={handleOk}
-                onCancel={handleCancel}
-                closable={false}
-                width={"50%"}
-                footer={null}
-            >
+
+            {addVisible ? (
                 <AddVehicle
-                    isEdit={isEdit}
-                    branches={branches}
+                    title={"Add Vehicle"}
+                    visible={addVisible}
+                    handleCancel={handleCancel}
+                    handleOk={handleOk}
+                    setAddVisible={setAddVisible}
+                    updateData={editVisible ? updateData : null}
+                    reloadTable={reloadTable}
+                    action={action}
                     vehicleModels={vehicleModels}
-                    cancelClickHandler={handleCancel}
-                    updateVehicleData={vehicleData}
+                    branches={branches}
                 />
-            </Modal>}
+            ) : editVisible ? (
+                <AddVehicle
+                    title={"Edit Vehicle"}
+                    visible={editVisible}
+                    handleCancel={handleCancel}
+                    handleOk={handleOk}
+                    setAddVisible={seteditVisible}
+                    updateData={editVisible ? updateData : null}
+                    reloadTable={reloadTable}
+                    action={action}
+                    vehicleModels={vehicleModels}
+                    branches={branches}
+                />
+            ) : (
+                <></>
+            )}
         </>
     );
 }
