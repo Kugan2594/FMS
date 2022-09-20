@@ -3,6 +3,7 @@ import { Col, Form, Input, Modal, Row, Select } from "antd";
 import {
     generatorAddSuccess,
     generatorUpdateSuccess,
+    errHandler,
 } from "../../../helper/helper";
 import CustomButton from "../../../components/atoms/Button/CustomButton";
 import { getUserDetails } from "../../../contents/Login/LoginAuthentication";
@@ -39,7 +40,9 @@ function AddGenerator(props: any) {
                     reloadTable(res);
                     setAddVisible(false);
                 })
-                .catch((err) => {});
+                .catch((err) => {
+                    errHandler(err);
+                });
         } else {
             let data: object = {
                 id: values.id,
@@ -49,11 +52,15 @@ function AddGenerator(props: any) {
                 companyId: getUserDetails().company_id,
                 branchId: getUserDetails().company_branch_id,
             };
-            updateGeneratorById(data).then((res) => {
-                generatorUpdateSuccess();
-                reloadTable(res);
-                setAddVisible(false);
-            });
+            updateGeneratorById(data)
+                .then((res) => {
+                    generatorUpdateSuccess();
+                    reloadTable(res);
+                    setAddVisible(false);
+                })
+                .catch((err) => {
+                    errHandler(err);
+                });
         }
     };
 
