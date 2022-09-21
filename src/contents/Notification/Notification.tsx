@@ -38,7 +38,7 @@ function Notification({
             <div className="image-container">
               <div className="image">
                 {image != null ? (
-                  <Image style={{ borderRadius: "50%" }} src={image} />
+                  <Image preview={false} style={{ borderRadius: "50%" }} src={image} />
                 ) : (
                   <Image
                     width="100%"

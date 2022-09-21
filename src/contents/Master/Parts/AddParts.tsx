@@ -2,15 +2,10 @@ import { Col, DatePicker, Form, Input, Row, Select } from "antd";
 import Checkbox from "antd/lib/checkbox/Checkbox";
 import React, { useState } from "react";
 
-
-
 function AddParts() {
-
     const [form] = Form.useForm();
     const { Option } = Select;
     const [open, setOpen] = useState(false);
-
-
 
     return (
         <>
@@ -26,7 +21,9 @@ function AddParts() {
                             >
                                 <Option value="Front Tyre">Front Tyre</Option>
                                 <Option value="Battery">Battery</Option>
-                                <Option value="Front Mirror">Front Mirror</Option>
+                                <Option value="Front Mirror">
+                                    Front Mirror
+                                </Option>
                             </Select>
                         </Form.Item>
                     </Col>
@@ -38,9 +35,15 @@ function AddParts() {
                                 bordered={false}
                                 style={{ borderBottom: "1px solid #ccccb3" }}
                             >
-                                <Option value="Toyata Aqua NP CAD 4135">Toyata Aqua NP CAD 4135</Option>
-                                <Option value="Honda Suv NP AKM 5684">Honda Suv NP AKM 5684</Option>
-                                <Option value="Honda NP BAT 9480">Honda NP BAT 9480</Option>
+                                <Option value="Toyata Aqua NP CAD 4135">
+                                    Toyata Aqua NP CAD 4135
+                                </Option>
+                                <Option value="Honda Suv NP AKM 5684">
+                                    Honda Suv NP AKM 5684
+                                </Option>
+                                <Option value="Honda NP BAT 9480">
+                                    Honda NP BAT 9480
+                                </Option>
                             </Select>
                         </Form.Item>
                     </Col>
@@ -48,7 +51,13 @@ function AddParts() {
                         <Form.Item>
                             <DatePicker
                                 placeholder="Changed Date"
-                                style={{ borderBottom: "1px solid #ccccb3", borderTop: "0px", borderLeft: "0px", borderRight: "0px", width: "100%" }}
+                                style={{
+                                    borderBottom: "1px solid #ccccb3",
+                                    borderTop: "0px",
+                                    borderLeft: "0px",
+                                    borderRight: "0px",
+                                    width: "100%",
+                                }}
                             />
                         </Form.Item>
                     </Col>
@@ -104,9 +113,14 @@ function AddParts() {
                         </Form.Item>
                     </Col>
                     <Col span={24}>
-                        <Checkbox name="brandNew" onClick={() => {
-                            setOpen(!open)
-                        }}>Brand New</Checkbox>
+                        <Checkbox
+                            name="brandNew"
+                            onClick={() => {
+                                setOpen(!open);
+                            }}
+                        >
+                            Brand New
+                        </Checkbox>
                     </Col>
 
                     {open ? (
@@ -116,18 +130,17 @@ function AddParts() {
                                     placeholder="Brand"
                                     bordered={false}
                                     required
-                                    style={{ borderBottom: "1px solid #ccccb3" }}
+                                    style={{
+                                        borderBottom: "1px solid #ccccb3",
+                                    }}
                                 />
                             </Form.Item>
                         </Col>
-                    ) : (<></>)}
-
-
+                    ) : (
+                        <></>
+                    )}
                 </Row>
-
             </Form>
-
-
         </>
     );
 }
