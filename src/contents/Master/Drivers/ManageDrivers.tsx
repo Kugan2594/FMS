@@ -1,18 +1,42 @@
 import { Modal } from "antd";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import MasterTemplateWithSmallCard from "../../../templates/MasterTemplateWithSmallCard";
 import AddDriver from "./AddDriver";
 import { ExclamationCircleOutlined } from "@ant-design/icons";
 import { RocketOutlined } from "@ant-design/icons";
 import DriverProfile from "./DriverProfile";
+import { getAllDriverByCompanyIdAndBranchId } from "./ServiceDriver";
+import { getUserDetails } from "../../Login/LoginAuthentication";
 
 const { confirm } = Modal;
+
+function createData(data: any) {
+  let convertData = data.map((post: any, index: any) => {
+    return {
+      id: post.id,
+      branchName: post.branchResponseDto.branchName,
+      contactNumber: post.userResponseDto.mobileNumber,
+      // vehicleType: "car",
+      drivingLicense: post.userResponseDto.drivingLicenseNo,
+      drivingLicenseType: "Light Vehicle",
+      nic: post.userResponseDto.nic,
+      driverFirstName: post.userResponseDto.lastName,
+      driverLastName: post.userResponseDto.lastName,
+      vehicleIcon: <RocketOutlined />,
+      email: post.userResponseDto.email,
+      image:
+        "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
+    };
+  });
+  return convertData;
+}
 
 function ManageDrivers() {
   const [driverData, setDriverData] = useState({});
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isEdit, setisEdit] = useState(false);
   const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
+  const [driver, setDriver] = useState([]);
 
   const showModal = () => {
     setIsModalOpen(true);
@@ -54,54 +78,32 @@ function ManageDrivers() {
     setDriverData(data);
   };
 
-  const licenseType = [
-    { id: 1, name: "Heavy Vehicle" },
-    { id: 2, name: "Light Vehicle" },
-  ];
+  useEffect(() => {
+    getAllDriverData(
+      getUserDetails().company_id,
+      getUserDetails().company_branch_id
+    );
+  }, []);
 
-  const branches = [
-    { id: 1, name: "Jaffna" },
-    { id: 2, name: "Vavuniya" },
-    { id: 3, name: "Colombo" },
-    { id: 4, name: "Kandy" },
-  ];
+  const getAllDriverData = (companyId: number, branchId: number) => {
+    let data: any = [];
 
-  const data = [
-    {
-      id: "1",
-      branchName: "Colombo",
-      contactNumber: "0772250114",
-      vehicleType: "car",
-      drivingLicense: "82763871",
-      drivingLicenseType: "Light Vehicle",
-      nic: "941234500V",
-      driverFirstName: "Kugan",
-      driverLastName: "Kuga",
-      vehicleIcon: <RocketOutlined />,
-      email: "kugan@gmail.com",
-      image:
-        "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
-    },
-    {
-      id: "2",
-      branchName: "Jaffna",
-      contactNumber: "0772250114",
-      vehicleType: "car",
-      drivingLicense: "82763871",
-      drivingLicenseType: "Light Vehicle",
-      nic: "941234500V",
-      driverFirstName: "Cudeson",
-      driverLastName: "Cudeson",
-      vehicleIcon: <RocketOutlined />,
-      email: "Cudeson@gmail.com",
-    },
-  ];
+    getAllDriverByCompanyIdAndBranchId(companyId, branchId).then(
+      (res: any) => {
+        data = createData(res.results.driver);
+        setDriver(data);
+      },
+      (error: any) => {
+        setDriver([]);
+      }
+    );
+  };
 
   return (
     <div>
       <MasterTemplateWithSmallCard
-        data={data}
-        dataCount={data.length}
+        data={driver}
+        dataCount={driver.length}
         headerOnClickAdd={showModal}
         headerOnSearch={() => {}}
         cardOnClick={(data: any) => profileOnClickHandler(data)}
@@ -122,8 +124,6 @@ function ManageDrivers() {
           <AddDriver
             isEdit={isEdit}
             updateDriverData={driverData}
-            branches={branches}
-            licenseTypes={licenseType}
             cancelClickHandler={handleCancel}
           />
         </Modal>

@@ -118,6 +118,7 @@ function ManageVehicles() {
                 vehicleCard={true}
                 isProgressBar={true}
             />
+            {isModalOpen &&
             <Modal
                 title={isEdit ? "Edit Vehicle" : "Add New Vehicle"}
                 open={isModalOpen}
@@ -134,7 +135,7 @@ function ManageVehicles() {
                     cancelClickHandler={handleCancel}
                     updateVehicleData={vehicleData}
                 />
-            </Modal>
+            </Modal>}
         </>
     );
 }

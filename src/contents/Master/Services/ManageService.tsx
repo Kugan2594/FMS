@@ -1,9 +1,7 @@
 import { Button, Modal } from "antd";
-import MasterHeader from "../../../components/organisms/MasterHeader/MasterHeader";
 import { useState } from "react";
 import AddService from "./AddService";
 import MasterTemplateWithLargeCard from "../../../templates/MasterTemplateWithLargeCard";
-
 const data = [
     {
         id: "1",
@@ -12,9 +10,7 @@ const data = [
         vehicleNo: "NP CAR 5245",
         dueDate: "23 Mar 2022",
     },
-
 ];
-
 function ManageService() {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isEdit, setisEdit] = useState(false);
@@ -38,7 +34,7 @@ function ManageService() {
             <MasterTemplateWithLargeCard
                 data={data}
                 dataCount={data.length}
-                headerOnSearch={() => { }}
+                headerOnSearch={() => {}}
                 headerOnClickAdd={showModal}
                 cardOnClick={(id: string) => console.log("CLICKED " + id)}
                 deleteButton={(id: string) => console.log("DELETED " + id)}
@@ -49,14 +45,14 @@ function ManageService() {
                 title={isEdit ? "Edit Service" : "Add Service"}
                 open={isModalOpen}
                 onOk={handleOk}
-                onCancel={handleCancel}
+                // onCancel={handleCancel}
                 closable={false}
                 width={500}
+                footer={false}
             >
-                <AddService />
+                <AddService onAdd={handleCancel} onCancel={handleCancel} />
             </Modal>
         </>
     );
 }
-
 export default ManageService;

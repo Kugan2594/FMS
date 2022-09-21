@@ -47,6 +47,8 @@ export default function api(
             ? SYSTEM_CONFIG.baseUrl
             : service === "co-web"
             ? SYSTEM_CONFIG.corporateUrl
+            : service === "ad-web"
+            ? SYSTEM_CONFIG.adminUrl
             : SYSTEM_CONFIG.loginBaseUrl;
     let customURL = addParamsToURL(baseURL + endPoint, params);
     let headers = getHeaders(token, header === null ? {} : header);

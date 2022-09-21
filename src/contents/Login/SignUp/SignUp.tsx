@@ -18,7 +18,7 @@ function SignUp() {
     const { Text, Title } = Typography;
     const { Option } = Select;
     const [form2, setForm2] = useState(false);
-    const [form1, setForm1] = useState(false);
+    const [form1, setForm1] = useState(true);
     const handleSubmit = () => {};
     const onCreateUser = () => {
         setForm2(true);
