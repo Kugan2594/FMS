@@ -3,27 +3,33 @@ import React, { useEffect, useState } from "react";
 import "./driver.style.less";
 import { addDriver } from "./ServiceDriver";
 import { getUserDetails } from "../../../contents/Login/LoginAuthentication";
-import { Button } from "antd";
+import { Button } from "../../../components/atoms/Button";
 import { getAllBranchesByCompanyId } from "../Branch/ServicesBranch";
 import { getAllDrivingLicenseTypes } from "../../../contents/Settings/DrivingLicenseType/ServiceDrivingLicenseType";
 import {
   drivingLicenseNoRegex,
+  emailRegex,
   nicNoRegex,
   phoneNumberRegex,
 } from "../../../utils/Regex";
 import { driverAddSuccess, errHandler } from "../../../helper/helper";
+import { any } from "prop-types";
 const { Option } = Select;
 
 interface AddDriversPropType {
   isEdit: boolean;
   updateDriverData: any;
   cancelClickHandler: any;
+  reloadTable: any;
+  setIsModelOpen: any;
 }
 
 function AddDriver({
   isEdit,
   updateDriverData,
   cancelClickHandler,
+  reloadTable,
+  setIsModelOpen,
 }: AddDriversPropType) {
   const [form] = Form.useForm();
   const { Option } = Select;
@@ -88,6 +94,8 @@ function AddDriver({
     addDriver(data)
       .then((res) => {
         driverAddSuccess();
+        setIsModelOpen(false);
+        reloadTable(res);
       })
       .catch((err) => {
         errHandler(err);
@@ -133,7 +141,6 @@ function AddDriver({
               rules={[
                 {
                   pattern: new RegExp(phoneNumberRegex),
-
                   message: "Enter valid Mobile No Ex:- 947*********",
                 },
               ]}
@@ -147,7 +154,16 @@ function AddDriver({
             </Form.Item>
           </Col>
           <Col span={12}>
-            <Form.Item name="email">
+            <Form.Item
+              rules={[
+                {
+                  pattern: new RegExp(emailRegex),
+
+                  message: "Enter valid Email",
+                },
+              ]}
+              name="email"
+            >
               <Input
                 placeholder="Email"
                 required
@@ -248,7 +264,7 @@ function AddDriver({
               </Select>
             </Form.Item>
           </Col>
-          <Col  className="assign-vehicle-tag" span={6}>
+          <Col className="assign-vehicle-tag" span={6}>
             <Form.Item>
               <div>Assign Vehicle</div>
             </Form.Item>
@@ -271,23 +287,22 @@ function AddDriver({
             </Form.Item>
           </Col>
           <Col className="form-button-content" span={24}>
-            {/* <Form.Item>
-              <CustomButton
+            <Form.Item>
+              <Button
                 className="form-button"
                 title="Cancel"
                 onClick={cancelClickHandler}
               />
-              <CustomButton
+              <Button
                 className="form-button"
                 title={isEdit ? "Update" : "Add"}
                 type="primary"
                 htmlType="submit"
-                onClick={handleSubmit}
               />
-            </Form.Item> */}
-            <Button htmlType="submit" type="primary">
+            </Form.Item>
+            {/* <Button htmlType="submit" type="primary">
               Submit
-            </Button>
+            </Button> */}
           </Col>
         </Row>
       </Form>
