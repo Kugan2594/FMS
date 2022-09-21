@@ -41,16 +41,15 @@ export const errHandler = (err: any) => {
     // Emission Test
     errorBox("12101", "Emission Test Already Exist for this Vehicle");
 
-    // Emission Test
-    errorBox("12101", "Emission Test Already Exist for this Vehicle");
-
     // Driver
     errorBox("100016", "Email Already Exists");
     errorBox("13025", "Driving License No Already Exists");
     errorBox("100019", "Mobile No Already Exists");
     errorBox("100020", "Nic No Already Exists");
-};
 
+    // Branch
+    errorBox("1001", "Branch is depended");
+};
 //success message popups
 export const insuranceDocumentAddSuccess = () =>
     notification.success({
@@ -163,6 +162,11 @@ notification.success({
     message: "Driver Added Successfully",
     duration: 3,
 });
+export const serviceAddSuccess = () =>
+    notification.success({
+        message: "service Added Successfully",
+        duration: 3,
+    });
 
 export const driverDeleteSuccess = () =>
     notification.success({

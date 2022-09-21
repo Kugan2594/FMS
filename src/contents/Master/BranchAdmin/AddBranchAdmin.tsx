@@ -13,8 +13,8 @@ import { getUserDetails } from "../../../contents/Login/LoginAuthentication";
 import {
     nicNoRegex,
     phoneNumberRegex,
-    emailRegex,
     noSplCharAndNoRegex,
+    emailRegex,
 } from "../../../utils/Regex";
 interface IAddBranchAdmin {
     onClickCancel?: React.MouseEventHandler<HTMLElement> | undefined;
