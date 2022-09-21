@@ -46,7 +46,6 @@ export const errHandler = (err: any) => {
     errorBox("13025", "Driving License No Already Exists");
     errorBox("100019", "Mobile No Already Exists");
     errorBox("100020", "Nic No Already Exists");
-
 };
 
 //success message popups
@@ -137,5 +136,23 @@ export const mileageAddSuccess = () =>
 export const driverAddSuccess = () =>
     notification.success({
         message: "Driver Added Successfully",
+        duration: 3,
+    });
+
+export const branchAdminAddSuccess = () =>
+    notification.success({
+        message: "Branch Admin Created Successfully",
+        duration: 3,
+    });
+
+export const branchAdminUpdateSuccess = () =>
+    notification.success({
+        message: "Branch Admin Details Updated Successfully",
+        duration: 3,
+    });
+
+export const branchAdminDeleteSuccess = () =>
+    notification.error({
+        message: "Branch Admin Deleted Successfully",
         duration: 3,
     });

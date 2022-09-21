@@ -278,7 +278,7 @@ function SmallCard({
                                     </div>{" "}
                                     <div className="item-name">
                                         <Text strong type="secondary">
-                                            Designation
+                                            {designation}
                                         </Text>{" "}
                                     </div>
                                 </div>

@@ -1,13 +1,22 @@
-import { Col, Form, message, Row, Select, Typography, Upload } from "antd";
-import { Input } from "../../../components/atoms/index";
-import { Button } from "../../../components/atoms/Button/index";
-import "./branchAdmin.style.less";
-import { DefaultOptionType } from "antd/lib/select";
 import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
+import { Col, Form, message, Modal, Row, Select, Upload } from "antd";
 import type { UploadChangeParam } from "antd/es/upload";
 import type { RcFile, UploadFile, UploadProps } from "antd/es/upload/interface";
+import { DefaultOptionType } from "antd/lib/select";
+import CustomButton from "../../../components/atoms/Button/CustomButton";
 import React, { useState } from "react";
-interface AddBranchAdmin {
+import { Input } from "../../../components/atoms/index";
+import "./branchAdmin.style.less";
+import { createBranchAdmin, updateBranchAdminById } from "./ServiceBranchAdmin";
+import { branchAdminAddSuccess, errHandler } from "../../../helper/helper";
+import { getUserDetails } from "../../../contents/Login/LoginAuthentication";
+import {
+    nicNoRegex,
+    phoneNumberRegex,
+    emailRegex,
+    noSplCharAndNoRegex,
+} from "../../../utils/Regex";
+interface IAddBranchAdmin {
     onClickCancel?: React.MouseEventHandler<HTMLElement> | undefined;
     onClickAdd?: React.MouseEventHandler<HTMLElement> | undefined;
     onSearch?: ((value: string) => void) | undefined;
@@ -20,7 +29,6 @@ interface AddBranchAdmin {
     option?: DefaultOptionType | undefined;
     initialValues?: any;
 }
-const { Text, Title } = Typography;
 const getBase64 = (img: RcFile, callback: (url: string) => void) => {
     const reader = new FileReader();
     reader.addEventListener("load", () => callback(reader.result as string));
@@ -39,18 +47,23 @@ const beforeUpload = (file: RcFile) => {
     return isJpgOrPng && isLt2M;
 };
 const { Option } = Select;
-function AddBranchAdmin({
-    onClickAdd,
-    onClickCancel,
-    onSearch,
-    onChange,
-    option,
-    initialValues,
-}: AddBranchAdmin) {
+function AddBranchAdmin(props: any) {
+    const {
+        visible,
+        handleOk,
+        handleCancel,
+        setAddVisible,
+        title,
+        updateData,
+        action,
+        reloadTable,
+    } = props;
+
+    let show = visible;
+
     const [form] = Form.useForm();
     const [loading, setLoading] = useState(false);
     const [imageUrl, setImageUrl] = useState<string>();
-    console.log("TEST" + initialValues);
     const uploadButton = (
         <div>
             {loading ? <LoadingOutlined /> : <PlusOutlined />}
@@ -72,131 +85,278 @@ function AddBranchAdmin({
             });
         }
     };
+
+    const onFinish = (values: any) => {
+        if (action === "add") {
+            let data: object = {
+                branchName: values.branchName,
+                firstName: values.firstName,
+                lastName: values.lastName,
+                nic: values.nic,
+                mobileNumber: values.contactNumber,
+                email: values.email,
+                userType: "COMPANYBRANCHADMIN",
+                companyId: getUserDetails().company_id,
+                branchId: 1,
+            };
+            createBranchAdmin(data)
+                .then((res) => {
+                    branchAdminAddSuccess();
+                    reloadTable(res);
+                    setAddVisible(false);
+                })
+                .catch((err) => {
+                    errHandler(err);
+                });
+        } else {
+        }
+    };
+
+    const onFinishFailed = () => {};
+
     return (
-        <Form initialValues={initialValues}>
-            <div className="addBranch">
-                <Row className="row-1">
-                    <Form.Item valuePropName="fileList">
-                        <Upload
-                            name="avatar"
-                            listType="picture-card"
-                            className="avatar-uploader"
-                            showUploadList={false}
-                            action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-                            beforeUpload={beforeUpload}
-                            onChange={handleChange}
-                        >
-                            {imageUrl ? (
-                                <img
-                                    src={imageUrl}
-                                    alt="avatar"
-                                    style={{ width: "100%" }}
-                                />
-                            ) : (
-                                uploadButton
-                            )}
-                        </Upload>
-                    </Form.Item>
-                </Row>
-                <Row gutter={4}>
-                    <Col xs={24} xl={24}>
-                        <div
-                            className="input-container"
+        <>
+            <Modal
+                title={title}
+                visible={show}
+                onOk={handleOk}
+                onCancel={handleCancel}
+                width={"35%"}
+                footer={null}
+            >
+                <Form
+                    id="form"
+                    name="basic"
+                    form={form}
+                    onFinish={onFinish}
+                    onFinishFailed={onFinishFailed}
+                    initialValues={updateData}
+                >
+                    <div className="addBranch">
+                        <Row className="row-1">
+                            <Form.Item valuePropName="fileList">
+                                <Upload
+                                    name="avatar"
+                                    listType="picture-card"
+                                    className="avatar-uploader"
+                                    showUploadList={false}
+                                    action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+                                    beforeUpload={beforeUpload}
+                                    onChange={handleChange}
+                                >
+                                    {imageUrl ? (
+                                        <img
+                                            src={imageUrl}
+                                            alt="avatar"
+                                            style={{ width: "100%" }}
+                                        />
+                                    ) : (
+                                        uploadButton
+                                    )}
+                                </Upload>
+                            </Form.Item>
+                        </Row>
+                        <Row gutter={4}>
+                            <Col xs={24} xl={24}>
+                                <div
+                                    className="input-container"
+                                    style={{
+                                        width: "100%",
+                                        marginTop: "0px",
+                                    }}
+                                >
+                                    <div className="name">
+                                        {" "}
+                                        <Form.Item
+                                            name="adminFirstName"
+                                            rules={[
+                                                {
+                                                    required: true,
+                                                    message:
+                                                        "First name is mandatory",
+                                                },
+                                                {
+                                                    max: 30,
+                                                    message:
+                                                        "Sorry you are exceeding the limit",
+                                                },
+                                                {
+                                                    pattern: new RegExp(
+                                                        noSplCharAndNoRegex
+                                                    ),
+                                                    message:
+                                                        "Numbers are prohibited",
+                                                },
+                                            ]}
+                                        >
+                                            <Input label="First Name" />
+                                        </Form.Item>
+                                        <Form.Item
+                                            name="adminLastName"
+                                            style={{ marginLeft: "10%" }}
+                                            rules={[
+                                                {
+                                                    max: 30,
+                                                    message:
+                                                        "Sorry you are exceeding the limit",
+                                                },
+                                                {
+                                                    pattern: new RegExp(
+                                                        noSplCharAndNoRegex
+                                                    ),
+                                                    message:
+                                                        "Numbers are prohibited",
+                                                },
+                                            ]}
+                                        >
+                                            <Input label="Last Name" />
+                                        </Form.Item>
+                                    </div>
+                                    <Form.Item
+                                        name="nic"
+                                        rules={[
+                                            {
+                                                required: true,
+                                                message: "NIC is mandatory",
+                                            },
+                                            {
+                                                pattern: new RegExp(nicNoRegex),
+
+                                                message: "Enter valid NIC",
+                                            },
+                                        ]}
+                                    >
+                                        <Input label="NIC*" />
+                                    </Form.Item>
+                                    <Form.Item
+                                        name="contactNumber"
+                                        rules={[
+                                            {
+                                                required: true,
+                                                message:
+                                                    "Mobile number is mandatory",
+                                            },
+                                            {
+                                                pattern: new RegExp(
+                                                    phoneNumberRegex
+                                                ),
+                                                message:
+                                                    "Enter valid Mobile number",
+                                            },
+                                        ]}
+                                    >
+                                        <Input label="Contact Number" />
+                                    </Form.Item>
+                                    <Form.Item
+                                        name="email"
+                                        rules={[
+                                            {
+                                                required: true,
+                                                message: "Email is mandatory",
+                                            },
+                                            {
+                                                pattern: new RegExp(emailRegex),
+                                                message: "Enter valid E-mail",
+                                            },
+                                        ]}
+                                    >
+                                        <Input label="E Mail" />
+                                    </Form.Item>
+                                    <div
+                                        className="Select"
+                                        style={{
+                                            display: "flex",
+                                            flexDirection: "row",
+                                            gap: "8px",
+                                        }}
+                                    >
+                                        <Form.Item
+                                            name="branchName"
+                                            rules={[
+                                                {
+                                                    required: true,
+                                                    message:
+                                                        "Branch Name is mandatory",
+                                                },
+                                            ]}
+                                        >
+                                            <Select
+                                                showSearch
+                                                style={{ width: 200 }}
+                                                placeholder="Company Branch"
+                                                optionFilterProp="children"
+                                                filterOption={(input, option) =>
+                                                    (
+                                                        option!
+                                                            .children as unknown as string
+                                                    ).includes(input)
+                                                }
+                                                filterSort={(
+                                                    optionA,
+                                                    optionB
+                                                ) =>
+                                                    (
+                                                        optionA!
+                                                            .children as unknown as string
+                                                    )
+                                                        .toLowerCase()
+                                                        .localeCompare(
+                                                            (
+                                                                optionB!
+                                                                    .children as unknown as string
+                                                            ).toLowerCase()
+                                                        )
+                                                }
+                                            >
+                                                <Option value="1">
+                                                    Colombo
+                                                </Option>
+                                                <Option value="2">
+                                                    Jaffna
+                                                </Option>
+                                                <Option value="3">
+                                                    Singapore
+                                                </Option>
+                                                <Option value="4">
+                                                    Identified
+                                                </Option>
+                                                <Option value="5">
+                                                    Resolved
+                                                </Option>
+                                                <Option value="6">
+                                                    Cancelled
+                                                </Option>
+                                            </Select>
+                                        </Form.Item>
+                                    </div>
+                                </div>
+                            </Col>
+                        </Row>
+                        <Row
+                            justify="end"
+                            className="Actions"
+                            gutter={8}
                             style={{
-                                width: "100%",
-                                marginTop: "0px",
+                                marginTop: "3%",
                             }}
                         >
-                            <div className="name">
-                                {" "}
-                                <Form.Item name="adminFirstName">
-                                    <Input label="First Name" />
-                                </Form.Item>
-                                <Form.Item
-                                    name="adminLastName"
-                                    style={{ marginLeft: "10%" }}
-                                >
-                                    <Input label="Last Name" />
-                                </Form.Item>
-                            </div>
-                            <Form.Item name="nic">
-                                <Input label="NIC*" />
-                            </Form.Item>
-                            <Form.Item name="contactNumber">
-                                <Input label="Contact Number" />
-                            </Form.Item>
-                            <Form.Item name="email">
-                                <Input label="E Mail" />
-                            </Form.Item>
-                            <div
-                                className="Select"
-                                style={{
-                                    display: "flex",
-                                    flexDirection: "row",
-                                    gap: "8px",
-                                }}
-                            >
-                                <Form.Item name="branchName">
-                                    <Select
-                                        showSearch
-                                        style={{ width: 200 }}
-                                        placeholder="Company Branch"
-                                        optionFilterProp="children"
-                                        filterOption={(input, option) =>
-                                            (
-                                                option!
-                                                    .children as unknown as string
-                                            ).includes(input)
-                                        }
-                                        filterSort={(optionA, optionB) =>
-                                            (
-                                                optionA!
-                                                    .children as unknown as string
-                                            )
-                                                .toLowerCase()
-                                                .localeCompare(
-                                                    (
-                                                        optionB!
-                                                            .children as unknown as string
-                                                    ).toLowerCase()
-                                                )
-                                        }
-                                    >
-                                        <Option value="1">Colombo</Option>
-                                        <Option value="2">Jaffna</Option>
-                                        <Option value="3">Singapore</Option>
-                                        <Option value="4">Identified</Option>
-                                        <Option value="5">Resolved</Option>
-                                        <Option value="6">Cancelled</Option>
-                                    </Select>
-                                </Form.Item>
-                            </div>
-                        </div>
-                    </Col>
-                </Row>
-                <Row
-                    justify="end"
-                    className="Actions"
-                    gutter={8}
-                    style={{
-                        marginTop: "3%",
-                    }}
-                >
-                    <Col>
-                        {" "}
-                        <Button title="Cancel" onClick={onClickCancel} />
-                    </Col>
-                    <Col>
-                        <Button
-                            title="Add"
-                            type="primary"
-                            onClick={onClickAdd}
-                        />
-                    </Col>
-                </Row>
-            </div>
-        </Form>
+                            <CustomButton
+                                type={"primary"}
+                                htmlType={"submit"}
+                                title={"Submit"}
+                                style={submitButton}
+                            />
+                        </Row>
+                    </div>
+                </Form>
+            </Modal>
+        </>
     );
 }
 
 export default AddBranchAdmin;
+
+const submitButton: React.CSSProperties = {
+    marginLeft: "70%",
+    width: "30%",
+};
