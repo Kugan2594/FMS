@@ -19,12 +19,12 @@ export interface CardSmallType {
     privilege?: boolean;
     adminCard?: boolean;
     branchCard?: boolean;
-    contactNumber?: string;
+    mobileNumber?: string;
     vehicleCard?: boolean;
     vehicleNumber?: string;
     vehicleType?: string;
     designation?: string;
-    drivingLicense?: string;
+    drivingLicenseNo?: string;
     vehicleModel?: string;
     driverCard?: boolean;
     generatorCard?: boolean;
@@ -36,8 +36,8 @@ export interface CardSmallType {
     email?: string;
     adminFirstName?: string;
     adminLastName?: string;
-    driverFirstName?: string;
-    driverLastName?: string;
+    firstName?: string;
+    lastName?: string;
     tankCapacity?: any;
     maximumPower?: any;
     onCardClick?: React.MouseEventHandler<HTMLDivElement> | undefined;
@@ -62,7 +62,7 @@ let intialValue: CardSmallType = {
     vehicleNumber: "",
     vehicleType: "",
     designation: "",
-    drivingLicense: "",
+    drivingLicenseNo: "",
     vehicleModel: "",
     driverCard: false,
     generatorCard: false,
@@ -74,9 +74,9 @@ let intialValue: CardSmallType = {
     email: "",
     adminFirstName: "",
     adminLastName: "",
-    driverFirstName: "",
-    driverLastName: "",
-    contactNumber: "",
+    firstName: "",
+    lastName: "",
+    mobileNumber: "",
     tankCapacity: "",
     maximumPower: "",
 };
@@ -101,7 +101,7 @@ function SmallCard({
     vehicleNumber,
     vehicleType,
     designation,
-    drivingLicense,
+    drivingLicenseNo,
     vehicleModel,
     driverCard,
     generatorBrand,
@@ -113,11 +113,11 @@ function SmallCard({
     email,
     adminFirstName,
     adminLastName,
-    driverFirstName,
-    driverLastName,
+    firstName,
+    lastName,
     tankCapacity,
     maximumPower,
-    contactNumber,
+    mobileNumber,
     onCardClick,
 }: CardSmallType) {
     const { Title, Text } = Typography;
@@ -163,9 +163,7 @@ function SmallCard({
                 >
                     <div className="content-2-item">
                         {branchCard && <Title level={5}> {branchName}</Title>}
-                        {driverCard && (
-                            <Title level={5}> {driverFirstName}</Title>
-                        )}
+                        {driverCard && <Title level={5}> {firstName}</Title>}
                         {adminCard && (
                             <Title level={5}> {adminFirstName}</Title>
                         )}
@@ -186,7 +184,7 @@ function SmallCard({
                             {adminCard && (
                                 <Text strong type="secondary">
                                     {" "}
-                                    {contactNumber}
+                                    {mobileNumber}
                                 </Text>
                             )}
                             {branchCard && (
@@ -210,7 +208,7 @@ function SmallCard({
                             {driverCard && (
                                 <div className="admin-name">
                                     <Text strong type="secondary">
-                                        {drivingLicense}
+                                        {drivingLicenseNo}
                                     </Text>
                                     <br />
                                     <Text strong type="secondary">

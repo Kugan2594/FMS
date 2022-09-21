@@ -25,6 +25,7 @@ import OTPVerification from "../contents/Login/OTPVerification/OTPVerification";
 import Statistics from "../contents/Master/Statistics/Statistics";
 import Page from "../contents/Master/Statistics/Statistics";
 import SignUpSplitScreen from "../contents/Login/SignUp/SignUpSplitScreen";
+import StaticsHistory from "../contents/Home/Statics/StaticsHistory";
 
 const Loader = (Component: any) => (props: any) =>
     (
@@ -57,7 +58,12 @@ const PublicRoute: RouteObject[] = [
     {
         path: "home",
         element: <CustomLayout />,
-        children: [],
+        children: [
+            {
+                path: "allBranches",
+                element: <StaticsHistory />,
+            },
+        ],
     },
     {
         path: "master",

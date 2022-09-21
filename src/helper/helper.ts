@@ -41,6 +41,9 @@ export const errHandler = (err: any) => {
     // Emission Test
     errorBox("12101", "Emission Test Already Exist for this Vehicle");
 
+    // Emission Test
+    errorBox("12101", "Emission Test Already Exist for this Vehicle");
+
     // Driver
     errorBox("100016", "Email Already Exists");
     errorBox("13025", "Driving License No Already Exists");
@@ -154,5 +157,33 @@ export const branchAdminUpdateSuccess = () =>
 export const branchAdminDeleteSuccess = () =>
     notification.error({
         message: "Branch Admin Deleted Successfully",
+        duration: 3,
+    });
+notification.success({
+    message: "Driver Added Successfully",
+    duration: 3,
+});
+
+export const driverDeleteSuccess = () =>
+    notification.success({
+        message: "Driver Deleted Successfully",
+        duration: 3,
+    });
+
+export const branchAddSuccess = () =>
+    notification.success({
+        message: "Branch Added Successfully",
+        duration: 3,
+    });
+
+export const branchUpdateSuccess = () =>
+    notification.success({
+        message: "Branch Updated Successfully",
+        duration: 3,
+    });
+
+export const branchDeleteSuccess = () =>
+    notification.success({
+        message: "Branch Deleted Successfully",
         duration: 3,
     });
