@@ -102,15 +102,15 @@ function MasterTemplateWithSmallCard({
                                         progressData={data.progressData}
                                         adminFirstName={data.adminFirstName}
                                         adminLastName={data.adminLastName}
-                                        driverFirstName={data.driverFirstName}
-                                        driverLastName={data.driverLastName}
+                                        firstName={data.firstName}
+                                        lastName={data.lastName}
                                         isProgressBar={isProgressBar}
                                         privilege={privilege}
                                         adminCard={adminCard}
                                         branchCard={branchCard}
                                         vehicleCard={vehicleCard}
                                         generatorCard={generatorCard}
-                                        contactNumber={data.contactNumber}
+                                        mobileNumber={data.mobileNumber}
                                         driverCard={driverCard}
                                         designation={data.designation}
                                         nic={data.nic}
@@ -121,7 +121,7 @@ function MasterTemplateWithSmallCard({
                                         generatorName={data.generatorName}
                                         fuelType={data.fuelType}
                                         vehicleIcon={data.vehicleIcon}
-                                        drivingLicense={data.drivingLicense}
+                                        drivingLicenseNo={data.drivingLicenseNo}
                                         tankCapacity={data.tankCapacity}
                                         maximumPower={data.maximumPower}
                                     />

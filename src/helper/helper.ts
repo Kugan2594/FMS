@@ -32,10 +32,8 @@ export const errHandler = (err: any) => {
     errorBox("120001", "Invalid OAUTH Path");
     errorBox("104", "Vehicle Not Exists");
 
-<<<<<<< HEAD
   // Insurance Document
   errorBox("12201", "Insurance Document already exist for this Vehicle");
-=======
     // Vehicle
     errorBox("1306", "Vehicle Number Already Exists");
     errorBox("107", "Vehicle Depend");
@@ -45,7 +43,6 @@ export const errHandler = (err: any) => {
     errorBox("102", "Branch Not Exists");
     errorBox("120001", "Invalid OAUTH Path");
     errorBox("104", "Vehicle Not Exists");
->>>>>>> 67261256dbc22c93c4b21ab8695b64d1b0c8cb92
 
   // Revenue License
   errorBox("12001", "Revenue License Already Exist for this Vehicle");
