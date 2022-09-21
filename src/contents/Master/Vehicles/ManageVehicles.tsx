@@ -1,6 +1,7 @@
-import { ExclamationCircleOutlined } from "@ant-design/icons";
-import { Modal } from "antd";
+import { DownloadOutlined, ExclamationCircleOutlined } from "@ant-design/icons";
+import { Button, Modal, notification, Upload } from "antd";
 import { useEffect, useState } from "react";
+import { SYSTEM_CONFIG } from "../../../utils/StytemConfig";
 import { vehicleDeleteSuccess } from "../../../helper/helper";
 import MasterTemplateWithSmallCard from "../../../templates/MasterTemplateWithSmallCard";
 import { getUserDetails } from "../../Login/LoginAuthentication";
@@ -124,8 +125,65 @@ function ManageVehicles() {
         { id: 4, name: "FORD" },
     ];
 
+    const uploadProps = {
+        name: "file",
+        action: SYSTEM_CONFIG.baseUrl + "/csvUpload",
+        onChange(info: any) {
+            if (info.file.status !== "uploading") {
+            }
+
+            if (info.file.status === "done") {
+                getAllVehicles(getUserDetails().company_id);
+
+                if (info.file.response.hasOwnProperty("results")) {
+                    if (
+                        info.file.response.results.bulkImport
+                            .employeesDesignation.length > 0
+                    ) {
+                        notification.error({
+                            message: `Designations doesn't match for following Employees : ${info.file.response.results.bulkImport.employeesDesignation}`,
+                        });
+                    }
+                    if (
+                        info.file.response.results.bulkImport.employeesId
+                            .length > 0
+                    ) {
+                        notification.error({
+                            message: `Duplicate Employee IDs : ${info.file.response.results.bulkImport.employeesId}`,
+                            duration: 3,
+                        });
+                    }
+                    if (
+                        info.file.response.results.bulkImport.employeesEmail
+                            .length > 0
+                    ) {
+                        notification.error({
+                            message: `Duplicate Email Id : ${info.file.response.results.bulkImport.employeesEmail}`,
+                            duration: 3,
+                        });
+                    }
+                } else {
+                    notification.success({
+                        message: `File uploaded successfully : ${info.file.name}`,
+                        duration: 3,
+                    });
+                }
+            } else if (info.file.status === "error") {
+                console.log(info.file);
+                notification.error({
+                    message: `File upload failed: \n ${info.file.response.message}`,
+                    duration: 3,
+                });
+            }
+        },
+        showUploadList: false,
+    };
+
     return (
         <>
+            <Upload {...uploadProps}>
+                <Button icon={<DownloadOutlined />}></Button>
+            </Upload>
             <MasterTemplateWithSmallCard
                 data={vehicles}
                 dataCount={vehicles.length}

@@ -7,3 +7,4 @@ export const drivingLicenseNoRegex =
 export const amountNoRegex = /^([0-9])+$/;
 export const lifeTiimeMonthNoRegex = /^([0-9]{3})+$/;
 export const lifeTimeMileageNoRegex = /^([0-9]{3})+$/;
+export const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;

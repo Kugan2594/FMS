@@ -1,278 +1,151 @@
+import { ExclamationCircleOutlined } from "@ant-design/icons";
+import { Modal } from "antd";
+import { branchAdminDeleteSuccess } from "../../../helper/helper";
+import { useEffect, useState } from "react";
+import { getUserDetails } from "../../../contents/Login/LoginAuthentication";
 import MasterTemplateWithSmallCard from "../../../templates/MasterTemplateWithSmallCard";
-import { useState } from "react";
-import { Modal, Space } from "antd";
 import AddBranchAdmin from "../BranchAdmin/AddBranchAdmin";
-import { ExclamationCircleOutlined, RocketOutlined } from "@ant-design/icons";
-import ViewBranchAdmin from "../BranchAdmin/ViewBranchAdmin";
+import { deleteBranchAdminById, getAllBranchAdmin } from "./ServiceBranchAdmin";
 
 const { confirm } = Modal;
-const data = [
-    {
-        id: "1",
-        numberOfVehicles: 34,
-        progressData: 49,
-        itemName: "Vehicles",
-        branchLocation: "Colombo 06,Colombo",
-        branchName: "Colombo Branch",
-        adminName: "Michael Clarke",
-        contactNumber: "0772250114",
-        vehicleNumber: "MJ2200",
-        vehicleType: "car",
-        designation: "manager",
-        drivingLicense: "82763871",
-        vehicleModel: "Tyota MT",
-        generatorBrand: "Honda",
-        fuelType: "gasoline",
-        nic: "941234500V",
-        generatorName: "generator-A",
-        driverName: "michael Clarke",
-        vehicleIcon: <RocketOutlined />,
-        email: "kugan2594@gmail.com",
-        adminFirstName: "Michael",
-        adminLastName: "Clarke",
-        driverFirstName: "Michael",
-        driverLastName: "Clarke",
-    },
-    {
-        id: "2",
-        numberOfVehicles: 34,
-        progressData: 49,
-        itemName: "Vehicles",
-        branchLocation: "Triplicane",
-        branchName: "Colombo Branch",
-        adminName: "Michael Clarke",
-        contactNumber: "0772250114",
-        vehicleNumber: "MJ2200",
-        vehicleType: "car",
-        designation: "manager",
-        drivingLicense: "82763871",
-        vehicleModel: "Tyota MT",
-        generatorBrand: "Honda",
-        fuelType: "gasoline",
-        nic: "941234500V",
-        generatorName: "generator-A",
-        driverName: "michael Clarke",
-        vehicleIcon: <RocketOutlined />,
-        email: "kugan2594@gmail.com",
 
-        adminFirstName: "Michael",
-        adminLastName: "Clarke",
-        driverFirstName: "Michael",
-        driverLastName: "Clarke",
-    },
-    {
-        id: "3",
-        numberOfVehicles: 34,
-        progressData: 49,
-        itemName: "Vehicles",
-        branchLocation: "Colombo",
-        branchName: "Colombo Branch",
-        adminName: "Michael Clarke",
-        contactNumber: "0772250114",
-        vehicleNumber: "MJ2200",
-        vehicleType: "car",
-        designation: "manager",
-        drivingLicense: "82763871",
-        vehicleModel: "Tyota MT",
-        generatorBrand: "Honda",
-        fuelType: "gasoline",
-        nic: "941234500V",
-        generatorName: "generator-A",
-        driverName: "michael Clarke",
-        vehicleIcon: <RocketOutlined />,
-        email: "kugan2594@gmail.com",
-        adminFirstName: "Michael",
-        adminLastName: "Clarke",
-        driverFirstName: "Michael",
-        driverLastName: "Clarke",
-    },
-    {
-        id: "1",
-        numberOfVehicles: 34,
-        progressData: 49,
-        itemName: "Vehicles",
-        branchLocation: "Colombo",
-        branchName: "Colombo Branch",
-        adminName: "Michael Clarke",
-        contactNumber: "0772250114",
-        vehicleNumber: "MJ2200",
-        vehicleType: "car",
-        designation: "manager",
-        drivingLicense: "82763871",
-        vehicleModel: "Tyota MT",
-        generatorBrand: "Honda",
-        fuelType: "gasoline",
-        nic: "941234500V",
-        generatorName: "generator-A",
-        driverName: "michael Clarke",
-        vehicleIcon: <RocketOutlined />,
-        email: "kugan2594@gmail.com",
-        adminFirstName: "Michael",
-        adminLastName: "Clarke",
-        driverFirstName: "Michael",
-        driverLastName: "Clarke",
-    },
-    {
-        id: "1",
-        numberOfVehicles: 34,
-        progressData: 49,
-        itemName: "Vehicles",
-        branchLocation: "Colombo",
-        branchName: "Colombo Branch",
-        adminName: "Michael Clarke",
-        contactNumber: "0772250114",
-        vehicleNumber: "MJ2200",
-        vehicleType: "car",
-        designation: "manager",
-        drivingLicense: "82763871",
-        vehicleModel: "Tyota MT",
-        generatorBrand: "Honda",
-        fuelType: "gasoline",
-        nic: "941234500V",
-        generatorName: "generator-A",
-        driverName: "michael Clarke",
-        vehicleIcon: <RocketOutlined />,
-        email: "kugan2594@gmail.com",
-        adminFirstName: "Michael",
-        adminLastName: "Clarke",
-        driverFirstName: "Michael",
-        driverLastName: "Clarke",
-    },
-    {
-        id: "1",
-        numberOfVehicles: 34,
-        progressData: 49,
-        itemName: "Vehicles",
-        branchLocation: "Colombo",
-        branchName: "Colombo Branch",
-        adminName: "Michael Clarke",
-        contactNumber: "0772250114",
-        vehicleNumber: "MJ2200",
-        vehicleType: "car",
-        designation: "Manager",
-        drivingLicense: "82763871",
-        vehicleModel: "Tyota MT",
-        generatorBrand: "Honda",
-        fuelType: "gasoline",
-        nic: "941234500V",
-        generatorName: "generator-A",
-        driverName: "michael Clarke",
-        vehicleIcon: <RocketOutlined />,
-        email: "kugan2594@gmail.com",
-        adminFirstName: "Michael",
-        adminLastName: "Clarke",
-        driverFirstName: "Michael",
-        driverLastName: "Clarke",
-    },
-];
-interface ManageBranchType {}
 function ManageBranchAdmin() {
-    const [visible, setVisible] = useState(false);
-    const [ok, setOk] = useState(false);
-    const [edit, setEdit] = useState(false);
-    const [formValues, setFormValues] = useState("");
-    const onClickAddBranch = () => {};
-    const showModal = () => {
-        setVisible(!visible);
-    };
-    const handleOk = () => {
-        setVisible(!visible);
-        setEdit(false);
-    };
-    const handleCancel = () => {
-        setVisible(!visible);
-        setEdit(false);
-    };
-    const showEditModal = (data: any) => {
-        setEdit(true);
-        setVisible(!visible);
-        setFormValues(data);
+    const [addVisible, setAddVisible] = useState(false);
+    const [editVisible, seteditVisible] = useState(false);
+    const [branchAdminData, setbranchAdminData] = useState([]);
+    const [updateData, setupdateData] = useState([]);
+    const [action, setaction] = useState<string>("add");
+
+    const createData = (data: any) => {
+        let convertData = data.map((post: any) => {
+            return {
+                id: post.id,
+                numberOfVehicles: 34,
+                progressData: 49,
+                itemName: "Branch Admin",
+                branchLocation: "Colombo",
+                branchName: post.branchResponseDto.branchName,
+                adminName: post.firstName + " " + post.lastName,
+                contactNumber: post.mobileNumber,
+                vehicleNumber: null,
+                vehicleType: null,
+                designation: "Branch Admin",
+                drivingLicense: post.drivingLicenseNo,
+                vehicleModel: null,
+                generatorBrand: null,
+                fuelType: null,
+                nic: post.nic,
+                generatorName: null,
+                driverName: null,
+                vehicleIcon: null,
+                email: post.email,
+                adminFirstName: post.firstName,
+                adminLastName: post.lastName,
+                driverFirstName: null,
+                driverLastName: null,
+            };
+        });
+        return convertData;
     };
 
-    const [view, setView] = useState(false);
-    const deleteHandler = (id: any) => {
+    const getBranchAdmins = (companyId: number) => {
+        getAllBranchAdmin(companyId).then((res: any) => {
+            let data: [] = createData(res.results.branchAdmin);
+            setbranchAdminData(data);
+        });
+    };
+
+    const reloadTable = (res: any) => {
+        getBranchAdmins(getUserDetails().company_id);
+    };
+
+    const openAdd = () => {
+        setaction("add");
+        setAddVisible(true);
+        seteditVisible(false);
+    };
+
+    const openEdit = (data: any) => {
+        setaction("edit");
+        seteditVisible(true);
+        setupdateData(data);
+    };
+
+    const handleOk = () => {
+        setAddVisible(false);
+    };
+
+    const handleCancel = () => {
+        setAddVisible(false);
+        seteditVisible(false);
+    };
+
+    const deleteBranchAdmin = (id: number) => {
+        deleteBranchAdminById(id).then((res: any) => {
+            branchAdminDeleteSuccess();
+            reloadTable(res);
+        });
+    };
+
+    const deleteClickHandler = (id: any) => {
         confirm({
-            title: "Are you sure do you want to delete this Branch Admin?",
+            title: "Are you sure delete this Branch Admin?",
             icon: <ExclamationCircleOutlined />,
             okText: "Yes",
             okType: "danger",
             cancelText: "No",
-            onOk() {},
+            onOk() {
+                deleteBranchAdmin(id);
+            },
         });
     };
-    const handleViewCancel = () => {
-        setView(false);
-    };
-    const showViewModal = (data: string) => {
-        setView(true);
-        setFormValues(data);
-    };
+
+    useEffect(() => {
+        getBranchAdmins(getUserDetails().company_id);
+    }, []);
+
     return (
-        <div>
+        <>
             <MasterTemplateWithSmallCard
-                data={data}
-                dataCount={data.length}
-                headerOnSearch={() => console.log("SEARCHED")}
-                headerOnClickAdd={showModal}
-                cardOnClick={(data: string) => showViewModal(data)}
-                onClickDelete={(id: string) => deleteHandler(id)}
-                onClickUpdate={(data: any) => showEditModal(data)}
+                data={branchAdminData}
+                dataCount={branchAdminData.length}
+                headerOnSearch={() => {}}
+                headerOnClickAdd={openAdd}
+                cardOnClick={openAdd}
+                onClickDelete={(id: number) => {
+                    deleteClickHandler(id);
+                }}
+                onClickUpdate={(data: any) => openEdit(data)}
                 privilege={false}
-                branchCard={false}
                 adminCard={true}
                 isProgressBar={false}
-                vehicleCard={false}
-                generatorCard={false}
-                driverCard={false}
             />
-            <div>
-                {visible && (
-                    <Modal
-                        visible={visible}
-                        maskStyle={{ borderRadius: "25" }}
-                        footer={false}
-                        bodyStyle={{ borderRadius: "10" }}
-                        width={450}
-                    >
-                        {edit ? (
-                            <Space
-                                style={{
-                                    paddingBottom: "4%",
-                                    fontSize: "18px",
-                                }}
-                            >
-                                Edit branch Admin
-                            </Space>
-                        ) : (
-                            <Space
-                                style={{
-                                    paddingBottom: "4%",
-                                    fontSize: "18px",
-                                }}
-                            >
-                                Add New branch Admin
-                            </Space>
-                        )}
-                        <AddBranchAdmin
-                            onClickAdd={handleOk}
-                            onClickCancel={handleCancel}
-                            initialValues={edit ? formValues : {}}
-                        />
-                    </Modal>
-                )}
-                {view && (
-                    <Modal
-                        visible={view}
-                        maskStyle={{ borderRadius: "25" }}
-                        footer={false}
-                        onCancel={handleViewCancel}
-                        width={400}
-                    >
-                        <ViewBranchAdmin branchData={formValues} />
-                    </Modal>
-                )}
-            </div>
-        </div>
+            {addVisible ? (
+                <AddBranchAdmin
+                    title={"Add Branch Admin"}
+                    visible={addVisible}
+                    handleCancel={handleCancel}
+                    handleOk={handleOk}
+                    setAddVisible={setAddVisible}
+                    updateData={editVisible ? updateData : null}
+                    reloadTable={reloadTable}
+                    action={action}
+                />
+            ) : editVisible ? (
+                <AddBranchAdmin
+                    title={"Edit Branch Admin"}
+                    visible={editVisible}
+                    handleCancel={handleCancel}
+                    handleOk={handleOk}
+                    setAddVisible={seteditVisible}
+                    updateData={editVisible ? updateData : null}
+                    reloadTable={reloadTable}
+                    action={action}
+                />
+            ) : (
+                <></>
+            )}
+        </>
     );
 }
 

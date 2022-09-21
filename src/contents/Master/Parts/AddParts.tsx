@@ -6,7 +6,6 @@ function AddParts() {
     const [form] = Form.useForm();
     const { Option } = Select;
     const [open, setOpen] = useState(false);
-
     return (
         <>
             <Form id="form" name="basic" form={form}>
