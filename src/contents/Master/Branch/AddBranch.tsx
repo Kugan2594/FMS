@@ -8,6 +8,7 @@ import { getUserDetails } from "../../../contents/Login/LoginAuthentication";
 import React, { useState } from "react";
 import { errHandler, branchAddSuccess } from "../../../helper/helper";
 import { addBranch, editBranch } from "./ServicesBranch";
+import { contactNoRegex, emailRegex } from "../../../utils/Regex";
 interface AddBranchType {
   onClickCancel?: React.MouseEventHandler<HTMLElement> | undefined;
   onClickAdd?: React.MouseEventHandler<HTMLElement> | undefined;
@@ -87,8 +88,7 @@ function AddBranch(props: any) {
         address: branchData.address,
         phoneNumber: branchData.phoneNumber,
         email: branchData.email,
-        //   companyId:  getUserDetails().company_id
-        companyId: 1,
+        companyId: getUserDetails().company_id,
       };
 
       editBranch(data)
@@ -142,16 +142,34 @@ function AddBranch(props: any) {
               marginTop: "0px",
             }}
           >
-            <Form.Item name="branchName">
-              <Input label="branchName" />
+            <Form.Item name="branchName" required>
+              <Input label="Branch Name" />
             </Form.Item>
             <Form.Item name="address">
               <Input label="Address" />
             </Form.Item>
-            <Form.Item name="phoneNumber">
+            <Form.Item
+              rules={[
+                {
+                  pattern: new RegExp(contactNoRegex),
+
+                  message: "Enter valid Mobile",
+                },
+              ]}
+              name="phoneNumber"
+            >
               <Input label="Contact Number" />
             </Form.Item>
-            <Form.Item name="email">
+            <Form.Item
+              rules={[
+                {
+                  pattern: new RegExp(emailRegex),
+
+                  message: "Enter valid Email",
+                },
+              ]}
+              name="email"
+            >
               <Input label="email" />
             </Form.Item>
           </div>

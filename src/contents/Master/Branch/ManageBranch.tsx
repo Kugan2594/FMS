@@ -6,7 +6,6 @@ import { Modal, Space } from "antd";
 import ViewBranch from "./ViewBranch";
 import { getUserDetails } from "../../Login/LoginAuthentication";
 import { getAllBranchByCompanyId, deleteBranch } from "./ServicesBranch";
-import { branchDeleteSuccess, errHandler } from "../../../helper/helper";
 const { confirm } = Modal;
 function createData(data: any) {
   let convertData = data.map((post: any, index: any) => {
@@ -29,16 +28,14 @@ function ManageBranch() {
   const [view, setView] = useState(false);
   const [branch, setBranch] = useState([]);
   const [action, setaction] = useState("add");
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const showModal = () => {
-    setIsModalOpen(true);
+    setVisible(!visible);
   };
   const handleOk = () => {
     setVisible(!visible);
   };
   const handleCancel = () => {
-    // setVisible(!visible);
-    setIsModalOpen(false);
+    setVisible(!visible);
     setEdit(false);
   };
   const showEditModal = (data: any) => {
@@ -73,13 +70,7 @@ function ManageBranch() {
       okType: "danger",
       cancelText: "No",
       onOk() {
-        deleteBranch(id)
-          .then((res) => {
-            branchDeleteSuccess();
-          })
-          .catch((err) => {
-            errHandler(err);
-          });
+        deleteBranch(id);
         getAllBranchData(getUserDetails().company_id);
         console.log(id);
       },
@@ -90,7 +81,7 @@ function ManageBranch() {
     setView(true);
   };
   const handleViewCancel = () => {
-    setIsModalOpen(false);
+    setView(false);
   };
   const reloadTable = (res: any) => {
     getAllBranchData(getUserDetails().company_id);
@@ -117,11 +108,9 @@ function ManageBranch() {
       <div>
         {visible && (
           <Modal
-            // visible={visible}
+            visible={visible}
             maskStyle={{ borderRadius: "25" }}
             footer={false}
-            open={isModalOpen}
-            onCancel={handleCancel}
           >
             {edit ? (
               <Space
