@@ -14,7 +14,7 @@ interface DriverDataType {
 function AssignVehicle({ driverData, cancelClickHandler }: DriverDataType) {
   const [form] = Form.useForm();
 
-  const [assignedVehicle, setAssignedVehicle] = useState([]);
+  const [assignedVehicle, setAssignedVehicle] = useState({id:"", vehicles:[""]});
 
   const handleChange = (data: any) => {
     setAssignedVehicle(data);
@@ -102,7 +102,7 @@ function AssignVehicle({ driverData, cancelClickHandler }: DriverDataType) {
               </Form.Item>
             </Col>
             <Col span={18}>
-              <Form.Item name="assignedVehicles">
+              <Form.Item name="vehicles">
                 <Select
                   mode="multiple"
                   allowClear
@@ -130,7 +130,6 @@ function AssignVehicle({ driverData, cancelClickHandler }: DriverDataType) {
                 type="primary"
                 title="Assign Vehicle"
                 htmlType="submit"
-                onClick={() => console.log("AAAAAA", assignedVehicle)}
               />
             </div>
           </Form.Item>
