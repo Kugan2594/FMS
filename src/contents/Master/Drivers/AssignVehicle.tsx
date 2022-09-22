@@ -14,10 +14,11 @@ interface DriverDataType {
 function AssignVehicle({ driverData, cancelClickHandler }: DriverDataType) {
   const [form] = Form.useForm();
 
-  const [assignedVehicle, setAssignedVehicle] = useState({id:"", vehicles:[""]});
+  const [assignedVehicle, setAssignedVehicle] = useState({});
 
   const handleChange = (data: any) => {
-    setAssignedVehicle(data);
+    const newAssignedVehicle = {id: driverData.id, vehicles: data};
+    setAssignedVehicle(newAssignedVehicle);
   };
 
   const onFinish = (values: any) => {
