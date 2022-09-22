@@ -63,9 +63,14 @@ function ManageDrivers() {
     setIsProfileModalOpen(false);
   };
 
-  const deleteClickHandler = (id: any) => {
-    console.log("iddd", id);
+  const reloadTable = (res: any) => {
+    getAllDriverData(
+      getUserDetails().company_id,
+      getUserDetails().company_branch_id
+    );
+  };
 
+  const deleteClickHandler = (id: any) => {
     confirm({
       title: "Are you sure delete this Driver?",
       icon: <ExclamationCircleOutlined />,
@@ -73,11 +78,13 @@ function ManageDrivers() {
       okType: "danger",
       cancelText: "No",
       onOk() {
-        deleteDriver(id);
-        getAllDriverByCompanyIdAndBranchId(
-          getUserDetails().company_id,
-          getUserDetails().company_branch_id
+        deleteDriver(id).then(() =>
+          getAllDriverData(
+            getUserDetails().company_id,
+            getUserDetails().company_branch_id
+          )
         );
+
         driverDeleteSuccess();
       },
     });
@@ -135,6 +142,8 @@ function ManageDrivers() {
             isEdit={isEdit}
             updateDriverData={driverData}
             cancelClickHandler={handleCancel}
+            reloadTable={reloadTable}
+            setIsModelOpen={setIsModalOpen}
           />
         </Modal>
       )}

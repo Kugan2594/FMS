@@ -9,6 +9,7 @@ import {
 import { getUserDetails } from "../../Login/LoginAuthentication";
 import moment from "moment";
 import { ExclamationCircleOutlined } from "@ant-design/icons";
+import { revenueLicenseDocumentAddSuccess } from "../../../helper/helper";
 
 const { confirm } = Modal;
 
@@ -63,9 +64,10 @@ function ManageRevenueLicense() {
       okType: "danger",
       cancelText: "No",
       onOk() {
-        deleteRevenueLicense(id);
-        getAllRevenueLicenseData(getUserDetails().user_id);
-        console.log(id);
+        deleteRevenueLicense(id).then((res: any) => {
+          revenueLicenseDocumentAddSuccess();
+          reloadTable(res);
+        });
       },
     });
   };
@@ -89,6 +91,10 @@ function ManageRevenueLicense() {
 
   const onFinishAdd = () => {};
 
+  const reloadTable = (res: any) => {
+    getAllRevenueLicenseData(getUserDetails().user_id);
+  };
+
   return (
     <>
       <MasterTemplateWithLargeCard
@@ -111,7 +117,12 @@ function ManageRevenueLicense() {
           width={500}
           footer={null}
         >
-          <AddRevenueLicense updateData={updateData} isEdit={isEdit} />
+          <AddRevenueLicense
+            updateData={updateData}
+            isEdit={isEdit}
+            reloadTable={reloadTable}
+            setIsModelOpen={setIsModalOpen}
+          />
         </Modal>
       )}
     </>

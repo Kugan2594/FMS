@@ -78,7 +78,7 @@ function ManageGenerator() {
 
     const deleteClickHandler = (id: any) => {
         confirm({
-            title: "Are you sure delete this Emission Test Document?",
+            title: "Are you sure delete this Generator?",
             icon: <ExclamationCircleOutlined />,
             okText: "Yes",
             okType: "danger",

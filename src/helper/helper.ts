@@ -22,30 +22,24 @@ export const errHandler = (err: any) => {
   // Common
   errorBox("120000", "Notify Account Balance Not Enough");
 
-  // Vehicle
-  errorBox("1306", "Vehicle Number Already Exists");
-    errorBox("107", "Vehicle Depend");
-    errorBox("1300", "Vehicle doesn't exists in Resources");
-    errorBox("120002", "Invalid Resource Path");
-    errorBox("103", "Company Not Exists");
-    errorBox("102", "Branch Not Exists");
-    errorBox("120001", "Invalid OAUTH Path");
-    errorBox("104", "Vehicle Not Exists");
-
   // Insurance Document
   errorBox("12201", "Insurance Document already exist for this Vehicle");
-    // Vehicle
-    errorBox("1306", "Vehicle Number Already Exists");
-    errorBox("107", "Vehicle Depend");
-    errorBox("1300", "Vehicle doesn't exists in Resources");
-    errorBox("120002", "Invalid Resource Path");
-    errorBox("103", "Company Not Exists");
-    errorBox("102", "Branch Not Exists");
-    errorBox("120001", "Invalid OAUTH Path");
-    errorBox("104", "Vehicle Not Exists");
+
+  // Vehicle
+  errorBox("1306", "Vehicle Number Already Exists");
+  errorBox("107", "Vehicle Depend");
+  errorBox("1300", "Vehicle doesn't exists in Resources");
+  errorBox("120002", "Invalid Resource Path");
+  errorBox("103", "Company Not Exists");
+  errorBox("102", "Branch Not Exists");
+  errorBox("120001", "Invalid OAUTH Path");
+  errorBox("104", "Vehicle Not Exists");
 
   // Revenue License
   errorBox("12001", "Revenue License Already Exist for this Vehicle");
+
+  // Emission Test
+  errorBox("12101", "Emission Test Already Exist for this Vehicle");
 
   // Emission Test
   errorBox("12101", "Emission Test Already Exist for this Vehicle");
@@ -59,7 +53,6 @@ export const errHandler = (err: any) => {
   // Branch
   errorBox("1001", "Branch is depended");
 };
-
 //success message popups
 export const insuranceDocumentAddSuccess = () =>
   notification.success({
@@ -122,16 +115,16 @@ export const vehicleAddSuccess = () =>
   });
 
 export const vehicleUpdateSuccess = () =>
-    notification.success({
-        message: "Vehicle Updated Successfully",
-        duration: 3,
-    });
+  notification.success({
+    message: "Vehicle Updated Successfully",
+    duration: 3,
+  });
 
 export const vehicleDeleteSuccess = () =>
-    notification.success({
-        message: "Vehicle Deleted Successfully",
-        duration: 3,
-    });
+  notification.success({
+    message: "Vehicle Deleted Successfully",
+    duration: 3,
+  });
 
 export const fuelUpAddSuccess = () =>
   notification.success({
@@ -148,6 +141,33 @@ export const mileageAddSuccess = () =>
 export const driverAddSuccess = () =>
   notification.success({
     message: "Driver Added Successfully",
+    duration: 3,
+  });
+
+export const branchAdminAddSuccess = () =>
+  notification.success({
+    message: "Branch Admin Created Successfully",
+    duration: 3,
+  });
+
+export const branchAdminUpdateSuccess = () =>
+  notification.success({
+    message: "Branch Admin Details Updated Successfully",
+    duration: 3,
+  });
+
+export const branchAdminDeleteSuccess = () =>
+  notification.error({
+    message: "Branch Admin Deleted Successfully",
+    duration: 3,
+  });
+notification.success({
+  message: "Driver Added Successfully",
+  duration: 3,
+});
+export const serviceAddSuccess = () =>
+  notification.success({
+    message: "service Added Successfully",
     duration: 3,
   });
 
