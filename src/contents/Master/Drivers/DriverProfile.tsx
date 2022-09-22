@@ -16,7 +16,7 @@ function DriverProfile({ driverProfileData }: DriverProfileType) {
           {driverProfileData.image != null ? (
             <Image
               width="100%"
-              style={{ borderRadius: "50%" }}
+              style={{ borderRadius: "50%", objectFit: "cover" }}
               src={driverProfileData.image}
             />
           ) : (
