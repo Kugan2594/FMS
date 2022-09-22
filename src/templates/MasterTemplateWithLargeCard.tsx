@@ -25,6 +25,9 @@ interface TemplateType {
     cardOnClick?: any;
     updateButton?: any;
     deleteButton?: any;
+    isBulkImportExport?: boolean;
+    uploadProps?: any;
+    downloadProps?: any;
 }
 
 interface CardType {
@@ -49,11 +52,14 @@ function MasterTemplateWithLargeCard({
     cardOnClick,
     updateButton,
     deleteButton,
+    isBulkImportExport,
+    uploadProps,
+    downloadProps,
 }: TemplateType) {
   return (
     <div className="master-template-large-card">
       <div className="master-template-large-card-header">
-        <MasterHeader onSearch={headerOnSearch} onClickAdd={headerOnClickAdd} dataCount={dataCount} />
+        <MasterHeader onSearch={headerOnSearch} onClickAdd={headerOnClickAdd} dataCount={dataCount} isBulkImportExport={isBulkImportExport} uploadProps={uploadProps} downloadProps={downloadProps} />
       </div>
       <div className="master-template-large-card-content">
         <List

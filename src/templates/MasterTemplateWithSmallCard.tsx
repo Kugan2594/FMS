@@ -36,6 +36,9 @@ interface TemplateType {
     nic?: string;
     generatorName?: string;
     driverName?: string;
+    isBulkImportExport?: boolean;
+    uploadProps?: any;
+    downloadProps?: any;
 }
 
 function MasterTemplateWithSmallCard({
@@ -54,6 +57,9 @@ function MasterTemplateWithSmallCard({
     vehicleCard,
     generatorCard,
     driverCard,
+    isBulkImportExport,
+    uploadProps,
+    downloadProps,
 }: TemplateType) {
     return (
             <div className="master-template-small-card" style={{width:"100%"}}>
@@ -62,6 +68,9 @@ function MasterTemplateWithSmallCard({
                         onSearch={headerOnSearch}
                         onClickAdd={headerOnClickAdd}
                         dataCount={dataCount}
+                        isBulkImportExport={isBulkImportExport}
+                        uploadProps={uploadProps}
+                        downloadProps={downloadProps}
                     />
                 </div>
                 <div>
