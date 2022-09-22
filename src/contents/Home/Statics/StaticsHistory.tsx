@@ -1,10 +1,13 @@
-import { Card, Col, Row, Table, Typography } from "antd";
+import { Card, Col, DatePicker, Row, Table, Tag, Typography } from "antd";
 import Search from "antd/lib/input/Search";
 import type { ColumnsType } from "antd/es/table";
-import React from "react";
+import React, { useState } from "react";
 import "./statics.style.less";
+import { Button } from "../../../components/atoms/Button";
 
 const { Title } = Typography;
+const { RangePicker } = DatePicker;
+const { CheckableTag } = Tag;
 
 const columns: ColumnsType<any> = [
   {
@@ -15,17 +18,18 @@ const columns: ColumnsType<any> = [
   {
     title: "Branch",
     dataIndex: "branch",
-    width: 150,
+    width: 100,
   },
   {
     title: "Date",
     dataIndex: "date",
-    width: 150,
+    width: 100,
   },
   {
     title: "Amount",
     dataIndex: "amount",
-    width: 100,
+    width: 80,
+    align: "right",
   },
 ];
 
@@ -36,6 +40,7 @@ const data = [
     branch: "Jaffna",
     amount: 3000,
     date: "24 Mar 2022",
+    type: "Car",
   },
   {
     key: "2",
@@ -43,6 +48,7 @@ const data = [
     branch: "Jaffna",
     amount: 3000,
     date: "24 Mar 2022",
+    type: "Car",
   },
   {
     key: "3",
@@ -50,6 +56,7 @@ const data = [
     branch: "Jaffna",
     amount: 3000,
     date: "24 Mar 2022",
+    type: "Car",
   },
   {
     key: "4",
@@ -57,6 +64,7 @@ const data = [
     branch: "Jaffna",
     amount: 3000,
     date: "24 Mar 2022",
+    type: "Car",
   },
   {
     key: "5",
@@ -64,6 +72,7 @@ const data = [
     branch: "Jaffna",
     amount: 3000,
     date: "24 Mar 2022",
+    type: "Car",
   },
   {
     key: "6",
@@ -71,6 +80,7 @@ const data = [
     branch: "Jaffna",
     amount: 3000,
     date: "24 Mar 2022",
+    type: "Bike",
   },
   {
     key: "7",
@@ -78,6 +88,7 @@ const data = [
     branch: "Jaffna",
     amount: 3000,
     date: "24 Mar 2022",
+    type: "Bike",
   },
   {
     key: "8",
@@ -85,6 +96,7 @@ const data = [
     branch: "Jaffna",
     amount: 3000,
     date: "24 Mar 2022",
+    type: "Van",
   },
   {
     key: "9",
@@ -92,6 +104,7 @@ const data = [
     branch: "Jaffna",
     amount: 3000,
     date: "24 Mar 2022",
+    type: "Van",
   },
   {
     key: "10",
@@ -99,6 +112,7 @@ const data = [
     branch: "Jaffna",
     amount: 3000,
     date: "24 Mar 2022",
+    type: "Car",
   },
   {
     key: "11",
@@ -106,6 +120,7 @@ const data = [
     branch: "Jaffna",
     amount: 3000,
     date: "24 Mar 2022",
+    type: "Van",
   },
   {
     key: "12",
@@ -113,6 +128,7 @@ const data = [
     branch: "Jaffna",
     amount: 3000,
     date: "24 Mar 2022",
+    type: "Truck",
   },
   {
     key: "13",
@@ -120,6 +136,7 @@ const data = [
     branch: "Jaffna",
     amount: 3000,
     date: "24 Mar 2022",
+    type: "Car",
   },
   {
     key: "14",
@@ -127,6 +144,7 @@ const data = [
     branch: "Jaffna",
     amount: 3000,
     date: "24 Mar 2022",
+    type: "Van",
   },
   {
     key: "15",
@@ -134,23 +152,68 @@ const data = [
     branch: "Jaffna",
     amount: 3000,
     date: "24 Mar 2022",
+    type: "Truck",
   },
 ];
 
+const vehicleTypes = ["Car", "Truck", "Van", "Bike"];
+
+const tagsData = ["All Vehicles", ...vehicleTypes];
+
 function StaticsHistory() {
+  const [selectedTags, setSelectedTags] = useState("All Vehicles");
+  const [mockData, setMockData] = useState(data);
+
+  const handleChange = (tag: string) => {    
+    // const nextSelectedTags =
+    //   checked && selectedTags.includes("All Vehicles")
+    //     ? [...selectedTags, tag]
+    //     : selectedTags.filter((t) => t !== tag);
+    // console.log("You are interested in: ", nextSelectedTags);
+    // setSelectedTags(nextSelectedTags);
+  };
+
+  const clickHandler = (tag: any) => {
+    if (tag === "All Vehicles") {
+      setMockData(data);
+    } else {
+      setMockData(data.filter((data) => data.type === tag));
+    }
+  };
+
   return (
     <div className="statics-history">
       <Card className="statics-history-card">
-        <Title level={5}>Expanse History</Title>
+        <Title level={5}>Expense History</Title>
         <div className="statics-history-header">
           <Row>
             <Col span={12}>
               <Search />
             </Col>
+            <Col span={12}>
+              <RangePicker bordered={false} />
+            </Col>
           </Row>
+          <div className="statics-history-tag">
+            {tagsData.map((tag) => {
+              return (
+                <Button
+                  onClick={() => clickHandler(tag)}
+                  size="small"
+                  title={tag}
+                />
+              );
+            })}
+          </div>
         </div>
         <div className="statics-history-content">
-          <Table columns={columns} dataSource={data} size="small" />
+          <Table
+            pagination={false}
+            scroll={{ y: 200 }}
+            columns={columns}
+            dataSource={mockData}
+            size="small"
+          />
         </div>
       </Card>
     </div>

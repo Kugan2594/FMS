@@ -65,6 +65,7 @@ function MasterTemplateWithLargeCard({
               console.log(page);
             },
             pageSize: 5,
+            showSizeChanger: false,
           }}
           dataSource={data}
           renderItem={(data) => (

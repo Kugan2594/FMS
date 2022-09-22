@@ -1,4 +1,4 @@
-import React, { MouseEventHandler } from "react";
+import React, { MouseEventHandler, FormEventHandler } from "react";
 import { Button } from "antd";
 
 interface ButtonPropsType {
@@ -15,6 +15,9 @@ interface ButtonPropsType {
         | undefined;
     className?: string;
     htmlType?: "submit" | "button" | "reset";
+    size?: 'small' | 'middle' | 'large';
+    onChange?: any;
+    disabled?: boolean;
 }
 
 const CustomButton = (props: ButtonPropsType) => {
@@ -25,6 +28,9 @@ const CustomButton = (props: ButtonPropsType) => {
             onClick={props.onClick}
             className={props.className}
             htmlType={props.htmlType}
+            size={props.size}
+            onChange={props.onChange}
+            disabled={props.disabled}
         >
             {props.title}
         </Button>
