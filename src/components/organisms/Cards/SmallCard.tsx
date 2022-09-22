@@ -1,5 +1,5 @@
-import { SettingOutlined } from "@ant-design/icons";
-import { Button, Card, Col, Image, Progress, Row, Typography } from "antd";
+import { SettingOutlined, CarOutlined } from "@ant-design/icons";
+import { Button, Card, Col, Image, Progress, Row, Tooltip, Typography } from "antd";
 import React, { useState } from "react";
 import "./card.style.less";
 export interface CardSmallType {
@@ -41,6 +41,8 @@ export interface CardSmallType {
     tankCapacity?: any;
     maximumPower?: any;
     onCardClick?: React.MouseEventHandler<HTMLDivElement> | undefined;
+    status?: boolean;
+    onClickVehicleAssign?: any;
 }
 let intialValue: CardSmallType = {
     id: "",
@@ -119,6 +121,8 @@ function SmallCard({
     maximumPower,
     mobileNumber,
     onCardClick,
+    status,
+    onClickVehicleAssign,
 }: CardSmallType) {
     const { Title, Text } = Typography;
 
@@ -318,24 +322,18 @@ function SmallCard({
                                     </div>
                                 </div>
                             )}
-                            {driverCard && (
-                                <div className="number-of-vehicles">
-                                    <div
-                                        className="number"
-                                        style={{
-                                            fontSize: "24px",
-                                            padding: "0px",
-                                        }}
-                                    >
-                                        {vehicleIcon}
-                                    </div>{" "}
-                                    <div className="item-name">
-                                        <Text strong type="secondary">
-                                            {vehicleType}
-                                        </Text>{" "}
-                                    </div>
-                                </div>
-                            )}
+                            {driverCard &&
+                            <Tooltip placement="top" title={"Assign Vehicle"}>
+                            <Button
+                            disabled={!status}
+                            onClick={() => onClickVehicleAssign(id)}
+                            style={{ borderRadius: 5, margin: "10px" }}
+                            >
+                                
+                            <CarOutlined style={{ fontSize: "24px" }} />
+                            </Button>
+                            </Tooltip>
+                            }
                         </div>
                         <div className="actions">
                             {privilege && (

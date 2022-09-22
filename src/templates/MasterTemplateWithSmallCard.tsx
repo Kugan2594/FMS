@@ -39,6 +39,7 @@ interface TemplateType {
     isBulkImportExport?: boolean;
     uploadProps?: any;
     downloadProps?: any;
+    onClickVehicleAssign?: any;
 }
 
 function MasterTemplateWithSmallCard({
@@ -60,6 +61,7 @@ function MasterTemplateWithSmallCard({
     isBulkImportExport,
     uploadProps,
     downloadProps,
+    onClickVehicleAssign,
 }: TemplateType) {
     return (
             <div className="master-template-small-card" style={{width:"100%"}}>
@@ -105,6 +107,10 @@ function MasterTemplateWithSmallCard({
                                                 data.vehicleNumber
                                             );
                                         }}
+                                        onClickVehicleAssign={() => {
+                                            onClickVehicleAssign(data);
+                                        }}
+                                        status={data.status}
                                         numberOfVehicles={data.numberOfVehicles}
                                         itemName={data.itemName}
                                         image={data.image}
