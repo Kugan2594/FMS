@@ -8,7 +8,7 @@ import { getUserDetails } from "../../../contents/Login/LoginAuthentication";
 import React, { useState } from "react";
 import { errHandler, branchAddSuccess } from "../../../helper/helper";
 import { addBranch, editBranch } from "./ServicesBranch";
-import { contactNoRegex, emailRegex } from "../../../utils/Regex";
+import { phoneNumberRegex, emailRegex } from "../../../utils/Regex";
 interface AddBranchType {
   onClickCancel?: React.MouseEventHandler<HTMLElement> | undefined;
   onClickAdd?: React.MouseEventHandler<HTMLElement> | undefined;
@@ -151,7 +151,7 @@ function AddBranch(props: any) {
             <Form.Item
               rules={[
                 {
-                  pattern: new RegExp(contactNoRegex),
+                  pattern: new RegExp(phoneNumberRegex),
 
                   message: "Enter valid Mobile",
                 },

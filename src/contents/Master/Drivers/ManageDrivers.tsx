@@ -117,7 +117,7 @@ function ManageDrivers() {
   };
 
   return (
-    <div>
+    <>
       <MasterTemplateWithSmallCard
         data={driver}
         dataCount={driver.length}
@@ -159,7 +159,7 @@ function ManageDrivers() {
           <DriverProfile driverProfileData={driverData} />
         </Modal>
       )}
-    </div>
+    </>
   );
 }
 
