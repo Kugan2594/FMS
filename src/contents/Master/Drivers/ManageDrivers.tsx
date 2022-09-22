@@ -11,6 +11,7 @@ import {
 } from "./ServiceDriver";
 import { getUserDetails } from "../../Login/LoginAuthentication";
 import { driverDeleteSuccess } from "../../../helper/helper";
+import AssignVehicle from "./AssignVehicle";
 
 const { confirm } = Modal;
 
@@ -29,6 +30,7 @@ function createData(data: any) {
       vehicleIcon: <RocketOutlined />,
       email: post.userResponseDto.email,
       image: null,
+      status: post.userResponseDto.status,
     };
   });
   return convertData;
@@ -40,6 +42,7 @@ function ManageDrivers() {
   const [isEdit, setisEdit] = useState(false);
   const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
   const [driver, setDriver] = useState([]);
+  const [isAssignVehicleModal, setIsAssignVehicleModal] = useState(false);
 
   const showModal = () => {
     setIsModalOpen(true);
@@ -52,6 +55,11 @@ function ManageDrivers() {
     setDriverData(data);
   };
 
+  const assignVehicleHandler = (data: any) => {
+    setIsAssignVehicleModal(true);
+    setDriverData(data);
+  }
+
   const handleOk = () => {
     setIsModalOpen(false);
     setisEdit(false);
@@ -61,6 +69,7 @@ function ManageDrivers() {
     setIsModalOpen(false);
     setisEdit(false);
     setIsProfileModalOpen(false);
+    setIsAssignVehicleModal(false);
   };
 
   const reloadTable = (res: any) => {
@@ -127,6 +136,7 @@ function ManageDrivers() {
         onClickDelete={(id: any) => deleteClickHandler(id)}
         onClickUpdate={(data: any) => updateClickHandler(data)}
         driverCard={true}
+        onClickVehicleAssign={(data: any) => assignVehicleHandler(data)}
       />
       {isModalOpen && (
         <Modal
@@ -157,6 +167,18 @@ function ManageDrivers() {
           footer={false}
         >
           <DriverProfile driverProfileData={driverData} />
+        </Modal>
+      )}
+      {isAssignVehicleModal && (
+        <Modal
+          open={isAssignVehicleModal}
+          onOk={handleOk}
+          onCancel={handleCancel}
+          closable={false}
+          width={"50%"}
+          footer={false}
+        >
+          <AssignVehicle driverData={driverData} cancelClickHandler={handleCancel} />
         </Modal>
       )}
     </>
