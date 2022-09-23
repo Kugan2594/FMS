@@ -82,8 +82,8 @@ function Profile({ userProfileData, closeOnClickHandler }: ProfileType) {
             <div className="user-profile-image">
               {userProfileData.image != null ? (
                 <Image
-                  width="150px"
-                  height= "150px"
+                  width="120px"
+                  height= "120px"
                   style={{ borderRadius: "50%", objectFit: "cover" }}
                   src={userProfileData.image}
                 />

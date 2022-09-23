@@ -6,7 +6,8 @@ const getAllDriverByCompanyIdAndBranchId = (companyId: number,branchId: number) 
       "get",
       "fm-web",
       null,
-      `/driver/${companyId}/${branchId}`,
+      // `/driver/${companyId}/${branchId}`,
+      `/driver/1/1`,
       "token",
       "",
       ""
