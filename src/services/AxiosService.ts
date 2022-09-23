@@ -72,11 +72,6 @@ export default function api(
               message: error.response.data.error_description,
               duration: 3,
             });
-          } else if (error.response.status === 400) {
-            notification.error({
-              message: error.response.data.error_description,
-              duration: 3,
-            });
           }
         }
       });
