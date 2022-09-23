@@ -59,9 +59,33 @@ const getAllVehiclesFromResourcesForDropDown = () => {
   });
 };
 
+const getAllVehiclesByCompanyIdAndBranchId = (
+  companyId: number,
+  branchId: number
+) => {
+  return new Promise((resolve, reject) => {
+    api(
+      "get",
+      "co-web",
+      null,
+      `/companyVehicle/${companyId}/${branchId}`,
+      "token",
+      "",
+      ""
+    )
+      .then((response: any) => {
+        resolve(response.data);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+};
+
 export {
   addVehicle,
   getAllVehiclesByCompanyId,
   deleteVehicleByVehicleNumberAndCompanyId,
   getAllVehiclesFromResourcesForDropDown,
+  getAllVehiclesByCompanyIdAndBranchId,
 };
