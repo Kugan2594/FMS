@@ -1,7 +1,12 @@
 import { Col, Form, Image, Row, Select, Typography } from "antd";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import User from "../../../assets/User.svg";
 import { Button } from "../../../components/atoms/Button";
+import {
+  getAllocatedVehicleByDriverId,
+  getAllVehicleByCompanyIdAndBranchId,
+} from "./ServiceDriver";
+import { getUserDetails } from "../../../contents/Login/LoginAuthentication";
 
 const { Title, Text } = Typography;
 const { Option } = Select;
@@ -13,11 +18,25 @@ interface DriverDataType {
 
 function AssignVehicle({ driverData, cancelClickHandler }: DriverDataType) {
   const [form] = Form.useForm();
+  const [vehicle, setVehicle] = useState([]);
 
-  const [assignedVehicle, setAssignedVehicle] = useState({});
+  const [assignedVehicle, setAssignedVehicle] = useState({
+    userId: driverData.userId,
+    vehicleNumber: [],
+  });
+  useEffect(() => {
+    getVehicleSelectData(
+      getUserDetails().company_id,
+      getUserDetails().company_branch_id
+    );
+    getAllocatedVehicleData(driverData.userId);
+  }, []);
 
   const handleChange = (data: any) => {
-    const newAssignedVehicle = {id: driverData.id, vehicles: data};
+    const newAssignedVehicle = {
+      userId: driverData.userId,
+      vehicleNumber: data,
+    };
     setAssignedVehicle(newAssignedVehicle);
   };
 
@@ -27,31 +46,67 @@ function AssignVehicle({ driverData, cancelClickHandler }: DriverDataType) {
 
   const onFinishFailed = () => {};
 
+  const getVehicleSelectData = (companyId: number, branchId: number) => {
+    getAllVehicleByCompanyIdAndBranchId(companyId, branchId).then(
+      (res: any) => {
+        let data: any = [];
+        res.results.vehicleByCompanyAndBranch.map((post: any) => {
+          data.push({
+            value: post.vehicleNumber,
+            label: `${post.vehicleNumber}`,
+          });
+        });
+        setVehicle(data);
+      }
+    );
+  };
+
+  const getAllocatedVehicleData = (userId: number) => {
+    getAllocatedVehicleByDriverId(userId).then((res: any) => {
+      let data: any = [];
+      res.results.vehicleAllocation.map((post: any) => {
+        data.push({
+          userId: driverData.userId,
+          vehicleNumber: post.vehicleNumber,
+        });
+      });
+
+      const vehicleArray = data.map((vehicle: any) => vehicle.vehicleNumber);
+      const newAssignedVehicle = {
+        userId: driverData.userId,
+        vehicleNumber: vehicleArray,
+      };
+      console.log("LLLLL", newAssignedVehicle);
+
+      setAssignedVehicle(newAssignedVehicle);
+    });
+  };
+
   return (
     <div className="assignVehicle">
       <Row gutter={8} align="middle">
         <Col span={6}>
           <div className="assignVehicle-image-container">
-          <div className="assignVehicle-image">
-            {driverData.image != null ? (
-              <Image
-                width="100%"
-                style={{ borderRadius: "50%" }}
-                src={driverData.image}
-              />
-            ) : (
-              <Image
-                width="100%"
-                style={{ borderRadius: "50%" }}
-                preview={false}
-                src={User}
-              />
-            )}
+            <div className="assignVehicle-image">
+              {driverData.image != null ? (
+                <Image
+                  width="100%"
+                  style={{ borderRadius: "50%" }}
+                  src={driverData.image}
+                />
+              ) : (
+                <Image
+                  width="100%"
+                  style={{ borderRadius: "50%" }}
+                  preview={false}
+                  src={User}
+                />
+              )}
             </div>
           </div>
         </Col>
         <Col span={18}>
-          <div className="assignVehicle-detail-header" >
+          <div className="assignVehicle-detail-header">
             <Title className="assignVehicle-detail-title" level={4}>
               {driverData.firstName + " " + driverData.lastName}
             </Title>
@@ -103,7 +158,7 @@ function AssignVehicle({ driverData, cancelClickHandler }: DriverDataType) {
               </Form.Item>
             </Col>
             <Col span={18}>
-              <Form.Item name="vehicles">
+              <Form.Item name="vehicleNumber">
                 <Select
                   mode="multiple"
                   allowClear
@@ -111,12 +166,8 @@ function AssignVehicle({ driverData, cancelClickHandler }: DriverDataType) {
                   style={{ width: "80%", borderBottom: "1px solid #ccccb3" }}
                   placeholder="Select Vehicles"
                   onChange={handleChange}
-                >
-                  <Option value="v1">V1</Option>
-                  <Option value="v2">V2</Option>
-                  <Option value="v3">V3</Option>
-                  <Option value="v4">V4</Option>
-                </Select>
+                  options={vehicle}
+                ></Select>
               </Form.Item>
             </Col>
           </Row>
@@ -131,6 +182,7 @@ function AssignVehicle({ driverData, cancelClickHandler }: DriverDataType) {
                 type="primary"
                 title="Assign Vehicle"
                 htmlType="submit"
+                onClick={() => console.log("KKKKK", assignedVehicle)}
               />
             </div>
           </Form.Item>

@@ -52,6 +52,9 @@ export const errHandler = (err: any) => {
 
   // Branch
   errorBox("1001", "Branch is depended");
+
+  // User
+  errorBox("100018", "You already Verified");
 };
 //success message popups
 export const insuranceDocumentAddSuccess = () =>
@@ -192,5 +195,11 @@ export const branchUpdateSuccess = () =>
 export const branchDeleteSuccess = () =>
   notification.success({
     message: "Branch Deleted Successfully",
+    duration: 3,
+  });
+
+export const userVerifiedSuccess = () =>
+  notification.success({
+    message: "User Verified Successfully",
     duration: 3,
   });

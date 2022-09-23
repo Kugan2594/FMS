@@ -8,3 +8,5 @@ export const amountNoRegex = /^([0-9])+$/;
 export const lifeTiimeMonthNoRegex = /^([0-9]{3})+$/;
 export const lifeTimeMileageNoRegex = /^([0-9]{3})+$/;
 export const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+export const contactNoRegex =
+  /^(?:0|0094|\+94)?(?:(7)|21(0|1|2|3|4|5|6|7|8|9)\d)\d{7}$/;

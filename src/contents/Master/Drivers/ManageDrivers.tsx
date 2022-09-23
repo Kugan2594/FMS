@@ -19,6 +19,7 @@ function createData(data: any) {
   let convertData = data.map((post: any, index: any) => {
     return {
       id: post.id,
+      userId: post.userResponseDto.id,
       branchId: post.branchResponseDto.branchName,
       mobileNumber: post.userResponseDto.mobileNumber,
       // vehicleType: "car",
@@ -58,7 +59,7 @@ function ManageDrivers() {
   const assignVehicleHandler = (data: any) => {
     setIsAssignVehicleModal(true);
     setDriverData(data);
-  }
+  };
 
   const handleOk = () => {
     setIsModalOpen(false);
@@ -178,7 +179,10 @@ function ManageDrivers() {
           width={"50%"}
           footer={false}
         >
-          <AssignVehicle driverData={driverData} cancelClickHandler={handleCancel} />
+          <AssignVehicle
+            driverData={driverData}
+            cancelClickHandler={handleCancel}
+          />
         </Modal>
       )}
     </>
