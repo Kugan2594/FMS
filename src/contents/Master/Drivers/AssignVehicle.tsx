@@ -20,10 +20,7 @@ function AssignVehicle({ driverData, cancelClickHandler }: DriverDataType) {
   const [form] = Form.useForm();
   const [vehicle, setVehicle] = useState([]);
 
-  const [assignedVehicle, setAssignedVehicle] = useState({
-    userId: driverData.userId,
-    vehicleNumber: [],
-  });
+  const [assignedVehicle, setAssignedVehicle] = useState([]);
   useEffect(() => {
     getVehicleSelectData(
       getUserDetails().company_id,
@@ -33,12 +30,13 @@ function AssignVehicle({ driverData, cancelClickHandler }: DriverDataType) {
   }, []);
 
   const handleChange = (data: any) => {
-    const newAssignedVehicle = {
-      userId: driverData.userId,
-      vehicleNumber: data,
-    };
-    setAssignedVehicle(newAssignedVehicle);
+    setAssignedVehicle(data);
   };
+
+  // {
+  //   userId: driverData.userId,
+  //   vehicleNumber: assignedVehicle
+  // }
 
   const onFinish = (values: any) => {
     let data: object = {};
@@ -65,20 +63,9 @@ function AssignVehicle({ driverData, cancelClickHandler }: DriverDataType) {
     getAllocatedVehicleByDriverId(userId).then((res: any) => {
       let data: any = [];
       res.results.vehicleAllocation.map((post: any) => {
-        data.push({
-          userId: driverData.userId,
-          vehicleNumber: post.vehicleNumber,
-        });
+        data.push(post.vehicleNumber);
       });
-
-      const vehicleArray = data.map((vehicle: any) => vehicle.vehicleNumber);
-      const newAssignedVehicle = {
-        userId: driverData.userId,
-        vehicleNumber: vehicleArray,
-      };
-      console.log("LLLLL", newAssignedVehicle);
-
-      setAssignedVehicle(newAssignedVehicle);
+      setAssignedVehicle(data);
     });
   };
 
@@ -147,7 +134,6 @@ function AssignVehicle({ driverData, cancelClickHandler }: DriverDataType) {
           id="addDriver-form"
           name="basic"
           form={form}
-          initialValues={assignedVehicle}
           onFinish={onFinish}
           onFinishFailed={onFinishFailed}
         >
@@ -158,8 +144,9 @@ function AssignVehicle({ driverData, cancelClickHandler }: DriverDataType) {
               </Form.Item>
             </Col>
             <Col span={18}>
-              <Form.Item name="vehicleNumber">
+              <Form.Item>
                 <Select
+                  value={assignedVehicle}
                   mode="multiple"
                   allowClear
                   bordered={false}

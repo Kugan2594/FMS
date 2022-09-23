@@ -164,10 +164,7 @@ export const branchAdminDeleteSuccess = () =>
     message: "Branch Admin Deleted Successfully",
     duration: 3,
   });
-notification.success({
-  message: "Driver Added Successfully",
-  duration: 3,
-});
+
 export const serviceAddSuccess = () =>
   notification.success({
     message: "service Added Successfully",
