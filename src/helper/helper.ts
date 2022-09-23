@@ -55,6 +55,9 @@ export const errHandler = (err: any) => {
 
   // User
   errorBox("100018", "You already Verified");
+
+  // Vehicle Service
+  errorBox("401", "Vehicle Service Already Exists");
 };
 //success message popups
 export const insuranceDocumentAddSuccess = () =>
@@ -198,5 +201,11 @@ export const branchDeleteSuccess = () =>
 export const userVerifiedSuccess = () =>
   notification.success({
     message: "User Verified Successfully",
+    duration: 3,
+  });
+
+export const VehicleServiceDeletedSuccess = () =>
+  notification.success({
+    message: "Vehicle Service Deleted Successfully",
     duration: 3,
   });
