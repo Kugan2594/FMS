@@ -8,6 +8,7 @@ import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
 import getUserProfileDetails from "./ServiceProfile";
 import { getUserDetails } from "../../../contents/Login/LoginAuthentication";
 import { getAllDrivingLicenseTypes } from "../../../contents/Settings/DrivingLicenseType/ServiceDrivingLicenseType";
+import { phoneNumberRegex } from "../../../utils/Regex";
 
 
 const { Title, Text } = Typography;
@@ -50,9 +51,9 @@ const beforeUpload = (file: RcFile) => {
 };
 
 function Profile({closeOnClickHandler }: ProfileType) {
+  const [form] = Form.useForm();
   const [userProfile, setUserProfile]: any = useState({});
   const [isEdit, setIsEdit] = useState(false);
-  const [form] = Form.useForm();
   const [imageUrl, setImageUrl] = useState<string>(
     userProfile.image != null && userProfile.image
   );
@@ -62,7 +63,6 @@ function Profile({closeOnClickHandler }: ProfileType) {
   
 
   console.log("PROFILE", userProfile);
-  
 
   const getProfileData = (userId: number) => {
     let data: any = {};
@@ -248,10 +248,10 @@ function Profile({closeOnClickHandler }: ProfileType) {
           <Form
             id="addDriver-form"
             name="basic"
-            //   form={form}
+            form={form}
             initialValues={userProfile}
-            //   onFinish={onFinish}
-            //   onFinishFailed={onFinishFailed}
+            // onFinish={onFinish}
+            // onFinishFailed={onFinishFailed}
           >
             <Form.Item name="image">
               <Upload
@@ -286,7 +286,14 @@ function Profile({closeOnClickHandler }: ProfileType) {
                 style={{ borderBottom: "1px solid #ccccb3" }}
               />
             </Form.Item>
-            <Form.Item name="mobileNumber">
+            <Form.Item name="mobileNumber"
+            rules={[
+              {
+                pattern: new RegExp(phoneNumberRegex),
+                message: "Enter valid Mobile No Ex:- 947*********",
+              },
+            ]}
+            >
               <Input
                 placeholder="Contact Number"
                 required
@@ -295,9 +302,9 @@ function Profile({closeOnClickHandler }: ProfileType) {
               />
             </Form.Item>
             {getUserDetails().roleName === "COMPANYADMIN" &&
-            <Form.Item name="companyName">
+            <Form.Item>
               <Input
-              value={getUserDetails().company_branch_name}
+                value={getUserDetails().company_name}
                 placeholder="Company Name"
                 required
                 bordered={false}
