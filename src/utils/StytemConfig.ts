@@ -1,4 +1,4 @@
-const BASE_URL: string = "192.168.1.81";
+const BASE_URL: string = "localhost";
 const FM_WEB_PORT: number = 1014;
 const FM_LOGIN_BASE_URL = `http://${BASE_URL}:${FM_WEB_PORT}/fleet-management-oauth`;
 const FM_WEB_BASE_URL = `http://${BASE_URL}:${FM_WEB_PORT}/fleet-management-oauth/api/v1`;
@@ -17,5 +17,5 @@ export const SYSTEM_CONFIG = {
     oauthClient: oauthClient,
     loginBaseUrl: FM_LOGIN_BASE_URL,
     corporateUrl: FM_CORP_BASE_URL,
-    adminUrl : FM_ADMIN_BASE_URL
+    adminUrl: FM_ADMIN_BASE_URL,
 };
