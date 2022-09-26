@@ -17,7 +17,6 @@ function AddService(props: any) {
     const [fileList, setFileList] = useState([]);
     const { Option } = Select;
     let vehicleNum: string;
-
     useEffect(() => {
         getVehicleSelectData(getUserDetails().user_id);
         getAllServicesSelectData();
@@ -32,7 +31,6 @@ function AddService(props: any) {
                 });
                 vehicleNum = post.vehicleNumber;
                 console.log("vehicle", vehicleNum);
-
                 return null;
             });
             setVehicle(data);
@@ -92,7 +90,7 @@ function AddService(props: any) {
                                 bordered={false}
                                 style={{ borderBottom: "1px solid #ccccb3" }}
                                 options={vehicle}
-                            ></Select>
+                            />
                         </Form.Item>
                         <Form.Item name="serviceDate">
                             <DatePicker
