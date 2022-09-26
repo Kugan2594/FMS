@@ -16,7 +16,7 @@ function DriverProfile({ driverProfileData }: DriverProfileType) {
           {driverProfileData.image != null ? (
             <Image
               width="100%"
-              style={{ borderRadius: "50%" }}
+              style={{ borderRadius: "50%", objectFit: "cover" }}
               src={driverProfileData.image}
             />
           ) : (
@@ -80,9 +80,9 @@ function DriverProfile({ driverProfileData }: DriverProfileType) {
         <div className="driver-detail">
           <Text>Assign Vehicles: </Text>
           <br />
-            {driverProfileData.assignedVehicles.map((vehicle: any) => {
+            {/* {driverProfileData.assignedVehicles.map((vehicle: any) => {
               return <Text className="data" strong>{vehicle}{" "}</Text>
-            })}
+            })} */}
         </div>
       </div>
     </div>

@@ -22,6 +22,9 @@ export const errHandler = (err: any) => {
     // Common
     errorBox("120000", "Notify Account Balance Not Enough");
 
+    // Insurance Document
+    errorBox("12201", "Insurance Document already exist for this Vehicle");
+
     // Vehicle
     errorBox("1306", "Vehicle Number Already Exists");
     errorBox("107", "Vehicle Depend");
@@ -32,11 +35,11 @@ export const errHandler = (err: any) => {
     errorBox("120001", "Invalid OAUTH Path");
     errorBox("104", "Vehicle Not Exists");
 
-    // Insurance Document
-    errorBox("12201", "Insurance Document already exist for this Vehicle");
-
     // Revenue License
     errorBox("12001", "Revenue License Already Exist for this Vehicle");
+
+    // Emission Test
+    errorBox("12101", "Emission Test Already Exist for this Vehicle");
 
     // Emission Test
     errorBox("12101", "Emission Test Already Exist for this Vehicle");
@@ -49,6 +52,9 @@ export const errHandler = (err: any) => {
 
     // Branch
     errorBox("1001", "Branch is depended");
+
+    // User
+    errorBox("100018", "You already Verified");
 };
 //success message popups
 export const insuranceDocumentAddSuccess = () =>
@@ -158,10 +164,7 @@ export const branchAdminDeleteSuccess = () =>
         message: "Branch Admin Deleted Successfully",
         duration: 3,
     });
-notification.success({
-    message: "Driver Added Successfully",
-    duration: 3,
-});
+
 export const serviceAddSuccess = () =>
     notification.success({
         message: "service Added Successfully",
@@ -194,5 +197,11 @@ export const branchDeleteSuccess = () =>
 export const partAddSuccess = () =>
     notification.success({
         message: "part Added Successfully",
+        duration: 3,
+    });
+
+export const userVerifiedSuccess = () =>
+    notification.success({
+        message: "User Verified Successfully",
         duration: 3,
     });

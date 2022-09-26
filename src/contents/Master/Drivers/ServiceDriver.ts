@@ -1,6 +1,9 @@
 import api from "../../../services/AxiosService";
 
-const getAllDriverByCompanyIdAndBranchId = (companyId: number,branchId: number) => {
+const getAllDriverByCompanyIdAndBranchId = (
+  companyId: number,
+  branchId: number
+) => {
   return new Promise((resolve, reject) => {
     api(
       "get",
@@ -44,4 +47,45 @@ const deleteDriver = (id: number) => {
   });
 };
 
-export {getAllDriverByCompanyIdAndBranchId, addDriver,deleteDriver}
+const getAllVehicleByCompanyIdAndBranchId = (
+  companyId: number,
+  branchId: number
+) => {
+  return new Promise((resolve, reject) => {
+    api(
+      "get",
+      "co-web",
+      null,
+      `/companyVehicle/${companyId}/${branchId}`,
+      "token",
+      "",
+      ""
+    )
+      .then((response: any) => {
+        resolve(response.data);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+};
+
+const getAllocatedVehicleByDriverId = (userId: number) => {
+  return new Promise((resolve, reject) => {
+    api("get", "co-web", null, `/vehicleAllocation/${userId}`, "token", "", "")
+      .then((response: any) => {
+        resolve(response.data);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+};
+
+export {
+  getAllDriverByCompanyIdAndBranchId,
+  addDriver,
+  deleteDriver,
+  getAllVehicleByCompanyIdAndBranchId,
+  getAllocatedVehicleByDriverId,
+};

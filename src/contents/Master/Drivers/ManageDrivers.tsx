@@ -11,6 +11,7 @@ import {
 } from "./ServiceDriver";
 import { getUserDetails } from "../../Login/LoginAuthentication";
 import { driverDeleteSuccess } from "../../../helper/helper";
+import AssignVehicle from "./AssignVehicle";
 
 const { confirm } = Modal;
 
@@ -18,6 +19,7 @@ function createData(data: any) {
   let convertData = data.map((post: any, index: any) => {
     return {
       id: post.id,
+      userId: post.userResponseDto.id,
       branchId: post.branchResponseDto.branchName,
       mobileNumber: post.userResponseDto.mobileNumber,
       // vehicleType: "car",
@@ -29,6 +31,7 @@ function createData(data: any) {
       vehicleIcon: <RocketOutlined />,
       email: post.userResponseDto.email,
       image: null,
+      status: post.userResponseDto.status,
     };
   });
   return convertData;
@@ -40,6 +43,7 @@ function ManageDrivers() {
   const [isEdit, setisEdit] = useState(false);
   const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
   const [driver, setDriver] = useState([]);
+  const [isAssignVehicleModal, setIsAssignVehicleModal] = useState(false);
 
   const showModal = () => {
     setIsModalOpen(true);
@@ -52,6 +56,11 @@ function ManageDrivers() {
     setDriverData(data);
   };
 
+  const assignVehicleHandler = (data: any) => {
+    setIsAssignVehicleModal(true);
+    setDriverData(data);
+  };
+
   const handleOk = () => {
     setIsModalOpen(false);
     setisEdit(false);
@@ -61,11 +70,17 @@ function ManageDrivers() {
     setIsModalOpen(false);
     setisEdit(false);
     setIsProfileModalOpen(false);
+    setIsAssignVehicleModal(false);
+  };
+
+  const reloadTable = (res: any) => {
+    getAllDriverData(
+      getUserDetails().company_id,
+      getUserDetails().company_branch_id
+    );
   };
 
   const deleteClickHandler = (id: any) => {
-    console.log("iddd", id);
-
     confirm({
       title: "Are you sure delete this Driver?",
       icon: <ExclamationCircleOutlined />,
@@ -73,11 +88,13 @@ function ManageDrivers() {
       okType: "danger",
       cancelText: "No",
       onOk() {
-        deleteDriver(id);
-        getAllDriverByCompanyIdAndBranchId(
-          getUserDetails().company_id,
-          getUserDetails().company_branch_id
+        deleteDriver(id).then(() =>
+          getAllDriverData(
+            getUserDetails().company_id,
+            getUserDetails().company_branch_id
+          )
         );
+
         driverDeleteSuccess();
       },
     });
@@ -110,7 +127,7 @@ function ManageDrivers() {
   };
 
   return (
-    <div>
+    <>
       <MasterTemplateWithSmallCard
         data={driver}
         dataCount={driver.length}
@@ -120,6 +137,7 @@ function ManageDrivers() {
         onClickDelete={(id: any) => deleteClickHandler(id)}
         onClickUpdate={(data: any) => updateClickHandler(data)}
         driverCard={true}
+        onClickVehicleAssign={(data: any) => assignVehicleHandler(data)}
       />
       {isModalOpen && (
         <Modal
@@ -135,6 +153,8 @@ function ManageDrivers() {
             isEdit={isEdit}
             updateDriverData={driverData}
             cancelClickHandler={handleCancel}
+            reloadTable={reloadTable}
+            setIsModelOpen={setIsModalOpen}
           />
         </Modal>
       )}
@@ -150,7 +170,22 @@ function ManageDrivers() {
           <DriverProfile driverProfileData={driverData} />
         </Modal>
       )}
-    </div>
+      {isAssignVehicleModal && (
+        <Modal
+          open={isAssignVehicleModal}
+          onOk={handleOk}
+          onCancel={handleCancel}
+          closable={false}
+          width={"50%"}
+          footer={false}
+        >
+          <AssignVehicle
+            driverData={driverData}
+            cancelClickHandler={handleCancel}
+          />
+        </Modal>
+      )}
+    </>
   );
 }
 
