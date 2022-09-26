@@ -9,7 +9,8 @@ const getAllDriverByCompanyIdAndBranchId = (
       "get",
       "fm-web",
       null,
-      `/driver/${companyId}/${branchId}`,
+      // `/driver/${companyId}/${branchId}`,
+      `/driver/1/1`,
       "token",
       "",
       ""
@@ -82,10 +83,36 @@ const getAllocatedVehicleByDriverId = (userId: number) => {
   });
 };
 
+const addVehicleAllocationByDriverId = (data: any) => {
+  return new Promise((resolve, reject) => {
+      api("post", "co-web", null, "/vehicleAllocation", "token", data, "")
+          .then((response: any) => {
+              resolve(response.data);
+          })
+          .catch((error) => {
+              reject(error);
+          });
+  });
+};
+
+const updateVehicleAllocationByDriverId = (data: any) => {
+  return new Promise((resolve, reject) => {
+      api("put", "co-web", null, "/vehicleAllocation", "token", data, "")
+          .then((reponse: any) => {
+              resolve(reponse.data);
+          })
+          .catch((error) => {
+              reject(error);
+          });
+  });
+};
+
 export {
   getAllDriverByCompanyIdAndBranchId,
   addDriver,
   deleteDriver,
   getAllVehicleByCompanyIdAndBranchId,
   getAllocatedVehicleByDriverId,
+  addVehicleAllocationByDriverId,
+  updateVehicleAllocationByDriverId,
 };
