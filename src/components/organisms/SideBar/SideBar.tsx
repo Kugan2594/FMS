@@ -113,7 +113,6 @@ function SideBar() {
           footer={false}
         >
           <Profile
-            userProfileData={userData}
             closeOnClickHandler={handleCancel}
           />
         </Modal>

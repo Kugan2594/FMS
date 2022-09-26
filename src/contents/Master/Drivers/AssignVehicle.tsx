@@ -3,10 +3,13 @@ import React, { useEffect, useState } from "react";
 import User from "../../../assets/User.svg";
 import { Button } from "../../../components/atoms/Button";
 import {
+  addVehicleAllocationByDriverId,
   getAllocatedVehicleByDriverId,
   getAllVehicleByCompanyIdAndBranchId,
+  updateVehicleAllocationByDriverId,
 } from "./ServiceDriver";
 import { getUserDetails } from "../../../contents/Login/LoginAuthentication";
+import { assignedVehicleSuccess } from "../../../helper/helper";
 
 const { Title, Text } = Typography;
 const { Option } = Select;
@@ -19,8 +22,8 @@ interface DriverDataType {
 function AssignVehicle({ driverData, cancelClickHandler }: DriverDataType) {
   const [form] = Form.useForm();
   const [vehicle, setVehicle] = useState([]);
-
   const [assignedVehicle, setAssignedVehicle] = useState([]);
+  const [isAdd, setIsAdd] = useState(false);
   useEffect(() => {
     getVehicleSelectData(
       getUserDetails().company_id,
@@ -31,16 +34,35 @@ function AssignVehicle({ driverData, cancelClickHandler }: DriverDataType) {
 
   const handleChange = (data: any) => {
     setAssignedVehicle(data);
+    console.log("DATA", data);
   };
-
-  // {
-  //   userId: driverData.userId,
-  //   vehicleNumber: assignedVehicle
-  // }
 
   const onFinish = (values: any) => {
-    let data: object = {};
-  };
+    if (isAdd) {
+      let data: object = {
+        userId: driverData.userId,
+        vehicleNumber: assignedVehicle,
+      };
+      addVehicleAllocationByDriverId(data).then((res) => {
+        assignedVehicleSuccess();
+        cancelClickHandler();
+      }).catch((err) => {
+
+      });
+    } else {
+    let data: object = {
+      id: 1,
+      userId: driverData.userId,
+      vehicleNumber: assignedVehicle,
+    };
+    updateVehicleAllocationByDriverId(data).then((res) => {
+      assignedVehicleSuccess();
+      cancelClickHandler();
+    }).catch((err) => {
+
+    });
+  }
+};
 
   const onFinishFailed = () => {};
 
@@ -66,6 +88,7 @@ function AssignVehicle({ driverData, cancelClickHandler }: DriverDataType) {
         data.push(post.vehicleNumber);
       });
       setAssignedVehicle(data);
+      setIsAdd(data.length == 0 ? true : false);
     });
   };
 
