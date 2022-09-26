@@ -191,3 +191,8 @@ export const branchDeleteSuccess = () =>
         message: "Branch Deleted Successfully",
         duration: 3,
     });
+export const partAddSuccess = () =>
+    notification.success({
+        message: "part Added Successfully",
+        duration: 3,
+    });

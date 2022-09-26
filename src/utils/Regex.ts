@@ -5,6 +5,6 @@ export const nicNoRegex = /^([0-9]{9}[x|X|v|V]|[0-9]{12})$/;
 export const drivingLicenseNoRegex =
     /^([A-Z]{1}[0-9]{7}[A-Z]{1})|([A-Z]{1}[0-9]{7})$/;
 export const amountNoRegex = /^([0-9])+$/;
-export const lifeTiimeMonthNoRegex = /^([0-9]{3})+$/;
-export const lifeTimeMileageNoRegex = /^([0-9]{3})+$/;
+export const lifeTiimeMonthNoRegex = /^([0-9])+$/;
+export const lifeTimeMileageNoRegex = /^([0-9])+$/;
 export const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;

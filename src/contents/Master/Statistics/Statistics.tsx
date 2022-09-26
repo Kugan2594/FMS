@@ -1,7 +1,7 @@
 import React from "react";
-import { Column } from "@ant-design/charts";
+import { Column, Line, Pie } from "@ant-design/charts";
 import { useState, useEffect } from "react";
-import { Button, Card, Col, DatePicker, Row, Select } from "antd";
+import { Button, Card, Col, DatePicker, Row, Select, Space } from "antd";
 import "./Statistics.style.less";
 import SelectOptions from "./SelectOptions";
 
@@ -106,9 +106,117 @@ const Page: React.FC = () => {
 
     const data: Idata[] = [
         {
+            id: 1,
+            amount: 350.0,
+            date: "2022-09-12T11:13:26.503+00:00",
+            userId: 5,
+            vehicleNumber: "BAT-9470",
+            expensesType: "ECO_DOCUMENT",
+            branchId: 4,
+            branchName: "singapore",
+            companyId: 1,
+            vehicleTypeId: "Train",
+        },
+        {
+            id: 2,
+            amount: 350.0,
+            date: "2022-09-13T11:13:26.503+00:00",
+            userId: 5,
+            vehicleNumber: "BAT-9470",
+            expensesType: "ECO_DOCUMENT",
+            branchId: 4,
+            branchName: "singapore",
+            companyId: 1,
+            vehicleTypeId: "Train",
+        },
+        {
+            id: 3,
+            amount: 350.0,
+            date: "2022-09-14T11:13:26.503+00:00",
+            userId: 5,
+            vehicleNumber: "BAT-9470",
+            expensesType: "ECO_DOCUMENT",
+            branchId: 4,
+            branchName: "singapore",
+            companyId: 1,
+            vehicleTypeId: "Train",
+        },
+        {
+            id: 4,
+            amount: 350.0,
+            date: "2022-09-15T11:13:26.503+00:00",
+            userId: 5,
+            vehicleNumber: "BAT-9470",
+            expensesType: "ECO_DOCUMENT",
+            branchId: 4,
+            branchName: "singapore",
+            companyId: 1,
+            vehicleTypeId: "Train",
+        },
+        {
+            id: 5,
+            amount: 350.0,
+            date: "2022-09-16T11:13:26.503+00:00",
+            userId: 5,
+            vehicleNumber: "BAT-9470",
+            expensesType: "ECO_DOCUMENT",
+            branchId: 4,
+            branchName: "singapore",
+            companyId: 1,
+            vehicleTypeId: "Train",
+        },
+        {
+            id: 6,
+            amount: 350.0,
+            date: "2022-09-17T11:13:26.503+00:00",
+            userId: 5,
+            vehicleNumber: "BAT-9470",
+            expensesType: "ECO_DOCUMENT",
+            branchId: 4,
+            branchName: "singapore",
+            companyId: 1,
+            vehicleTypeId: "Train",
+        },
+        {
+            id: 7,
+            amount: 350.0,
+            date: "2022-09-18T11:13:26.503+00:00",
+            userId: 5,
+            vehicleNumber: "BAT-9470",
+            expensesType: "ECO_DOCUMENT",
+            branchId: 4,
+            branchName: "singapore",
+            companyId: 1,
+            vehicleTypeId: "Train",
+        },
+        {
+            id: 8,
+            amount: 350.0,
+            date: "2022-09-19T11:13:26.503+00:00",
+            userId: 5,
+            vehicleNumber: "BAT-9470",
+            expensesType: "service",
+            branchId: 4,
+            branchName: "singapore",
+            companyId: 1,
+            vehicleTypeId: "Train",
+        },
+        {
+            id: 9,
+            amount: 350.0,
+            date: "2022-09-20T11:13:26.503+00:00",
+            userId: 5,
+            vehicleNumber: "BAT-9470",
+            expensesType: "ECO_DOCUMENT",
+            branchId: 4,
+            branchName: "singapore",
+            companyId: 1,
+            vehicleTypeId: "Train",
+        },
+        {
             id: 10,
             amount: 250.0,
-            date: "2022-09-14T11:13:26.503+00:00",
+            date: "2022-09-21T11:13:26.503+00:00",
             userId: 5,
             vehicleNumber: "BAT-9470",
             expensesType: "ECO_DOCUMENT",
@@ -120,10 +228,10 @@ const Page: React.FC = () => {
         {
             id: 11,
             amount: 150.0,
-            date: "2023-09-14T11:13:26.503+00:00",
+            date: "2022-09-23T11:13:26.503+00:00",
             userId: 5,
             vehicleNumber: "BAT-9470",
-            expensesType: "ECO_DOCUMENT",
+            expensesType: "service",
             branchId: 2,
             branchName: "singapore",
             companyId: 1,
@@ -132,10 +240,10 @@ const Page: React.FC = () => {
         {
             id: 12,
             amount: 230.0,
-            date: "2024-09-14T11:13:26.503+00:00",
+            date: "2022-09-24T11:13:26.503+00:00",
             userId: 5,
             vehicleNumber: "BAT-9470",
-            expensesType: "ECO_DOCUMENT",
+            expensesType: "fuel",
             branchId: 3,
             branchName: "singapore",
             companyId: 1,
@@ -144,17 +252,106 @@ const Page: React.FC = () => {
         {
             id: 13,
             amount: 350.0,
-            date: "2025-09-14T11:13:26.503+00:00",
+            date: "2022-09-22T11:13:26.503+00:00",
+            userId: 5,
+            vehicleNumber: "BAT-9470",
+            expensesType: "Part",
+            branchId: 4,
+            branchName: "singapore",
+            companyId: 1,
+            vehicleTypeId: "Train",
+        },
+        {
+            id: 14,
+            amount: 350.0,
+            date: "2022-07-22T11:13:26.503+00:00",
+            userId: 5,
+            vehicleNumber: "BAT-9470",
+            expensesType: "Part",
+            branchId: 4,
+            branchName: "singapore",
+            companyId: 1,
+            vehicleTypeId: "Train",
+        },
+        {
+            id: 15,
+            amount: 350.0,
+            date: "2022-06-22T11:13:26.503+00:00",
+            userId: 5,
+            vehicleNumber: "BAT-9470",
+            expensesType: "Part",
+            branchId: 4,
+            branchName: "singapore",
+            companyId: 1,
+            vehicleTypeId: "Train",
+        },
+        {
+            id: 16,
+            amount: 350.0,
+            date: "2022-05-22T11:13:26.503+00:00",
+            userId: 5,
+            vehicleNumber: "BAT-9470",
+            expensesType: "service",
+            branchId: 4,
+            branchName: "singapore",
+            companyId: 1,
+            vehicleTypeId: "Train",
+        },
+        {
+            id: 17,
+            amount: 350.0,
+            date: "2022-06-22T11:13:26.503+00:00",
             userId: 5,
             vehicleNumber: "BAT-9470",
             expensesType: "ECO_DOCUMENT",
             branchId: 4,
             branchName: "singapore",
             companyId: 1,
-            vehicleTypeId: "Train",
+            vehicleTypeId: "Bus",
+        },
+        {
+            id: 18,
+            amount: 350.0,
+            date: "2029-09-22T11:13:26.503+00:00",
+            userId: 5,
+            vehicleNumber: "BAT-9470",
+            expensesType: "service",
+            branchId: 4,
+            branchName: "singapore",
+            companyId: 1,
+            vehicleTypeId: "Bus",
+        },
+        {
+            id: 19,
+            amount: 350.0,
+            date: "2028-06-22T11:13:26.503+00:00",
+            userId: 5,
+            vehicleNumber: "BAT-9500",
+            expensesType: "ECO_DOCUMENT",
+            branchId: 4,
+            branchName: "singapore",
+            companyId: 1,
+            vehicleTypeId: "Bus",
+        },
+        {
+            id: 20,
+            amount: 350.0,
+            date: "2025-09-22T11:13:26.503+00:00",
+            userId: 5,
+            vehicleNumber: "BAT-9470",
+            expensesType: "ECO_DOCUMENT",
+            branchId: 4,
+            branchName: "singapore",
+            companyId: 1,
+            vehicleTypeId: "Bus",
         },
     ];
-
+    const monthFormat = "YYYY/MM";
+    const yearFormat = "YYYY";
+    interface yearTotal {
+        amount: number;
+        date: number;
+    }
     const [overAll, setOverAll] = useState(false);
     const [service, setService] = useState(false);
     const [part, setPart] = useState(false);
@@ -170,18 +367,35 @@ const Page: React.FC = () => {
     const [period, setPeriod]: any[] = useState([]);
     const [newData, setNewData] = useState<any>(data);
     const [grandData, setGrandData] = useState<any>();
-    console.log("newdata", newData);
-    useEffect(() => {
-        setGrandData(newData);
-    }, []);
+    const [yearExpense, setYearExpense]: any = useState([]);
+    const [yearData, setYearData]: any = useState([]);
+    const [weekData, setweekData]: any = useState([]);
+    const [monthData, setMonthData]: any = useState([]);
+    const [lastMonthData, setLastMonthData]: any = useState([]);
+    const [customData, setCustomData]: any = useState([]);
+    const [monthlyData, setMonthlyData]: any = useState([]);
+    const [lastMonth, setLastMonth]: any = useState(false);
+    const [buss, setBuss] = useState(true);
+    const [monthlyDate, setMonthlyDate] = useState("");
+    const [graph, setGraph] = useState(false);
+    // console.log("newdata", newData);
+    useEffect(() => {}, []);
     const onClickPart = () => {
         setOverAll(false);
         setPart(true);
-        console.log(service);
-        console.log("all Over" + overAll);
+        setOverAll(false);
+        setDocs(false);
+        setFuel(false);
+        setOthers(false);
+        setService(false);
+        console.log(part);
+        console.log("part", " ", part);
     };
     const onClickService = () => {
         setOverAll(false);
+        setDocs(false);
+        setFuel(false);
+        setOthers(false);
         setService(true);
         console.log(service);
         console.log("all Over" + overAll);
@@ -189,18 +403,30 @@ const Page: React.FC = () => {
     const onClickFuel = () => {
         setOverAll(false);
         setFuel(true);
+        setOverAll(false);
+        setPart(false);
+        setDocs(false);
+        setOthers(false);
+        setService(false);
         console.log(fuel);
         console.log("all Over" + overAll);
     };
     const onClickDocs = () => {
         setOverAll(false);
         setDocs(true);
+        setPart(false);
+        setFuel(false);
+        setService(false);
         console.log(docs);
         console.log("all Over" + overAll);
     };
     const onClickOthers = () => {
         setOverAll(false);
+        setPart(false);
+        setDocs(false);
+        setFuel(false);
         setOthers(true);
+        setService(false);
         console.log(Others);
         console.log("all Over" + overAll);
     };
@@ -224,34 +450,123 @@ const Page: React.FC = () => {
             setCustom(true);
             setAnnually(false);
             setMonthly(false);
+            setLastMonth(false);
+            setWeekly(false);
         }
         if (value === "Monthly") {
             setMonthly(true);
             setAnnually(false);
             setCustom(false);
+            setLastMonth(false);
+            setWeekly(false);
         }
         if (value === "Annually") {
             setAnnually(true);
             setMonthly(false);
             setCustom(false);
+            setLastMonth(false);
+            setWeekly(false);
         }
         if (value === "Last Month") {
             setAnnually(false);
             setMonthly(false);
             setCustom(false);
+            setWeekly(false);
+            setLastMonth(true);
+            let dateTo = moment();
+            let dateFrom = moment().subtract(30, "d");
+            let graphData: any[] = data.filter((x) =>
+                moment(x.date).isBetween(dateFrom, dateTo)
+            );
+            console.log("today", dateTo);
+            console.log("graphdata", graphData);
+            let lastMonthInfo;
+            lastMonthInfo = graphData.map((x) => {
+                let dataObj = {
+                    amount: x.amount,
+                    date: moment(x.date).format("MMM/DD"),
+                };
+                console.log("dataObj", dataObj);
+                let lastMonthDetail = lastMonthData;
+                lastMonthDetail.push(dataObj);
+                setLastMonthData(lastMonthDetail);
+                console.log("lastmonthData", "  ", lastMonthData);
+            });
         }
         if (value === "Last 7 Days") {
             setAnnually(false);
             setMonthly(false);
             setCustom(false);
             setWeekly(true);
+            let dateTo = moment();
+            let dateFrom = moment().subtract(7, "d");
+            let graphData: any[] = data.filter((x) =>
+                moment(x.date).isBetween(dateFrom, dateTo)
+            );
+            console.log("today", dateTo);
+            console.log("graphdata", graphData);
+            setNewData(graphData);
+            let yearInfo;
+            yearInfo = graphData.map((x) => {
+                let dataObj = {
+                    amount: x.amount,
+                    date: moment(x.date).format("DD-dd"),
+                };
+                console.log("dataObj", dataObj);
+                let weekDetail = weekData;
+                weekDetail.push(dataObj);
+                setweekData(weekDetail);
+                console.log("weekData", weekData);
+            });
         }
     };
-    const monthFormat = "YYYY/MM";
-    const yearFormat = "YYYY";
+
     const handleMonthChange = (value: any) => {
         console.log(value);
+        let graphData: any[] = data.filter((x) =>
+            moment(x.date).isBetween(moment(value[0]), moment(value[1]))
+        );
+        console.log("graphdata", graphData);
+        setNewData(graphData);
+        let start = moment(value[0]);
+        let end = moment(value[1]);
+        let diff = end.diff(start, "months");
+        console.log("diff", diff);
+        console.log("start", start);
+        console.log("end", end);
+
+        for (let i = 0; i <= diff; i++) {
+            let amount = 0;
+            let monthData = graphData.filter(
+                (x) =>
+                    moment(x.date).year() ===
+                        moment(value[0]).add(i, "months").year() &&
+                    moment(x.date).month() ===
+                        moment(value[0]).add(i, "months").month()
+            );
+            console.log("monthData", monthData);
+            monthData.map((x) => {
+                amount += x.amount;
+                setMonthlyDate(
+                    moment(value[0]).add(i, "months").format("YYYY/MMM")
+                );
+                console.log(
+                    "mmmmmmmmmm",
+                    moment(value[0]).add(i, "months").format("YYYY/MMM")
+                );
+            });
+            let dataObj = {
+                amount: amount,
+                date: moment(value[0]).add(i, "months").format("YY/MMM"),
+            };
+            console.log("dataObj,", dataObj);
+            let monthlyDetail = monthlyData;
+            monthlyDetail.push(dataObj);
+            setMonthlyData(monthlyDetail);
+            console.log("MonthlyData", monthlyData);
+        }
     };
+
     const handleYearChange = (value: any) => {
         let graphData: any[] = data.filter(
             (x) =>
@@ -260,20 +575,115 @@ const Page: React.FC = () => {
         );
         console.log("graphdata", graphData);
         setNewData(graphData);
-        const arrayData = data.map((x: any) => {
-            return moment(x.date).year();
-        });
-        console.log("....arrayData", arrayData);
-    };
+        let start = moment(value[0]._d).year();
+        let end = moment(value[1]._d).year();
+        let diff = end - start;
 
-    // console.log("test", moment(data[0].date).year());
-    // console.log("period[1]", period[1]);
-    // console.log("data", data);
-    // console.log("outside", period);
-    // data.push(newData);
-    // console.log("graaandData", data);
+        for (let i = start; i <= end; i++) {
+            let amount = 0;
+            let yearInfo;
+
+            part
+                ? (yearInfo = data.filter(
+                      (x) =>
+                          moment(x.date).year() === i &&
+                          x.expensesType === "Part"
+                  ))
+                : service
+                ? (yearInfo = data.filter(
+                      (x) =>
+                          moment(x.date).year() === i &&
+                          x.expensesType === "service"
+                  ))
+                : docs
+                ? (yearInfo = data.filter(
+                      (x) =>
+                          moment(x.date).year() === i &&
+                          x.expensesType === "ECO_DOCUMENT"
+                  ))
+                : fuel
+                ? (yearInfo = data.filter(
+                      (x) =>
+                          moment(x.date).year() === i &&
+                          x.expensesType === "fuel"
+                  ))
+                : buss && part
+                ? (yearInfo = data.filter(
+                      (x) =>
+                          moment(x.date).year() === i &&
+                          x.expensesType === "part" &&
+                          x.vehicleTypeId === "Bus"
+                  ))
+                : (yearInfo = data.filter((x) => moment(x.date).year() === i));
+
+            // yearInfo = data.filter(
+            //     (x) => moment(x.date).year() === i && x.vehicleTypeId === "Bus"
+            // );
+            // yearInfo = data.filter(
+            //     (x) =>
+            //         moment(x.date).year() === i &&
+            //         x.vehicleTypeId === "Bus" &&
+            //         x.vehicleNumber === "BAT-9500"
+            // );
+            console.log(
+                "year",
+                i,
+                "        ",
+                "yearInfo",
+                yearInfo,
+                "vehicleType"
+            );
+            yearInfo.map((x) => (amount += x.amount));
+            console.log("#####amount", amount);
+            let dataObj = {
+                amount: amount,
+                date: i,
+            };
+            console.log("dataObj,", dataObj);
+            let yearDetail = yearData;
+            yearDetail.push(dataObj);
+            setYearData(yearDetail);
+            console.log("yearData", yearData);
+        }
+    };
+    const handleCustomChange = (value: any) => {
+        let graphData: any[] = data.filter((x) =>
+            moment(x.date).isBetween(moment(value[0]), moment(value[1]))
+        );
+        console.log(graphData);
+        setNewData(graphData);
+        graphData.map((x) => {
+            let dataObj = {
+                amount: x.amount,
+                date: moment(x.date).format("YY/MM/DD"),
+            };
+            console.log("dataObj,", dataObj);
+            let customDetail = customData;
+            customDetail.push(dataObj);
+            setCustomData(customDetail);
+            console.log("custom Data", customData);
+        });
+    };
+    const handleVehicleType = (value: any) => {
+        console.log(value);
+        value === "Bus" ? setBuss(true) : setBuss(false);
+        console.log(buss);
+    };
+    const handleChangeChart = (value: any) => {
+        value === "Graph" ? setGraph(true) : setGraph(false);
+    };
     const config = {
-        data: newData,
+        data: anually
+            ? yearData
+            : weekly
+            ? weekData
+            : lastMonth
+            ? lastMonthData
+            : custom
+            ? customData
+            : monthly
+            ? monthlyData
+            : weekData,
         xField: "date",
         yField: "amount",
         key: "id",
@@ -283,26 +693,67 @@ const Page: React.FC = () => {
             },
         },
         slider: {
-            start: 0.1,
+            start: 0,
             end: 1,
         },
     };
-
+    const configLine = {
+        data: anually
+            ? yearData
+            : weekly
+            ? weekData
+            : lastMonth
+            ? lastMonthData
+            : custom
+            ? customData
+            : monthly
+            ? monthlyData
+            : weekData,
+        xField: "date",
+        yField: "amount",
+        label: {},
+        point: {
+            size: 5,
+            shape: "diamond",
+            style: {
+                fill: "white",
+                stroke: "#5B8FF9",
+                lineWidth: 2,
+            },
+        },
+        tooltip: {
+            showMarkers: false,
+        },
+        state: {
+            active: {
+                style: {
+                    shadowBlur: 4,
+                    stroke: "#000",
+                    fill: "red",
+                },
+            },
+        },
+        interactions: [
+            {
+                type: "marker-active",
+            },
+        ],
+    };
     return (
         <Card
             style={{
                 width: "50%",
                 height: "30%",
-                borderRadius: "5px",
+                borderRadius: "10px",
             }}
         >
             <div className="filter-container" style={{ height: "40px" }}>
-                <Row>
-                    <Col xs={24} xl={8}>
+                <Row justify="start">
+                    <Col xs={24} xl={6}>
                         <Select
                             // defaultValue="All Types"
                             style={{ width: 120 }}
-                            onChange={handleChange}
+                            onChange={handleVehicleType}
                         >
                             {data.map((x: any) => {
                                 return (
@@ -313,7 +764,7 @@ const Page: React.FC = () => {
                             })}
                         </Select>
                     </Col>
-                    <Col xs={24} xl={8}>
+                    <Col xs={24} xl={6}>
                         <Select
                             // defaultValue="All Vehicles"
                             style={{ width: 120 }}
@@ -328,12 +779,13 @@ const Page: React.FC = () => {
                             })}
                         </Select>
                     </Col>
+                    <Col xs={24} xl={4}></Col>
                     <Col xs={24} xl={8}>
                         <div className="toggle">
                             <Select
                                 defaultValue="Bar"
                                 style={{ width: 120 }}
-                                onChange={handleChange}
+                                onChange={handleChangeChart}
                             >
                                 <Option value="Graph">Graph</Option>
                                 <Option value="Bar">Bar</Option>
@@ -352,65 +804,79 @@ const Page: React.FC = () => {
                         style={{ marginTop: "10px", height: "60px" }}
                     >
                         <div className="new-container">
-                            <Select
-                                // defaultValue="Bar"
-                                style={{ width: 120 }}
-                                onChange={handleChangeDate}
-                            >
-                                <Option value="Last 7 Days">Last 7 Days</Option>
-                                <Option value="Last Month">Last Month</Option>
-                                <Option value="Monthly">Monthly</Option>
-                                <Option value="Annually">Annually</Option>
-                                <Option value="Custom">Custom</Option>
-                            </Select>
-                            {custom ? <RangePicker /> : ""}
-                            {anually ? (
-                                <RangePicker
-                                    onChange={handleYearChange}
-                                    defaultValue={[
-                                        moment("2015", yearFormat),
-                                        moment("2016", yearFormat),
-                                    ]}
-                                    format={yearFormat}
-                                    picker="year"
-                                />
-                            ) : (
-                                ""
-                            )}
-                            {monthly ? (
-                                <RangePicker
-                                    onChange={handleMonthChange}
-                                    defaultValue={[
-                                        moment("2015/01", monthFormat),
-                                        moment("2015/02", monthFormat),
-                                    ]}
-                                    format={monthFormat}
-                                    picker="month"
-                                />
-                            ) : (
-                                ""
-                            )}
+                            <Row justify="space-between">
+                                <Col xs={24} xl={6}>
+                                    <Select
+                                        // defaultValue="Bar"
+                                        style={{ width: 120 }}
+                                        onChange={handleChangeDate}
+                                    >
+                                        <Option value="Last 7 Days">
+                                            Last 7 Days
+                                        </Option>
+                                        <Option value="Last Month">
+                                            Last Month
+                                        </Option>
+                                        <Option value="Monthly">Monthly</Option>
+                                        <Option value="Annually">
+                                            Annually
+                                        </Option>
+                                        <Option value="Custom">Custom</Option>
+                                    </Select>
+                                </Col>
+                                <Col xs={24} xl={18}>
+                                    {custom ? (
+                                        <RangePicker
+                                            onChange={handleCustomChange}
+                                        />
+                                    ) : (
+                                        ""
+                                    )}
+                                    {anually ? (
+                                        <RangePicker
+                                            onChange={handleYearChange}
+                                            defaultValue={[
+                                                moment("2015", yearFormat),
+                                                moment("2016", yearFormat),
+                                            ]}
+                                            format={yearFormat}
+                                            picker="year"
+                                        />
+                                    ) : (
+                                        ""
+                                    )}
+                                    {monthly ? (
+                                        <RangePicker
+                                            onChange={handleMonthChange}
+                                            defaultValue={[
+                                                moment("2015/01", monthFormat),
+                                                moment("2015/02", monthFormat),
+                                            ]}
+                                            format={monthFormat}
+                                            picker="month"
+                                        />
+                                    ) : (
+                                        ""
+                                    )}
+                                </Col>
+                            </Row>
                         </div>
                     </div>
                 </Col>
             </Row>
             <Row gutter={16}>
                 <Col xs={24} xl={18}>
-                    <div>
-                        <Column {...config} />
-                    </div>
+                    {graph ? <Line {...configLine} /> : <Column {...config} />}
                 </Col>
                 <Col xs={24} xl={6}>
-                    <div>
-                        <SelectOptions
-                            onClickOverall={onClickOverall}
-                            onClickDocs={onClickDocs}
-                            onClickFuel={onClickFuel}
-                            onClickOthers={onClickOthers}
-                            onClickPart={onClickPart}
-                            onClickService={onClickService}
-                        />
-                    </div>
+                    <SelectOptions
+                        onClickOverall={onClickOverall}
+                        onClickDocs={onClickDocs}
+                        onClickFuel={onClickFuel}
+                        onClickOthers={onClickOthers}
+                        onClickPart={onClickPart}
+                        onClickService={onClickService}
+                    />
                 </Col>
             </Row>
         </Card>
