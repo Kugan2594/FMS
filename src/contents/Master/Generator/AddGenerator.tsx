@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Col, Form, Input, Modal, Row, Select } from "antd";
 import {
     generatorAddSuccess,
@@ -8,9 +8,11 @@ import {
 import CustomButton from "../../../components/atoms/Button/CustomButton";
 import { getUserDetails } from "../../../contents/Login/LoginAuthentication";
 import { addGenerator, updateGeneratorById } from "./ServiceGenerator";
+import { getAllBranchesByCompanyId } from "../Branch/ServicesBranch";
 
 function AddGenerator(props: any) {
     const [form] = Form.useForm();
+    const [branch, setBranch] = useState([]);
 
     const {
         visible,
@@ -63,6 +65,23 @@ function AddGenerator(props: any) {
                 });
         }
     };
+
+    const getBranchSelectData = (companyId: number) => {
+        getAllBranchesByCompanyId(companyId).then((res: any) => {
+            let data: any = [];
+            res.map((post: any) => {
+                data.push({
+                    value: post.id,
+                    label: `${post.branchName}`,
+                });
+            });
+            setBranch(data);
+        });
+    };
+
+    useEffect(() => {
+        getBranchSelectData(getUserDetails().company_id);
+    }, []);
 
     const onFinishFailed = () => {};
 
@@ -120,9 +139,13 @@ function AddGenerator(props: any) {
                                         borderBottom: "1px solid #ccccb3",
                                     }}
                                 >
-                                    <Option value="Jaffna">Jaffna</Option>
-                                    <Option value="Kandy">Kandy</Option>
-                                    <Option value="Colombo">Colombo</Option>
+                                    {branch.map((post: any) => {
+                                        return (
+                                            <Option value={post.value}>
+                                                {post.label}
+                                            </Option>
+                                        );
+                                    })}
                                 </Select>
                             </Form.Item>
                             <Form.Item name="tankCapacity">
