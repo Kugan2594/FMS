@@ -18,16 +18,6 @@ function SideBar() {
   const [submenuItems, setSubmenuItems] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const userData = {
-    companyName: "Invicta Innovations",
-    address: "Thirunelveli, Jaffna, Sri Lanka",
-    registrationNumber: "5645641",
-    companyPhoneNumber: "22560564",
-    companyEmail: "invicta@gmail.com",
-    licenceType: "Platinum",
-    image: "https://picsum.photos/200",
-  };
-
   const navigate = useNavigate();
 
   const profileOnClickHandler = () => {
@@ -95,7 +85,7 @@ function SideBar() {
             <UserProfile
               onClickProfile={profileOnClickHandler}
               onClickLogout={LogoutClickHandler}
-              userProfile={userData.image}
+              userProfile={"https://picsum.photos/200"}
             />
           </div>
         </div>
