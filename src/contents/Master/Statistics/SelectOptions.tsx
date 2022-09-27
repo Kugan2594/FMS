@@ -19,25 +19,52 @@ function SelectOptions({
     onClickOthers,
 }: SelectOptionType) {
     return (
-        <Space className="selectOptions" direction="vertical" align="baseline">
+        <Space
+            className="selectOptions"
+            direction="vertical"
+            align="center"
+            size={10}
+        >
+            <div className="space1"></div>
             <Button className="btn" onClick={onClickOverall}>
                 Over All
             </Button>
-            <Button className="btn" onClick={onClickPart}>
+            <Button
+                className="btn"
+                onClick={onClickPart}
+                style={{ width: "80px" }}
+            >
                 Part
             </Button>
-            <Button className="btn" onClick={onClickService}>
+            <Button
+                className="btn"
+                onClick={onClickService}
+                style={{ width: "80px" }}
+            >
                 Service
             </Button>
-            <Button className="btn" onClick={onClickDocs}>
+            <Button
+                className="btn"
+                onClick={onClickDocs}
+                style={{ width: "80px" }}
+            >
                 Docs
             </Button>
-            <Button className="btn" onClick={onClickFuel}>
+            <Button
+                className="btn"
+                onClick={onClickFuel}
+                style={{ width: "80px" }}
+            >
                 Fuel
             </Button>
-            <Button className="btn" onClick={onClickOthers}>
+            <Button
+                className="btn"
+                onClick={onClickOthers}
+                style={{ width: "80px" }}
+            >
                 Others
             </Button>
+            <div className="space2"></div>
         </Space>
     );
 }

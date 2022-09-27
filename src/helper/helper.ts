@@ -50,15 +50,16 @@ export const errHandler = (err: any) => {
   errorBox("100019", "Mobile No Already Exists");
   errorBox("100020", "Nic No Already Exists");
 
+  // Vehicle Service
+  errorBox("401", "Vehicle Service Already Exists");
+
   // Branch
   errorBox("1001", "Branch is depended");
 
   // User
   errorBox("100018", "You already Verified");
-
-  // Vehicle Service
-  errorBox("401", "Vehicle Service Already Exists");
 };
+
 //success message popups
 export const insuranceDocumentAddSuccess = () =>
   notification.success({
@@ -197,10 +198,21 @@ export const branchDeleteSuccess = () =>
     message: "Branch Deleted Successfully",
     duration: 3,
   });
+export const partAddSuccess = () =>
+  notification.success({
+    message: "part Added Successfully",
+    duration: 3,
+  });
 
 export const userVerifiedSuccess = () =>
   notification.success({
     message: "User Verified Successfully",
+    duration: 3,
+  });
+
+export const assignedVehicleSuccess = () =>
+  notification.success({
+    message: "Vehicle Assigned Successfully",
     duration: 3,
   });
 

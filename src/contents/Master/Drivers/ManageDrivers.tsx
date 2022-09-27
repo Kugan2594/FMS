@@ -61,11 +61,6 @@ function ManageDrivers() {
     setDriverData(data);
   };
 
-  const handleOk = () => {
-    setIsModalOpen(false);
-    setisEdit(false);
-  };
-
   const handleCancel = () => {
     setIsModalOpen(false);
     setisEdit(false);
@@ -143,7 +138,6 @@ function ManageDrivers() {
         <Modal
           title={isEdit ? "Edit Driver" : "Add New Driver"}
           open={isModalOpen}
-          onOk={handleOk}
           onCancel={handleCancel}
           closable={false}
           width={"50%"}
@@ -161,7 +155,6 @@ function ManageDrivers() {
       {isProfileModalOpen && (
         <Modal
           open={isProfileModalOpen}
-          onOk={handleOk}
           onCancel={handleCancel}
           closable={false}
           width={"25%"}
@@ -173,8 +166,6 @@ function ManageDrivers() {
       {isAssignVehicleModal && (
         <Modal
           open={isAssignVehicleModal}
-          onOk={handleOk}
-          onCancel={handleCancel}
           closable={false}
           width={"50%"}
           footer={false}

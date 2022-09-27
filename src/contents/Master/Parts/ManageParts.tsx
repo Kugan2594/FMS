@@ -22,7 +22,7 @@ const data = [
         vehicleModel: "TOYOTA aqua",
         branchName: "Jaffna Branch",
         dueDate: "23 Mar 2022",
-    }
+    },
 ];
 
 function ManageParts() {
@@ -51,7 +51,7 @@ function ManageParts() {
             <MasterTemplateWithLargeCard
                 data={data}
                 dataCount={data.length}
-                headerOnSearch={() => { }}
+                headerOnSearch={() => {}}
                 headerOnClickAdd={showModal}
                 cardOnClick={(id: string) => console.log("CLICKED " + id)}
                 deleteButton={(id: string) => console.log("DELETED " + id)}
@@ -65,8 +65,9 @@ function ManageParts() {
                 onCancel={handleCancel}
                 closable={false}
                 width={500}
+                footer={false}
             >
-                <AddParts />
+                <AddParts onAdd={handleCancel} onCancel={handleCancel} />
             </Modal>
         </>
     );

@@ -17,5 +17,5 @@ export const SYSTEM_CONFIG = {
     oauthClient: oauthClient,
     loginBaseUrl: FM_LOGIN_BASE_URL,
     corporateUrl: FM_CORP_BASE_URL,
-    adminUrl : FM_ADMIN_BASE_URL
+    adminUrl: FM_ADMIN_BASE_URL,
 };
