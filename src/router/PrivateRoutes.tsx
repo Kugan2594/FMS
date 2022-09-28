@@ -49,7 +49,7 @@ const PrivateRoute: RouteObject[] = [
         element: <ManageMileage />,
     },
     {
-        path: "/generators",
+        path: "/generator",
         element: <ManageGenerator />,
     },
     {

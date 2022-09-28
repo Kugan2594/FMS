@@ -104,7 +104,7 @@ const PublicRoute: RouteObject[] = [
                 element: <ManageParts />,
             },
             {
-                path: "generators",
+                path: "generator",
                 element: <ManageGenerator />,
             },
             {
