@@ -31,7 +31,6 @@ function AddParts(props: any) {
           label: `${post.resourceVehicleDto.vehicleModel} ${post.resourceVehicleDto.vehicleBodyTypeResponseDto} ${post.resourceVehicleDto.vehicleTypeName} ${post.resourceVehicleDto.fuelTypeName} ${post.vehicleNumber}`,
         });
         vehicleNum = post.vehicleNumber;
-        console.log("vehicle", vehicleNum);
 
         return null;
       });
@@ -59,17 +58,11 @@ function AddParts(props: any) {
       date: values.date,
       locationWhereItFixed: values.locationWhereItFixed,
       brandNew: values.brandNew,
-      // airPressure: "3.0",
-      // isHybrid: false,
-      // size: values.size,
       capacity: values.capacity,
       lastService: values.lastService,
       brand: values.brand,
-      // engine: null,
-      // partId: 5,
       partName: values.partName,
       vehicleNumber: vehicleNumbers,
-      // userPartId: null,
       companyId: getUserDetails().company_id,
       branchId: getUserDetails().company_branch_id,
       userId: getUserDetails().user_id,
