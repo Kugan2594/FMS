@@ -110,7 +110,7 @@ const Page: React.FC = () => {
             amount: 350.0,
             date: "2022-09-12T11:13:26.503+00:00",
             userId: 5,
-            vehicleNumber: "BAT-9470",
+            vehicleNumber: "BAT-9471",
             expensesType: "ECO_DOCUMENT",
             branchId: 4,
             branchName: "singapore",
@@ -122,7 +122,7 @@ const Page: React.FC = () => {
             amount: 350.0,
             date: "2022-09-13T11:13:26.503+00:00",
             userId: 5,
-            vehicleNumber: "BAT-9470",
+            vehicleNumber: "BAT-9472",
             expensesType: "ECO_DOCUMENT",
             branchId: 4,
             branchName: "singapore",
@@ -146,7 +146,7 @@ const Page: React.FC = () => {
             amount: 350.0,
             date: "2022-09-15T11:13:26.503+00:00",
             userId: 5,
-            vehicleNumber: "BAT-9470",
+            vehicleNumber: "BAT-9473",
             expensesType: "ECO_DOCUMENT",
             branchId: 4,
             branchName: "singapore",
@@ -158,7 +158,7 @@ const Page: React.FC = () => {
             amount: 350.0,
             date: "2022-09-16T11:13:26.503+00:00",
             userId: 5,
-            vehicleNumber: "BAT-9470",
+            vehicleNumber: "BAT-9474",
             expensesType: "ECO_DOCUMENT",
             branchId: 4,
             branchName: "singapore",
@@ -170,7 +170,7 @@ const Page: React.FC = () => {
             amount: 350.0,
             date: "2022-09-17T11:13:26.503+00:00",
             userId: 5,
-            vehicleNumber: "BAT-9470",
+            vehicleNumber: "BAT-9475",
             expensesType: "ECO_DOCUMENT",
             branchId: 4,
             branchName: "singapore",
@@ -182,7 +182,7 @@ const Page: React.FC = () => {
             amount: 350.0,
             date: "2022-09-18T11:13:26.503+00:00",
             userId: 5,
-            vehicleNumber: "BAT-9470",
+            vehicleNumber: "BAT-9476",
             expensesType: "ECO_DOCUMENT",
             branchId: 4,
             branchName: "singapore",
@@ -194,7 +194,7 @@ const Page: React.FC = () => {
             amount: 350.0,
             date: "2022-09-19T11:13:26.503+00:00",
             userId: 5,
-            vehicleNumber: "BAT-9470",
+            vehicleNumber: "BAT-9477",
             expensesType: "service",
             branchId: 4,
             branchName: "singapore",
@@ -206,7 +206,7 @@ const Page: React.FC = () => {
             amount: 350.0,
             date: "2022-09-20T11:13:26.503+00:00",
             userId: 5,
-            vehicleNumber: "BAT-9470",
+            vehicleNumber: "BAT-9479",
             expensesType: "ECO_DOCUMENT",
             branchId: 4,
             branchName: "singapore",
@@ -218,7 +218,7 @@ const Page: React.FC = () => {
             amount: 250.0,
             date: "2022-09-21T11:13:26.503+00:00",
             userId: 5,
-            vehicleNumber: "BAT-9470",
+            vehicleNumber: "BAT-9478",
             expensesType: "ECO_DOCUMENT",
             branchId: 1,
             branchName: "singapore",
@@ -230,7 +230,7 @@ const Page: React.FC = () => {
             amount: 150.0,
             date: "2022-09-23T11:13:26.503+00:00",
             userId: 5,
-            vehicleNumber: "BAT-9470",
+            vehicleNumber: "SAT-9479",
             expensesType: "service",
             branchId: 2,
             branchName: "singapore",
@@ -242,7 +242,7 @@ const Page: React.FC = () => {
             amount: 230.0,
             date: "2022-09-24T11:13:26.503+00:00",
             userId: 5,
-            vehicleNumber: "BAT-9470",
+            vehicleNumber: "BAT-94780",
             expensesType: "fuel",
             branchId: 3,
             branchName: "singapore",
@@ -254,7 +254,7 @@ const Page: React.FC = () => {
             amount: 350.0,
             date: "2022-09-22T11:13:26.503+00:00",
             userId: 5,
-            vehicleNumber: "BAT-9470",
+            vehicleNumber: "BAT-9481",
             expensesType: "Part",
             branchId: 4,
             branchName: "singapore",
@@ -266,7 +266,7 @@ const Page: React.FC = () => {
             amount: 350.0,
             date: "2022-07-22T11:13:26.503+00:00",
             userId: 5,
-            vehicleNumber: "BAT-9470",
+            vehicleNumber: "PAT-9482",
             expensesType: "Part",
             branchId: 4,
             branchName: "singapore",
@@ -278,7 +278,7 @@ const Page: React.FC = () => {
             amount: 350.0,
             date: "2022-06-22T11:13:26.503+00:00",
             userId: 5,
-            vehicleNumber: "BAT-9470",
+            vehicleNumber: "PAT-9475",
             expensesType: "Part",
             branchId: 4,
             branchName: "singapore",
@@ -290,7 +290,7 @@ const Page: React.FC = () => {
             amount: 350.0,
             date: "2022-05-22T11:13:26.503+00:00",
             userId: 5,
-            vehicleNumber: "BAT-9470",
+            vehicleNumber: "CAT-9479",
             expensesType: "service",
             branchId: 4,
             branchName: "singapore",
@@ -302,7 +302,7 @@ const Page: React.FC = () => {
             amount: 350.0,
             date: "2022-06-22T11:13:26.503+00:00",
             userId: 5,
-            vehicleNumber: "BAT-9470",
+            vehicleNumber: "BAT-9485",
             expensesType: "ECO_DOCUMENT",
             branchId: 4,
             branchName: "singapore",
@@ -314,7 +314,7 @@ const Page: React.FC = () => {
             amount: 350.0,
             date: "2029-09-22T11:13:26.503+00:00",
             userId: 5,
-            vehicleNumber: "BAT-9470",
+            vehicleNumber: "SAT-9486",
             expensesType: "service",
             branchId: 4,
             branchName: "singapore",
@@ -326,7 +326,7 @@ const Page: React.FC = () => {
             amount: 350.0,
             date: "2028-06-22T11:13:26.503+00:00",
             userId: 5,
-            vehicleNumber: "BAT-9500",
+            vehicleNumber: "BAT-9590",
             expensesType: "ECO_DOCUMENT",
             branchId: 4,
             branchName: "singapore",
@@ -338,12 +338,12 @@ const Page: React.FC = () => {
             amount: 350.0,
             date: "2025-09-22T11:13:26.503+00:00",
             userId: 5,
-            vehicleNumber: "BAT-9470",
+            vehicleNumber: "BAT-9450",
             expensesType: "ECO_DOCUMENT",
             branchId: 4,
             branchName: "singapore",
             companyId: 1,
-            vehicleTypeId: "Bus",
+            vehicleTypeId: "Train",
         },
     ];
     const monthFormat = "YYYY/MM";
@@ -362,13 +362,12 @@ const Page: React.FC = () => {
     const [monthly, setMonthly] = useState(false);
     const [anually, setAnnually] = useState(false);
     const [weekly, setWeekly] = useState(false);
-    const [startYearEndYear, setStartYearEndYear]: any = useState([0, 0]);
-    const [chartData, setChartData] = useState("");
+    const [startYearEndYear, setStartYearEndYear]: any[] = useState([]);
     const [period, setPeriod]: any[] = useState([]);
     const [newData, setNewData] = useState<any>(data);
     const [grandData, setGrandData] = useState<any>();
     const [yearExpense, setYearExpense]: any = useState([]);
-    const [yearData, setYearData]: any = useState([]);
+    const [yearData, setYearData]: any[] = useState([]);
     const [weekData, setweekData]: any = useState([]);
     const [monthData, setMonthData]: any = useState([]);
     const [lastMonthData, setLastMonthData]: any = useState([]);
@@ -378,8 +377,29 @@ const Page: React.FC = () => {
     const [buss, setBuss] = useState(true);
     const [monthlyDate, setMonthlyDate] = useState("");
     const [graph, setGraph] = useState(false);
-    // console.log("newdata", newData);
-    useEffect(() => {}, []);
+    const [yearArray, setYearArray]: any[] = useState([]);
+    const [yearsInfo, setYearsInfo]: any[] = useState([]);
+    const [vehicleNumberValue, setVehicleNumberValue]: any = useState();
+    const [vehicleTypeValue, setVehicleTypeValue]: any = useState();
+    const [vehicleNoFilter, setVehicleNoFilter]: any = useState(false);
+    const [vehicleTypeFilter, setVehicleTypeFilter] = useState(false);
+    const [filterArray, setFilterArray] = useState([false, false]);
+    const [majorData, setMajorData]: any = useState([]);
+    useEffect(() => {
+        console.log("vehicleType", vehicleTypeValue);
+    }, [
+        majorData,
+        startYearEndYear,
+        yearData,
+        yearArray,
+        yearsInfo,
+        vehicleNumberValue,
+        vehicleTypeValue,
+        vehicleNoFilter,
+        vehicleTypeFilter,
+        filterArray,
+        lastMonthData,
+    ]);
     const onClickPart = () => {
         setOverAll(false);
         setPart(true);
@@ -388,8 +408,6 @@ const Page: React.FC = () => {
         setFuel(false);
         setOthers(false);
         setService(false);
-        console.log(part);
-        console.log("part", " ", part);
     };
     const onClickService = () => {
         setOverAll(false);
@@ -397,8 +415,6 @@ const Page: React.FC = () => {
         setFuel(false);
         setOthers(false);
         setService(true);
-        console.log(service);
-        console.log("all Over" + overAll);
     };
     const onClickFuel = () => {
         setOverAll(false);
@@ -408,8 +424,6 @@ const Page: React.FC = () => {
         setDocs(false);
         setOthers(false);
         setService(false);
-        console.log(fuel);
-        console.log("all Over" + overAll);
     };
     const onClickDocs = () => {
         setOverAll(false);
@@ -417,8 +431,6 @@ const Page: React.FC = () => {
         setPart(false);
         setFuel(false);
         setService(false);
-        console.log(docs);
-        console.log("all Over" + overAll);
     };
     const onClickOthers = () => {
         setOverAll(false);
@@ -427,8 +439,6 @@ const Page: React.FC = () => {
         setFuel(false);
         setOthers(true);
         setService(false);
-        console.log(Others);
-        console.log("all Over" + overAll);
     };
     const onClickOverall = () => {
         // overAll ? setOverAll(true) : setOverAll(false);
@@ -444,7 +454,7 @@ const Page: React.FC = () => {
         }
     };
     const handleChange = () => {};
-    const handleChangeDate = (value: string) => {
+    const handleDateRange = (value: string) => {
         console.log(value);
         if (value === "Custom") {
             setCustom(true);
@@ -475,10 +485,17 @@ const Page: React.FC = () => {
             setLastMonth(true);
             let dateTo = moment();
             let dateFrom = moment().subtract(30, "d");
-            let graphData: any[] = data.filter((x) =>
-                moment(x.date).isBetween(dateFrom, dateTo)
-            );
-            console.log("today", dateTo);
+            let graphData: any[] = [];
+            vehicleNoFilter
+                ? (graphData = data.filter(
+                      (x) =>
+                          moment(x.date).isBetween(dateFrom, dateTo) &&
+                          x.vehicleNumber === vehicleNumberValue
+                  ))
+                : (graphData = data.filter((x) =>
+                      moment(x.date).isBetween(dateFrom, dateTo)
+                  ));
+
             console.log("graphdata", graphData);
             let lastMonthInfo;
             lastMonthInfo = graphData.map((x) => {
@@ -490,7 +507,9 @@ const Page: React.FC = () => {
                 let lastMonthDetail = lastMonthData;
                 lastMonthDetail.push(dataObj);
                 setLastMonthData(lastMonthDetail);
-                console.log("lastmonthData", "  ", lastMonthData);
+                console.log("lastmonthdata", lastMonthData);
+                setMajorData(lastMonthDetail);
+                console.log("majorData", "  ", majorData);
             });
         }
         if (value === "Last 7 Days") {
@@ -500,9 +519,16 @@ const Page: React.FC = () => {
             setWeekly(true);
             let dateTo = moment();
             let dateFrom = moment().subtract(7, "d");
-            let graphData: any[] = data.filter((x) =>
-                moment(x.date).isBetween(dateFrom, dateTo)
-            );
+            let graphData: any[] = [];
+            vehicleNoFilter
+                ? (graphData = data.filter(
+                      (x) =>
+                          moment(x.date).isBetween(dateFrom, dateTo) &&
+                          x.vehicleNumber === vehicleNumberValue
+                  ))
+                : (graphData = data.filter((x) =>
+                      moment(x.date).isBetween(dateFrom, dateTo)
+                  ));
             console.log("today", dateTo);
             console.log("graphdata", graphData);
             setNewData(graphData);
@@ -523,11 +549,19 @@ const Page: React.FC = () => {
 
     const handleMonthChange = (value: any) => {
         console.log(value);
-        let graphData: any[] = data.filter((x) =>
-            moment(x.date).isBetween(moment(value[0]), moment(value[1]))
-        );
-        console.log("graphdata", graphData);
-        setNewData(graphData);
+        let graphData: any = [];
+        vehicleNoFilter
+            ? (graphData = data.filter(
+                  (x) =>
+                      moment(x.date).isBetween(
+                          moment(value[0]),
+                          moment(value[1])
+                      ) && x.vehicleNumber === vehicleNumberValue
+              ))
+            : (graphData = data.filter((x) =>
+                  moment(x.date).isBetween(moment(value[0]), moment(value[1]))
+              ));
+
         let start = moment(value[0]);
         let end = moment(value[1]);
         let diff = end.diff(start, "months");
@@ -538,20 +572,16 @@ const Page: React.FC = () => {
         for (let i = 0; i <= diff; i++) {
             let amount = 0;
             let monthData = graphData.filter(
-                (x) =>
+                (x: any) =>
                     moment(x.date).year() ===
                         moment(value[0]).add(i, "months").year() &&
                     moment(x.date).month() ===
                         moment(value[0]).add(i, "months").month()
             );
             console.log("monthData", monthData);
-            monthData.map((x) => {
+            monthData.map((x: any) => {
                 amount += x.amount;
                 setMonthlyDate(
-                    moment(value[0]).add(i, "months").format("YYYY/MMM")
-                );
-                console.log(
-                    "mmmmmmmmmm",
                     moment(value[0]).add(i, "months").format("YYYY/MMM")
                 );
             });
@@ -568,6 +598,10 @@ const Page: React.FC = () => {
     };
 
     const handleYearChange = (value: any) => {
+        let startEnd = value;
+        setStartYearEndYear(startEnd);
+        console.log("startend", startEnd);
+        console.log("startyearendyear", startYearEndYear);
         let graphData: any[] = data.filter(
             (x) =>
                 moment(x.date).year() >= moment(value[0]._d).year() &&
@@ -582,49 +616,27 @@ const Page: React.FC = () => {
         for (let i = start; i <= end; i++) {
             let amount = 0;
             let yearInfo;
-
-            part
+            vehicleNoFilter && vehicleTypeFilter
                 ? (yearInfo = data.filter(
                       (x) =>
                           moment(x.date).year() === i &&
-                          x.expensesType === "Part"
+                          x.vehicleTypeId === vehicleTypeValue &&
+                          x.vehicleNumber === vehicleNumberValue
                   ))
-                : service
+                : vehicleNumberValue
                 ? (yearInfo = data.filter(
                       (x) =>
                           moment(x.date).year() === i &&
-                          x.expensesType === "service"
+                          x.vehicleNumber === vehicleNumberValue
                   ))
-                : docs
+                : vehicleTypeValue
                 ? (yearInfo = data.filter(
                       (x) =>
                           moment(x.date).year() === i &&
-                          x.expensesType === "ECO_DOCUMENT"
-                  ))
-                : fuel
-                ? (yearInfo = data.filter(
-                      (x) =>
-                          moment(x.date).year() === i &&
-                          x.expensesType === "fuel"
-                  ))
-                : buss && part
-                ? (yearInfo = data.filter(
-                      (x) =>
-                          moment(x.date).year() === i &&
-                          x.expensesType === "part" &&
-                          x.vehicleTypeId === "Bus"
+                          x.vehicleTypeId === vehicleTypeValue
                   ))
                 : (yearInfo = data.filter((x) => moment(x.date).year() === i));
 
-            // yearInfo = data.filter(
-            //     (x) => moment(x.date).year() === i && x.vehicleTypeId === "Bus"
-            // );
-            // yearInfo = data.filter(
-            //     (x) =>
-            //         moment(x.date).year() === i &&
-            //         x.vehicleTypeId === "Bus" &&
-            //         x.vehicleNumber === "BAT-9500"
-            // );
             console.log(
                 "year",
                 i,
@@ -633,8 +645,14 @@ const Page: React.FC = () => {
                 yearInfo,
                 "vehicleType"
             );
-            yearInfo.map((x) => (amount += x.amount));
-            console.log("#####amount", amount);
+
+            console.log("yearArray", yearArray);
+            yearInfo.map((x) => {
+                amount += x.amount;
+                yearArray.push(x);
+            });
+
+            // console.log("#####amount", amount);
             let dataObj = {
                 amount: amount,
                 date: i,
@@ -643,7 +661,12 @@ const Page: React.FC = () => {
             let yearDetail = yearData;
             yearDetail.push(dataObj);
             setYearData(yearDetail);
+            setMajorData(yearDetail);
+            console.log("majorData", majorData);
             console.log("yearData", yearData);
+            console.log("yearArray$#@#$%", "  ", yearArray);
+            setYearsInfo(yearArray);
+            console.log("yearInfo$#@#$%", "  ", yearsInfo);
         }
     };
     const handleCustomChange = (value: any) => {
@@ -665,25 +688,39 @@ const Page: React.FC = () => {
         });
     };
     const handleVehicleType = (value: any) => {
-        console.log(value);
-        value === "Bus" ? setBuss(true) : setBuss(false);
-        console.log(buss);
+        data.filter((x) => x.vehicleTypeId === value);
     };
     const handleChangeChart = (value: any) => {
         value === "Graph" ? setGraph(true) : setGraph(false);
     };
+    const onChange = (value: string) => {
+        setVehicleNumberValue(value);
+        setVehicleNoFilter(true);
+        console.log("vehicleNo", value);
+    };
+
+    const onSearch = (value: string) => {
+        console.log("search:", value);
+    };
+    const handleApply = () => {
+        let filter = [vehicleTypeFilter, vehicleNoFilter];
+        setFilterArray(filter);
+        console.log("filterArray", filterArray);
+    };
+
     const config = {
-        data: anually
-            ? yearData
-            : weekly
-            ? weekData
-            : lastMonth
-            ? lastMonthData
-            : custom
-            ? customData
-            : monthly
-            ? monthlyData
-            : weekData,
+        // data: anually
+        //     ? yearData
+        //     : weekly
+        //     ? weekData
+        //     : lastMonth
+        //     ? lastMonthData
+        //     : custom
+        //     ? customData
+        //     : monthly
+        //     ? monthlyData
+        //     : data,
+        data: data,
         xField: "date",
         yField: "amount",
         key: "id",
@@ -755,20 +792,24 @@ const Page: React.FC = () => {
                             style={{ width: 120 }}
                             onChange={handleVehicleType}
                         >
-                            {data.map((x: any) => {
-                                return (
-                                    <Option value={x.vehicleTypeId}>
-                                        {x.vehicleTypeId}
-                                    </Option>
-                                );
-                            })}
+                            {" "}
+                            <Option value="Bus">Bus</Option>
+                            <Option value="Car">Car</Option>
+                            <Option value="Train">Train</Option>
                         </Select>
                     </Col>
                     <Col xs={24} xl={6}>
                         <Select
-                            // defaultValue="All Vehicles"
-                            style={{ width: 120 }}
-                            onChange={handleChange}
+                            showSearch
+                            placeholder="VehicleNUmber"
+                            optionFilterProp="children"
+                            onChange={onChange}
+                            onSearch={onSearch}
+                            filterOption={(input, option) =>
+                                (option!.children as unknown as string)
+                                    .toLowerCase()
+                                    .includes(input.toLowerCase())
+                            }
                         >
                             {data.map((x: any) => {
                                 return (
@@ -809,7 +850,7 @@ const Page: React.FC = () => {
                                     <Select
                                         // defaultValue="Bar"
                                         style={{ width: 120 }}
-                                        onChange={handleChangeDate}
+                                        onChange={handleDateRange}
                                     >
                                         <Option value="Last 7 Days">
                                             Last 7 Days
@@ -824,7 +865,7 @@ const Page: React.FC = () => {
                                         <Option value="Custom">Custom</Option>
                                     </Select>
                                 </Col>
-                                <Col xs={24} xl={18}>
+                                <Col xs={24} xl={14}>
                                     {custom ? (
                                         <RangePicker
                                             onChange={handleCustomChange}
@@ -858,6 +899,14 @@ const Page: React.FC = () => {
                                     ) : (
                                         ""
                                     )}
+                                </Col>
+                                <Col xs={24} xl={4}>
+                                    <Button
+                                        onClick={handleApply}
+                                        type="primary"
+                                    >
+                                        Appy
+                                    </Button>
                                 </Col>
                             </Row>
                         </div>

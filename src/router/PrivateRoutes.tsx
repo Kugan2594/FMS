@@ -18,6 +18,7 @@ import ManageNotifications from "../contents/Notification/ManageNotifications";
 import Statistics from "../contents/Master/Statistics/Statistics";
 import Page from "../contents/Master/Statistics/Statistics";
 import StaticsHistory from "../contents/Home/Statics/StaticsHistory";
+import VehiclesCard from "../contents/Master/VehiclesCard/VehiclesCard";
 
 const Loader = (Component: any) => (props: any) =>
     (
@@ -86,6 +87,10 @@ const PrivateRoute: RouteObject[] = [
     {
         path: "statistics",
         element: <Page />,
+    },
+    {
+        path: "vehicle-card",
+        element: <VehiclesCard />,
     },
     {
         path: "/allBranches",

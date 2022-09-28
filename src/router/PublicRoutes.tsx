@@ -26,6 +26,7 @@ import Statistics from "../contents/Master/Statistics/Statistics";
 import Page from "../contents/Master/Statistics/Statistics";
 import SignUpSplitScreen from "../contents/Login/SignUp/SignUpSplitScreen";
 import StaticsHistory from "../contents/Home/Statics/StaticsHistory";
+import VehiclesCard from "../contents/Master/VehiclesCard/VehiclesCard";
 
 const Loader = (Component: any) => (props: any) =>
     (
@@ -45,10 +46,10 @@ const PublicRoute: RouteObject[] = [
     },
     {
         path: "/sign-up-split-screen",
-    element: <SignUpSplitScreen />,
-  },
-  {
-    path: "/sign-up",
+        element: <SignUpSplitScreen />,
+    },
+    {
+        path: "/sign-up",
         element: <SignUp />,
     },
     {
@@ -122,6 +123,7 @@ const PublicRoute: RouteObject[] = [
                 path: "statistics",
                 element: <Page />,
             },
+            { path: "vehicle-card", element: <VehiclesCard /> },
         ],
     },
     {
