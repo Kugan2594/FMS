@@ -206,8 +206,8 @@ export const userVerifiedSuccess = () =>
         duration: 3,
     });
 
-  export const assignedVehicleSuccess = () =>
-  notification.success({
-    message: "Vehicle Assigned Successfully",
-    duration: 3,
-  });
+export const assignedVehicleSuccess = () =>
+    notification.success({
+        message: "Vehicle Assigned Successfully",
+        duration: 3,
+    });
