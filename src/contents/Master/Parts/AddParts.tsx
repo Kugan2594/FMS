@@ -18,6 +18,7 @@ function AddParts(props: any) {
   const [vehicleNumbers, setVehicleNumbers] = useState("");
 
   let vehicleNum: string;
+
   useEffect(() => {
     getAllPartsSelectData();
     getVehicleSelectData(getUserDetails().user_id);
@@ -61,7 +62,7 @@ function AddParts(props: any) {
       capacity: values.capacity,
       lastService: values.lastService,
       brand: values.brand,
-      partName: values.partName,
+      partId: values.partName,
       vehicleNumber: vehicleNumbers,
       companyId: getUserDetails().company_id,
       branchId: getUserDetails().company_branch_id,

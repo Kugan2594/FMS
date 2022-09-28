@@ -7,27 +7,6 @@ import moment from "moment";
 import { getAllPartsByCompanyIdAndBranchId } from "././ServiceParts";
 import { getUserDetails } from "../../../contents/Login/LoginAuthentication";
 
-const data = [
-  {
-    id: "1",
-    name: "Parts",
-    progressData: 40,
-    vehicleNo: "NP CAR 5245",
-    vehicleModel: "TOYOTA aqua",
-    branchName: "Jaffna Branch",
-    dueDate: "23 Mar 2022",
-  },
-  {
-    id: "67",
-    name: "Parts",
-    progressData: 40,
-    vehicleNo: "NP CAR 5245",
-    vehicleModel: "TOYOTA aqua",
-    branchName: "Jaffna Branch",
-    dueDate: "23 Mar 2022",
-  },
-];
-
 function ManageParts() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isEdit, setisEdit] = useState(false);
@@ -37,7 +16,7 @@ function ManageParts() {
     let convertData = data.map((post: any, index: any) => {
       return {
         id: post.id,
-        name: "Tyre",
+        name: post.partResponseDto.name,
         progressData: post.healthPercentage,
         vehicleNo: post.vehicleNumber,
         lastChangedDate: moment(post.date).format("DD-MM-yyyy"),
