@@ -25,7 +25,7 @@ function ManageParts() {
         let convertData = data.map((post: any, index: any) => {
             return {
                 id: post.id,
-                name: "Tyre",
+                name: post.partResponseDto.name,
                 progressData: post.healthPercentage,
                 vehicleNo: post.vehicleNumber,
                 lastChangedDate: moment(post.date).format("DD-MM-yyyy"),
