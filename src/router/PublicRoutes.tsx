@@ -45,10 +45,10 @@ const PublicRoute: RouteObject[] = [
     },
     {
         path: "/sign-up-split-screen",
-    element: <SignUpSplitScreen />,
-  },
-  {
-    path: "/sign-up",
+        element: <SignUpSplitScreen />,
+    },
+    {
+        path: "/sign-up",
         element: <SignUp />,
     },
     {
@@ -103,7 +103,7 @@ const PublicRoute: RouteObject[] = [
                 element: <ManageParts />,
             },
             {
-                path: "generator",
+                path: "generators",
                 element: <ManageGenerator />,
             },
             {
