@@ -72,6 +72,11 @@ export default function api(
               message: error.response.data.error_description,
               duration: 3,
             });
+          } else if (error.response.data.error === "invalid_grant") {
+            notification.error({
+              message: "Incorrect user name or password",
+              duration: 3,
+            });
           }
         }
       });
