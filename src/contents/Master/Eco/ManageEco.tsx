@@ -11,6 +11,7 @@ import {
 import { getUserDetails } from "../../Login/LoginAuthentication";
 import moment from "moment";
 import { ExclamationCircleOutlined } from "@ant-design/icons";
+import { ecoDocumentDeleteSuccess, errHandler } from "../../../helper/helper";
 
 const { confirm } = Modal;
 
@@ -80,10 +81,20 @@ function ManageEco() {
       okType: "danger",
       cancelText: "No",
       onOk() {
-        deleteEmissionTest(id);
-        getAllEmissionTestData(getUserDetails().user_id);
+        deleteEmissionTest(id)
+          .then((res: any) => {
+            ecoDocumentDeleteSuccess();
+            reloadTable(res);
+          })
+          .catch((error) => {
+            errHandler(error);
+          });
       },
     });
+  };
+
+  const reloadTable = (res: any) => {
+    getAllEmissionTestData(getUserDetails().user_id);
   };
 
   return (
@@ -108,7 +119,12 @@ function ManageEco() {
           width={500}
           footer={null}
         >
-          <AddEco updateData={updateData} isEdit={isEdit} />
+          <AddEco
+            updateData={updateData}
+            isEdit={isEdit}
+            reloadTable={reloadTable}
+            setIsModelOpen={setIsModalOpen}
+          />
         </Modal>
       )}
     </>

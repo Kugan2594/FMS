@@ -46,7 +46,7 @@ const beforeUpload = (file: RcFile) => {
 };
 
 function AddRevenueLicense(props: any) {
-  const { reloadTable } = props;
+  const { reloadTable, setIsModelOpen } = props;
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
   const [imageUrl, setImageUrl] = useState<string>();
@@ -123,6 +123,7 @@ function AddRevenueLicense(props: any) {
     addRevenueLicense(formData)
       .then((res: any) => {
         revenueLicenseDocumentAddSuccess();
+        setIsModelOpen(false);
         reloadTable();
       })
       .catch((err) => {

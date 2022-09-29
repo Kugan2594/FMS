@@ -57,9 +57,23 @@ const getAllPartsByCompanyIdAndBranchId = (
       });
   });
 };
+
+const deletePart = (id: number) => {
+  return new Promise((resolve, reject) => {
+    api("delete", "co-web", null, `/parts/${id}`, "token", "", "")
+      .then((response: any) => {
+        resolve(response.data);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+};
+
 export {
   addPart,
   getAllParts,
   getAllVehiclesAllocationsForDropDown,
   getAllPartsByCompanyIdAndBranchId,
+  deletePart,
 };

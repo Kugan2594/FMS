@@ -106,6 +106,18 @@ const updateVehicleAllocationByDriverId = (data: any) => {
   });
 };
 
+const getAllDriverByCompanyId = (companyId: number) => {
+  return new Promise((resolve, reject) => {
+    api("get", "fm-web", null, `/driver/${companyId}`, "token", "", "")
+      .then((response: any) => {
+        resolve(response.data);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+};
+
 export {
   getAllDriverByCompanyIdAndBranchId,
   addDriver,
@@ -114,4 +126,5 @@ export {
   getAllocatedVehicleByDriverId,
   addVehicleAllocationByDriverId,
   updateVehicleAllocationByDriverId,
+  getAllDriverByCompanyId,
 };

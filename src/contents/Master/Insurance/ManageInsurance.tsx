@@ -7,6 +7,10 @@ import moment from "moment";
 import { getUserDetails } from "../../Login/LoginAuthentication";
 import { deleteInsurance, getInsuranceByUserId } from "./ServiceInsurance";
 import { ExclamationCircleOutlined } from "@ant-design/icons";
+import {
+  errHandler,
+  insuranceDocumentDeleteSuccess,
+} from "../../../helper/helper";
 
 const { confirm } = Modal;
 
@@ -82,10 +86,20 @@ function ManageInsurance() {
       okType: "danger",
       cancelText: "No",
       onOk() {
-        deleteInsurance(id);
-        getInsuranceByUserIdData(getUserDetails().user_id);
+        deleteInsurance(id)
+          .then((res: any) => {
+            insuranceDocumentDeleteSuccess();
+            reloadTable(res);
+          })
+          .catch((error) => {
+            errHandler(error);
+          });
       },
     });
+  };
+
+  const reloadTable = (res: any) => {
+    getInsuranceByUserIdData(getUserDetails().user_id);
   };
 
   return (
@@ -110,7 +124,12 @@ function ManageInsurance() {
           width={500}
           footer={null}
         >
-          <AddInsurance updateData={updateData} isEdit={isEdit} />
+          <AddInsurance
+            updateData={updateData}
+            isEdit={isEdit}
+            reloadTable={reloadTable}
+            setIsModelOpen={setIsModalOpen}
+          />
         </Modal>
       )}
     </>

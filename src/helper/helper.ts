@@ -37,6 +37,7 @@ export const errHandler = (err: any) => {
 
   // Revenue License
   errorBox("12001", "Revenue License Already Exist for this Vehicle");
+  errorBox("12000", "Revenue License Document Depend");
 
   // Emission Test
   errorBox("12101", "Emission Test Already Exist for this Vehicle");
@@ -219,5 +220,29 @@ export const assignedVehicleSuccess = () =>
 export const VehicleServiceDeletedSuccess = () =>
   notification.success({
     message: "Vehicle Service Deleted Successfully",
+    duration: 3,
+  });
+
+export const revenueLicenseDocumentDeleteSuccess = () =>
+  notification.success({
+    message: "Revenue License Document Deleted Successfully",
+    duration: 3,
+  });
+
+export const partDeleteSuccess = () =>
+  notification.success({
+    message: "Part Deleted Successfully",
+    duration: 3,
+  });
+
+export const insuranceDocumentDeleteSuccess = () =>
+  notification.success({
+    message: "Insurance Document Deleted Successfully",
+    duration: 3,
+  });
+
+export const ecoDocumentDeleteSuccess = () =>
+  notification.success({
+    message: "Emission Test Document Deleted Successfully",
     duration: 3,
   });
