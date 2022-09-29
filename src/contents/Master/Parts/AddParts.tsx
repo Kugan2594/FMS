@@ -38,6 +38,13 @@ function AddParts(props: any) {
     useEffect(() => {
         getAllPartsSelectData();
         getVehicleSelectData(getUserDetails().user_id);
+        console.log(updateData);
+
+        if (action === "edit") {
+            console.log(updateData);
+
+            form.setFieldValue("amount", 100);
+        }
     }, []);
     const getVehicleSelectData = (userId: number) => {
         getAllVehiclesAllocationsForDropDown(userId).then((res: any) => {
@@ -67,19 +74,18 @@ function AddParts(props: any) {
         });
     };
     const onFinishAdd = (values: any) => {
-        if (action == "add") {
+        if (action === "add") {
             let data: object = {
                 expectedLifetimeInKm: values.expectedLifetimeInKm,
                 expectedLifetimeInYears: values.expectedLifetimeInYears,
                 warranty: values.warranty,
                 amount: values.amount,
-                date: values.date,
                 locationWhereItFixed: values.locationWhereItFixed,
                 brandNew: values.brandNew,
                 capacity: values.capacity,
-                lastService: values.lastService,
+                lastChangedDate: values.lastChangedDate,
                 brand: values.brand,
-                partId: values.partName,
+                // partId: values.partName,
                 vehicleNumber: vehicleNumbers,
                 companyId: getUserDetails().company_id,
                 branchId: getUserDetails().company_branch_id,
@@ -99,13 +105,12 @@ function AddParts(props: any) {
                 expectedLifetimeInYears: values.expectedLifetimeInYears,
                 warranty: values.warranty,
                 amount: values.amount,
-                date: values.date,
                 locationWhereItFixed: values.locationWhereItFixed,
                 brandNew: values.brandNew,
                 capacity: values.capacity,
-                lastService: values.lastService,
+                lastChangedDate: values.lastChangedDate,
                 brand: values.brand,
-                partName: values.partName,
+                partId: values.partName,
                 vehicleNumber: vehicleNumbers,
                 companyId: getUserDetails().company_id,
                 branchId: getUserDetails().company_branch_id,
@@ -134,13 +139,14 @@ function AddParts(props: any) {
                 form={form}
                 onFinish={onFinishAdd}
                 onFinishFailed={onFinishFailed}
+                initialValues={updateData}
             >
                 <Row>
                     <Col span={24}>
                         <Form.Item name="id" hidden>
                             <Input />
                         </Form.Item>
-                        <Form.Item name="partName">
+                        <Form.Item name="partId">
                             <Select
                                 placeholder="Part Name"
                                 optionFilterProp="children"

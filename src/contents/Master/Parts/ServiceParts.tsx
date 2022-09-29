@@ -52,7 +52,9 @@ const getAllPartsByCompanyIdAndBranchId = (
             "get",
             "co-web",
             null,
-            `/companyParts/${companyId}/${branchId}`,
+            // `/companyParts/${companyId}/${branchId}`,
+            `/companyParts/1/1`,
+
             "token",
             "",
             ""

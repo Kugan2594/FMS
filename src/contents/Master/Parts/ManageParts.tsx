@@ -11,6 +11,7 @@ import {
 import { getUserDetails } from "../../../contents/Login/LoginAuthentication";
 import { ExclamationCircleOutlined } from "@ant-design/icons";
 import { errHandler, partDeleteSuccess } from "../../../helper/helper";
+import { Console } from "console";
 const { confirm } = Modal;
 function ManageParts() {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -29,11 +30,19 @@ function ManageParts() {
                 progressData: post.healthPercentage,
                 vehicleNo: post.vehicleNumber,
                 lastChangedDate: moment(post.date).format("DD-MM-yyyy"),
+                locationWhereItFixed: post.locationWhereItFixed,
+                brandNew: post.brandNew,
+                capacity: post.capacity,
+                brand: post.brand,
+                partId: post.partName,
+                warranty: post.warranty,
+                amount: post.amount,
+                expectedLifetimeInKm: post.expectedLifetimeInKm,
+                expectedLifetimeInYears: post.expectedLifetimeInYears,
             };
         });
         return convertData;
     }
-
     const showModal = () => {
         setIsModalOpen(true);
         setisEdit(false);
@@ -42,16 +51,15 @@ function ManageParts() {
         setIsModalOpen(true);
         setisEdit(true);
         setupdateData(data);
+        console.log({ data });
+        console.log("edit", isEdit);
     };
-
     const handleOk = () => {
         setIsModalOpen(false);
     };
-
     const handleCancel = () => {
         setIsModalOpen(false);
     };
-
     const getAllPartsData = (companyId: Number, branchId: Number) => {
         let data: any = [];
         getAllPartsByCompanyIdAndBranchId(companyId, branchId).then(
@@ -62,7 +70,6 @@ function ManageParts() {
             (error: any) => {}
         );
     };
-
     useEffect(() => {
         getAllPartsData(
             getUserDetails().company_id,
@@ -89,7 +96,10 @@ function ManageParts() {
         });
     };
     const reloadTable = (res: any) => {
-        // getAllGenerator(getUserDetails().company_id);
+        getAllPartsData(
+            getUserDetails().company_id,
+            getUserDetails().company_branch_id
+        );
     };
     return (
         <>
@@ -114,16 +124,29 @@ function ManageParts() {
                 width={500}
                 footer={false}
             >
-                <AddParts
-                    title={"Add Generator"}
-                    visible={addVisible}
-                    setAddVisible={setAddVisible}
-                    updateData={isEdit ? updateData : null}
-                    // reloadTable={reloadTable}
-                    handleClose={handleCancel}
-                    handleAdd={handleCancel}
-                    action={action}
-                />
+                {isEdit ? (
+                    <AddParts
+                        title={"Edit Parts"}
+                        visible={addVisible}
+                        setAddVisible={setAddVisible}
+                        updateData={isEdit ? updateData : null}
+                        reloadTable={reloadTable}
+                        handleClose={handleCancel}
+                        handleAdd={handleCancel}
+                        action={action}
+                    />
+                ) : (
+                    <AddParts
+                        title={"Add Parts"}
+                        visible={addVisible}
+                        setAddVisible={setAddVisible}
+                        updateData={isEdit ? updateData : null}
+                        reloadTable={reloadTable}
+                        handleClose={handleCancel}
+                        handleAdd={handleCancel}
+                        action={action}
+                    />
+                )}
             </Modal>
         </>
     );
