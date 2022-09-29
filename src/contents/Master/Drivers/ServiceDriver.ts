@@ -9,8 +9,7 @@ const getAllDriverByCompanyIdAndBranchId = (
       "get",
       "fm-web",
       null,
-      // `/driver/${companyId}/${branchId}`,
-      `/driver/1/1`,
+      `/driver/${companyId}/${branchId}`,
       "token",
       "",
       ""
@@ -85,25 +84,37 @@ const getAllocatedVehicleByDriverId = (userId: number) => {
 
 const addVehicleAllocationByDriverId = (data: any) => {
   return new Promise((resolve, reject) => {
-      api("post", "co-web", null, "/vehicleAllocation", "token", data, "")
-          .then((response: any) => {
-              resolve(response.data);
-          })
-          .catch((error) => {
-              reject(error);
-          });
+    api("post", "co-web", null, "/vehicleAllocation", "token", data, "")
+      .then((response: any) => {
+        resolve(response.data);
+      })
+      .catch((error) => {
+        reject(error);
+      });
   });
 };
 
 const updateVehicleAllocationByDriverId = (data: any) => {
   return new Promise((resolve, reject) => {
-      api("put", "co-web", null, "/vehicleAllocation", "token", data, "")
-          .then((reponse: any) => {
-              resolve(reponse.data);
-          })
-          .catch((error) => {
-              reject(error);
-          });
+    api("put", "co-web", null, "/vehicleAllocation", "token", data, "")
+      .then((reponse: any) => {
+        resolve(reponse.data);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+};
+
+const getAllDriverByCompanyId = (companyId: number) => {
+  return new Promise((resolve, reject) => {
+    api("get", "fm-web", null, `/driver/${companyId}`, "token", "", "")
+      .then((response: any) => {
+        resolve(response.data);
+      })
+      .catch((error) => {
+        reject(error);
+      });
   });
 };
 
@@ -115,4 +126,5 @@ export {
   getAllocatedVehicleByDriverId,
   addVehicleAllocationByDriverId,
   updateVehicleAllocationByDriverId,
+  getAllDriverByCompanyId,
 };

@@ -6,6 +6,7 @@ import { Modal, Space } from "antd";
 import ViewBranch from "./ViewBranch";
 import { getUserDetails } from "../../Login/LoginAuthentication";
 import { getAllBranchByCompanyId, deleteBranch } from "./ServicesBranch";
+import { branchDeleteSuccess, errHandler } from "../../../helper/helper";
 const { confirm } = Modal;
 function createData(data: any) {
   let convertData = data.map((post: any, index: any) => {
@@ -70,9 +71,14 @@ function ManageBranch() {
       okType: "danger",
       cancelText: "No",
       onOk() {
-        deleteBranch(id);
-        getAllBranchData(getUserDetails().company_id);
-        console.log(id);
+        deleteBranch(id)
+          .then((res: any) => {
+            branchDeleteSuccess();
+            reloadTable(res);
+          })
+          .catch((error) => {
+            errHandler(error);
+          });
       },
     });
   };

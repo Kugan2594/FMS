@@ -41,6 +41,7 @@ const beforeUpload = (file: RcFile) => {
 };
 
 function AddEco(props: any) {
+  const { reloadTable, setIsModelOpen } = props;
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
   const [imageUrl, setImageUrl] = useState<string>();
@@ -115,6 +116,8 @@ function AddEco(props: any) {
     addEmissionTest(formData)
       .then((res: any) => {
         emissionTestDocumentAddSuccess();
+        setIsModelOpen(false);
+        reloadTable();
       })
       .catch((err) => {
         errHandler(err);

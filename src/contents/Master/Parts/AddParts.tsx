@@ -10,6 +10,7 @@ import {
 } from "./ServiceParts";
 
 function AddParts(props: any) {
+  const { reloadTable, setIsModelOpen } = props;
   const [form] = Form.useForm();
   const { Option } = Select;
   const [open, setOpen] = useState(false);
@@ -23,6 +24,7 @@ function AddParts(props: any) {
     getAllPartsSelectData();
     getVehicleSelectData(getUserDetails().user_id);
   }, []);
+
   const getVehicleSelectData = (userId: number) => {
     getAllVehiclesAllocationsForDropDown(userId).then((res: any) => {
       let data: any = [];
@@ -72,6 +74,8 @@ function AddParts(props: any) {
     addPart(data)
       .then((res: any) => {
         partAddSuccess();
+        setIsModelOpen(false);
+        reloadTable(res);
       })
       .catch((err) => {
         errHandler(err);

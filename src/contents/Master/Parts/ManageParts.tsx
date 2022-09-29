@@ -4,8 +4,15 @@ import { useState, useEffect } from "react";
 import AddParts from "././AddParts";
 import MasterTemplateWithLargeCard from "../../../templates/MasterTemplateWithLargeCard";
 import moment from "moment";
-import { getAllPartsByCompanyIdAndBranchId } from "././ServiceParts";
+import {
+  deletePart,
+  getAllPartsByCompanyIdAndBranchId,
+} from "././ServiceParts";
 import { getUserDetails } from "../../../contents/Login/LoginAuthentication";
+import { ExclamationCircleOutlined } from "@ant-design/icons";
+import { errHandler, partDeleteSuccess } from "../../../helper/helper";
+
+const { confirm } = Modal;
 
 function ManageParts() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -54,6 +61,33 @@ function ManageParts() {
     );
   };
 
+  const deleteClickHandler = (id: any) => {
+    confirm({
+      title: "Are you sure delete this Emission Test Document?",
+      icon: <ExclamationCircleOutlined />,
+      okText: "Yes",
+      okType: "danger",
+      cancelText: "No",
+      onOk() {
+        deletePart(id)
+          .then((res: any) => {
+            partDeleteSuccess();
+            reloadTable(res);
+          })
+          .catch((error) => {
+            errHandler(error);
+          });
+      },
+    });
+  };
+
+  const reloadTable = (res: any) => {
+    getAllPartsData(
+      getUserDetails().company_id,
+      getUserDetails().company_branch_id
+    );
+  };
+
   useEffect(() => {
     getAllPartsData(
       getUserDetails().company_id,
@@ -69,7 +103,7 @@ function ManageParts() {
         headerOnSearch={() => {}}
         headerOnClickAdd={showModal}
         cardOnClick={(id: string) => console.log("CLICKED " + id)}
-        deleteButton={(id: string) => console.log("DELETED " + id)}
+        deleteButton={(id: string) => deleteClickHandler(id)}
         updateButton={showModalEdit}
       />
 
@@ -82,7 +116,11 @@ function ManageParts() {
         width={500}
         footer={false}
       >
-        <AddParts onAdd={handleCancel} onCancel={handleCancel} />
+        <AddParts
+          onAdd={handleCancel}
+          onCancel={handleCancel}
+          reloadTable={reloadTable}
+        />
       </Modal>
     </>
   );
