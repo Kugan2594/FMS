@@ -3,12 +3,17 @@ import { useEffect, useState } from "react";
 import AddService from "./AddService";
 import MasterTemplateWithLargeCard from "../../../templates/MasterTemplateWithLargeCard";
 import {
+  deleteVehicleService,
   getAllVehicleServices,
   getAllVehicleServicesByCompanyIdAndBranchId,
 } from "./ServicesService";
 import moment from "moment";
 import { getAllVehiclesByCompanyIdAndBranchId } from "../Vehicles/ServiceVehicle";
 import { getUserDetails } from "../../../contents/Login/LoginAuthentication";
+import { ExclamationCircleOutlined } from "@ant-design/icons";
+import { VehicleServiceDeletedSuccess } from "../../../helper/helper";
+
+const { confirm } = Modal;
 
 function createData(data: any) {
   let convertData = data.map((post: any, index: any) => {
@@ -16,7 +21,7 @@ function createData(data: any) {
       id: post.id,
       name: post.serviceResponseDto.serviceName,
       progressData: post.serviceValidity,
-      vehicleNo: post.vehicleResponseDto.vehicleNumber,
+      vehicleNo: post.vehicleNumber,
       lastChangedDate: moment(post.serviceDate).format("DD-MM-yyyy"),
     };
   });
@@ -48,7 +53,7 @@ function ManageService() {
     let data: any = [];
     getAllVehicleServicesByCompanyIdAndBranchId(companyId, branchId).then(
       (res: any) => {
-        data = createData(res.results.service);
+        data = createData(res.results.companyVehicleService);
         setServices(data);
       },
       (error: any) => {}
@@ -62,6 +67,29 @@ function ManageService() {
     );
   }, []);
 
+  const reloadTable = (res: any) => {
+    getAllVehicleServiceData(
+      getUserDetails().company_id,
+      getUserDetails().company_branch_id
+    );
+  };
+
+  const deleteClickHandler = (id: any) => {
+    confirm({
+      title: "Are you sure delete this Vehicle Service?",
+      icon: <ExclamationCircleOutlined />,
+      okText: "Yes",
+      okType: "danger",
+      cancelText: "No",
+      onOk() {
+        deleteVehicleService(id).then((res: any) => {
+          VehicleServiceDeletedSuccess();
+          reloadTable(res);
+        });
+      },
+    });
+  };
+
   return (
     <>
       <MasterTemplateWithLargeCard
@@ -70,7 +98,7 @@ function ManageService() {
         headerOnSearch={() => {}}
         headerOnClickAdd={showModal}
         cardOnClick={(id: string) => console.log("CLICKED " + id)}
-        deleteButton={(id: string) => console.log("DELETED " + id)}
+        deleteButton={(id: string) => deleteClickHandler(id)}
         updateButton={showModalEdit}
       />
 
@@ -78,12 +106,16 @@ function ManageService() {
         title={isEdit ? "Edit Service" : "Add Service"}
         open={isModalOpen}
         onOk={handleOk}
-        // onCancel={handleCancel}
+        onCancel={handleCancel}
         closable={false}
         width={500}
         footer={false}
       >
-        <AddService onAdd={handleCancel} onCancel={handleCancel} />
+        <AddService
+          onAdd={handleCancel}
+          onCancel={handleCancel}
+          reloadTable={reloadTable}
+        />
       </Modal>
     </>
   );

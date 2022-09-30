@@ -1,22 +1,22 @@
 import React from "react";
 import {
-    HomeOutlined,
-    CarOutlined,
-    BellOutlined,
-    SettingOutlined,
+  HomeOutlined,
+  CarOutlined,
+  BellOutlined,
+  SettingOutlined,
 } from "@ant-design/icons";
 
 interface MenuItem {
-    id: string;
-    icon: any;
-    name: string;
-    link: string;
-    children: SubmenuItem[];
+  id: string;
+  icon: any;
+  name: string;
+  link: string;
+  children: SubmenuItem[];
 }
 
 interface SubmenuItem {
-    id: string;
-    name: string;
+  id: string;
+  name: string;
 }
 
 const mainMenuItems: MenuItem[] = [
@@ -29,7 +29,7 @@ const mainMenuItems: MenuItem[] = [
     children: [
       { id: "branches", name: "Branches" },
       { id: "vehicles", name: "Vehicles" },
-      { id: "generators", name: "Genarators" },
+      { id: "generator", name: "Genarators" },
       { id: "parts", name: "Parts" },
       { id: "revenueLicense", name: "Revenue License" },
       { id: "emissionTest", name: "Emission Test" },

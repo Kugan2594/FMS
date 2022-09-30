@@ -41,6 +41,7 @@ const beforeUpload = (file: RcFile) => {
 };
 
 function AddInsurance(props: any) {
+  const { reloadTable, setIsModelOpen } = props;
   const [form] = Form.useForm();
   const { Option } = Select;
   const [loading, setLoading] = useState(false);
@@ -119,6 +120,8 @@ function AddInsurance(props: any) {
     addInsurance(formData)
       .then((res: any) => {
         insuranceDocumentAddSuccess();
+        setIsModelOpen(false);
+        reloadTable();
       })
       .catch((err) => {
         errHandler(err);
