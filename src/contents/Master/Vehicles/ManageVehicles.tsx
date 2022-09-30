@@ -10,6 +10,7 @@ import {
   deleteVehicleByVehicleNumberAndCompanyId,
   getAllVehiclesByCompanyId,
 } from "./ServiceVehicle";
+import VehicleProfile from "./VehicleProfile";
 
 const { confirm } = Modal;
 
@@ -73,6 +74,7 @@ function ManageVehicles() {
   const handleCancel = () => {
     setAddVisible(false);
     seteditVisible(false);
+    setIsProfileModalOpen(false);
   };
 
   const getAllVehicles = (companyId: number) => {
@@ -176,13 +178,10 @@ function ManageVehicles() {
 
   return (
     <>
-      <Upload {...uploadProps}>
-        <Button icon={<DownloadOutlined />}></Button>
-      </Upload>
       <MasterTemplateWithSmallCard
         data={vehicles}
         dataCount={vehicles.length}
-        headerOnClickAdd={openAdd}
+        headerOnClickAdd={() => setIsProfileModalOpen(true)}
         headerOnSearch={() => {}}
         cardOnClick={(data: any) => profileOnClickHandler(data)}
         onClickVehicleDelete={(vehicleNumber: string) =>
@@ -219,6 +218,17 @@ function ManageVehicles() {
           vehicleModels={vehicleModels}
           branches={branches}
         />
+      ) : isProfileModalOpen ? (
+        <Modal
+          title={false}
+          open={isProfileModalOpen}
+          onCancel={handleCancel}
+          closable={false}
+          width={"75%"}
+          footer={false}
+        >
+          <VehicleProfile />
+        </Modal>
       ) : (
         <></>
       )}
