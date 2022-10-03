@@ -9,7 +9,11 @@ import {
 import { getUserDetails } from "../../Login/LoginAuthentication";
 import moment from "moment";
 import { ExclamationCircleOutlined } from "@ant-design/icons";
-import { revenueLicenseDocumentAddSuccess } from "../../../helper/helper";
+import {
+  errHandler,
+  revenueLicenseDocumentAddSuccess,
+  revenueLicenseDocumentDeleteSuccess,
+} from "../../../helper/helper";
 
 const { confirm } = Modal;
 
@@ -64,10 +68,14 @@ function ManageRevenueLicense() {
       okType: "danger",
       cancelText: "No",
       onOk() {
-        deleteRevenueLicense(id).then((res: any) => {
-          revenueLicenseDocumentAddSuccess();
-          reloadTable(res);
-        });
+        deleteRevenueLicense(id)
+          .then((res: any) => {
+            revenueLicenseDocumentDeleteSuccess();
+            reloadTable(res);
+          })
+          .catch((error) => {
+            errHandler(error);
+          });
       },
     });
   };

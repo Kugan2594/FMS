@@ -234,3 +234,21 @@ export const VehicleServiceDeletedSuccess = () =>
         message: "Vehicle Service Deleted Successfully",
         duration: 3,
     });
+
+export const revenueLicenseDocumentDeleteSuccess = () =>
+    notification.success({
+        message: "Revenue License Document Deleted Successfully",
+        duration: 3,
+    });
+
+export const insuranceDocumentDeleteSuccess = () =>
+    notification.success({
+        message: "Insurance Document Deleted Successfully",
+        duration: 3,
+    });
+
+export const ecoDocumentDeleteSuccess = () =>
+    notification.success({
+        message: "Emission Test Document Deleted Successfully",
+        duration: 3,
+    });

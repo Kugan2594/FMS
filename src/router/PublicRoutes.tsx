@@ -22,11 +22,10 @@ import SignUp from "../contents/Login/SignUp/SignUp";
 import ManageVehicles from "../contents/Master/Vehicles/ManageVehicles";
 import ManageNotifications from "../contents/Notification/ManageNotifications";
 import OTPVerification from "../contents/Login/OTPVerification/OTPVerification";
-import Statistics from "../contents/Master/Statistics/Statistics";
-import Page from "../contents/Master/Statistics/Statistics";
 import SignUpSplitScreen from "../contents/Login/SignUp/SignUpSplitScreen";
 import StaticsHistory from "../contents/Home/Statics/StaticsHistory";
-import VehiclesCard from "../contents/Master/VehiclesCard/VehiclesCard";
+import Page from "../contents/Home/Statistics/Statistics";
+import VehiclesCard from "../contents/Home/VehiclesCard/VehiclesCard";
 
 const Loader = (Component: any) => (props: any) =>
     (
@@ -62,7 +61,7 @@ const PublicRoute: RouteObject[] = [
         children: [
             {
                 path: "allBranches",
-                element: <StaticsHistory />,
+                element: <Page />,
             },
         ],
     },

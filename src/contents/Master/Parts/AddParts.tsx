@@ -16,6 +16,7 @@ import {
 } from "./ServiceParts";
 
 function AddParts(props: any) {
+    const { reloadTable, setIsModelOpen } = props;
     const [form] = Form.useForm();
     const { Option } = Select;
     const [open, setOpen] = useState(false);
@@ -30,7 +31,6 @@ function AddParts(props: any) {
         title,
         updateData,
         action,
-        reloadTable,
         handleAdd,
         handleClose,
     } = props;
@@ -46,6 +46,7 @@ function AddParts(props: any) {
             form.setFieldValue("amount", 100);
         }
     }, []);
+
     const getVehicleSelectData = (userId: number) => {
         getAllVehiclesAllocationsForDropDown(userId).then((res: any) => {
             let data: any = [];
@@ -95,6 +96,8 @@ function AddParts(props: any) {
             addPart(data)
                 .then((res: any) => {
                     partAddSuccess();
+                    setIsModelOpen(false);
+                    reloadTable(res);
                 })
                 .catch((err) => {
                     errHandler(err);
@@ -117,12 +120,12 @@ function AddParts(props: any) {
                 userId: getUserDetails().user_id,
             };
             updatePartById(data)
-                .then((res) => {
+                .then((res: any) => {
                     partUpdateSuccess();
                     reloadTable(res);
                     setAddVisible(false);
                 })
-                .catch((err) => {
+                .catch((err: any) => {
                     errHandler(err);
                 });
         }

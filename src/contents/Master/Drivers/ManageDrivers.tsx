@@ -7,10 +7,11 @@ import { RocketOutlined } from "@ant-design/icons";
 import DriverProfile from "./DriverProfile";
 import {
   deleteDriver,
+  getAllDriverByCompanyId,
   getAllDriverByCompanyIdAndBranchId,
 } from "./ServiceDriver";
 import { getUserDetails } from "../../Login/LoginAuthentication";
-import { driverDeleteSuccess } from "../../../helper/helper";
+import { driverDeleteSuccess, errHandler } from "../../../helper/helper";
 import AssignVehicle from "./AssignVehicle";
 
 const { confirm } = Modal;
@@ -69,10 +70,7 @@ function ManageDrivers() {
   };
 
   const reloadTable = (res: any) => {
-    getAllDriverData(
-      getUserDetails().company_id,
-      getUserDetails().company_branch_id
-    );
+    getAllDriverData(getUserDetails().company_id);
   };
 
   const deleteClickHandler = (id: any) => {
@@ -83,14 +81,14 @@ function ManageDrivers() {
       okType: "danger",
       cancelText: "No",
       onOk() {
-        deleteDriver(id).then(() =>
-          getAllDriverData(
-            getUserDetails().company_id,
-            getUserDetails().company_branch_id
-          )
-        );
-
-        driverDeleteSuccess();
+        deleteDriver(id)
+          .then((res: any) => {
+            driverDeleteSuccess();
+            reloadTable(res);
+          })
+          .catch((error) => {
+            errHandler(error);
+          });
       },
     });
   };
@@ -101,16 +99,13 @@ function ManageDrivers() {
   };
 
   useEffect(() => {
-    getAllDriverData(
-      getUserDetails().company_id,
-      getUserDetails().company_branch_id
-    );
+    getAllDriverData(getUserDetails().company_id);
   }, []);
 
-  const getAllDriverData = (companyId: number, branchId: number) => {
+  const getAllDriverData = (companyId: number) => {
     let data: any = [];
 
-    getAllDriverByCompanyIdAndBranchId(companyId, branchId).then(
+    getAllDriverByCompanyId(companyId).then(
       (res: any) => {
         data = createData(res.results.driver);
         setDriver(data);

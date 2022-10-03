@@ -5,7 +5,7 @@ import AddParts from "././AddParts";
 import MasterTemplateWithLargeCard from "../../../templates/MasterTemplateWithLargeCard";
 import moment from "moment";
 import {
-    deletePartById,
+    deletePart,
     getAllPartsByCompanyIdAndBranchId,
 } from "././ServiceParts";
 import { getUserDetails } from "../../../contents/Login/LoginAuthentication";
@@ -84,7 +84,7 @@ function ManageParts() {
             okType: "danger",
             cancelText: "No",
             onOk() {
-                deletePartById(id)
+                deletePart(id)
                     .then((res) => {
                         partDeleteSuccess();
                         reloadTable(res);
