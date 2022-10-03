@@ -5,7 +5,11 @@ import AddInsurance from "./AddInsurance";
 import MasterTemplateWithLargeCard from "../../../templates/MasterTemplateWithLargeCard";
 import moment from "moment";
 import { getUserDetails } from "../../Login/LoginAuthentication";
-import { deleteInsurance, getInsuranceByUserId } from "./ServiceInsurance";
+import {
+  deleteInsurance,
+  getInsuranceByCompanyId,
+  getInsuranceByUserId,
+} from "./ServiceInsurance";
 import { ExclamationCircleOutlined } from "@ant-design/icons";
 import {
   errHandler,
@@ -62,12 +66,12 @@ function ManageInsurance() {
   };
 
   useEffect(() => {
-    getInsuranceByUserIdData(getUserDetails().user_id);
+    getInsuranceByUserIdData(getUserDetails().company_id);
   }, []);
 
-  const getInsuranceByUserIdData = (userId: number) => {
+  const getInsuranceByUserIdData = (companyId: number) => {
     let data: any = [];
-    getInsuranceByUserId(userId).then(
+    getInsuranceByCompanyId(companyId).then(
       (res: any) => {
         data = createData(res.results.insurance);
         setInsurance(data);
@@ -99,7 +103,7 @@ function ManageInsurance() {
   };
 
   const reloadTable = (res: any) => {
-    getInsuranceByUserIdData(getUserDetails().user_id);
+    getInsuranceByUserIdData(getUserDetails().company_id);
   };
 
   return (

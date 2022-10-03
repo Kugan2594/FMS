@@ -26,6 +26,10 @@ import {
   revenueLicenseDocumentAddSuccess,
 } from "../../../helper/helper";
 import { noSplCharAndLetterRegex } from "../../../utils/Regex";
+import {
+  getAllVehiclesByCompanyId,
+  getAllVehiclesByCompanyIdAndBranchId,
+} from "../Vehicles/ServiceVehicle";
 
 const getBase64 = (img: RcFile, callback: (url: string) => void) => {
   const reader = new FileReader();
@@ -73,23 +77,63 @@ function AddRevenueLicense(props: any) {
   };
 
   useEffect(() => {
-    getVehicleSelectData(getUserDetails().user_id);
+    getVehicleSelectData(
+      getUserDetails().user_id,
+      getUserDetails().company_id,
+      getUserDetails().company_branch_id
+    );
   }, []);
 
-  const getVehicleSelectData = (userId: number) => {
-    getAllVehiclesAllocationsForDropDown(userId).then((res: any) => {
-      let data: any = [];
-      res.map((post: any) => {
-        data.push({
-          value: post.vehicleNumber,
-          label: `${post.resourceVehicleDto.vehicleModel} ${post.resourceVehicleDto.vehicleBodyTypeResponseDto} ${post.resourceVehicleDto.vehicleTypeName} ${post.resourceVehicleDto.fuelTypeName} ${post.vehicleNumber}`,
+  const getVehicleSelectData = (
+    userId: number,
+    companyId: number,
+    branchId: number
+  ) => {
+    if (getUserDetails().roleName == "COMPANYDRIVER") {
+      getAllVehiclesAllocationsForDropDown(userId).then((res: any) => {
+        let data: any = [];
+        res.map((post: any) => {
+          data.push({
+            value: post.vehicleNumber,
+            label: `${post.resourceVehicleDto.vehicleModel} ${post.resourceVehicleDto.vehicleBodyTypeResponseDto} ${post.resourceVehicleDto.vehicleTypeName} ${post.resourceVehicleDto.fuelTypeName} ${post.vehicleNumber}`,
+          });
+          vehicleNum = post.vehicleNumber;
+          return null;
         });
-        vehicleNum = post.vehicleNumber;
-        return null;
+        setVehicle(data);
+        setvehicleNumbers(vehicleNum);
       });
-      setVehicle(data);
-      setvehicleNumbers(vehicleNum);
-    });
+    } else if (getUserDetails().roleName == "COMPANYADMIN") {
+      getAllVehiclesByCompanyId(companyId).then((res: any) => {
+        let data: any = [];
+        res.results.companyVehicle.map((post: any) => {
+          data.push({
+            value: post.vehicleNumber,
+            label: `${post.resourceVehicleDto.vehicleModel} ${post.resourceVehicleDto.vehicleBodyTypeResponseDto} ${post.resourceVehicleDto.vehicleTypeName} ${post.resourceVehicleDto.fuelTypeName} ${post.vehicleNumber}`,
+          });
+          vehicleNum = post.vehicleNumber;
+          return null;
+        });
+        setVehicle(data);
+        setvehicleNumbers(vehicleNum);
+      });
+    } else if (getUserDetails().roleName == "COMPANYBRANCHADMIN") {
+      getAllVehiclesByCompanyIdAndBranchId(companyId, branchId).then(
+        (res: any) => {
+          let data: any = [];
+          res.results.vehicleByCompanyAndBranch.map((post: any) => {
+            data.push({
+              value: post.vehicleNumber,
+              label: `${post.resourceVehicleDto.vehicleModel} ${post.resourceVehicleDto.vehicleBodyTypeResponseDto} ${post.resourceVehicleDto.vehicleTypeName} ${post.resourceVehicleDto.fuelTypeName} ${post.vehicleNumber}`,
+            });
+            vehicleNum = post.vehicleNumber;
+            return null;
+          });
+          setVehicle(data);
+          setvehicleNumbers(vehicleNum);
+        }
+      );
+    }
   };
 
   const uploadButton = (
@@ -112,6 +156,8 @@ function AddRevenueLicense(props: any) {
       vehicleNumber: vehicleNumbers,
       taxAmount: revenueLicenseData.taxAmount,
       userId: getUserDetails().user_id,
+      companyId: getUserDetails().company_id,
+      branchId: getUserDetails().company_branch_id,
     };
 
     fileList.map((post, index) => {
