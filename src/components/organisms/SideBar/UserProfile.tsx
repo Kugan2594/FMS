@@ -1,22 +1,29 @@
 import React, { useState } from "react";
 import { Avatar } from "antd";
 import { UserOutlined } from '@ant-design/icons';
+import { Button } from "../../atoms/Button";
+import CustomButton from "../../atoms/Button/CustomButton";
 
-function UserProfile() {
-  const [userProfile, setUserProfile] = useState("");
+interface UserProfileType {
+  onClickProfile: any;
+  onClickLogout: any;
+  userProfile: string;
+}
+
+function UserProfile({onClickProfile, onClickLogout, userProfile}: UserProfileType) {
 
   return (
     <div className="user-profile">
-      <div style={{cursor: "pointer"}}>
-        {userProfile != "" ? (
+      <div className="profile" onClick={onClickProfile}>
+        {userProfile != null ? (
           <Avatar src={userProfile} shape="square" size="large" />
         ) : (
           <Avatar icon={<UserOutlined />} shape="square" size="large" />
         )}
         <div>Profile</div>
       </div>
-      <div className="logout" style={{ marginTop: "15px", cursor: "pointer" }}>
-        <h4>Logout</h4>
+      <div className="logout">
+        <CustomButton title="Logout" onClick={onClickLogout} type="default"/>
       </div>
     </div>
   );
