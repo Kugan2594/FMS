@@ -1,4 +1,4 @@
-import { Col, Form, Image, message, Modal, Row, Upload, Button } from "antd";
+import { Col, Form, Image, message, Modal, Row, Upload } from "antd";
 import { Input } from "../../../components/atoms/index";
 import Column from "antd/lib/table/Column";
 import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
@@ -6,13 +6,25 @@ import type { UploadChangeParam } from "antd/es/upload";
 import type { RcFile, UploadFile, UploadProps } from "antd/es/upload/interface";
 import { getUserDetails } from "../../../contents/Login/LoginAuthentication";
 import React, { useState } from "react";
-import { errHandler, branchAddSuccess } from "../../../helper/helper";
+import {
+  errHandler,
+  branchAddSuccess,
+  branchUpdateSuccess,
+} from "../../../helper/helper";
 import { addBranch, editBranch } from "./ServicesBranch";
 import { phoneNumberRegex, emailRegex } from "../../../utils/Regex";
+import { Button } from "../../../components/atoms/Button";
+
 interface AddBranchType {
   onClickCancel?: React.MouseEventHandler<HTMLElement> | undefined;
   onClickAdd?: React.MouseEventHandler<HTMLElement> | undefined;
   initialValues?: any;
+  isEdit: boolean;
+  cancelClickHandler: any;
+  reloadTable: any;
+  setIsModelOpen: any;
+  updateData: any;
+  action: any;
 }
 const getBase64 = (img: RcFile, callback: (url: string) => void) => {
   const reader = new FileReader();
@@ -32,7 +44,14 @@ const beforeUpload = (file: RcFile) => {
   return isJpgOrPng && isLt2M;
 };
 
-function AddBranch(props: any) {
+function AddBranch({
+  isEdit,
+  updateData,
+  cancelClickHandler,
+  reloadTable,
+  setIsModelOpen,
+  action,
+}: AddBranchType) {
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
   const [imageUrl, setImageUrl] = useState<string>();
@@ -61,58 +80,60 @@ function AddBranch(props: any) {
   const onFinishFailed = () => {};
 
   const onFinishAdd = (values: any) => {
-    let branchData = values;
-    if (props.action == "add") {
-      const data = {
+    if (action === "add") {
+      let data: object = {
         id: 100,
-        branchName: branchData.branchName,
-        address: branchData.address,
-        phoneNumber: branchData.phoneNumber,
-        email: branchData.email,
+        branchName: values.branchName,
+        address: values.address,
+        phoneNumber: values.phoneNumber,
+        email: values.email,
         companyId: getUserDetails().company_id,
-        //   companyId:  1
       };
-
       addBranch(data)
-        .then((res: any) => {
+        .then((res) => {
           branchAddSuccess();
-          props.reloadTable(res);
+          setIsModelOpen(false);
+          reloadTable(res);
         })
-        .catch((err: any) => {
+        .catch((err) => {
           errHandler(err);
         });
     } else {
-      const data = {
-        id: props.initialValues.id,
-        branchName: branchData.branchName,
-        address: branchData.address,
-        phoneNumber: branchData.phoneNumber,
-        email: branchData.email,
+      let data: object = {
+        id: values.id,
+        branchName: values.branchName,
+        address: values.address,
+        phoneNumber: values.phoneNumber,
+        email: values.email,
         companyId: getUserDetails().company_id,
       };
-
       editBranch(data)
-        .then((res: any) => {
-          branchAddSuccess();
-          props.reloadTable(res);
+        .then((res) => {
+          branchUpdateSuccess();
+          setIsModelOpen(false);
+          reloadTable(res);
         })
-        .catch((err: any) => {
+        .catch((err) => {
           errHandler(err);
         });
     }
   };
+
   return (
     <Form
       id="form"
       name="basic"
       form={form}
-      initialValues={props.isEdit ? props.updateData : {}}
+      initialValues={isEdit ? updateData : {}}
       onFinish={onFinishAdd}
       onFinishFailed={onFinishFailed}
     >
       <Row gutter={8}>
         <Col xs={24} xl={6} style={{ marginLeft: "0px" }}>
           <Row className="row-1">
+            <Form.Item name="id" hidden>
+              <Input />
+            </Form.Item>
             <Form.Item valuePropName="fileList">
               <Upload
                 name="avatar"
@@ -184,9 +205,17 @@ function AddBranch(props: any) {
           marginTop: "3%",
         }}
       >
-        <Button htmlType="submit" type="primary">
-          Add
-        </Button>
+        <Button
+          className="form-button"
+          title="Cancel"
+          onClick={cancelClickHandler}
+        />
+        <Button
+          className="form-button"
+          title={isEdit ? "Update" : "Add"}
+          type="primary"
+          htmlType="submit"
+        />
       </Row>
     </Form>
   );
