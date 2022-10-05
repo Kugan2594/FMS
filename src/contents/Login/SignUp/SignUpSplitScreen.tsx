@@ -4,7 +4,7 @@ import Logo from "../../../assets/Logo.svg";
 import Standalone from "../../../assets/Standalone.svg";
 import Corporate from "../../../assets/Corporate.svg";
 import { Image, Row, Col, Typography, Card } from "antd";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const { Title, Text } = Typography;
 
@@ -17,10 +17,6 @@ function SignUpSplitScreen() {
 
   const corporateOnClick = () => {
     navigate("/sign-up");
-  };
-
-  const loginOnClick = () => {
-    navigate("/");
   };
 
   return (
@@ -71,14 +67,18 @@ function SignUpSplitScreen() {
         </Row>
       </div>
       <div className="signUp-split-screen-login-container">
-        <Text>Already have an account? </Text>
-        <Text
-          strong
-          className="signUp-split-screen-login"
-          onClick={loginOnClick}
-        >
-          Login
-        </Text>
+      <Text style={{ fontSize: "16px" }}>Already have an account?</Text>
+            <Text
+                strong
+                style={{
+                  fontSize: "16px",
+                  color: "blue",
+                  cursor: "pointer",
+                  marginLeft: "5px"
+                }}
+              >
+                <Link to="/">Login</Link>
+              </Text>
       </div>
     </div>
   );
