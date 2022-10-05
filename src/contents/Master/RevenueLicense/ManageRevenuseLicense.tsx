@@ -4,6 +4,7 @@ import AddRevenueLicense from "./AddRevenueLicense";
 import MasterTemplateWithLargeCard from "../../../templates/MasterTemplateWithLargeCard";
 import {
   deleteRevenueLicense,
+  getAllRevenueLicenseByCompanyId,
   getAllRevenueLicenseByUserId,
 } from "./ServicesRevenueLicense";
 import { getUserDetails } from "../../Login/LoginAuthentication";
@@ -43,13 +44,13 @@ function ManageRevenueLicense() {
   const [updateData, setUpdataData] = useState({});
 
   useEffect(() => {
-    getAllRevenueLicenseData(getUserDetails().user_id);
+    getAllRevenueLicenseData(getUserDetails().company_id);
   }, []);
 
-  const getAllRevenueLicenseData = (userId: number) => {
+  const getAllRevenueLicenseData = (companyId: number) => {
     let data: any = [];
 
-    getAllRevenueLicenseByUserId(userId).then(
+    getAllRevenueLicenseByCompanyId(companyId).then(
       (res: any) => {
         data = createData(res.results.revenueLicense);
         setRevenueLicense(data);
