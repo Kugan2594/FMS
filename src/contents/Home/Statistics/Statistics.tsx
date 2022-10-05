@@ -4,7 +4,11 @@ import { useState, useEffect } from "react";
 import { Button, Card, Col, DatePicker, Row, Select, Space } from "antd";
 import "./Statistics.style.less";
 import SelectOptions from "./SelectOptions";
-import { AiOutlineAreaChart, AiOutlineBarChart } from "react-icons/ai";
+import {
+    AiOutlineAreaChart,
+    AiOutlineBarChart,
+    AiOutlineOrderedList,
+} from "react-icons/ai";
 import moment from "moment";
 import { any } from "prop-types";
 import { has } from "immer/dist/internal";
@@ -395,6 +399,7 @@ const Page: React.FC = () => {
     const [filterArray, setFilterArray] = useState([false, false]);
     const [majorData, setMajorData]: any = useState([]);
     const [bar, setBar]: any = useState(true);
+    const [staticsType, setStaticsType]: any = useState(true);
     useEffect(() => {
         console.log("vehicleType", vehicleTypeValue);
     }, [
@@ -828,6 +833,9 @@ const Page: React.FC = () => {
     const onSearch = (value: string) => {
         console.log("search:", value);
     };
+    const handleStaticType = () => {
+        setStaticsType(!staticsType);
+    };
 
     const config = {
         // data: anually
@@ -900,7 +908,7 @@ const Page: React.FC = () => {
     };
     return (
         <Card style={{ width: "100%" }}>
-            <div className="filter-container" style={{ height: "20px" }}>
+            <div className="filter-container" style={{ height: "10%" }}>
                 <Row justify="end" align="middle">
                     <Col xs={24} xl={8}>
                         <Select
@@ -952,109 +960,91 @@ const Page: React.FC = () => {
                         </Select>
                     </Col>
 
-                    <Col
-                        xs={24}
-                        xl={3}
-                        style={{ border: "1px solid red", borderRadius: "10" }}
-                    >
+                    <Col xs={24} xl={3}>
                         <div className="toggle">
-                            {bar ? (
-                                <AiOutlineBarChart
-                                    onClick={handleChangeChart}
-                                />
-                            ) : (
-                                <AiOutlineAreaChart
-                                    onClick={handleChangeChart}
-                                />
-                            )}
+                            <Space className="toggle-space">
+                                {bar ? (
+                                    <AiOutlineBarChart
+                                        size={25}
+                                        onClick={handleChangeChart}
+                                    />
+                                ) : (
+                                    <AiOutlineAreaChart
+                                        size={25}
+                                        onClick={handleChangeChart}
+                                    />
+                                )}
+                            </Space>
                         </div>
                     </Col>
                 </Row>
             </div>
-            <Row justify="start">
-                <Col span={24}>
-                    <div
-                        className="calender"
-                        style={{ marginTop: "10px", height: "40px" }}
+            <div className="filter-container" style={{ height: "10%" }}>
+                <Row justify="space-around" style={{}}>
+                    <Col
+                        xs={24}
+                        xl={6}
+                        style={{
+                            width: "100%",
+                        }}
                     >
-                        <div
-                            className="new-container"
+                        <Select
+                            // defaultValue="Bar"
                             style={{
-                                marginTop: "3%",
+                                width: "100%",
                             }}
+                            onChange={handleDateRange}
                         >
-                            <Row justify="space-around" style={{}}>
-                                <Col
-                                    xs={24}
-                                    xl={6}
-                                    style={{
-                                        width: "100%",
-                                    }}
-                                >
-                                    <Select
-                                        // defaultValue="Bar"
-                                        style={{
-                                            width: "100%",
-                                        }}
-                                        onChange={handleDateRange}
-                                    >
-                                        <Option value="Last 7 Days">
-                                            Last 7 Days
-                                        </Option>
-                                        <Option value="Last Month">
-                                            Last Month
-                                        </Option>
-                                        <Option value="Monthly">Monthly</Option>
-                                        <Option value="Annually">
-                                            Annually
-                                        </Option>
-                                        <Option value="Custom">Custom</Option>
-                                    </Select>
-                                </Col>
-                                <Col xs={24} xl={4}></Col>
-                                <Col xs={24} xl={14} style={{}}>
-                                    {custom ? (
-                                        <RangePicker
-                                            onChange={handleCustomChange}
-                                        />
-                                    ) : (
-                                        ""
-                                    )}
-                                    {anually ? (
-                                        <RangePicker
-                                            onChange={handleYearChange}
-                                            defaultValue={[
-                                                moment("2015", yearFormat),
-                                                moment("2016", yearFormat),
-                                            ]}
-                                            format={yearFormat}
-                                            picker="year"
-                                        />
-                                    ) : (
-                                        ""
-                                    )}
-                                    {monthly ? (
-                                        <RangePicker
-                                            onChange={handleMonthChange}
-                                            defaultValue={[
-                                                moment("2015/01", monthFormat),
-                                                moment("2015/02", monthFormat),
-                                            ]}
-                                            format={monthFormat}
-                                            picker="month"
-                                        />
-                                    ) : (
-                                        ""
-                                    )}
-                                </Col>
-                                {/* <Col xs={24} xl={4}>
-                                    <Button type="primary">Appy</Button>
-                                </Col> */}
-                            </Row>
-                        </div>
-                    </div>
-                </Col>
-            </Row>
+                            <Option value="Last 7 Days">Last 7 Days</Option>
+                            <Option value="Last Month">Last Month</Option>
+                            <Option value="Monthly">Monthly</Option>
+                            <Option value="Annually">Annually</Option>
+                            <Option value="Custom">Custom</Option>
+                        </Select>
+                    </Col>
+                    <Col xs={24} xl={2}></Col>
+                    <Col xs={24} xl={14} style={{}}>
+                        {custom ? (
+                            <RangePicker onChange={handleCustomChange} />
+                        ) : (
+                            ""
+                        )}
+                        {anually ? (
+                            <RangePicker
+                                onChange={handleYearChange}
+                                defaultValue={[
+                                    moment("2015", yearFormat),
+                                    moment("2016", yearFormat),
+                                ]}
+                                format={yearFormat}
+                                picker="year"
+                            />
+                        ) : (
+                            ""
+                        )}
+                        {monthly ? (
+                            <RangePicker
+                                onChange={handleMonthChange}
+                                defaultValue={[
+                                    moment("2015/01", monthFormat),
+                                    moment("2015/02", monthFormat),
+                                ]}
+                                format={monthFormat}
+                                picker="month"
+                            />
+                        ) : (
+                            ""
+                        )}
+                    </Col>
+                </Row>
+            </div>
+            <div className="filter-container" style={{ height: "10%" }}>
+                <Row>
+                    <Col>
+                        <SelectOptions />
+                    </Col>
+                </Row>
+            </div>
             <Row>
                 <Col xs={24} xl={24}>
                     {graph ? (

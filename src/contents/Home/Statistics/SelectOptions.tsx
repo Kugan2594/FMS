@@ -1,4 +1,4 @@
-import { Button, Space } from "antd";
+import { Button, Space, Tag } from "antd";
 import "./Statistics.style.less";
 import { useState } from "react";
 
@@ -10,6 +10,8 @@ interface SelectOptionType {
     onClickFuel?: React.MouseEventHandler<HTMLElement> | undefined;
     onClickOthers?: React.MouseEventHandler<HTMLElement> | undefined;
 }
+const { CheckableTag } = Tag;
+const tagsData = ["Overall", "Parts", "Service", "Documents", "Fuel", "others"];
 function SelectOptions({
     onClickOverall,
     onClickPart,
@@ -18,57 +20,74 @@ function SelectOptions({
     onClickFuel,
     onClickOthers,
 }: SelectOptionType) {
+    const [selectedTags, setSelectedTags] = useState<string[]>(["Overall"]);
+    const handleChange = (tag: string, checked: boolean) => {
+        const nextSelectedTags = checked
+            ? [...selectedTags, tag]
+            : selectedTags.filter((t) => t !== tag);
+        console.log("You are interested in: ", nextSelectedTags);
+        setSelectedTags(nextSelectedTags);
+    };
     return (
-        <Space
-            className="selectOptions"
-            direction="vertical"
-            align="center"
-            size={5}
-        >
-            <div className="space1"></div>
-            <Button
+        <Space className="selectOptions" direction="horizontal" align="center">
+            {/* <span style={{ marginRight: 8 }}>Categories:</span> */}
+            {tagsData.map((tag) => (
+                <CheckableTag
+                    key={tag}
+                    checked={selectedTags.indexOf(tag) > -1}
+                    onChange={(checked) => handleChange(tag, checked)}
+                >
+                    {tag}
+                </CheckableTag>
+            ))}
+            {/* <Button
                 className="btn"
                 onClick={onClickOverall}
-                style={{ width: "80%" }}
+                style={{ width: "100%" }}
+                size="small"
             >
                 Over All
             </Button>
             <Button
                 className="btn"
                 onClick={onClickPart}
-                style={{ width: "80%" }}
+                style={{ width: "100%" }}
+                size="small"
             >
                 Part
             </Button>
             <Button
                 className="btn"
                 onClick={onClickService}
-                style={{ width: "80%" }}
+                style={{ width: "100%" }}
+                size="small"
             >
                 Service
             </Button>
             <Button
                 className="btn"
                 onClick={onClickDocs}
-                style={{ width: "80%" }}
+                style={{ width: "100%" }}
+                size="small"
             >
                 Docs
             </Button>
             <Button
                 className="btn"
                 onClick={onClickFuel}
-                style={{ width: "80%" }}
+                style={{ width: "100%" }}
+                size="small"
             >
                 Fuel
             </Button>
             <Button
                 className="btn"
                 onClick={onClickOthers}
-                style={{ width: "80%" }}
+                style={{ width: "100%" }}
+                size="small"
             >
                 Others
-            </Button>
-            <div className="space2"></div>
+            </Button> */}
         </Space>
     );
 }
