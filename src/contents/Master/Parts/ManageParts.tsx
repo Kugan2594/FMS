@@ -26,7 +26,9 @@ function ManageParts() {
         name: post.partResponseDto.name,
         progressData: post.healthPercentage,
         vehicleNo: post.vehicleNumber,
+        branchName: "Rs. " + post.amount,
         lastChangedDate: moment(post.date).format("DD-MM-yyyy"),
+        dueDate: moment(post.date).add(post.expectedLifetimeInYears,"months").format("DD-MM-yyyy"),
       };
     });
     return convertData;

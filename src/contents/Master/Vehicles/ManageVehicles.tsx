@@ -197,8 +197,6 @@ function ManageVehicles() {
           updateData={editVisible ? updateData : null}
           reloadTable={reloadTable}
           action={action}
-          vehicleModels={vehicleModels}
-          branches={branches}
         />
       ) : editVisible ? (
         <AddVehicle
@@ -210,8 +208,6 @@ function ManageVehicles() {
           updateData={editVisible ? updateData : null}
           reloadTable={reloadTable}
           action={action}
-          vehicleModels={vehicleModels}
-          branches={branches}
         />
       ) : isProfileModalOpen ? (
         <Modal

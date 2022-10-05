@@ -198,7 +198,7 @@ function AddBranchAdmin(props: any) {
                   <div className="name">
                     {" "}
                     <Form.Item
-                      name="adminFirstName"
+                      name="firstName"
                       rules={[
                         {
                           required: true,
@@ -217,7 +217,7 @@ function AddBranchAdmin(props: any) {
                       <Input label="First Name" />
                     </Form.Item>
                     <Form.Item
-                      name="adminLastName"
+                      name="lastName"
                       style={{ marginLeft: "10%" }}
                       rules={[
                         {
