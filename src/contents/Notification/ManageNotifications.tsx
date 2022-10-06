@@ -15,6 +15,9 @@ import {
 } from "../../features/notificationSlice";
 import moment from "moment";
 import { useNavigate } from "react-router-dom";
+import { Stomp } from "@stomp/stompjs";
+import SockJS from "sockjs-client";
+import { SYSTEM_CONFIG } from "../../utils/StytemConfig";
 
 const { Title, Text } = Typography;
 
@@ -42,10 +45,37 @@ function ManageNotifications() {
 
   const navigate = useNavigate();
 
+  useEffect(() => {
+    WebSocketClient(
+      `/user/${getUserDetails().user_name}/queue/corporate/vehicleAllocation`
+    );
+    getAllNotification(getUserDetails().user_id);
+  }, []);
+
   const getAllNotification = (userId: number) => {
     getAllNotificationsByUserId(userId).then((res: any) => {
-      let data: NotificationDetailType = createData(res.results.notification).sort((a: any, b: any) => b.id - a.id);
+      let data: NotificationDetailType = createData(
+        res.results.notification
+      ).sort((a: any, b: any) => b.id - a.id);
+
       dispatch(setNotification(data));
+    });
+  };
+
+  const WebSocketClient = (url: any) => {
+    var sock = new SockJS(SYSTEM_CONFIG.webSocketUrl);
+    let stompClient = Stomp.over(sock);
+    sock.onopen = function () {};
+    return new Promise((resolve, reject) => {
+      stompClient.connect({}, (frame: any) => {
+        stompClient.subscribe(url, (data) => {
+          resolve(data);
+          let dataH = JSON.parse(data.body);
+          console.log("conneted", dataH);
+          getAllNotification(getUserDetails().user_id);
+        });
+      });
+      stompClient.activate();
     });
   };
 
@@ -53,7 +83,7 @@ function ManageNotifications() {
     readNotification(data.id).then(() => {
       getAllNotification(getUserDetails().user_id);
     });
-    
+
     {
       data.message == "vehicle allocation"
         ? navigate("/master/drivers")
