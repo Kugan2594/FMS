@@ -42,14 +42,9 @@ function ManageNotifications() {
 
   const navigate = useNavigate();
 
-  useEffect(() => {
-    getAllNotification(getUserDetails().user_id);
-  }, []);
-
   const getAllNotification = (userId: number) => {
     getAllNotificationsByUserId(userId).then((res: any) => {
       let data: NotificationDetailType = createData(res.results.notification).sort((a: any, b: any) => b.id - a.id);
-
       dispatch(setNotification(data));
     });
   };

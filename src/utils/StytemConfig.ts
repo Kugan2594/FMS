@@ -1,4 +1,4 @@
-const BASE_URL: string = "localhost";
+const BASE_URL: string = "192.168.1.209";
 const FM_WEB_PORT: number = 1014;
 const WEB_SOCKET_PORT: number = 1016;
 

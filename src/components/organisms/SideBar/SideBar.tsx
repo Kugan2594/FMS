@@ -7,22 +7,53 @@ import mainMenuItems from "./items";
 import SubModule from "../SubModule/item";
 import { useNavigate } from "react-router-dom";
 import { ExclamationCircleOutlined } from "@ant-design/icons";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "Redux/store";
 import Profile from "./Profile";
 import { Stomp } from "@stomp/stompjs";
 import SockJS from "sockjs-client";
 import { SYSTEM_CONFIG } from "../../../utils/StytemConfig";
 import { getUserDetails } from "../../../contents/Login/LoginAuthentication";
+import {
+  NotificationDetailType,
+  setNotification,
+} from "../../../features/notificationSlice";
+import { getAllNotificationsByUserId } from "../../../contents/Notification/ServiceNotification";
+import moment from "moment";
+
 
 const { Sider } = Layout;
 const { confirm } = Modal;
+
+const createData = (data: any) => {
+  let convertData = data.map((post: any) => {
+    return {
+      id: post.id,
+      image: "https://picsum.photos/200",
+      description: post.description,
+      time: moment(post.createdAt).format("DD-MM-YYYY hh:mm a"),
+      isRead: post.read,
+      message: post.message,
+    };
+  });
+
+  return convertData;
+};
 
 function SideBar() {
   const [submenuItems, setSubmenuItems] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const getAllNotification = (userId: number) => {
+    getAllNotificationsByUserId(userId).then((res: any) => {
+      let data: NotificationDetailType = createData(res.results.notification).sort((a: any, b: any) => b.id - a.id);
+
+      dispatch(setNotification(data));
+    });
+  };
 
   const profileOnClickHandler = () => {
     setIsModalOpen(true);
@@ -70,8 +101,9 @@ function SideBar() {
   };
   useEffect(() => {
     WebSocketClient(
-      `/user/${getUserDetails().user_name}/standalone/revenuelicense`
+      `/user/${getUserDetails().user_name}/queue/corporate/vehicleAllocation`
     );
+    getAllNotification(getUserDetails().user_id);
   }, []);
 
   const WebSocketClient = (url: any) => {
@@ -84,6 +116,7 @@ function SideBar() {
           resolve(data);
           let dataH = JSON.parse(data.body);
           console.log("conneted", dataH);
+          getAllNotification(getUserDetails().user_id);
         });
       });
       stompClient.activate();
