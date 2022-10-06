@@ -11,6 +11,7 @@ import {
   getAllVehiclesByCompanyId,
   getAllVehiclesByCompanyIdAndBranchId,
 } from "./ServiceVehicle";
+import VehicleProfile from "./VehicleProfile";
 
 const { confirm } = Modal;
 
@@ -240,6 +241,17 @@ function ManageVehicles() {
           cancelClickHandler={handleCancel}
           isEdit={editVisible}
         />
+      ) : isProfileModalOpen ? (
+        <Modal
+          title={false}
+          open={isProfileModalOpen}
+          onCancel={handleCancel}
+          closable={false}
+          width={"75%"}
+          footer={false}
+        >
+          <VehicleProfile />
+        </Modal>
       ) : (
         <></>
       )}

@@ -6,7 +6,7 @@ import User from "../../assets/User.svg";
 const { Text } = Typography;
 
 interface NotificationDetailType {
-  id: string;
+  id: number;
   image: any;
   description: string;
   time: string;
@@ -31,7 +31,7 @@ function Notification({
             ? { backgroundColor: "white" }
             : { backgroundColor: "rgba(170, 238, 255, 0.151)" }
         }
-        onClick={() => cardOnClickHandler(id)}
+        onClick={() => cardOnClickHandler()}
       >
         <Row align="middle" gutter={15}>
           <Col span={3}>

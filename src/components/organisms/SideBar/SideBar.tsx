@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Layout, Modal } from "antd";
 import HeaderLogo from "./HeaderLogo";
 import UserProfile from "./UserProfile";
@@ -10,10 +10,7 @@ import { ExclamationCircleOutlined } from "@ant-design/icons";
 import { useSelector } from "react-redux";
 import { RootState } from "Redux/store";
 import Profile from "./Profile";
-import { Stomp } from "@stomp/stompjs";
-import SockJS from "sockjs-client";
-import { SYSTEM_CONFIG } from "../../../utils/StytemConfig";
-import { getUserDetails } from "../../../contents/Login/LoginAuthentication";
+
 
 const { Sider } = Layout;
 const { confirm } = Modal;
@@ -21,16 +18,6 @@ const { confirm } = Modal;
 function SideBar() {
   const [submenuItems, setSubmenuItems] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const userData = {
-    companyName: "Invicta Innovations",
-    address: "Thirunelveli, Jaffna, Sri Lanka",
-    registrationNumber: "5645641",
-    companyPhoneNumber: "22560564",
-    companyEmail: "invicta@gmail.com",
-    licenceType: "Platinum",
-    image: "https://picsum.photos/200",
-  };
 
   const navigate = useNavigate();
 
@@ -78,27 +65,6 @@ function SideBar() {
     }
     navigate(item.link);
   };
-  useEffect(() => {
-    WebSocketClient(
-      `/user/${getUserDetails().user_name}/standalone/revenuelicense`
-    );
-  }, []);
-
-  const WebSocketClient = (url: any) => {
-    var sock = new SockJS(SYSTEM_CONFIG.webSocketUrl);
-    let stompClient = Stomp.over(sock);
-    sock.onopen = function () {};
-    return new Promise((resolve, reject) => {
-      stompClient.connect({}, (frame: any) => {
-        stompClient.subscribe(url, (data) => {
-          resolve(data);
-          let dataH = JSON.parse(data.body);
-          console.log("conneted", dataH);
-        });
-      });
-      stompClient.activate();
-    });
-  };
 
   return (
     <Sider theme="light" breakpoint="lg" className="main-sidebar">
@@ -120,7 +86,7 @@ function SideBar() {
             <UserProfile
               onClickProfile={profileOnClickHandler}
               onClickLogout={LogoutClickHandler}
-              userProfile={userData.image}
+              userProfile={"https://picsum.photos/200"}
             />
           </div>
         </div>
