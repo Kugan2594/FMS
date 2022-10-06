@@ -8,7 +8,6 @@ import {
   Select,
   message,
   Upload,
-  Button,
 } from "antd";
 import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
 import type { UploadChangeParam } from "antd/es/upload";
@@ -30,6 +29,7 @@ import {
   getAllVehiclesByCompanyId,
   getAllVehiclesByCompanyIdAndBranchId,
 } from "../Vehicles/ServiceVehicle";
+import { Button } from "../../../components/atoms/Button";
 
 const getBase64 = (img: RcFile, callback: (url: string) => void) => {
   const reader = new FileReader();
@@ -50,7 +50,7 @@ const beforeUpload = (file: RcFile) => {
 };
 
 function AddRevenueLicense(props: any) {
-  const { reloadTable, setIsModelOpen } = props;
+  const { reloadTable, setIsModelOpen, cancelClickHandler, isEdit } = props;
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
   const [imageUrl, setImageUrl] = useState<string>();
@@ -274,9 +274,26 @@ function AddRevenueLicense(props: any) {
             <Form.Item hidden={true} name="userId"></Form.Item>
           </Col>
         </Row>
-        <Button htmlType="submit" type="primary">
-          Add
-        </Button>
+        <Row
+          justify="end"
+          className="Actions"
+          gutter={8}
+          style={{
+            marginTop: "3%",
+          }}
+        >
+          <Button
+            className="form-button"
+            title="Cancel"
+            onClick={cancelClickHandler}
+          />
+          <Button
+            className="form-button"
+            title={isEdit ? "Update" : "Add"}
+            type="primary"
+            htmlType="submit"
+          />
+        </Row>
       </Form>
     </>
   );
