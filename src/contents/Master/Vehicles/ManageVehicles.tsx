@@ -41,8 +41,15 @@ function ManageVehicles() {
         image:
           "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
         vehicleIdFromResource: post.resourceVehicleDto.id,
-        vehicleModel: post.resourceVehicleDto.vehicleModel,
-        vehicleType: post.resourceVehicleDto.vehicleType,
+        vehicleModel:
+          post.resourceVehicleDto.vehicleBrand +
+          " " +
+          post.resourceVehicleDto.vehicleModel +
+          " " +
+          post.resourceVehicleDto.fuelTypeName +
+          " " +
+          post.resourceVehicleDto.vehicleBodyTypeResponseDto,
+        vehicleType: post.resourceVehicleDto.vehicleTypeName,
       };
     });
 
@@ -217,6 +224,8 @@ function ManageVehicles() {
           updateData={editVisible ? updateData : null}
           reloadTable={reloadTable}
           action={action}
+          cancelClickHandler={handleCancel}
+          isEdit={editVisible}
         />
       ) : editVisible ? (
         <AddVehicle
@@ -228,6 +237,8 @@ function ManageVehicles() {
           updateData={editVisible ? updateData : null}
           reloadTable={reloadTable}
           action={action}
+          cancelClickHandler={handleCancel}
+          isEdit={editVisible}
         />
       ) : (
         <></>

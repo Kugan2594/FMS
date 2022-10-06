@@ -7,6 +7,7 @@ import ViewBranch from "./ViewBranch";
 import { getUserDetails } from "../../Login/LoginAuthentication";
 import { getAllBranchByCompanyId, deleteBranch } from "./ServicesBranch";
 import { branchDeleteSuccess, errHandler } from "../../../helper/helper";
+import "./viewBranch.style.less";
 const { confirm } = Modal;
 function createData(data: any) {
   let convertData = data.map((post: any, index: any) => {
@@ -14,8 +15,10 @@ function createData(data: any) {
       id: post.id,
       numberOfVehicles: 34,
       progressData: 49,
-      branchLocation: post.address,
+      address: post.address,
       branchName: post.branchName,
+      email: post.email,
+      phoneNumber: post.phoneNumber,
     };
   });
   return convertData;
@@ -29,21 +32,26 @@ function ManageBranch() {
   const [view, setView] = useState(false);
   const [branch, setBranch] = useState([]);
   const [action, setaction] = useState("add");
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isEdit, setisEdit] = useState(false);
+  const [branchData, setBranchData] = useState({});
+
   const showModal = () => {
-    setVisible(!visible);
+    setaction("add");
+    setIsModalOpen(true);
+    setisEdit(false);
   };
-  const handleOk = () => {
-    setVisible(!visible);
-  };
-  const handleCancel = () => {
-    setVisible(!visible);
-    setEdit(false);
-  };
-  const showEditModal = (data: any) => {
-    setEdit(true);
+
+  const updateClickHandler = (data: any) => {
     setaction("edit");
-    setVisible(!visible);
-    setFormValues(data);
+    setIsModalOpen(true);
+    setisEdit(true);
+    setBranchData(data);
+  };
+
+  const handleCancel = () => {
+    setIsModalOpen(false);
+    setisEdit(false);
   };
 
   useEffect(() => {
@@ -102,7 +110,7 @@ function ManageBranch() {
         headerOnClickAdd={showModal}
         cardOnClick={(data: string) => showViewModal(data)}
         onClickDelete={(id: string) => onDeleteHandler(id)}
-        onClickUpdate={(data: any) => showEditModal(data)}
+        onClickUpdate={(data: any) => updateClickHandler(data)}
         privilege={false}
         branchCard={true}
         adminCard={false}
@@ -112,37 +120,22 @@ function ManageBranch() {
         driverCard={false}
       />
       <div>
-        {visible && (
+        {isModalOpen && (
           <Modal
-            visible={visible}
-            maskStyle={{ borderRadius: "25" }}
+            title={isEdit ? "Edit Branch" : "Add New Branch"}
+            open={isModalOpen}
+            onCancel={handleCancel}
+            closable={false}
+            width={"50%"}
             footer={false}
           >
-            {edit ? (
-              <Space
-                style={{
-                  paddingBottom: "1%",
-                  fontSize: "18px",
-                }}
-              >
-                Edit branch
-              </Space>
-            ) : (
-              <Space
-                style={{
-                  paddingBottom: "1%",
-                  fontSize: "18px",
-                }}
-              >
-                Add New branch
-              </Space>
-            )}
             <AddBranch
-              onClickAdd={handleOk}
-              onClickCancel={handleCancel}
-              action={action}
-              initialValues={edit ? formValues : {}}
+              isEdit={isEdit}
+              updateData={branchData}
+              cancelClickHandler={handleCancel}
               reloadTable={reloadTable}
+              setIsModelOpen={setIsModalOpen}
+              action={action}
             />
           </Modal>
         )}
