@@ -287,11 +287,6 @@ function SmallCard({
               )}
               {vehicleCard && (
                 <div className="number-of-vehicles">
-                  <div className="item-name">
-                    <Text strong type="secondary">
-                      vehicle model
-                    </Text>{" "}
-                  </div>
                   <div
                     className="number"
                     style={{
@@ -301,6 +296,11 @@ function SmallCard({
                   >
                     {vehicleModel}
                   </div>{" "}
+                  <div className="item-name">
+                    <Text strong type="secondary">
+                      vehicle model
+                    </Text>{" "}
+                  </div>
                 </div>
               )}
 
