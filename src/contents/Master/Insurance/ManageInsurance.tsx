@@ -133,6 +133,7 @@ function ManageInsurance() {
             isEdit={isEdit}
             reloadTable={reloadTable}
             setIsModelOpen={setIsModalOpen}
+            cancelClickHandler={handleCancel}
           />
         </Modal>
       )}
