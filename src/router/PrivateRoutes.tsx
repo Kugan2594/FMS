@@ -17,8 +17,8 @@ import ManageVehicles from "../contents/Master/Vehicles/ManageVehicles";
 import ManageNotifications from "../contents/Notification/ManageNotifications";
 import StaticsHistory from "../contents/Home/Statics/StaticsHistory";
 import Page from "../contents/Home/Statistics/Statistics";
-import VehiclesCard from "../contents/Home/VehiclesCard/VehiclesCard";
 import DashBoard from "../contents/Home/DashBoard/DashBoard";
+import OverallVehiclesStatus from "../contents/Home/VehiclesCard/OverallVehiclesStatus";
 
 const Loader = (Component: any) => (props: any) =>
     (
@@ -90,7 +90,7 @@ const PrivateRoute: RouteObject[] = [
     },
     {
         path: "vehicle-card",
-        element: <VehiclesCard />,
+        element: <OverallVehiclesStatus />,
     },
     {
         path: "/allBranches",

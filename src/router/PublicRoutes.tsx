@@ -25,7 +25,7 @@ import OTPVerification from "../contents/Login/OTPVerification/OTPVerification";
 import SignUpSplitScreen from "../contents/Login/SignUp/SignUpSplitScreen";
 import StaticsHistory from "../contents/Home/Statics/StaticsHistory";
 import Page from "../contents/Home/Statistics/Statistics";
-import VehiclesCard from "../contents/Home/VehiclesCard/VehiclesCard";
+import OverallVehiclesStatus from "../contents/Home/VehiclesCard/OverallVehiclesStatus";
 
 const Loader = (Component: any) => (props: any) =>
     (
@@ -122,7 +122,7 @@ const PublicRoute: RouteObject[] = [
                 path: "statistics",
                 element: <Page />,
             },
-            { path: "vehicle-card", element: <VehiclesCard /> },
+            { path: "vehicle-card", element: <OverallVehiclesStatus /> },
         ],
     },
     {
