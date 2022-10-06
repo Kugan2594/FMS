@@ -37,14 +37,18 @@ function ManageVehicles() {
         branchLocation: getUserDetails().company_branch_name,
         companyId: getUserDetails().company_id,
         branchId: getUserDetails().company_branch_id,
-        progressData: post.vehicleValidity,
+        progressData: 80,
         image:
           "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
         vehicleIdFromResource: post.resourceVehicleDto.id,
         vehicleModel:
+          post.resourceVehicleDto.vehicleBrand +
+          " " +
           post.resourceVehicleDto.vehicleModel +
           " " +
-          post.resourceVehicleDto.fuelTypeName,
+          post.resourceVehicleDto.fuelTypeName +
+          " " +
+          post.resourceVehicleDto.vehicleBodyTypeResponseDto,
         vehicleType: post.resourceVehicleDto.vehicleTypeName,
       };
     });
