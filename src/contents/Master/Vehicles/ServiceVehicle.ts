@@ -82,10 +82,23 @@ const getAllVehiclesByCompanyIdAndBranchId = (
   });
 };
 
+const updateVehicle = (data: any) => {
+  return new Promise((resolve, reject) => {
+    api("put", "co-web", null, "/companyVehicle", "token", data, "")
+      .then((response: any) => {
+        resolve(response.data);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+};
+
 export {
   addVehicle,
   getAllVehiclesByCompanyId,
   deleteVehicleByVehicleNumberAndCompanyId,
   getAllVehiclesFromResourcesForDropDown,
   getAllVehiclesByCompanyIdAndBranchId,
+  updateVehicle,
 };

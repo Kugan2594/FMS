@@ -37,12 +37,15 @@ function ManageVehicles() {
         branchLocation: getUserDetails().company_branch_name,
         companyId: getUserDetails().company_id,
         branchId: getUserDetails().company_branch_id,
-        progressData: 80,
+        progressData: post.vehicleValidity,
         image:
           "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
         vehicleIdFromResource: post.resourceVehicleDto.id,
-        vehicleModel: post.resourceVehicleDto.vehicleModel,
-        vehicleType: post.resourceVehicleDto.vehicleType,
+        vehicleModel:
+          post.resourceVehicleDto.vehicleModel +
+          " " +
+          post.resourceVehicleDto.fuelTypeName,
+        vehicleType: post.resourceVehicleDto.vehicleTypeName,
       };
     });
 
@@ -217,6 +220,8 @@ function ManageVehicles() {
           updateData={editVisible ? updateData : null}
           reloadTable={reloadTable}
           action={action}
+          cancelClickHandler={handleCancel}
+          isEdit={editVisible}
         />
       ) : editVisible ? (
         <AddVehicle
@@ -228,6 +233,8 @@ function ManageVehicles() {
           updateData={editVisible ? updateData : null}
           reloadTable={reloadTable}
           action={action}
+          cancelClickHandler={handleCancel}
+          isEdit={editVisible}
         />
       ) : (
         <></>
