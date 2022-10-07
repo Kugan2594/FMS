@@ -89,6 +89,26 @@ const deleteVehicleService = (id: number) => {
   });
 };
 
+const getAllVehicleServicesByCompanyId = (companyId: Number) => {
+  return new Promise((resolve, reject) => {
+    api(
+      "get",
+      "co-web",
+      null,
+      `/companyVehicleService/${companyId}`,
+      "token",
+      "",
+      ""
+    )
+      .then((response: any) => {
+        resolve(response.data);
+      })
+      .catch((error: any) => {
+        reject(error);
+      });
+  });
+};
+
 export {
   getAllVehiclesAllocationsForDropDown,
   getAllServices,
@@ -96,4 +116,5 @@ export {
   getAllVehicleServices,
   getAllVehicleServicesByCompanyIdAndBranchId,
   deleteVehicleService,
+  getAllVehicleServicesByCompanyId,
 };
