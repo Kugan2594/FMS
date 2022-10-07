@@ -35,6 +35,18 @@ const addDriver = (data: object) => {
   });
 };
 
+const updateDriver = (data: object) => {
+  return new Promise((resolve, reject) => {
+    api("put", "fm-web", null, `/driver`, "token", data, "")
+      .then((response: any) => {
+        resolve(response.data);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+};
+
 const deleteDriver = (id: number) => {
   return new Promise((resolve, reject) => {
     api("delete", "fm-web", null, `/driver/${id}`, "token", "", "")
@@ -121,6 +133,7 @@ const getAllDriverByCompanyId = (companyId: number) => {
 export {
   getAllDriverByCompanyIdAndBranchId,
   addDriver,
+  updateDriver,
   deleteDriver,
   getAllVehicleByCompanyIdAndBranchId,
   getAllocatedVehicleByDriverId,

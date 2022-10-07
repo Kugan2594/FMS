@@ -49,6 +49,10 @@ function ManageNotifications() {
     WebSocketClient(
       `/user/${getUserDetails().user_name}/queue/corporate/vehicleAllocation`
     );
+    WebSocketClient(
+       `/user/${getUserDetails().user_name}/queue/corporate/branchAdmin`
+       );
+      
     getAllNotification(getUserDetails().user_id);
   }, []);
 
