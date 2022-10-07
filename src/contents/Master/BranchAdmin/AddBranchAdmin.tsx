@@ -331,7 +331,6 @@ function AddBranchAdmin(props: any) {
                         style={{ width: 200 }}
                         placeholder="Company Branch"
                         optionFilterProp="children"
-                        value={updateData.branchId}
                         options={branch}
                       />
                     </Form.Item>
