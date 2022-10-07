@@ -144,7 +144,7 @@ function AddParts(props: any) {
           <Col span={11}>
             <Form.Item name="expectedLifetimeInYears">
               <Input
-                placeholder="Durability in Years"
+                placeholder="Durability in Months"
                 bordered={false}
                 required
                 style={{ borderBottom: "1px solid #ccccb3" }}

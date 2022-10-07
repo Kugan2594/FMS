@@ -58,11 +58,7 @@ function Profile({closeOnClickHandler }: ProfileType) {
     userProfile.image != null && userProfile.image
   );
   const [loading, setLoading] = useState(false);
-  const [drivingLicense, setDrivingLicenseType] = useState([])
-
-  
-
-  console.log("PROFILE", userProfile);
+  const [drivingLicense, setDrivingLicenseType] = useState([]);
 
   const getProfileData = (userId: number) => {
     let data: any = {};
@@ -110,8 +106,6 @@ function Profile({closeOnClickHandler }: ProfileType) {
       });
     }
   };
-
-  console.log("DDDDDD", getUserDetails().roleName);
   
   const uploadButton = (
     <div>
