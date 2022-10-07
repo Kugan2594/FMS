@@ -61,6 +61,8 @@ export const errHandler = (err: any) => {
   // User
   errorBox("100018", "You already Verified");
   errorBox("1000002", "Invalid Token");
+  errorBox("100013", "Invalid Email");
+  errorBox("1000003", "Token Expired");
 };
 
 //success message popups

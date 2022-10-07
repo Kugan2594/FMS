@@ -4,11 +4,14 @@ import AddService from "./AddService";
 import MasterTemplateWithLargeCard from "../../../templates/MasterTemplateWithLargeCard";
 import {
   deleteVehicleService,
-  getAllVehicleServices,
   getAllVehicleServicesByCompanyIdAndBranchId,
+  getAllVehicleServicesByCompanyId,
 } from "./ServicesService";
 import moment from "moment";
-import { getAllVehiclesByCompanyIdAndBranchId } from "../Vehicles/ServiceVehicle";
+import {
+  getAllVehiclesByCompanyId,
+  getAllVehiclesByCompanyIdAndBranchId,
+} from "../Vehicles/ServiceVehicle";
 import { getUserDetails } from "../../../contents/Login/LoginAuthentication";
 import { ExclamationCircleOutlined } from "@ant-design/icons";
 import { VehicleServiceDeletedSuccess } from "../../../helper/helper";
@@ -32,6 +35,7 @@ function ManageService() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isEdit, setisEdit] = useState(false);
   const [services, setServices] = useState([]);
+  const [vehicles, setvehicles] = useState([]);
 
   const showModal = () => {
     setIsModalOpen(true);
@@ -60,11 +64,50 @@ function ManageService() {
     );
   };
 
-  useEffect(() => {
-    getAllVehicleServiceData(
-      getUserDetails().company_id,
-      getUserDetails().company_branch_id
+  const getAllVehicleServices = (companyId: Number) => {
+    let data: any = [];
+    getAllVehicleServicesByCompanyId(companyId).then(
+      (res: any) => {
+        data = createData(res.results.companyVehicleService);
+        setServices(data);
+      },
+      (error: any) => {}
     );
+  };
+
+  const getAllVehicles = (companyId: number) => {
+    getAllVehiclesByCompanyId(companyId).then((res: any) => {
+      let data: [] = createData(res.results.companyVehicle);
+      setvehicles(data);
+    });
+  };
+
+  const getAllVehiclesByCompanyAndBranch = (
+    companyId: number,
+    branchId: number
+  ) => {
+    getAllVehiclesByCompanyIdAndBranchId(companyId, branchId).then(
+      (res: any) => {
+        let data: [] = createData(res.results.vehicleByCompanyAndBranch);
+        setvehicles(data);
+      }
+    );
+  };
+
+  useEffect(() => {
+    if (getUserDetails().roleName == "COMPANYADMIN") {
+      getAllVehicleServices(getUserDetails().company_id);
+      getAllVehicles(getUserDetails().company_id);
+    } else if (getUserDetails().roleName == "COMPANYBRANCHADMIN") {
+      getAllVehicleServiceData(
+        getUserDetails().company_id,
+        getUserDetails().company_branch_id
+      );
+      getAllVehiclesByCompanyAndBranch(
+        getUserDetails().company_id,
+        getUserDetails().company_branch_id
+      );
+    }
   }, []);
 
   const reloadTable = (res: any) => {

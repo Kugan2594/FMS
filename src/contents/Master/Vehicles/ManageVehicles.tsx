@@ -38,7 +38,7 @@ function ManageVehicles() {
         branchLocation: getUserDetails().company_branch_name,
         companyId: getUserDetails().company_id,
         branchId: getUserDetails().company_branch_id,
-        progressData: 80,
+        progressData: post.vehicleValidity,
         image:
           "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
         vehicleIdFromResource: post.resourceVehicleDto.id,

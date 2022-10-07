@@ -98,7 +98,7 @@ function AddInsurance(props: any) {
         res.map((post: any) => {
           data.push({
             value: post.vehicleNumber,
-            label: `${post.resourceVehicleDto.vehicleModel} ${post.resourceVehicleDto.vehicleBodyTypeResponseDto} ${post.resourceVehicleDto.vehicleTypeName} ${post.resourceVehicleDto.fuelTypeName} ${post.vehicleNumber}`,
+            label: `${post.resourceVehicleDto.vehicleBrand} ${post.resourceVehicleDto.vehicleModel} ${post.resourceVehicleDto.vehicleBodyTypeResponseDto} ${post.resourceVehicleDto.vehicleTypeName} ${post.resourceVehicleDto.fuelTypeName} ${post.vehicleNumber}`,
           });
           vehicleNum = post.vehicleNumber;
           return null;
@@ -112,7 +112,7 @@ function AddInsurance(props: any) {
         res.results.companyVehicle.map((post: any) => {
           data.push({
             value: post.vehicleNumber,
-            label: `${post.resourceVehicleDto.vehicleModel} ${post.resourceVehicleDto.vehicleBodyTypeResponseDto} ${post.resourceVehicleDto.vehicleTypeName} ${post.resourceVehicleDto.fuelTypeName} ${post.vehicleNumber}`,
+            label: `${post.resourceVehicleDto.vehicleBrand} ${post.resourceVehicleDto.vehicleModel} ${post.resourceVehicleDto.vehicleBodyTypeResponseDto} ${post.resourceVehicleDto.vehicleTypeName} ${post.resourceVehicleDto.fuelTypeName} ${post.vehicleNumber}`,
           });
           vehicleNum = post.vehicleNumber;
           return null;
@@ -127,7 +127,7 @@ function AddInsurance(props: any) {
           res.results.vehicleByCompanyAndBranch.map((post: any) => {
             data.push({
               value: post.vehicleNumber,
-              label: `${post.resourceVehicleDto.vehicleModel} ${post.resourceVehicleDto.vehicleBodyTypeResponseDto} ${post.resourceVehicleDto.vehicleTypeName} ${post.resourceVehicleDto.fuelTypeName} ${post.vehicleNumber}`,
+              label: `${post.resourceVehicleDto.vehicleBrand} ${post.resourceVehicleDto.vehicleModel} ${post.resourceVehicleDto.vehicleBodyTypeResponseDto} ${post.resourceVehicleDto.vehicleTypeName} ${post.resourceVehicleDto.fuelTypeName} ${post.vehicleNumber}`,
             });
             vehicleNum = post.vehicleNumber;
             return null;
@@ -187,7 +187,7 @@ function AddInsurance(props: any) {
         onFinishFailed={onFinishFailed}
       >
         <Row>
-          <Col span={11}>
+          <Col span={24}>
             <Form.Item name="vehicleNo">
               <Select
                 placeholder="Vehicle"
@@ -198,7 +198,7 @@ function AddInsurance(props: any) {
               ></Select>
             </Form.Item>
           </Col>
-          <Col span={2}> </Col>
+
           <Col span={11}>
             <Form.Item
               rules={[
@@ -216,18 +216,6 @@ function AddInsurance(props: any) {
             >
               <Input
                 placeholder="Price"
-                bordered={false}
-                required
-                style={{ borderBottom: "1px solid #ccccb3" }}
-              />
-            </Form.Item>
-          </Col>
-        </Row>
-        <Row>
-          <Col span={11}>
-            <Form.Item name="insuranceProvider">
-              <Input
-                placeholder="Provider"
                 bordered={false}
                 required
                 style={{ borderBottom: "1px solid #ccccb3" }}
@@ -252,9 +240,9 @@ function AddInsurance(props: any) {
         </Row>
         <Row>
           <Col span={11}>
-            <Form.Item name="policyNumber">
+            <Form.Item name="insuranceProvider">
               <Input
-                placeholder="Policy Number"
+                placeholder="Provider"
                 bordered={false}
                 required
                 style={{ borderBottom: "1px solid #ccccb3" }}
@@ -273,6 +261,18 @@ function AddInsurance(props: any) {
                   borderRight: "0px",
                   width: "100%",
                 }}
+              />
+            </Form.Item>
+          </Col>
+        </Row>
+        <Row>
+          <Col span={11}>
+            <Form.Item name="policyNumber">
+              <Input
+                placeholder="Policy Number"
+                bordered={false}
+                required
+                style={{ borderBottom: "1px solid #ccccb3" }}
               />
             </Form.Item>
           </Col>
