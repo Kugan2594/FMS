@@ -2,17 +2,11 @@ import { Card, Col, Row, Space, Typography } from "antd";
 import Chart from "chart.js/auto";
 import { Bar, Doughnut, Line, Pie } from "react-chartjs-2";
 import { CategoryScale } from "chart.js";
-import CustomRangePicker from "../../../components/atoms/RangePicker/CustomRangePicker";
-import {
-    AiFillRightCircle,
-    AiOutlineQq,
-    AiOutlineRocket,
-} from "react-icons/ai";
-import { GrCar } from "react-icons/gr";
 import { getAllVehicleType } from "./ServiceVehicleType";
 import { useState, useEffect } from "react";
 import { getAllVehiclesByCompanyId } from "../../../contents/Master/Vehicles/ServiceVehicle";
 import { getUserDetails } from "../../../contents/Login/LoginAuthentication";
+import { IoIosCar } from "react-icons/io";
 Chart.register(CategoryScale);
 const { Title, Text } = Typography;
 
@@ -25,11 +19,7 @@ function OverallVehicleTypeCard() {
         getVehicleTypeData();
         getAllVehicles(getUserDetails().company_id);
         overallVehicleTypes(vehicles, vehicleType);
-        console.log("vehicles----", vehicles);
-        console.log("vehicleType", vehicleType);
-        console.log("vehicleTypeData#######3", vehicleTypeData);
-        console.log("vehicleTypeArray", vehicleTypeArray);
-    }, [vehicleTypeArray]);
+    }, []);
     const createData = (data: any) => {
         let convertData = data.map((post: any) => {
             return {
@@ -70,7 +60,6 @@ function OverallVehicleTypeCard() {
                     vehicleType: post.vehicleTypeName,
                 });
                 setVehicleType(data);
-                console.log("vehicleTypes", vehicleType);
             });
         });
     };
@@ -78,7 +67,6 @@ function OverallVehicleTypeCard() {
         getAllVehiclesByCompanyId(companyId).then((res: any) => {
             let data: [] = createData(res.results.companyVehicle);
             setVehicles(data);
-            console.log(data);
         });
     };
     const overallVehicleTypes = (vehicles: any, vehicleType: any) => {
@@ -91,10 +79,10 @@ function OverallVehicleTypeCard() {
             vehicleTypeCount = vehicleTypeFilter.length;
             typeArray.push({
                 vehicleType: vehicleType[i].vehicleType,
+                icon: <IoIosCar size={30} />,
                 vehicleTypeCount: vehicleTypeCount,
             });
             setVehicleTypeArray(typeArray);
-            console.log("vehicleTypeArray", vehicleTypeArray);
         }
     };
     let count = vehicleTypeArray.map((x: any) => x.vehicleTypeCount);
@@ -127,7 +115,6 @@ function OverallVehicleTypeCard() {
     };
 
     return (
-        // <div className="vehicleTypeCard" style={{ width: "100%" }}>
         <Card style={{ borderRadius: "3%" }}>
             <Row justify="center">
                 <Col span={1}></Col>
@@ -141,22 +128,20 @@ function OverallVehicleTypeCard() {
             </Row>
             <div className="row-container" style={{ width: "100%" }}>
                 <Row gutter={16} justify="start">
-                    {vehicleTypeData.map((x: any) => {
+                    {vehicleTypeArray.map((x: any) => {
                         return (
                             <Col span={8} style={{ textAlign: "center" }}>
                                 <div>{x.icon}</div>
                                 <div style={{ color: "grey" }}>
                                     {x.vehicleType}
                                 </div>
-                                <div>{x.count}</div>
-                                {/* </div> */}
+                                <div>{x.vehicleTypeCount}</div>
                             </Col>
                         );
                     })}
                 </Row>
             </div>
         </Card>
-        // </div>
     );
 }
 

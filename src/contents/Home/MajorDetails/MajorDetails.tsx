@@ -70,7 +70,6 @@ function MajorDetails() {
             setvehicles(data);
         });
     };
-    let count = vehicles.length;
     const getAllBranchData = (companyId: number) => {
         let data: any = [];
 
@@ -112,27 +111,27 @@ function MajorDetails() {
             getUserDetails().company_id,
             getUserDetails().company_branch_id
         );
-        MajorDetails(branch, vehicles);
-        console.log("Vehicles", vehicles);
-        console.log("branch", branch);
-        console.log("filtered", branchData);
+        getMajorDetails(branch, vehicles);
     }, []);
-    const MajorDetails = (branch: any, vehicles: any) => {
+    const getMajorDetails = (branch: any, vehicles: any) => {
         let totalBranches = branch.length;
-        let filterArray: any = [];
-        for (let i = 1; i < totalBranches; i++) {
-            let filteredData = vehicles.filter((x: any) => x.branchId === i);
+        let filterArray: any = branchData;
+        for (let i = 1; i <= totalBranches; i++) {
+            let filteredData = vehicles.filter((x: any) => (x.branchId = i));
             filterArray.push(filteredData);
             setBranchData(filterArray);
-            let sum = 0;
-            let array: any = [];
-            branchData.map((x: any) => {
+        }
+        let sum = 0;
+        let array: any = perfect;
+        let l = branchData.length;
+        for (let i = 0; i < l; i++) {
+            branchData[i].map((x: any) => {
                 if (x.progressData === 80) {
                     array.push(x);
                 }
             });
             setPerfect(array);
-            if (perfect.length === branchData.length) {
+            if (perfect.length === branchData[i].length) {
                 sum = +1;
                 setPerfectNumber(sum);
             }
@@ -148,7 +147,7 @@ function MajorDetails() {
         {
             title: "On-risk",
             icon: <AiOutlineRedEnvelope size={30} />,
-            count: onRisk,
+            count: branch.length - perfectNumber,
         },
         {
             title: "Perfect",
