@@ -15,6 +15,7 @@ function OverallVehicleTypeCard() {
     const [vehicleType, setVehicleType]: any[] = useState([]);
     const [vehicleTypeArray, setVehicleTypeArray]: any[] = useState([]);
     const [vehicleTypeData, setVehicleTypeData]: any[] = useState([]);
+    const [countArray, setCountArray]: any[] = useState([]);
     useEffect(() => {
         getVehicleTypeData();
         getAllVehicles(getUserDetails().company_id);
@@ -69,7 +70,7 @@ function OverallVehicleTypeCard() {
             setVehicles(data);
         });
     };
-    const overallVehicleTypes = (vehicles: any, vehicleType: any) => {
+    const overallVehicleTypes = (data1: any, data2: any) => {
         for (let i = 0; i < vehicleType.length; i++) {
             let vehicleTypeCount = 0;
             let typeArray = vehicleTypeArray;
@@ -84,14 +85,16 @@ function OverallVehicleTypeCard() {
             });
             setVehicleTypeArray(typeArray);
         }
+        let count = vehicleTypeArray.map((x: any) => x.vehicleTypeCount);
+        setCountArray(count);
     };
-    let count = vehicleTypeArray.map((x: any) => x.vehicleTypeCount);
+
     const data = {
         labels: ["Red", "Blue", "Yellow", "Blue", "Yellow"],
         datasets: [
             {
                 label: "My First Dataset",
-                data: count,
+                data: countArray,
                 backgroundColor: [
                     "rgb(255, 99, 132)",
                     "rgb(54, 162, 235)",
@@ -105,7 +108,7 @@ function OverallVehicleTypeCard() {
         ],
         option: [
             {
-                aspectRatio: 0.1,
+                aspectRatio: 1,
             },
         ],
     };
