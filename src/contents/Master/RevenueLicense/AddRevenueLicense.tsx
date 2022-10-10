@@ -134,192 +134,176 @@ function AddRevenueLicense(props: any) {
                 }
             );
         }
-        const getVehicleSelectData = (userId: number) => {
-            getAllVehiclesAllocationsForDropDown(userId).then((res: any) => {
-                let data: any = [];
-                res.map((post: any) => {
-                    data.push({
-                        value: post.vehicleNumber,
-                        label: `${post.resourceVehicleDto.vehicleModel} ${post.resourceVehicleDto.vehicleBodyTypeResponseDto} ${post.resourceVehicleDto.vehicleTypeName} ${post.resourceVehicleDto.fuelTypeName} ${post.vehicleNumber}`,
-                    });
-                    vehicleNum = post.vehicleNumber;
-                    return null;
-                });
-                setVehicle(data);
-                setvehicleNumbers(vehicleNum);
-            });
-        };
-
-        const uploadButton = (
-            <div>
-                {loading ? <LoadingOutlined /> : <PlusOutlined />}
-                <div style={{ marginTop: 8 }}>Upload</div>
-            </div>
-        );
-
-        const { Option } = Select;
-
-        const onFinishAdd = (values: any) => {
-            const formData = new FormData();
-            let revenueLicenseData = values;
-            const data = {
-                id: 1,
-                taxIssuedDate: revenueLicenseData.taxIssuedDate,
-                taxExpiryDate: revenueLicenseData.taxExpiryDate,
-                region: revenueLicenseData.region,
-                vehicleNumber: vehicleNumbers,
-                taxAmount: revenueLicenseData.taxAmount,
-                userId: getUserDetails().user_id,
-            };
-
-            fileList.map((post, index) => {
-                formData.append("files", post);
-            });
-
-            formData.append("addRevenueLicense", JSON.stringify(data));
-
-            addRevenueLicense(formData)
-                .then((res: any) => {
-                    revenueLicenseDocumentAddSuccess();
-                    setIsModelOpen(false);
-                    reloadTable();
-                })
-                .catch((err) => {
-                    errHandler(err);
-                });
-        };
-
-        const onFinishFailed = () => {};
-
-        return (
-            <>
-                <Form
-                    id="form"
-                    name="basic"
-                    form={form}
-                    initialValues={props.isEdit ? props.updateData : {}}
-                    onFinish={onFinishAdd}
-                    onFinishFailed={onFinishFailed}
-                >
-                    <Row style={{ paddingLeft: "35px", paddingRight: "35px" }}>
-                        <Col span={24}>
-                            <Form.Item name="vehicleNo">
-                                <Select
-                                    placeholder="Vehicle"
-                                    optionFilterProp="children"
-                                    bordered={false}
-                                    style={{
-                                        borderBottom: "1px solid #ccccb3",
-                                    }}
-                                    options={vehicle}
-                                ></Select>
-                            </Form.Item>
-                            <Form.Item name="region">
-                                <Input
-                                    placeholder="Region"
-                                    required
-                                    bordered={false}
-                                    style={{
-                                        borderBottom: "1px solid #ccccb3",
-                                    }}
-                                />
-                            </Form.Item>
-                            <Form.Item name="taxIssuedDate">
-                                <DatePicker
-                                    placeholder="Issued Date"
-                                    style={{
-                                        borderBottom: "1px solid #ccccb3",
-                                        borderTop: "0px",
-                                        borderLeft: "0px",
-                                        borderRight: "0px",
-                                        width: "100%",
-                                    }}
-                                />
-                            </Form.Item>
-                            <Form.Item name="taxExpiryDate">
-                                <DatePicker
-                                    placeholder="Expire Date"
-                                    style={{
-                                        borderBottom: "1px solid #ccccb3",
-                                        borderTop: "0px",
-                                        borderLeft: "0px",
-                                        borderRight: "0px",
-                                        width: "100%",
-                                    }}
-                                />
-                            </Form.Item>
-                            <Form.Item
-                                rules={[
-                                    {
-                                        max: 10,
-                                        message:
-                                            "Sorry you are exceeding the limit!",
-                                    },
-                                    {
-                                        pattern: new RegExp(
-                                            noSplCharAndLetterRegex
-                                        ),
-
-                                        message: "Enter valid amount",
-                                    },
-                                ]}
-                                name="taxAmount"
-                            >
-                                <Input
-                                    placeholder="Price"
-                                    bordered={false}
-                                    required
-                                    style={{
-                                        borderBottom: "1px solid #ccccb3",
-                                    }}
-                                />
-                            </Form.Item>
-                            <Upload
-                                name="avatar"
-                                listType="picture-card"
-                                className="avatar-uploader"
-                                showUploadList={false}
-                                action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-                                beforeUpload={beforeUpload}
-                                onChange={handleChange}
-                            >
-                                {imageUrl ? (
-                                    <img
-                                        src={imageUrl}
-                                        alt="avatar"
-                                        style={{ width: "100%" }}
-                                    />
-                                ) : (
-                                    uploadButton
-                                )}
-                            </Upload>
-
-                            <Form.Item hidden={true} name="userId"></Form.Item>
-                        </Col>
-                    </Row>
-                    <Row
-                        justify="end"
-                        className="Actions"
-                        gutter={8}
-                        style={{
-                            marginTop: "3%",
-                        }}
-                    >
-                        <Button
-                            className="form-button"
-                            title="Cancel"
-                            onClick={cancelClickHandler}
-                        />
-                        <Button
-                            className="form-button"
-                            title={isEdit ? "Update" : "Add"}
-                            type="primary"
-                            htmlType="submit"
-                        />
-                    </Row>
-                </Form>
-            </>
-        );
     };
+
+    const uploadButton = (
+        <div>
+            {loading ? <LoadingOutlined /> : <PlusOutlined />}
+            <div style={{ marginTop: 8 }}>Upload</div>
+        </div>
+    );
+
+    const { Option } = Select;
+
+    const onFinishAdd = (values: any) => {
+        const formData = new FormData();
+        let revenueLicenseData = values;
+        const data = {
+            id: 1,
+            taxIssuedDate: revenueLicenseData.taxIssuedDate,
+            taxExpiryDate: revenueLicenseData.taxExpiryDate,
+            region: revenueLicenseData.region,
+            vehicleNumber: vehicleNumbers,
+            taxAmount: revenueLicenseData.taxAmount,
+            userId: getUserDetails().user_id,
+            companyId: getUserDetails().company_id,
+            branchId: getUserDetails().company_branch_id,
+        };
+
+        fileList.map((post, index) => {
+            formData.append("files", post);
+        });
+
+        formData.append("addRevenueLicense", JSON.stringify(data));
+
+        addRevenueLicense(formData)
+            .then((res: any) => {
+                revenueLicenseDocumentAddSuccess();
+                setIsModelOpen(false);
+                reloadTable();
+            })
+            .catch((err) => {
+                errHandler(err);
+            });
+    };
+
+    const onFinishFailed = () => {};
+
+    return (
+        <>
+            <Form
+                id="form"
+                name="basic"
+                form={form}
+                initialValues={props.isEdit ? props.updateData : {}}
+                onFinish={onFinishAdd}
+                onFinishFailed={onFinishFailed}
+            >
+                <Row style={{ paddingLeft: "35px", paddingRight: "35px" }}>
+                    <Col span={24}>
+                        <Form.Item name="vehicleNo">
+                            <Select
+                                placeholder="Vehicle"
+                                optionFilterProp="children"
+                                bordered={false}
+                                style={{ borderBottom: "1px solid #ccccb3" }}
+                                options={vehicle}
+                            ></Select>
+                        </Form.Item>
+                        <Form.Item name="region">
+                            <Input
+                                placeholder="Region"
+                                required
+                                bordered={false}
+                                style={{ borderBottom: "1px solid #ccccb3" }}
+                            />
+                        </Form.Item>
+                        <Form.Item name="taxIssuedDate">
+                            <DatePicker
+                                placeholder="Issued Date"
+                                style={{
+                                    borderBottom: "1px solid #ccccb3",
+                                    borderTop: "0px",
+                                    borderLeft: "0px",
+                                    borderRight: "0px",
+                                    width: "100%",
+                                }}
+                            />
+                        </Form.Item>
+                        <Form.Item name="taxExpiryDate">
+                            <DatePicker
+                                placeholder="Expire Date"
+                                style={{
+                                    borderBottom: "1px solid #ccccb3",
+                                    borderTop: "0px",
+                                    borderLeft: "0px",
+                                    borderRight: "0px",
+                                    width: "100%",
+                                }}
+                            />
+                        </Form.Item>
+                        <Form.Item
+                            rules={[
+                                {
+                                    max: 10,
+                                    message:
+                                        "Sorry you are exceeding the limit!",
+                                },
+                                {
+                                    pattern: new RegExp(
+                                        noSplCharAndLetterRegex
+                                    ),
+
+                                    message: "Enter valid amount",
+                                },
+                            ]}
+                            name="taxAmount"
+                        >
+                            <Input
+                                placeholder="Price"
+                                bordered={false}
+                                required
+                                style={{ borderBottom: "1px solid #ccccb3" }}
+                            />
+                        </Form.Item>
+                        <Upload
+                            name="avatar"
+                            listType="picture-card"
+                            className="avatar-uploader"
+                            showUploadList={false}
+                            action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+                            beforeUpload={beforeUpload}
+                            onChange={handleChange}
+                        >
+                            {imageUrl ? (
+                                <img
+                                    src={imageUrl}
+                                    alt="avatar"
+                                    style={{ width: "100%" }}
+                                />
+                            ) : (
+                                uploadButton
+                            )}
+                        </Upload>
+
+                        <Form.Item hidden={true} name="id"></Form.Item>
+
+                        <Form.Item hidden={true} name="userId"></Form.Item>
+                    </Col>
+                </Row>
+                <Row
+                    justify="end"
+                    className="Actions"
+                    gutter={8}
+                    style={{
+                        marginTop: "3%",
+                    }}
+                >
+                    <Button
+                        className="form-button"
+                        title="Cancel"
+                        onClick={cancelClickHandler}
+                    />
+                    <Button
+                        className="form-button"
+                        title={isEdit ? "Update" : "Add"}
+                        type="primary"
+                        htmlType="submit"
+                    />
+                </Row>
+            </Form>
+        </>
+    );
 }
+
 export default AddRevenueLicense;

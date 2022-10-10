@@ -1,6 +1,7 @@
 import { Button, Modal } from "antd";
 import MasterHeader from "../../../components/organisms/MasterHeader/MasterHeader";
 import { useState, useEffect } from "react";
+import AddParts from "././AddParts";
 import MasterTemplateWithLargeCard from "../../../templates/MasterTemplateWithLargeCard";
 import moment from "moment";
 import {
@@ -10,17 +11,13 @@ import {
 import { getUserDetails } from "../../../contents/Login/LoginAuthentication";
 import { ExclamationCircleOutlined } from "@ant-design/icons";
 import { errHandler, partDeleteSuccess } from "../../../helper/helper";
-import { Console } from "console";
-import AddParts from "../Parts/AddParts";
+
 const { confirm } = Modal;
+
 function ManageParts() {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isEdit, setisEdit] = useState(false);
     const [parts, setParts] = useState([]);
-    const [updateData, setupdateData] = useState([]);
-    const [editVisible, seteditVisible] = useState(false);
-    const [action, setaction] = useState<string>("add");
-    const [addVisible, setAddVisible] = useState(false);
 
     function createData(data: any) {
         let convertData = data.map((post: any, index: any) => {
@@ -123,29 +120,11 @@ function ManageParts() {
                 width={500}
                 footer={false}
             >
-                {isEdit ? (
-                    <AddParts
-                        title={"Edit Parts"}
-                        visible={addVisible}
-                        setAddVisible={setAddVisible}
-                        updateData={isEdit ? updateData : null}
-                        reloadTable={reloadTable}
-                        handleClose={handleCancel}
-                        handleAdd={handleCancel}
-                        action={action}
-                    />
-                ) : (
-                    <AddParts
-                        title={"Add Parts"}
-                        visible={addVisible}
-                        setAddVisible={setAddVisible}
-                        updateData={isEdit ? updateData : null}
-                        reloadTable={reloadTable}
-                        handleClose={handleCancel}
-                        handleAdd={handleCancel}
-                        action={action}
-                    />
-                )}
+                <AddParts
+                    onAdd={handleCancel}
+                    onCancel={handleCancel}
+                    reloadTable={reloadTable}
+                />
             </Modal>
         </>
     );
