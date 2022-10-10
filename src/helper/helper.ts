@@ -156,6 +156,12 @@ export const driverAddSuccess = () =>
     duration: 3,
   });
 
+export const driverUpdateSuccess = () =>
+  notification.success({
+    message: "Driver Updated Successfully",
+    duration: 3,
+  });
+
 export const branchAdminAddSuccess = () =>
   notification.success({
     message: "Branch Admin Created Successfully",
