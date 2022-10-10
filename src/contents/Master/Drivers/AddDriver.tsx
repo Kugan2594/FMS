@@ -1,7 +1,7 @@
 import { Col, Form, Input, Row, Select } from "antd";
 import React, { useEffect, useState } from "react";
 import "./driver.style.less";
-import { addDriver } from "./ServiceDriver";
+import { addDriver, updateDriver } from "./ServiceDriver";
 import { getUserDetails } from "../../../contents/Login/LoginAuthentication";
 import { Button } from "../../../components/atoms/Button";
 import { getAllBranchesByCompanyId } from "../Branch/ServicesBranch";
@@ -12,7 +12,7 @@ import {
   nicNoRegex,
   phoneNumberRegex,
 } from "../../../utils/Regex";
-import { driverAddSuccess, errHandler } from "../../../helper/helper";
+import { driverAddSuccess, driverUpdateSuccess, errHandler } from "../../../helper/helper";
 import { any } from "prop-types";
 const { Option } = Select;
 
@@ -70,8 +70,8 @@ function AddDriver({
   };
 
   const onFinish = (values: any) => {
+    if (isEdit == false) {
     let data: object = {
-      id: 1,
       firstName: values.firstName,
       lastName: values.lastName,
       nic: values.nic,
@@ -92,7 +92,31 @@ function AddDriver({
       })
       .catch((err) => {
         errHandler(err);
-      });
+      });} else {
+        let data: object = {
+          driverId: updateDriverData.id,
+          firstName: values.firstName,
+          lastName: values.lastName,
+          nic: values.nic,
+          email: updateDriverData.email,
+          drivingLicenseNo: values.drivingLicenseNo,
+          drivingLicenseTypeId: values.drivingLicenseTypeId,
+          branchId: values.branchId,
+          mobileNumber: values.mobileNumber,
+          companyId: getUserDetails().company_id,
+          subscription: "PREMIUM",
+          userType: "COMPANYDRIVER",
+        };
+        updateDriver(data)
+          .then((res) => {
+            driverUpdateSuccess();
+            setIsModelOpen(false);
+            reloadTable(res);
+          })
+          .catch((err) => {
+            errHandler(err);
+          });
+      }
   };
 
   const onFinishFailed = () => {};
@@ -146,7 +170,7 @@ function AddDriver({
               />
             </Form.Item>
           </Col>
-          <Col span={12}>
+          {!isEdit && <Col span={12}>
             <Form.Item
               rules={[
                 {
@@ -164,7 +188,7 @@ function AddDriver({
                 style={{ borderBottom: "1px solid #ccccb3" }}
               />
             </Form.Item>
-          </Col>
+          </Col>}
           <Col span={12}>
             <Form.Item
               name="nic"
@@ -205,9 +229,6 @@ function AddDriver({
                 style={{ borderBottom: "1px solid #ccccb3" }}
                 options={branch}
               >
-                {/* {branches.map((branch) => {
-                  return <Option value={branch.name}>{branch.name}</Option>;
-                })} */}
               </Select>
             </Form.Item>
           </Col>
@@ -251,9 +272,6 @@ function AddDriver({
                 style={{ borderBottom: "1px solid #ccccb3" }}
                 options={drivingLicenseType}
               >
-                {/* {licenseTypes.map((type) => {
-                  return <Option value={type.name}>{type.name}</Option>;
-                })} */}
               </Select>
             </Form.Item>
           </Col>

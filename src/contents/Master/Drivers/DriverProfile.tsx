@@ -1,6 +1,7 @@
 import { Image, Typography } from "antd";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import User from "../../../assets/User.svg";
+import { getAllocatedVehicleByDriverId } from "./ServiceDriver";
 
 const { Title, Text } = Typography;
 
@@ -9,6 +10,23 @@ interface DriverProfileType {
 }
 
 function DriverProfile({ driverProfileData }: DriverProfileType) {
+
+  const [assignedVehicle, setAssignedVehicle] = useState([]);
+
+  useEffect(() => {
+    getAllocatedVehicleData(driverProfileData.userId)
+  }, [])
+
+  const getAllocatedVehicleData = (userId: number) => {
+    getAllocatedVehicleByDriverId(userId).then((res: any) => {
+      let data: any = [];
+      res.results.vehicleAllocation.map((post: any) => {
+        data.push(post.vehicleNumber);
+      });
+      setAssignedVehicle(data);
+    });
+  };
+
   return (
     <div className="driver-profile">
       <div className="driver-profile-image-container">
@@ -67,22 +85,22 @@ function DriverProfile({ driverProfileData }: DriverProfileType) {
           <Text>Driving License Type: </Text>
           <br />
           <Text className="data" strong>
-            {driverProfileData.drivingLicenseTypeId}
+            {driverProfileData.drivingLicenseType}
           </Text>
         </div>
         <div className="driver-detail">
           <Text>Branch: </Text>
           <br />
           <Text className="data" strong>
-            {driverProfileData.branchId}
+            {driverProfileData.branchName}
           </Text>
         </div>
         <div className="driver-detail">
           <Text>Assign Vehicles: </Text>
           <br />
-            {/* {driverProfileData.assignedVehicles.map((vehicle: any) => {
+            {assignedVehicle.map((vehicle: any) => {
               return <Text className="data" strong>{vehicle}{" "}</Text>
-            })} */}
+            })}
         </div>
       </div>
     </div>
