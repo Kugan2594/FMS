@@ -12,7 +12,11 @@ import {
   nicNoRegex,
   phoneNumberRegex,
 } from "../../../utils/Regex";
-import { driverAddSuccess, driverUpdateSuccess, errHandler } from "../../../helper/helper";
+import {
+  driverAddSuccess,
+  driverUpdateSuccess,
+  errHandler,
+} from "../../../helper/helper";
 import { any } from "prop-types";
 const { Option } = Select;
 
@@ -40,8 +44,6 @@ function AddDriver({
     getBranchSelectData(getUserDetails().company_id);
     getDrivingLicenseTypeSelectData();
   }, []);
-
-
 
   const getDrivingLicenseTypeSelectData = () => {
     getAllDrivingLicenseTypes().then((res: any) => {
@@ -71,52 +73,54 @@ function AddDriver({
 
   const onFinish = (values: any) => {
     if (isEdit == false) {
-    let data: object = {
-      firstName: values.firstName,
-      lastName: values.lastName,
-      nic: values.nic,
-      email: values.email,
-      drivingLicenseNo: values.drivingLicenseNo,
-      drivingLicenseTypeId: values.drivingLicenseTypeId,
-      branchId: values.branchId,
-      mobileNumber: values.mobileNumber,
-      companyId: getUserDetails().company_id,
-      subscription: "PREMIUM",
-      userType: "COMPANYDRIVER",
-    };
-    addDriver(data)
-      .then((res) => {
-        driverAddSuccess();
-        setIsModelOpen(false);
-        reloadTable(res);
-      })
-      .catch((err) => {
-        errHandler(err);
-      });} else {
-        let data: object = {
-          driverId: updateDriverData.id,
-          firstName: values.firstName,
-          lastName: values.lastName,
-          nic: values.nic,
-          email: updateDriverData.email,
-          drivingLicenseNo: values.drivingLicenseNo,
-          drivingLicenseTypeId: values.drivingLicenseTypeId,
-          branchId: values.branchId,
-          mobileNumber: values.mobileNumber,
-          companyId: getUserDetails().company_id,
-          subscription: "PREMIUM",
-          userType: "COMPANYDRIVER",
-        };
-        updateDriver(data)
-          .then((res) => {
-            driverUpdateSuccess();
-            setIsModelOpen(false);
-            reloadTable(res);
-          })
-          .catch((err) => {
-            errHandler(err);
-          });
-      }
+      let data: object = {
+        firstName: values.firstName,
+        lastName: values.lastName,
+        nic: values.nic,
+        email: values.email,
+        drivingLicenseNo: values.drivingLicenseNo,
+        drivingLicenseTypeId: values.drivingLicenseTypeId,
+        branchId: values.branchId,
+        mobileNumber: values.mobileNumber,
+        companyId: getUserDetails().company_id,
+        subscription: "PREMIUM",
+        userType: "COMPANYDRIVER",
+      };
+      addDriver(data)
+        .then((res) => {
+          driverAddSuccess();
+          setIsModelOpen(false);
+          reloadTable(res);
+        })
+        .catch((err) => {
+          errHandler(err);
+        });
+    } else {
+      let data: object = {
+        driverId: updateDriverData.id,
+        firstName: values.firstName,
+        lastName: values.lastName,
+        nic: values.nic,
+        email: updateDriverData.email,
+        drivingLicenseNo: values.drivingLicenseNo,
+        drivingLicenseTypeId: values.drivingLicenseTypeId,
+        branchId: values.branchId,
+        mobileNumber: values.mobileNumber,
+        companyId: getUserDetails().company_id,
+        subscription: "PREMIUM",
+        userType: "COMPANYDRIVER",
+        userId: updateDriverData.userId,
+      };
+      updateDriver(data)
+        .then((res) => {
+          driverUpdateSuccess();
+          setIsModelOpen(false);
+          reloadTable(res);
+        })
+        .catch((err) => {
+          errHandler(err);
+        });
+    }
   };
 
   const onFinishFailed = () => {};
@@ -170,25 +174,27 @@ function AddDriver({
               />
             </Form.Item>
           </Col>
-          {!isEdit && <Col span={12}>
-            <Form.Item
-              rules={[
-                {
-                  pattern: new RegExp(emailRegex),
+          {!isEdit && (
+            <Col span={12}>
+              <Form.Item
+                rules={[
+                  {
+                    pattern: new RegExp(emailRegex),
 
-                  message: "Enter valid Email",
-                },
-              ]}
-              name="email"
-            >
-              <Input
-                placeholder="Email"
-                required
-                bordered={false}
-                style={{ borderBottom: "1px solid #ccccb3" }}
-              />
-            </Form.Item>
-          </Col>}
+                    message: "Enter valid Email",
+                  },
+                ]}
+                name="email"
+              >
+                <Input
+                  placeholder="Email"
+                  required
+                  bordered={false}
+                  style={{ borderBottom: "1px solid #ccccb3" }}
+                />
+              </Form.Item>
+            </Col>
+          )}
           <Col span={12}>
             <Form.Item
               name="nic"
@@ -228,8 +234,7 @@ function AddDriver({
                 bordered={false}
                 style={{ borderBottom: "1px solid #ccccb3" }}
                 options={branch}
-              >
-              </Select>
+              ></Select>
             </Form.Item>
           </Col>
           <Col span={12}>
@@ -271,8 +276,7 @@ function AddDriver({
                 bordered={false}
                 style={{ borderBottom: "1px solid #ccccb3" }}
                 options={drivingLicenseType}
-              >
-              </Select>
+              ></Select>
             </Form.Item>
           </Col>
           <Col className="form-button-content" span={24}>
