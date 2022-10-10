@@ -85,14 +85,6 @@ const PrivateRoute: RouteObject[] = [
         element: <ManageNotifications />,
     },
     {
-        path: "statistics",
-        element: <Page />,
-    },
-    {
-        path: "vehicle-card",
-        element: <OverallVehiclesStatus />,
-    },
-    {
         path: "/allBranches",
         element: <DashBoard />,
     },

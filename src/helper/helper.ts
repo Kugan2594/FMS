@@ -52,16 +52,16 @@ export const errHandler = (err: any) => {
 
     // Vehicle Service
     errorBox("401", "Vehicle Service Already Exists");
-
-    // Branch
-    errorBox("1001", "Branch is depended");
-
     // User
     errorBox("100018", "You already Verified");
 
-    //Part
-    errorBox("1002", "Part Depended");
-    errorBox("11000", "Part Already Exists");
+    // Branch
+    errorBox("1001", "Branch is depended");
+    errorBox("1000", "Branch Already Exists");
+
+    // User
+    errorBox("100018", "You already Verified");
+    errorBox("1000002", "Invalid Token");
 };
 
 //success message popups
@@ -177,7 +177,7 @@ export const branchAdminUpdateSuccess = () =>
     });
 
 export const branchAdminDeleteSuccess = () =>
-    notification.error({
+    notification.success({
         message: "Branch Admin Deleted Successfully",
         duration: 3,
     });

@@ -1,7 +1,6 @@
 import { Button, Modal } from "antd";
 import MasterHeader from "../../../components/organisms/MasterHeader/MasterHeader";
 import { useState, useEffect } from "react";
-import AddParts from "././AddParts";
 import MasterTemplateWithLargeCard from "../../../templates/MasterTemplateWithLargeCard";
 import moment from "moment";
 import {
@@ -12,6 +11,7 @@ import { getUserDetails } from "../../../contents/Login/LoginAuthentication";
 import { ExclamationCircleOutlined } from "@ant-design/icons";
 import { errHandler, partDeleteSuccess } from "../../../helper/helper";
 import { Console } from "console";
+import AddParts from "../Parts/AddParts";
 const { confirm } = Modal;
 function ManageParts() {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -29,37 +29,34 @@ function ManageParts() {
                 name: post.partResponseDto.name,
                 progressData: post.healthPercentage,
                 vehicleNo: post.vehicleNumber,
+                branchName: "Rs. " + post.amount,
                 lastChangedDate: moment(post.date).format("DD-MM-yyyy"),
-                locationWhereItFixed: post.locationWhereItFixed,
-                brandNew: post.brandNew,
-                capacity: post.capacity,
-                brand: post.brand,
-                partId: post.partName,
-                warranty: post.warranty,
-                amount: post.amount,
-                expectedLifetimeInKm: post.expectedLifetimeInKm,
-                expectedLifetimeInYears: post.expectedLifetimeInYears,
+                dueDate: moment(post.date)
+                    .add(post.expectedLifetimeInYears, "months")
+                    .format("DD-MM-yyyy"),
             };
         });
         return convertData;
     }
+
     const showModal = () => {
         setIsModalOpen(true);
         setisEdit(false);
     };
-    const showModalEdit = (data: any) => {
+
+    const showModalEdit = () => {
         setIsModalOpen(true);
         setisEdit(true);
-        setupdateData(data);
-        console.log({ data });
-        console.log("edit", isEdit);
     };
+
     const handleOk = () => {
         setIsModalOpen(false);
     };
+
     const handleCancel = () => {
         setIsModalOpen(false);
     };
+
     const getAllPartsData = (companyId: Number, branchId: Number) => {
         let data: any = [];
         getAllPartsByCompanyIdAndBranchId(companyId, branchId).then(
@@ -70,37 +67,41 @@ function ManageParts() {
             (error: any) => {}
         );
     };
-    useEffect(() => {
-        getAllPartsData(
-            getUserDetails().company_id,
-            getUserDetails().company_branch_id
-        );
-    }, []);
+
     const deleteClickHandler = (id: any) => {
         confirm({
-            title: "Are you sure delete this Generator?",
+            title: "Are you sure delete this Emission Test Document?",
             icon: <ExclamationCircleOutlined />,
             okText: "Yes",
             okType: "danger",
             cancelText: "No",
             onOk() {
                 deletePart(id)
-                    .then((res) => {
+                    .then((res: any) => {
                         partDeleteSuccess();
                         reloadTable(res);
                     })
-                    .catch((err) => {
-                        errHandler(err);
+                    .catch((error) => {
+                        errHandler(error);
                     });
             },
         });
     };
+
     const reloadTable = (res: any) => {
         getAllPartsData(
             getUserDetails().company_id,
             getUserDetails().company_branch_id
         );
     };
+
+    useEffect(() => {
+        getAllPartsData(
+            getUserDetails().company_id,
+            getUserDetails().company_branch_id
+        );
+    }, []);
+
     return (
         <>
             <MasterTemplateWithLargeCard
@@ -109,9 +110,7 @@ function ManageParts() {
                 headerOnSearch={() => {}}
                 headerOnClickAdd={showModal}
                 cardOnClick={(id: string) => console.log("CLICKED " + id)}
-                deleteButton={(id: number) => {
-                    deleteClickHandler(id);
-                }}
+                deleteButton={(id: string) => deleteClickHandler(id)}
                 updateButton={showModalEdit}
             />
 

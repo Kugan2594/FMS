@@ -124,6 +124,7 @@ function ManageEco() {
             isEdit={isEdit}
             reloadTable={reloadTable}
             setIsModelOpen={setIsModalOpen}
+            cancelClickHandler={handleCancel}
           />
         </Modal>
       )}

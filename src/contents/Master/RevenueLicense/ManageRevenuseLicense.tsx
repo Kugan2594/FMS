@@ -120,7 +120,6 @@ function ManageRevenueLicense() {
           title={isEdit ? "Edit Revenue License" : "Add Revenue License"}
           open={isModalOpen}
           onOk={onFinishAdd}
-          onCancel={handleCancel}
           closable={false}
           width={500}
           footer={null}
@@ -130,6 +129,7 @@ function ManageRevenueLicense() {
             isEdit={isEdit}
             reloadTable={reloadTable}
             setIsModelOpen={setIsModalOpen}
+            cancelClickHandler={handleCancel}
           />
         </Modal>
       )}

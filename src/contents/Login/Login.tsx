@@ -175,18 +175,18 @@ function Login() {
       <Card className="signUp-option">
         <Row justify="center" align="middle">
           <Col className="sign-up-column">
-            <Text style={{ fontSize: "16px" }}>Don't have an account? </Text>
-            <div className="forgot-password">
-              <Text
+            <Text style={{ fontSize: "16px" }}>Don't have an account?</Text>
+            <Text
                 strong
                 style={{
+                  fontSize: "16px",
                   color: "blue",
                   cursor: "pointer",
+                  marginLeft: "5px",
                 }}
               >
                 <Link to="/sign-up-split-screen">Sign Up</Link>
               </Text>
-            </div>
           </Col>
         </Row>
       </Card>

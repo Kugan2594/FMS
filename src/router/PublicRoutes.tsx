@@ -26,6 +26,7 @@ import SignUpSplitScreen from "../contents/Login/SignUp/SignUpSplitScreen";
 import StaticsHistory from "../contents/Home/Statics/StaticsHistory";
 import Page from "../contents/Home/Statistics/Statistics";
 import OverallVehiclesStatus from "../contents/Home/VehiclesCard/OverallVehiclesStatus";
+import DashBoard from "../contents/Home/DashBoard/DashBoard";
 
 const Loader = (Component: any) => (props: any) =>
     (
@@ -56,12 +57,12 @@ const PublicRoute: RouteObject[] = [
         element: <OTPVerification />,
     },
     {
-        path: "home",
+        path: "home/*",
         element: <CustomLayout />,
         children: [
             {
                 path: "allBranches",
-                element: <Page />,
+                element: <DashBoard />,
             },
         ],
     },
@@ -118,11 +119,6 @@ const PublicRoute: RouteObject[] = [
                 path: "vehicles",
                 element: <ManageVehicles />,
             },
-            {
-                path: "statistics",
-                element: <Page />,
-            },
-            { path: "vehicle-card", element: <OverallVehiclesStatus /> },
         ],
     },
     {

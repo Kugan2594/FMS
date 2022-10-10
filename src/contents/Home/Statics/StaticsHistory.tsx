@@ -1,9 +1,12 @@
 import { Card, Col, DatePicker, Row, Table, Tag, Typography } from "antd";
 import Search from "antd/lib/input/Search";
 import type { ColumnsType } from "antd/es/table";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./statics.style.less";
 import { Button } from "../../../components/atoms/Button";
+import { getAllExpensesByCompanyId } from "./ServiceStatics";
+import { getUserDetails } from "../../../contents/Login/LoginAuthentication";
+import moment from "moment";
 
 const { Title } = Typography;
 const { RangePicker } = DatePicker;
@@ -33,136 +36,29 @@ const columns: ColumnsType<any> = [
     },
 ];
 
-const data = [
-    {
-        key: "1",
-        expense: "Water Service",
-        branch: "Jaffna",
-        amount: 3000,
-        date: "24 Mar 2022",
-        type: "Car",
-    },
-    {
-        key: "2",
-        expense: "Water Service",
-        branch: "Jaffna",
-        amount: 3000,
-        date: "24 Mar 2022",
-        type: "Car",
-    },
-    {
-        key: "3",
-        expense: "Water Service",
-        branch: "Jaffna",
-        amount: 3000,
-        date: "24 Mar 2022",
-        type: "Car",
-    },
-    {
-        key: "4",
-        expense: "Water Service",
-        branch: "Jaffna",
-        amount: 3000,
-        date: "24 Mar 2022",
-        type: "Car",
-    },
-    {
-        key: "5",
-        expense: "Water Service",
-        branch: "Jaffna",
-        amount: 3000,
-        date: "24 Mar 2022",
-        type: "Car",
-    },
-    {
-        key: "6",
-        expense: "Water Service",
-        branch: "Jaffna",
-        amount: 3000,
-        date: "24 Mar 2022",
-        type: "Bike",
-    },
-    {
-        key: "7",
-        expense: "Water Service",
-        branch: "Jaffna",
-        amount: 3000,
-        date: "24 Mar 2022",
-        type: "Bike",
-    },
-    {
-        key: "8",
-        expense: "Water Service",
-        branch: "Jaffna",
-        amount: 3000,
-        date: "24 Mar 2022",
-        type: "Van",
-    },
-    {
-        key: "9",
-        expense: "Water Service",
-        branch: "Jaffna",
-        amount: 3000,
-        date: "24 Mar 2022",
-        type: "Van",
-    },
-    {
-        key: "10",
-        expense: "Water Service",
-        branch: "Jaffna",
-        amount: 3000,
-        date: "24 Mar 2022",
-        type: "Car",
-    },
-    {
-        key: "11",
-        expense: "Water Service",
-        branch: "Jaffna",
-        amount: 3000,
-        date: "24 Mar 2022",
-        type: "Van",
-    },
-    {
-        key: "12",
-        expense: "Water Service",
-        branch: "Jaffna",
-        amount: 3000,
-        date: "24 Mar 2022",
-        type: "Truck",
-    },
-    {
-        key: "13",
-        expense: "Water Service",
-        branch: "Jaffna",
-        amount: 3000,
-        date: "24 Mar 2022",
-        type: "Car",
-    },
-    {
-        key: "14",
-        expense: "Water Service",
-        branch: "Jaffna",
-        amount: 3000,
-        date: "24 Mar 2022",
-        type: "Van",
-    },
-    {
-        key: "15",
-        expense: "Water Service",
-        branch: "Jaffna",
-        amount: 3000,
-        date: "24 Mar 2022",
-        type: "Truck",
-    },
-];
-
-const vehicleTypes = ["Car", "Truck", "Van", "Bike"];
-
-const tagsData = ["All Vehicles", ...vehicleTypes];
+function createdData(data: any) {
+    let convertData = data.map((post: any) => {
+        return {
+            key: post.id,
+            expense: post.expensesType.toLowerCase(),
+            branch: post.branchId,
+            amount: post.amount,
+            date: moment(post.date).format("DD-MM-YYYY"),
+            type: post.expensesType.toLowerCase(),
+        };
+    });
+    return convertData;
+}
 
 function StaticsHistory() {
     const [selectedTags, setSelectedTags] = useState("All Vehicles");
-    const [mockData, setMockData] = useState(data);
+    // const [mockData, setMockData] = useState(data);
+    const [data, setData]: any = useState([]);
+    const [tableData, setTableData] = useState([]);
+    const [type, setType] = useState([]);
+    const [dateRange, setDateRange] = useState([]);
+
+    const tagsData = ["All Vehicles", ...type];
 
     const handleChange = (tag: string) => {
         // const nextSelectedTags =
@@ -173,12 +69,50 @@ function StaticsHistory() {
         // setSelectedTags(nextSelectedTags);
     };
 
+    useEffect(() => {
+        getExpensesByCompanyId(getUserDetails().company_id);
+    }, []);
+
+    const getExpensesByCompanyId = (companyId: number) => {
+        let data: any = [];
+        getAllExpensesByCompanyId(companyId).then(
+            (res: any) => {
+                data = createdData(res.results.expenses);
+                setData(data);
+                setTableData(data);
+
+                const unique = (value: any, index: number, self: any) => {
+                    return self.indexOf(value) === index;
+                };
+
+                setType(
+                    data.map((expense: any) => expense.type).filter(unique)
+                );
+            },
+            (error: any) => {
+                setData([]);
+            }
+        );
+    };
+
     const clickHandler = (tag: any) => {
         if (tag === "All Vehicles") {
-            setMockData(data);
+            setTableData(data);
         } else {
-            setMockData(data.filter((data) => data.type === tag));
+            setTableData(data.filter((data: any) => data.type === tag));
         }
+    };
+
+    const datePickerOnChange = (datePickerDate: any) => {
+        setDateRange(datePickerDate);
+        console.log("DATE", datePickerDate);
+        setTableData(
+            tableData.filter(
+                (data: any) =>
+                    data.date >= dateRange[0] ||
+                    datePickerDate.date <= dateRange[1]
+            )
+        );
     };
 
     return (
@@ -191,7 +125,10 @@ function StaticsHistory() {
                             <Search />
                         </Col>
                         <Col span={12}>
-                            <RangePicker bordered={false} />
+                            <RangePicker
+                                bordered={false}
+                                onChange={datePickerOnChange}
+                            />
                         </Col>
                     </Row>
                     <div className="statics-history-tag">
@@ -209,9 +146,9 @@ function StaticsHistory() {
                 <div className="statics-history-content">
                     <Table
                         pagination={false}
-                        scroll={{ y: 140 }}
+                        scroll={{ y: 200 }}
                         columns={columns}
-                        dataSource={mockData}
+                        dataSource={tableData}
                         size="small"
                     />
                 </div>

@@ -4,33 +4,87 @@ import { Bar, Doughnut, Line, Pie } from "react-chartjs-2";
 import { CategoryScale } from "chart.js";
 import CustomRangePicker from "components/atoms/RangePicker/CustomRangePicker";
 import { AiOutlineRocket } from "react-icons/ai";
+import { getUserDetails } from "../../../contents/Login/LoginAuthentication";
+import { getAllVehiclesByCompanyId } from "../../../contents/Master/Vehicles/ServiceVehicle";
+import { useEffect, useState } from "react";
 Chart.register(CategoryScale);
 const { Text, Title } = Typography;
 const labels = ["Perfect", "Needs Attention", "Sleep"];
 
-const data1 = [
-    { title: "Perfect", count: 23 },
-    { title: "Needs Attention", count: 53 },
-    { title: "Sleep", count: 43 },
-];
-const count = data1.map((x) => x.count);
-const data = {
-    labels: ["Red", "Blue", "Yellow"],
-    datasets: [
-        {
-            label: "Dataset",
-            data: count,
-            backgroundColor: [
-                "rgb(255, 99, 132)",
-                "rgb(54, 162, 235)",
-                "rgb(255, 205, 86)",
-            ],
-            hoverOffset: 8,
-            cutout: 50,
-        },
-    ],
-};
 function OverallVehiclesStatus() {
+    const [vehicles, setvehicles] = useState([]);
+    const createData = (data: any) => {
+        let convertData = data.map((post: any) => {
+            return {
+                id: post.id,
+                vehicleNumber: post.vehicleNumber,
+                lease: post.lease,
+                color: post.color,
+                vehicleOwner: post.vehicleOwner,
+                tankCapacity: post.tankCapacity,
+                reserveTankCapacity: post.reserveTankCapacity,
+                maximumWeightCarriable: post.maximumWeightCarriable,
+                branchLocation: getUserDetails().company_branch_name,
+                companyId: getUserDetails().company_id,
+                branchId: getUserDetails().company_branch_id,
+                progressData: 80,
+                image: "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
+                vehicleIdFromResource: post.resourceVehicleDto.id,
+                vehicleModel:
+                    post.resourceVehicleDto.vehicleBrand +
+                    " " +
+                    post.resourceVehicleDto.vehicleModel +
+                    " " +
+                    post.resourceVehicleDto.fuelTypeName +
+                    " " +
+                    post.resourceVehicleDto.vehicleBodyTypeResponseDto,
+                vehicleType: post.resourceVehicleDto.vehicleTypeName,
+            };
+        });
+
+        return convertData;
+    };
+    const getAllVehicles = (companyId: number) => {
+        getAllVehiclesByCompanyId(companyId).then((res: any) => {
+            let data: [] = createData(res.results.companyVehicle);
+            setvehicles(data);
+            console.log(data);
+        });
+    };
+
+    let count = vehicles.length;
+
+    useEffect(() => {
+        getAllVehicles(getUserDetails().company_id);
+        console.log("vehicles", vehicles);
+    }, []);
+    let perfect1 = vehicles.filter((x: any) => x.progressData === 100).length;
+    let needsAttention1 = vehicles.filter(
+        (x: any) => x.progressData != 100
+    ).length;
+    const data1 = [
+        { title: "Perfect", count: perfect1 },
+        { title: "Needs Attention", count: needsAttention1 },
+        { title: "Sleep", count: 0 },
+    ];
+    const count1 = data1.map((x) => x.count);
+    const data = {
+        labels: ["Red", "Blue", "Yellow"],
+        datasets: [
+            {
+                label: "Dataset",
+                data: count1,
+                backgroundColor: [
+                    "rgb(255, 99, 132)",
+                    "rgb(54, 162, 235)",
+                    "rgb(255, 205, 86)",
+                ],
+                hoverOffset: 8,
+                cutout: 50,
+            },
+        ],
+    };
+
     return (
         <Card style={{ borderRadius: "3%" }}>
             <Row>
@@ -42,6 +96,9 @@ function OverallVehiclesStatus() {
                     <Pie data={data} />
                 </Col>
                 <Col span={1}></Col>
+            </Row>
+            <Row>
+                <Col>Total Vehicles:{count}</Col>
             </Row>
             <Row style={{ margin: "3%" }}>
                 <Col span={24}></Col>

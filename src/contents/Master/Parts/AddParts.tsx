@@ -102,157 +102,64 @@ function AddParts(props: any) {
                 .catch((err) => {
                     errHandler(err);
                 });
-        } else {
-            let data: object = {
-                expectedLifetimeInKm: values.expectedLifetimeInKm,
-                expectedLifetimeInYears: values.expectedLifetimeInYears,
-                warranty: values.warranty,
-                amount: values.amount,
-                locationWhereItFixed: values.locationWhereItFixed,
-                brandNew: values.brandNew,
-                capacity: values.capacity,
-                lastChangedDate: values.lastChangedDate,
-                brand: values.brand,
-                partId: values.partName,
-                vehicleNumber: vehicleNumbers,
-                companyId: getUserDetails().company_id,
-                branchId: getUserDetails().company_branch_id,
-                userId: getUserDetails().user_id,
-            };
-            updatePartById(data)
-                .then((res: any) => {
-                    partUpdateSuccess();
-                    reloadTable(res);
-                    setAddVisible(false);
-                })
-                .catch((err: any) => {
-                    errHandler(err);
-                });
         }
-    };
-
-    const onFinishFailed = () => {
-        console.log("failed");
-    };
-    return (
-        <>
-            <Form
-                id="form"
-                name="basic"
-                form={form}
-                onFinish={onFinishAdd}
-                onFinishFailed={onFinishFailed}
-                initialValues={updateData}
-            >
-                <Row>
-                    <Col span={24}>
-                        <Form.Item name="id" hidden>
-                            <Input />
-                        </Form.Item>
-                        <Form.Item name="partId">
-                            <Select
-                                placeholder="Part Name"
-                                optionFilterProp="children"
-                                bordered={false}
-                                style={{ borderBottom: "1px solid #ccccb3" }}
-                                options={part}
-                            />
-                        </Form.Item>
-                    </Col>
-                    <Col span={24}>
-                        <Form.Item name="vehicleNumber">
-                            <Select
-                                placeholder="Vehicle"
-                                optionFilterProp="children"
-                                bordered={false}
-                                style={{ borderBottom: "1px solid #ccccb3" }}
-                                options={vehicle}
-                            />
-                        </Form.Item>
-                    </Col>
-                    <Col span={24}>
-                        <Form.Item name="date">
-                            <DatePicker
-                                placeholder="Changed Date"
-                                style={{
-                                    borderBottom: "1px solid #ccccb3",
-                                    borderTop: "0px",
-                                    borderLeft: "0px",
-                                    borderRight: "0px",
-                                    width: "100%",
-                                }}
-                            />
-                        </Form.Item>
-                    </Col>
-                    <Col span={11}>
-                        <Form.Item name="expectedLifetimeInKm">
-                            <Input
-                                placeholder="Durability in Km"
-                                bordered={false}
-                                required
-                                style={{ borderBottom: "1px solid #ccccb3" }}
-                            />
-                        </Form.Item>
-                    </Col>
-                    <Col span={2}></Col>
-                    <Col span={11}>
-                        <Form.Item name="expectedLifetimeInYears">
-                            <Input
-                                placeholder="Durability in Years"
-                                bordered={false}
-                                required
-                                style={{ borderBottom: "1px solid #ccccb3" }}
-                            />
-                        </Form.Item>
-                    </Col>
-                    <Col span={24}>
-                        <Form.Item name="amount">
-                            <Input
-                                placeholder="Price"
-                                bordered={false}
-                                required
-                                style={{ borderBottom: "1px solid #ccccb3" }}
-                            />
-                        </Form.Item>
-                    </Col>
-                    <Col span={24}>
-                        <Form.Item name="warranty">
-                            <Input
-                                placeholder="Warranty"
-                                bordered={false}
-                                required
-                                style={{ borderBottom: "1px solid #ccccb3" }}
-                            />
-                        </Form.Item>
-                    </Col>
-                    <Col span={24}>
-                        <Form.Item name="locationWhereItFixed">
-                            <Input
-                                placeholder="Location Where It Fixed"
-                                bordered={false}
-                                required
-                                style={{ borderBottom: "1px solid #ccccb3" }}
-                            />
-                        </Form.Item>
-                    </Col>
-                    <Col span={24}>
-                        <Form.Item name="brandNew">
-                            <Checkbox
-                                name="brandNew"
-                                onClick={() => {
-                                    setOpen(!open);
-                                }}
-                            >
-                                Brand New
-                            </Checkbox>
-                        </Form.Item>
-                    </Col>
-
-                    {open ? (
+        const onFinishFailed = () => {
+            console.log("failed");
+        };
+        return (
+            <>
+                <Form
+                    id="form"
+                    name="basic"
+                    form={form}
+                    onFinish={onFinishAdd}
+                    onFinishFailed={onFinishFailed}
+                >
+                    <Row>
                         <Col span={24}>
-                            <Form.Item name="brand">
+                            <Form.Item name="partName">
+                                <Select
+                                    placeholder="Part Name"
+                                    optionFilterProp="children"
+                                    bordered={false}
+                                    style={{
+                                        borderBottom: "1px solid #ccccb3",
+                                    }}
+                                    options={part}
+                                />
+                            </Form.Item>
+                        </Col>
+                        <Col span={24}>
+                            <Form.Item name="vehicleNumber">
+                                <Select
+                                    placeholder="Vehicle"
+                                    optionFilterProp="children"
+                                    bordered={false}
+                                    style={{
+                                        borderBottom: "1px solid #ccccb3",
+                                    }}
+                                    options={vehicle}
+                                />
+                            </Form.Item>
+                        </Col>
+                        <Col span={24}>
+                            <Form.Item name="date">
+                                <DatePicker
+                                    placeholder="Changed Date"
+                                    style={{
+                                        borderBottom: "1px solid #ccccb3",
+                                        borderTop: "0px",
+                                        borderLeft: "0px",
+                                        borderRight: "0px",
+                                        width: "100%",
+                                    }}
+                                />
+                            </Form.Item>
+                        </Col>
+                        <Col span={11}>
+                            <Form.Item name="expectedLifetimeInKm">
                                 <Input
-                                    placeholder="Brand"
+                                    placeholder="Durability in Km"
                                     bordered={false}
                                     required
                                     style={{
@@ -261,34 +168,112 @@ function AddParts(props: any) {
                                 />
                             </Form.Item>
                         </Col>
-                    ) : (
-                        <></>
-                    )}
-                </Row>
-                <Row align="middle" justify="end">
-                    <Col span={24}>
-                        <Space direction="horizontal" align="center">
-                            <div className="1" style={{ width: "275px" }}></div>
-                            <Button
-                                htmlType="button"
-                                type="ghost"
-                                onClick={handleClose}
-                            >
-                                cancel
-                            </Button>
-                            <Button
-                                htmlType="submit"
-                                type="primary"
-                                onClick={handleAdd}
-                            >
-                                Add
-                            </Button>
-                        </Space>
-                    </Col>
-                </Row>
-            </Form>
-        </>
-    );
-}
+                        <Col span={2}></Col>
+                        <Col span={11}>
+                            <Form.Item name="expectedLifetimeInYears">
+                                <Input
+                                    placeholder="Durability in Months"
+                                    bordered={false}
+                                    required
+                                    style={{
+                                        borderBottom: "1px solid #ccccb3",
+                                    }}
+                                />
+                            </Form.Item>
+                        </Col>
+                        <Col span={24}>
+                            <Form.Item name="amount">
+                                <Input
+                                    placeholder="Price"
+                                    bordered={false}
+                                    required
+                                    style={{
+                                        borderBottom: "1px solid #ccccb3",
+                                    }}
+                                />
+                            </Form.Item>
+                        </Col>
+                        <Col span={24}>
+                            <Form.Item name="warranty">
+                                <Input
+                                    placeholder="Warranty"
+                                    bordered={false}
+                                    required
+                                    style={{
+                                        borderBottom: "1px solid #ccccb3",
+                                    }}
+                                />
+                            </Form.Item>
+                        </Col>
+                        <Col span={24}>
+                            <Form.Item name="locationWhereItFixed">
+                                <Input
+                                    placeholder="Location Where It Fixed"
+                                    bordered={false}
+                                    required
+                                    style={{
+                                        borderBottom: "1px solid #ccccb3",
+                                    }}
+                                />
+                            </Form.Item>
+                        </Col>
+                        <Col span={24}>
+                            <Form.Item name="brandNew">
+                                <Checkbox
+                                    name="brandNew"
+                                    onClick={() => {
+                                        setOpen(!open);
+                                    }}
+                                >
+                                    Brand New
+                                </Checkbox>
+                            </Form.Item>
+                        </Col>
 
+                        {open ? (
+                            <Col span={24}>
+                                <Form.Item name="brand">
+                                    <Input
+                                        placeholder="Brand"
+                                        bordered={false}
+                                        required
+                                        style={{
+                                            borderBottom: "1px solid #ccccb3",
+                                        }}
+                                    />
+                                </Form.Item>
+                            </Col>
+                        ) : (
+                            <></>
+                        )}
+                    </Row>
+                    <Row align="middle" justify="end">
+                        <Col span={24}>
+                            <Space direction="horizontal" align="center">
+                                <div
+                                    className="1"
+                                    style={{ width: "275px" }}
+                                ></div>
+                                <Button
+                                    htmlType="button"
+                                    type="ghost"
+                                    onClick={handleClose}
+                                >
+                                    cancel
+                                </Button>
+                                <Button
+                                    htmlType="submit"
+                                    type="primary"
+                                    onClick={handleAdd}
+                                >
+                                    Add
+                                </Button>
+                            </Space>
+                        </Col>
+                    </Row>
+                </Form>
+            </>
+        );
+    };
+}
 export default AddParts;

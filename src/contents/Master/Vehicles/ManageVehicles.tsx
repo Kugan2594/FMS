@@ -9,7 +9,9 @@ import AddVehicle from "./AddVehicle";
 import {
     deleteVehicleByVehicleNumberAndCompanyId,
     getAllVehiclesByCompanyId,
+    getAllVehiclesByCompanyIdAndBranchId,
 } from "./ServiceVehicle";
+import VehicleProfile from "./VehicleProfile";
 
 const { confirm } = Modal;
 
@@ -39,8 +41,15 @@ function ManageVehicles() {
                 progressData: 80,
                 image: "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
                 vehicleIdFromResource: post.resourceVehicleDto.id,
-                vehicleModel: post.resourceVehicleDto.vehicleModel,
-                vehicleType: post.resourceVehicleDto.vehicleType,
+                vehicleModel:
+                    post.resourceVehicleDto.vehicleBrand +
+                    " " +
+                    post.resourceVehicleDto.vehicleModel +
+                    " " +
+                    post.resourceVehicleDto.fuelTypeName +
+                    " " +
+                    post.resourceVehicleDto.vehicleBodyTypeResponseDto,
+                vehicleType: post.resourceVehicleDto.vehicleTypeName,
             };
         });
 
@@ -81,8 +90,29 @@ function ManageVehicles() {
         });
     };
 
+    const getAllVehiclesByCompanyAndBranch = (
+        companyId: number,
+        branchId: number
+    ) => {
+        getAllVehiclesByCompanyIdAndBranchId(companyId, branchId).then(
+            (res: any) => {
+                let data: [] = createData(
+                    res.results.vehicleByCompanyAndBranch
+                );
+                setvehicles(data);
+            }
+        );
+    };
+
     const reloadTable = (res: any) => {
-        getAllVehicles(getUserDetails().company_id);
+        if (getUserDetails().roleName == "COMPANYADMIN") {
+            getAllVehicles(getUserDetails().company_id);
+        } else if (getUserDetails().roleName == "COMPANYBRANCHADMIN") {
+            getAllVehiclesByCompanyAndBranch(
+                getUserDetails().company_id,
+                getUserDetails().company_branch_id
+            );
+        }
     };
 
     const deleteVehicleData = (vehicleNumber: string, companyId: number) => {
@@ -97,7 +127,14 @@ function ManageVehicles() {
     };
 
     useEffect(() => {
-        getAllVehicles(getUserDetails().company_id);
+        if (getUserDetails().roleName == "COMPANYADMIN") {
+            getAllVehicles(getUserDetails().company_id);
+        } else if (getUserDetails().roleName == "COMPANYBRANCHADMIN") {
+            getAllVehiclesByCompanyAndBranch(
+                getUserDetails().company_id,
+                getUserDetails().company_branch_id
+            );
+        }
     }, []);
 
     const deleteClickHandler = (vehicleNumber: any) => {
@@ -195,6 +232,8 @@ function ManageVehicles() {
                     updateData={editVisible ? updateData : null}
                     reloadTable={reloadTable}
                     action={action}
+                    cancelClickHandler={handleCancel}
+                    isEdit={editVisible}
                 />
             ) : editVisible ? (
                 <AddVehicle
@@ -206,7 +245,20 @@ function ManageVehicles() {
                     updateData={editVisible ? updateData : null}
                     reloadTable={reloadTable}
                     action={action}
+                    cancelClickHandler={handleCancel}
+                    isEdit={editVisible}
                 />
+            ) : isProfileModalOpen ? (
+                <Modal
+                    title={false}
+                    open={isProfileModalOpen}
+                    onCancel={handleCancel}
+                    closable={false}
+                    width={"75%"}
+                    footer={false}
+                >
+                    <VehicleProfile />
+                </Modal>
             ) : (
                 <></>
             )}
