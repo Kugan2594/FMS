@@ -130,7 +130,7 @@ function AddGenerator(props: any) {
                                     }}
                                 />
                             </Form.Item>
-                            <Form.Item>
+                            <Form.Item name="branchName">
                                 <Select
                                     placeholder="Company Branch"
                                     optionFilterProp="children"

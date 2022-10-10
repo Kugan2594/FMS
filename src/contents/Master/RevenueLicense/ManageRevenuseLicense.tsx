@@ -1,20 +1,17 @@
+import { ExclamationCircleOutlined } from "@ant-design/icons";
 import { Modal } from "antd";
-import { useState, useEffect } from "react";
-import AddRevenueLicense from "./AddRevenueLicense";
+import moment from "moment";
+import { useEffect, useState } from "react";
+import {
+  errHandler, revenueLicenseDocumentDeleteSuccess
+} from "../../../helper/helper";
 import MasterTemplateWithLargeCard from "../../../templates/MasterTemplateWithLargeCard";
+import { getUserDetails } from "../../Login/LoginAuthentication";
+import AddRevenueLicense from "./AddRevenueLicense";
 import {
   deleteRevenueLicense,
-  getAllRevenueLicenseByCompanyId,
-  getAllRevenueLicenseByUserId,
+  getAllRevenueLicenseByCompanyId
 } from "./ServicesRevenueLicense";
-import { getUserDetails } from "../../Login/LoginAuthentication";
-import moment from "moment";
-import { ExclamationCircleOutlined } from "@ant-design/icons";
-import {
-  errHandler,
-  revenueLicenseDocumentAddSuccess,
-  revenueLicenseDocumentDeleteSuccess,
-} from "../../../helper/helper";
 
 const { confirm } = Modal;
 
@@ -134,6 +131,8 @@ function ManageRevenueLicense() {
           />
         </Modal>
       )}
+      {console.log(updateData)
+      }
     </>
   );
 }
