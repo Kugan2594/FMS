@@ -12,4 +12,24 @@ const addFuelUp = (data: any) => {
     });
 };
 
-export { addFuelUp };
+const getAllFuelUpHistoryById = (vehicleId: string) => {
+    return new Promise((resolve, reject) => {
+        api(
+            "get",
+            "co-web",
+            null,
+            `/fuelUp/${vehicleId}`,
+            "token",
+            "",
+            ""
+        )
+            .then((response: any) => {
+                resolve(response.data);
+            })
+            .catch((error) => {
+                reject(error);
+            });
+    });
+};
+
+export { addFuelUp, getAllFuelUpHistoryById };
