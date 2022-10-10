@@ -4,7 +4,11 @@ import { useState, useEffect } from "react";
 import { Button, Card, Col, DatePicker, Row, Select, Space } from "antd";
 import "./Statistics.style.less";
 import SelectOptions from "./SelectOptions";
-
+import {
+    AiOutlineAreaChart,
+    AiOutlineBarChart,
+    AiOutlineOrderedList,
+} from "react-icons/ai";
 import moment from "moment";
 import { any } from "prop-types";
 import { has } from "immer/dist/internal";
@@ -352,6 +356,15 @@ const Page: React.FC = () => {
         amount: number;
         date: number;
     }
+    let dataArray: any = [];
+    const defltData = data.map((x: any) => {
+        let obj = {
+            amount: x.amount,
+            date: moment(x.date).format("YY/MM/dd"),
+        };
+        dataArray.push(obj);
+    });
+
     const [overAll, setOverAll] = useState(false);
     const [service, setService] = useState(false);
     const [part, setPart] = useState(false);
@@ -364,7 +377,7 @@ const Page: React.FC = () => {
     const [weekly, setWeekly] = useState(false);
     const [startYearEndYear, setStartYearEndYear]: any[] = useState([]);
     const [period, setPeriod]: any[] = useState([]);
-    const [newData, setNewData] = useState<any>(data);
+    const [newData, setNewData] = useState<any>(dataArray);
     const [grandData, setGrandData] = useState<any>();
     const [yearExpense, setYearExpense]: any = useState([]);
     const [yearData, setYearData]: any[] = useState([]);
@@ -385,6 +398,8 @@ const Page: React.FC = () => {
     const [vehicleTypeFilter, setVehicleTypeFilter] = useState(false);
     const [filterArray, setFilterArray] = useState([false, false]);
     const [majorData, setMajorData]: any = useState([]);
+    const [bar, setBar]: any = useState(true);
+    const [staticsType, setStaticsType]: any = useState(true);
     useEffect(() => {
         console.log("vehicleType", vehicleTypeValue);
     }, [
@@ -399,6 +414,7 @@ const Page: React.FC = () => {
         vehicleTypeFilter,
         filterArray,
         lastMonthData,
+        newData,
     ]);
     const onClickPart = () => {
         setOverAll(false);
@@ -486,11 +502,24 @@ const Page: React.FC = () => {
             let dateTo = moment();
             let dateFrom = moment().subtract(30, "d");
             let graphData: any[] = [];
-            vehicleNoFilter
+            vehicleTypeFilter && vehicleNoFilter
+                ? (graphData = data.filter(
+                      (x) =>
+                          moment(x.date).isBetween(dateFrom, dateTo) &&
+                          x.vehicleNumber === vehicleNumberValue &&
+                          x.vehicleTypeId === vehicleTypeValue
+                  ))
+                : vehicleNoFilter
                 ? (graphData = data.filter(
                       (x) =>
                           moment(x.date).isBetween(dateFrom, dateTo) &&
                           x.vehicleNumber === vehicleNumberValue
+                  ))
+                : vehicleTypeFilter
+                ? (graphData = data.filter(
+                      (x) =>
+                          moment(x.date).isBetween(dateFrom, dateTo) &&
+                          x.vehicleTypeId === vehicleTypeValue
                   ))
                 : (graphData = data.filter((x) =>
                       moment(x.date).isBetween(dateFrom, dateTo)
@@ -506,7 +535,7 @@ const Page: React.FC = () => {
                 console.log("dataObj", dataObj);
                 let lastMonthDetail = lastMonthData;
                 lastMonthDetail.push(dataObj);
-                setLastMonthData(lastMonthDetail);
+                setNewData(lastMonthDetail);
                 console.log("lastmonthdata", lastMonthData);
                 setMajorData(lastMonthDetail);
                 console.log("majorData", "  ", majorData);
@@ -519,12 +548,26 @@ const Page: React.FC = () => {
             setWeekly(true);
             let dateTo = moment();
             let dateFrom = moment().subtract(7, "d");
+
             let graphData: any[] = [];
-            vehicleNoFilter
+            vehicleTypeFilter && vehicleNoFilter
+                ? (graphData = data.filter(
+                      (x) =>
+                          moment(x.date).isBetween(dateFrom, dateTo) &&
+                          x.vehicleTypeId === vehicleTypeValue &&
+                          x.vehicleNumber === vehicleNumberValue
+                  ))
+                : vehicleNoFilter
                 ? (graphData = data.filter(
                       (x) =>
                           moment(x.date).isBetween(dateFrom, dateTo) &&
                           x.vehicleNumber === vehicleNumberValue
+                  ))
+                : vehicleTypeFilter
+                ? (graphData = data.filter(
+                      (x) =>
+                          moment(x.date).isBetween(dateFrom, dateTo) &&
+                          x.vehicleTypeId === vehicleTypeValue
                   ))
                 : (graphData = data.filter((x) =>
                       moment(x.date).isBetween(dateFrom, dateTo)
@@ -557,6 +600,24 @@ const Page: React.FC = () => {
                           moment(value[0]),
                           moment(value[1])
                       ) && x.vehicleNumber === vehicleNumberValue
+              ))
+            : vehicleTypeFilter
+            ? (graphData = data.filter(
+                  (x) =>
+                      moment(x.date).isBetween(
+                          moment(value[0]),
+                          moment(value[1])
+                      ) && x.vehicleTypeId === vehicleTypeValue
+              ))
+            : vehicleNoFilter && vehicleTypeFilter
+            ? (graphData = data.filter(
+                  (x) =>
+                      moment(x.date).isBetween(
+                          moment(value[0]),
+                          moment(value[1])
+                      ) &&
+                      x.vehicleTypeId === vehicleTypeValue &&
+                      x.vehicleTypeId === vehicleTypeValue
               ))
             : (graphData = data.filter((x) =>
                   moment(x.date).isBetween(moment(value[0]), moment(value[1]))
@@ -592,6 +653,7 @@ const Page: React.FC = () => {
             console.log("dataObj,", dataObj);
             let monthlyDetail = monthlyData;
             monthlyDetail.push(dataObj);
+            setNewData(monthlyData);
             setMonthlyData(monthlyDetail);
             console.log("MonthlyData", monthlyData);
         }
@@ -623,13 +685,13 @@ const Page: React.FC = () => {
                           x.vehicleTypeId === vehicleTypeValue &&
                           x.vehicleNumber === vehicleNumberValue
                   ))
-                : vehicleNumberValue
+                : vehicleNoFilter
                 ? (yearInfo = data.filter(
                       (x) =>
                           moment(x.date).year() === i &&
                           x.vehicleNumber === vehicleNumberValue
                   ))
-                : vehicleTypeValue
+                : vehicleTypeFilter
                 ? (yearInfo = data.filter(
                       (x) =>
                           moment(x.date).year() === i &&
@@ -661,6 +723,7 @@ const Page: React.FC = () => {
             let yearDetail = yearData;
             yearDetail.push(dataObj);
             setYearData(yearDetail);
+            setNewData(yearDetail);
             setMajorData(yearDetail);
             console.log("majorData", majorData);
             console.log("yearData", yearData);
@@ -670,9 +733,36 @@ const Page: React.FC = () => {
         }
     };
     const handleCustomChange = (value: any) => {
-        let graphData: any[] = data.filter((x) =>
-            moment(x.date).isBetween(moment(value[0]), moment(value[1]))
-        );
+        let graphData;
+        vehicleNoFilter && vehicleTypeFilter
+            ? (graphData = data.filter(
+                  (x) =>
+                      moment(x.date).isBetween(
+                          moment(value[0]),
+                          moment(value[1])
+                      ) &&
+                      x.vehicleNumber === vehicleNumberValue &&
+                      x.vehicleTypeId === vehicleTypeValue
+              ))
+            : vehicleNoFilter
+            ? (graphData = data.filter(
+                  (x) =>
+                      moment(x.date).isBetween(
+                          moment(value[0]),
+                          moment(value[1])
+                      ) && x.vehicleNumber === vehicleNumberValue
+              ))
+            : vehicleTypeFilter
+            ? (graphData = data.filter(
+                  (x) =>
+                      moment(x.date).isBetween(
+                          moment(value[0]),
+                          moment(value[1])
+                      ) && x.vehicleTypeId === vehicleTypeValue
+              ))
+            : (graphData = data.filter((x) =>
+                  moment(x.date).isBetween(moment(value[0]), moment(value[1]))
+              ));
         console.log(graphData);
         setNewData(graphData);
         graphData.map((x) => {
@@ -683,29 +773,68 @@ const Page: React.FC = () => {
             console.log("dataObj,", dataObj);
             let customDetail = customData;
             customDetail.push(dataObj);
+            setNewData(customDetail);
             setCustomData(customDetail);
             console.log("custom Data", customData);
         });
     };
     const handleVehicleType = (value: any) => {
-        data.filter((x) => x.vehicleTypeId === value);
+        setVehicleTypeFilter(true);
+        setVehicleTypeValue(value);
+        console.log("newData", newData);
+        let dateTo = moment();
+        let dateFrom = moment().subtract(7, "d");
+        let graphData;
+        weekly && vehicleNoFilter
+            ? (graphData = data.filter((x: any) => x.vehicleTypeId === value))
+            : weekly
+            ? (graphData = data.filter((x: any) => x.vehicleTypeId === value))
+            : vehicleNoFilter
+            ? (graphData = data.filter(
+                  (x: any) =>
+                      x.vehicleTypeId === value &&
+                      x.VehicleNUmber === vehicleNumberValue
+              ))
+            : (graphData = data.filter((x: any) => x.vehicleTypeId === value));
+        let array: any = [];
+        let y = graphData.map((x) => {
+            let dataObj = {
+                amount: x.amount,
+                date: moment(x.date).format("YYYY/MM/DD"),
+            };
+            array.push(dataObj);
+        });
+
+        console.log("y", y);
+        console.log("graphArray", array);
+        setNewData(array);
+        console.log("graphDATA", newData);
     };
-    const handleChangeChart = (value: any) => {
-        value === "Graph" ? setGraph(true) : setGraph(false);
+    const handleChangeChart = () => {
+        // value === "Graph" ? setGraph(true) : setGraph(false);
+        setBar(!bar);
+        setGraph(!graph);
     };
     const onChange = (value: string) => {
         setVehicleNumberValue(value);
         setVehicleNoFilter(true);
-        console.log("vehicleNo", value);
+        let graphData;
+        vehicleTypeFilter
+            ? (graphData = data.filter(
+                  (x) =>
+                      x.vehicleTypeId === vehicleTypeValue &&
+                      x.vehicleNumber === vehicleNumberValue
+              ))
+            : (graphData = data.filter((x) => x.vehicleNumber === value));
+        setNewData(graphData);
+        console.log(newData);
     };
 
     const onSearch = (value: string) => {
         console.log("search:", value);
     };
-    const handleApply = () => {
-        let filter = [vehicleTypeFilter, vehicleNoFilter];
-        setFilterArray(filter);
-        console.log("filterArray", filterArray);
+    const handleStaticType = () => {
+        setStaticsType(!staticsType);
     };
 
     const config = {
@@ -720,7 +849,7 @@ const Page: React.FC = () => {
         //     : monthly
         //     ? monthlyData
         //     : data,
-        data: data,
+        data: newData,
         xField: "date",
         yField: "amount",
         key: "id",
@@ -729,25 +858,26 @@ const Page: React.FC = () => {
                 autoRotate: true,
             },
         },
-        slider: {
-            start: 0,
-            end: 1,
-        },
+        // slider: {
+        //     start: 0,
+        //     end: 1,
+        // },
     };
     const configLine = {
-        data: anually
-            ? yearData
-            : weekly
-            ? weekData
-            : lastMonth
-            ? lastMonthData
-            : custom
-            ? customData
-            : monthly
-            ? monthlyData
-            : weekData,
+        // data: anually
+        //     ? yearData
+        //     : weekly
+        //     ? newData
+        //     : lastMonth
+        //     ? lastMonthData
+        //     : custom
+        //     ? customData
+        //     : monthly
+        //     ? monthlyData
+        data: newData,
         xField: "date",
         yField: "amount",
+
         label: {},
         point: {
             size: 5,
@@ -777,19 +907,13 @@ const Page: React.FC = () => {
         ],
     };
     return (
-        <Card
-            style={{
-                width: "50%",
-                height: "30%",
-                borderRadius: "10px",
-            }}
-        >
-            <div className="filter-container" style={{ height: "40px" }}>
-                <Row justify="start">
-                    <Col xs={24} xl={6}>
+        <Card style={{ width: "100%" }}>
+            <div className="filter-container" style={{ height: "10%" }}>
+                <Row justify="end" align="middle">
+                    <Col xs={24} xl={8}>
                         <Select
                             // defaultValue="All Types"
-                            style={{ width: 120 }}
+                            style={{ width: "70%" }}
                             onChange={handleVehicleType}
                         >
                             {" "}
@@ -798,7 +922,7 @@ const Page: React.FC = () => {
                             <Option value="Train">Train</Option>
                         </Select>
                     </Col>
-                    <Col xs={24} xl={6}>
+                    <Col xs={24} xl={13}>
                         <Select
                             showSearch
                             placeholder="VehicleNUmber"
@@ -810,122 +934,124 @@ const Page: React.FC = () => {
                                     .toLowerCase()
                                     .includes(input.toLowerCase())
                             }
+                            style={{ width: "90%" }}
                         >
-                            {data.map((x: any) => {
-                                return (
-                                    <Option value={x.vehicleNumber}>
-                                        {x.vehicleNumber}
-                                    </Option>
-                                );
-                            })}
+                            {vehicleTypeFilter
+                                ? data
+                                      .filter(
+                                          (x: any) =>
+                                              x.vehicleTypeId ===
+                                              vehicleTypeValue
+                                      )
+                                      .map((x: any) => {
+                                          return (
+                                              <Option value={x.vehicleNumber}>
+                                                  {x.vehicleNumber}
+                                              </Option>
+                                          );
+                                      })
+                                : data.map((x: any) => {
+                                      return (
+                                          <Option value={x.vehicleNumber}>
+                                              {x.vehicleNumber}
+                                          </Option>
+                                      );
+                                  })}
                         </Select>
                     </Col>
-                    <Col xs={24} xl={4}></Col>
-                    <Col xs={24} xl={8}>
+
+                    <Col xs={24} xl={3}>
                         <div className="toggle">
-                            <Select
-                                defaultValue="Bar"
-                                style={{ width: 120 }}
-                                onChange={handleChangeChart}
-                            >
-                                <Option value="Graph">Graph</Option>
-                                <Option value="Bar">Bar</Option>
-                                <Option value="Pie" disabled>
-                                    Pie
-                                </Option>
-                            </Select>
+                            <Space className="toggle-space">
+                                {bar ? (
+                                    <AiOutlineBarChart
+                                        size={25}
+                                        onClick={handleChangeChart}
+                                    />
+                                ) : (
+                                    <AiOutlineAreaChart
+                                        size={25}
+                                        onClick={handleChangeChart}
+                                    />
+                                )}
+                            </Space>
                         </div>
                     </Col>
                 </Row>
             </div>
-            <Row>
-                <Col span={24}>
-                    <div
-                        className="calender"
-                        style={{ marginTop: "10px", height: "60px" }}
+            <div className="filter-container" style={{ height: "10%" }}>
+                <Row justify="space-around" style={{}}>
+                    <Col
+                        xs={24}
+                        xl={6}
+                        style={{
+                            width: "100%",
+                        }}
                     >
-                        <div className="new-container">
-                            <Row justify="space-between">
-                                <Col xs={24} xl={6}>
-                                    <Select
-                                        // defaultValue="Bar"
-                                        style={{ width: 120 }}
-                                        onChange={handleDateRange}
-                                    >
-                                        <Option value="Last 7 Days">
-                                            Last 7 Days
-                                        </Option>
-                                        <Option value="Last Month">
-                                            Last Month
-                                        </Option>
-                                        <Option value="Monthly">Monthly</Option>
-                                        <Option value="Annually">
-                                            Annually
-                                        </Option>
-                                        <Option value="Custom">Custom</Option>
-                                    </Select>
-                                </Col>
-                                <Col xs={24} xl={14}>
-                                    {custom ? (
-                                        <RangePicker
-                                            onChange={handleCustomChange}
-                                        />
-                                    ) : (
-                                        ""
-                                    )}
-                                    {anually ? (
-                                        <RangePicker
-                                            onChange={handleYearChange}
-                                            defaultValue={[
-                                                moment("2015", yearFormat),
-                                                moment("2016", yearFormat),
-                                            ]}
-                                            format={yearFormat}
-                                            picker="year"
-                                        />
-                                    ) : (
-                                        ""
-                                    )}
-                                    {monthly ? (
-                                        <RangePicker
-                                            onChange={handleMonthChange}
-                                            defaultValue={[
-                                                moment("2015/01", monthFormat),
-                                                moment("2015/02", monthFormat),
-                                            ]}
-                                            format={monthFormat}
-                                            picker="month"
-                                        />
-                                    ) : (
-                                        ""
-                                    )}
-                                </Col>
-                                <Col xs={24} xl={4}>
-                                    <Button
-                                        onClick={handleApply}
-                                        type="primary"
-                                    >
-                                        Appy
-                                    </Button>
-                                </Col>
-                            </Row>
-                        </div>
-                    </div>
-                </Col>
-            </Row>
-            <Row gutter={16}>
-                <Col xs={24} xl={18}>
-                    {graph ? <Line {...configLine} /> : <Column {...config} />}
-                </Col>
-                <Col xs={24} xl={6}>
-                    <SelectOptions
-                        onClickOverall={onClickOverall}
-                        onClickDocs={onClickDocs}
-                        onClickFuel={onClickFuel}
-                        onClickOthers={onClickOthers}
-                        onClickPart={onClickPart}
-                        onClickService={onClickService}
-                    />
+                        <Select
+                            // defaultValue="Bar"
+                            style={{
+                                width: "100%",
+                            }}
+                            onChange={handleDateRange}
+                        >
+                            <Option value="Last 7 Days">Last 7 Days</Option>
+                            <Option value="Last Month">Last Month</Option>
+                            <Option value="Monthly">Monthly</Option>
+                            <Option value="Annually">Annually</Option>
+                            <Option value="Custom">Custom</Option>
+                        </Select>
+                    </Col>
+                    <Col xs={24} xl={2}></Col>
+                    <Col xs={24} xl={14} style={{}}>
+                        {custom ? (
+                            <RangePicker onChange={handleCustomChange} />
+                        ) : (
+                            ""
+                        )}
+                        {anually ? (
+                            <RangePicker
+                                onChange={handleYearChange}
+                                defaultValue={[
+                                    moment("2015", yearFormat),
+                                    moment("2016", yearFormat),
+                                ]}
+                                format={yearFormat}
+                                picker="year"
+                            />
+                        ) : (
+                            ""
+                        )}
+                        {monthly ? (
+                            <RangePicker
+                                onChange={handleMonthChange}
+                                defaultValue={[
+                                    moment("2015/01", monthFormat),
+                                    moment("2015/02", monthFormat),
+                                ]}
+                                format={monthFormat}
+                                picker="month"
+                            />
+                        ) : (
+                            ""
+                        )}
+                    </Col>
+                </Row>
+            </div>
+            <div className="filter-container" style={{ height: "10%" }}>
+                <Row>
+                    <Col>
+                        <SelectOptions />
+                    </Col>
+                </Row>
+            </div>
+            <Row>
+                <Col xs={24} xl={24}>
+                    {graph ? (
+                        <Line {...configLine} width={300} height={200} />
+                    ) : (
+                        <Column {...config} width={300} height={200} />
+                    )}
                 </Col>
             </Row>
         </Card>

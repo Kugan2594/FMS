@@ -49,30 +49,4 @@ const updateInsurance = (data: object) => {
   });
 };
 
-const getInsuranceByCompanyId = (companyId: number) => {
-  return new Promise((resolve, reject) => {
-    api(
-      "get",
-      "co-web",
-      null,
-      `/companyInsurance/${companyId}`,
-      "token",
-      "",
-      ""
-    )
-      .then((response: any) => {
-        resolve(response.data);
-      })
-      .catch((error) => {
-        reject(error);
-      });
-  });
-};
-
-export {
-  addInsurance,
-  getInsuranceByUserId,
-  deleteInsurance,
-  updateInsurance,
-  getInsuranceByCompanyId,
-};
+export { addInsurance, getInsuranceByUserId, deleteInsurance, updateInsurance };
