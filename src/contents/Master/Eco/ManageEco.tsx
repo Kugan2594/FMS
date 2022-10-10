@@ -6,7 +6,6 @@ import MasterTemplateWithLargeCard from "../../../templates/MasterTemplateWithLa
 import { createDeflateRaw } from "zlib";
 import {
   deleteEmissionTest,
-  getAllEmissionTestDocumentByCompanyId,
   getAllEmissionTestDocumentByUserId,
 } from "./ServicesEco";
 import { getUserDetails } from "../../Login/LoginAuthentication";
@@ -63,7 +62,7 @@ function ManageEco() {
   const getAllEmissionTestData = (userId: number) => {
     let data: any = [];
 
-    getAllEmissionTestDocumentByCompanyId(userId).then(
+    getAllEmissionTestDocumentByUserId(userId).then(
       (res: any) => {
         data = createData(res.results.emissionTest);
         setEco(data);
@@ -95,7 +94,7 @@ function ManageEco() {
   };
 
   const reloadTable = (res: any) => {
-    getAllEmissionTestData(getUserDetails().company_id);
+    getAllEmissionTestData(getUserDetails().user_id);
   };
 
   return (
