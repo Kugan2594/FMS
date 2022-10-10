@@ -1,12 +1,26 @@
 import { Button, Col, Form, Image, Input, InputNumber, Modal, Row } from "antd";
 import "antd/dist/antd.css";
+import { getUserDetails } from "../../../contents/Login/LoginAuthentication";
 import moment from "moment";
-import React, { useState } from "react";
-import { addFuelUp } from "./ServiceFuelUp";
+import React, { useState, useEffect } from "react";
+import { addFuelUp, getAllFuelUpHistoryById } from "./ServiceFuelUp";
+import { errHandler, fuelUpAddSuccess } from "../../../helper/helper";
 
 function ManageFuelUp() {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [editOpen, seteditOpen] = useState(false);
+    const [fuelUpData, setfuelUpData] = useState<any>([]);
+
+    const createData = (data: any) => {
+        let convertData = data.map((post: any) => {
+            return {
+                id: post.id,
+                filledAmount: post.filledAmount,
+                filledDate: moment(post.filledDate).format("DD MMM YYYY"),
+            };
+        });
+        return convertData;
+    };
 
     const showModal = () => {
         setIsModalOpen(true);
@@ -24,25 +38,42 @@ function ManageFuelUp() {
         seteditOpen(!editOpen);
     };
 
+    const getFuelUpData = (vehicleId: string) => {
+        getAllFuelUpHistoryById(vehicleId).then((res: any) => {
+            let data: [] = createData(res.results.fuelup);
+            setfuelUpData(data);
+        });
+    };
+
     const onFinish = (values: any) => {
         let filledDate: any = moment(Date()).format("YYYY-MM-DD");
         let data: object = {
             filledAmount: values.filledAmount,
             filledDate: filledDate,
-            userId: 5,
+            userId: getUserDetails().user_id,
             vehicleNumber: "BAT-9470",
         };
         addFuelUp(data)
-            .then((res) => {})
-            .catch((err) => {});
+            .then((res) => {
+                fuelUpAddSuccess();
+                getFuelUpData("BAT-9470");
+            })
+            .catch((err) => {
+                errHandler(err);
+            });
     };
 
     const onFinishFailed = () => {};
 
+    useEffect(() => {
+        getFuelUpData("BAT-9470");
+    }, []);
+
     return (
         <>
-            <Button title="Fuel Up" type="primary" onClick={showModal} />
-
+            <Button type="primary" onClick={showModal}>
+                Fuel Up
+            </Button>
             <Modal
                 open={isModalOpen}
                 onOk={handleOk}
@@ -63,7 +94,10 @@ function ManageFuelUp() {
                             <Row>
                                 <Col span={6}>
                                     <div style={{ fontSize: "12px" }}>
-                                        15 Jun 2022
+                                        {
+                                            fuelUpData[fuelUpData.length - 1]
+                                                .filledDate
+                                        }
                                     </div>
                                 </Col>
                                 <Col span={10}>
@@ -74,7 +108,11 @@ function ManageFuelUp() {
                                             textAlign: "right",
                                         }}
                                     >
-                                        3000 Rs
+                                        {
+                                            fuelUpData[fuelUpData.length - 1]
+                                                .filledAmount
+                                        }{" "}
+                                        Rs
                                     </div>
                                 </Col>
                                 <Col span={8}>
@@ -90,31 +128,35 @@ function ManageFuelUp() {
                                 {" "}
                                 Last Month
                             </h5>
-                            <Row>
-                                <Col span={6}>
-                                    <div style={{ fontSize: "12px" }}>
-                                        15 Jun 2022
-                                    </div>
-                                </Col>
-                                <Col span={10}>
-                                    <div
-                                        style={{
-                                            fontSize: "14px",
-                                            fontWeight: "bold",
-                                            textAlign: "right",
-                                        }}
-                                    >
-                                        3000 Rs
-                                    </div>
-                                </Col>
-                                <Col span={8}>
-                                    <Button
-                                        type="link"
-                                        onClick={handleOpenEdit}
-                                        title=" Edit"
-                                    />
-                                </Col>
-                            </Row>
+                            {fuelUpData.map((post: any) => {
+                                return (
+                                    <Row>
+                                        <Col span={6}>
+                                            <div style={{ fontSize: "12px" }}>
+                                                {post.filledDate}
+                                            </div>
+                                        </Col>
+                                        <Col span={10}>
+                                            <div
+                                                style={{
+                                                    fontSize: "14px",
+                                                    fontWeight: "bold",
+                                                    textAlign: "right",
+                                                }}
+                                            >
+                                                {post.filledAmount} Rs
+                                            </div>
+                                        </Col>
+                                        <Col span={8}>
+                                            <Button
+                                                type="link"
+                                                onClick={handleOpenEdit}
+                                                title=" Edit"
+                                            />
+                                        </Col>
+                                    </Row>
+                                );
+                            })}
                         </Col>
                         <Col span={0.5}>
                             <div
@@ -171,7 +213,12 @@ function ManageFuelUp() {
                                 <Row>
                                     <Col span={12}>
                                         <div style={{ fontSize: "12px" }}>
-                                            Last Refilled: 15 Jun 2022
+                                            Last Refilled:{" "}
+                                            {
+                                                fuelUpData[
+                                                    fuelUpData.length - 1
+                                                ].filledDate
+                                            }
                                         </div>
                                     </Col>
                                     <Col span={7}>
@@ -182,7 +229,12 @@ function ManageFuelUp() {
                                                 textAlign: "right",
                                             }}
                                         >
-                                            3000 Rs
+                                            {
+                                                fuelUpData[
+                                                    fuelUpData.length - 1
+                                                ].filledAmount
+                                            }{" "}
+                                            Rs
                                         </div>
                                     </Col>
                                     <Col span={5}>
@@ -254,7 +306,6 @@ function ManageFuelUp() {
                     </Row>
                 </div>
             </Modal>
-            {console.log(editOpen)}
         </>
     );
 }
