@@ -7,8 +7,12 @@ import CustomButton from "../../../components/atoms/Button/CustomButton";
 import React, { useEffect, useState } from "react";
 import { Input } from "../../../components/atoms/index";
 import "./branchAdmin.style.less";
-import { createBranchAdmin, updateBranchAdminById } from "./ServiceBranchAdmin";
-import { branchAdminAddSuccess, errHandler } from "../../../helper/helper";
+import { createBranchAdmin, updateBranchAdmin } from "./ServiceBranchAdmin";
+import {
+    branchAdminAddSuccess,
+    branchAdminUpdateSuccess,
+    errHandler,
+} from "../../../helper/helper";
 import { getUserDetails } from "../../../contents/Login/LoginAuthentication";
 import {
     nicNoRegex,
@@ -17,6 +21,8 @@ import {
     emailRegex,
 } from "../../../utils/Regex";
 import { getAllBranchByCompanyId } from "../Branch/ServicesBranch";
+
+const { Option } = Select;
 interface IAddBranchAdmin {
     onClickCancel?: React.MouseEventHandler<HTMLElement> | undefined;
     onClickAdd?: React.MouseEventHandler<HTMLElement> | undefined;
@@ -47,13 +53,12 @@ const beforeUpload = (file: RcFile) => {
     }
     return isJpgOrPng && isLt2M;
 };
-const { Option } = Select;
 
 function createData(data: any) {
     let convertData = data.map((post: any, index: any) => {
         return {
-            id: post.id,
-            branchName: post.branchName,
+            value: post.id,
+            label: post.branchName,
         };
     });
     return convertData;
@@ -111,7 +116,8 @@ function AddBranchAdmin(props: any) {
                 email: values.email,
                 userType: "COMPANYBRANCHADMIN",
                 companyId: getUserDetails().company_id,
-                branchId: 1,
+                branchId: values.branchId,
+                subscription: "PREMIUM",
             };
             createBranchAdmin(data)
                 .then((res) => {
@@ -123,6 +129,28 @@ function AddBranchAdmin(props: any) {
                     errHandler(err);
                 });
         } else {
+            let data: object = {
+                branchAdminId: updateData.userId,
+                branchName: values.branchName,
+                firstName: values.firstName,
+                lastName: values.lastName,
+                nic: values.nic,
+                mobileNumber: values.contactNumber,
+                email: updateData.email,
+                userType: "COMPANYBRANCHADMIN",
+                companyId: getUserDetails().company_id,
+                branchId: values.branchId,
+                subscription: "PREMIUM",
+            };
+            updateBranchAdmin(data)
+                .then((res) => {
+                    branchAdminUpdateSuccess();
+                    reloadTable(res);
+                    setAddVisible(false);
+                })
+                .catch((err) => {
+                    errHandler(err);
+                });
         }
     };
 

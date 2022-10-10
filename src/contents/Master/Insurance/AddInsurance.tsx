@@ -80,241 +80,306 @@ function AddInsurance(props: any) {
     );
 
     useEffect(() => {
-        getVehicleSelectData(getUserDetails().user_id);
+        getVehicleSelectData(
+            getUserDetails().user_id,
+            getUserDetails().company_id,
+            getUserDetails().company_branch_id
+        );
     }, []);
 
-    const getVehicleSelectData = (userId: number) => {
-        getAllVehiclesAllocationsForDropDown(userId).then((res: any) => {
-            let data: any = [];
-            res.map((post: any) => {
-                data.push({
-                    value: post.vehicleNumber,
-                    label: `${post.resourceVehicleDto.vehicleModel} ${post.resourceVehicleDto.vehicleBodyTypeResponseDto} ${post.resourceVehicleDto.vehicleTypeName} ${post.resourceVehicleDto.fuelTypeName} ${post.vehicleNumber}`,
+    const getVehicleSelectData = (
+        userId: number,
+        companyId: number,
+        branchId: number
+    ) => {
+        if (getUserDetails().roleName == "COMPANYDRIVER") {
+            getAllVehiclesAllocationsForDropDown(userId).then((res: any) => {
+                let data: any = [];
+                res.map((post: any) => {
+                    data.push({
+                        value: post.vehicleNumber,
+                        label: `${post.resourceVehicleDto.vehicleBrand} ${post.resourceVehicleDto.vehicleModel} ${post.resourceVehicleDto.vehicleBodyTypeResponseDto} ${post.resourceVehicleDto.vehicleTypeName} ${post.resourceVehicleDto.fuelTypeName} ${post.vehicleNumber}`,
+                    });
+                    vehicleNum = post.vehicleNumber;
+                    return null;
                 });
-                vehicleNum = post.vehicleNumber;
-                return null;
+                setVehicle(data);
+                setvehicleNumbers(vehicleNum);
             });
-            setVehicle(data);
-            setvehicleNumbers(vehicleNum);
-        });
-    };
+        } else if (getUserDetails().roleName == "COMPANYADMIN") {
+            getAllVehiclesByCompanyId(companyId).then((res: any) => {
+                let data: any = [];
+                res.results.companyVehicle.map((post: any) => {
+                    data.push({
+                        value: post.vehicleNumber,
+                        label: `${post.resourceVehicleDto.vehicleBrand} ${post.resourceVehicleDto.vehicleModel} ${post.resourceVehicleDto.vehicleBodyTypeResponseDto} ${post.resourceVehicleDto.vehicleTypeName} ${post.resourceVehicleDto.fuelTypeName} ${post.vehicleNumber}`,
+                    });
+                    vehicleNum = post.vehicleNumber;
+                    return null;
+                });
+                setVehicle(data);
+                setvehicleNumbers(vehicleNum);
+            });
+        } else if (getUserDetails().roleName == "COMPANYBRANCHADMIN") {
+            getAllVehiclesByCompanyIdAndBranchId(companyId, branchId).then(
+                (res: any) => {
+                    let data: any = [];
+                    res.results.vehicleByCompanyAndBranch.map((post: any) => {
+                        data.push({
+                            value: post.vehicleNumber,
+                            label: `${post.resourceVehicleDto.vehicleBrand} ${post.resourceVehicleDto.vehicleModel} ${post.resourceVehicleDto.vehicleBodyTypeResponseDto} ${post.resourceVehicleDto.vehicleTypeName} ${post.resourceVehicleDto.fuelTypeName} ${post.vehicleNumber}`,
+                        });
+                        vehicleNum = post.vehicleNumber;
+                        return null;
+                    });
+                    setVehicle(data);
+                    setvehicleNumbers(vehicleNum);
+                }
+            );
+        }
 
-    const onFinishAdd = (values: any) => {
-        const formData = new FormData();
-        let insuranceData = values;
-        const data = {
-            id: 1,
-            insuranceIssuedDate: insuranceData.insuranceIssuedDate,
-            insuranceExpiryDate: insuranceData.insuranceExpiryDate,
-            insuranceType: insuranceData.insuranceType,
-            vehicleNumber: vehicleNumbers,
-            userId: getUserDetails().user_id,
-            policyNumber: insuranceData.policyNumber,
-            policyHolderName: insuranceData.policyHolderName,
-            insuranceProvider: insuranceData.insuranceProvider,
-            insuranceAmount: insuranceData.insuranceAmount,
+        const uploadButton = (
+            <div>
+                {loading ? <LoadingOutlined /> : <PlusOutlined />}
+                <div style={{ marginTop: 8 }}>Upload</div>
+            </div>
+        );
+
+        const getVehicleSelectData = (userId: number) => {
+            getAllVehiclesAllocationsForDropDown(userId).then((res: any) => {
+                let data: any = [];
+                res.map((post: any) => {
+                    data.push({
+                        value: post.vehicleNumber,
+                        label: `${post.resourceVehicleDto.vehicleModel} ${post.resourceVehicleDto.vehicleBodyTypeResponseDto} ${post.resourceVehicleDto.vehicleTypeName} ${post.resourceVehicleDto.fuelTypeName} ${post.vehicleNumber}`,
+                    });
+                    vehicleNum = post.vehicleNumber;
+                    return null;
+                });
+                setVehicle(data);
+                setvehicleNumbers(vehicleNum);
+            });
         };
+        const onFinishAdd = (values: any) => {
+            const formData = new FormData();
+            let insuranceData = values;
+            const data = {
+                id: 1,
+                insuranceIssuedDate: insuranceData.insuranceIssuedDate,
+                insuranceExpiryDate: insuranceData.insuranceExpiryDate,
+                insuranceType: insuranceData.insuranceType,
+                vehicleNumber: vehicleNumbers,
+                userId: getUserDetails().user_id,
+                policyNumber: insuranceData.policyNumber,
+                policyHolderName: insuranceData.policyHolderName,
+                insuranceProvider: insuranceData.insuranceProvider,
+                insuranceAmount: insuranceData.insuranceAmount,
+            };
 
-        fileList.map((post, index) => {
-            formData.append("files", post);
-        });
-
-        formData.append("addInsuranceDetails", JSON.stringify(data));
-
-        addInsurance(formData)
-            .then((res: any) => {
-                insuranceDocumentAddSuccess();
-                setIsModelOpen(false);
-                reloadTable();
-            })
-            .catch((err) => {
-                errHandler(err);
+            fileList.map((post, index) => {
+                formData.append("files", post);
             });
+            const onFinishFailed = () => {};
+
+            return (
+                <>
+                    <Form
+                        id="form"
+                        name="basic"
+                        form={form}
+                        initialValues={props.isEdit ? props.updateData : {}}
+                        onFinish={onFinishAdd}
+                        onFinishFailed={onFinishFailed}
+                    >
+                        <Row>
+                            <Col span={11}>
+                                <Form.Item name="vehicleNo">
+                                    <Select
+                                        placeholder="Vehicle"
+                                        optionFilterProp="children"
+                                        bordered={false}
+                                        style={{
+                                            borderBottom: "1px solid #ccccb3",
+                                        }}
+                                        options={vehicle}
+                                    ></Select>
+                                </Form.Item>
+                            </Col>
+                            <Col span={2}> </Col>
+                            <Col span={11}>
+                                <Form.Item
+                                    rules={[
+                                        {
+                                            max: 10,
+                                            message:
+                                                "Sorry you are exceeding the limit!",
+                                        },
+                                        {
+                                            pattern: new RegExp(
+                                                noSplCharAndLetterRegex
+                                            ),
+
+                                            message: "Enter valid amount",
+                                        },
+                                    ]}
+                                    name="insuranceAmount"
+                                >
+                                    <Input
+                                        placeholder="Price"
+                                        bordered={false}
+                                        required
+                                        style={{
+                                            borderBottom: "1px solid #ccccb3",
+                                        }}
+                                    />
+                                </Form.Item>
+                            </Col>
+                            <Col span={2}> </Col>
+                            <Col span={11}>
+                                <Form.Item name="insuranceIssuedDate">
+                                    <DatePicker
+                                        placeholder="Issued Date"
+                                        style={{
+                                            borderBottom: "1px solid #ccccb3",
+                                            borderTop: "0px",
+                                            borderLeft: "0px",
+                                            borderRight: "0px",
+                                            width: "100%",
+                                        }}
+                                    />
+                                </Form.Item>
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col span={11}>
+                                <Form.Item name="insuranceProvider">
+                                    <Input
+                                        placeholder="Provider"
+                                        bordered={false}
+                                        required
+                                        style={{
+                                            borderBottom: "1px solid #ccccb3",
+                                        }}
+                                    />
+                                </Form.Item>
+                            </Col>
+                            <Col span={2}></Col>
+                            <Col span={11}>
+                                <Form.Item name="insuranceExpiryDate">
+                                    <DatePicker
+                                        placeholder="Expire Date"
+                                        style={{
+                                            borderBottom: "1px solid #ccccb3",
+                                            borderTop: "0px",
+                                            borderLeft: "0px",
+                                            borderRight: "0px",
+                                            width: "100%",
+                                        }}
+                                    />
+                                </Form.Item>
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col span={11}>
+                                <Form.Item name="policyNumber">
+                                    <Input
+                                        placeholder="Policy Number"
+                                        bordered={false}
+                                        required
+                                        style={{
+                                            borderBottom: "1px solid #ccccb3",
+                                        }}
+                                    />
+                                </Form.Item>
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col span={11}>
+                                <Form.Item name="policyHolderName">
+                                    <Input
+                                        placeholder="Policy Holder Name"
+                                        bordered={false}
+                                        required
+                                        style={{
+                                            borderBottom: "1px solid #ccccb3",
+                                        }}
+                                    />
+                                </Form.Item>
+                            </Col>
+                            <Col span={2}></Col>
+                            <Col span={11}>
+                                <Upload
+                                    name="avatar"
+                                    listType="picture-card"
+                                    className="avatar-uploader"
+                                    showUploadList={false}
+                                    action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+                                    beforeUpload={beforeUpload}
+                                    onChange={handleChange}
+                                >
+                                    {imageUrl ? (
+                                        <img
+                                            src={imageUrl}
+                                            alt="avatar"
+                                            style={{ width: "100%" }}
+                                        />
+                                    ) : (
+                                        uploadButton
+                                    )}
+                                </Upload>
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col span={11}>
+                                <Form.Item name="insuranceType">
+                                    <Select
+                                        placeholder="Policy Type"
+                                        optionFilterProp="children"
+                                        bordered={false}
+                                        style={{
+                                            borderBottom: "1px solid #ccccb3",
+                                        }}
+                                    >
+                                        <Option value="Third Party">
+                                            Third Party
+                                        </Option>
+                                        <Option value="Fully Insurance">
+                                            Fully Insurance
+                                        </Option>
+                                    </Select>
+                                </Form.Item>
+                                <Form.Item hidden={true} name="id"></Form.Item>
+
+                                <Form.Item
+                                    hidden={true}
+                                    name="userId"
+                                ></Form.Item>
+                            </Col>
+                        </Row>
+                        <Row
+                            justify="end"
+                            className="Actions"
+                            gutter={8}
+                            style={{
+                                marginTop: "3%",
+                            }}
+                        >
+                            <Button
+                                className="form-button"
+                                title="Cancel"
+                                onClick={cancelClickHandler}
+                            />
+                            <Button
+                                className="form-button"
+                                title={isEdit ? "Update" : "Add"}
+                                type="primary"
+                                htmlType="submit"
+                            />
+                        </Row>
+                    </Form>
+                </>
+            );
+        };
     };
-
-    const onFinishFailed = () => {};
-
-    return (
-        <>
-            <Form
-                id="form"
-                name="basic"
-                form={form}
-                initialValues={props.isEdit ? props.updateData : {}}
-                onFinish={onFinishAdd}
-                onFinishFailed={onFinishFailed}
-            >
-                <Row>
-                    <Col span={11}>
-                        <Form.Item name="vehicleNo">
-                            <Select
-                                placeholder="Vehicle"
-                                optionFilterProp="children"
-                                bordered={false}
-                                style={{ borderBottom: "1px solid #ccccb3" }}
-                                options={vehicle}
-                            ></Select>
-                        </Form.Item>
-                    </Col>
-                    <Col span={2}> </Col>
-                    <Col span={11}>
-                        <Form.Item
-                            rules={[
-                                {
-                                    max: 10,
-                                    message:
-                                        "Sorry you are exceeding the limit!",
-                                },
-                                {
-                                    pattern: new RegExp(
-                                        noSplCharAndLetterRegex
-                                    ),
-
-                                    message: "Enter valid amount",
-                                },
-                            ]}
-                            name="insuranceAmount"
-                        >
-                            <Input
-                                placeholder="Price"
-                                bordered={false}
-                                required
-                                style={{ borderBottom: "1px solid #ccccb3" }}
-                            />
-                        </Form.Item>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col span={11}>
-                        <Form.Item name="insuranceProvider">
-                            <Input
-                                placeholder="Provider"
-                                bordered={false}
-                                required
-                                style={{ borderBottom: "1px solid #ccccb3" }}
-                            />
-                        </Form.Item>
-                    </Col>
-                    <Col span={2}> </Col>
-                    <Col span={11}>
-                        <Form.Item name="insuranceIssuedDate">
-                            <DatePicker
-                                placeholder="Issued Date"
-                                style={{
-                                    borderBottom: "1px solid #ccccb3",
-                                    borderTop: "0px",
-                                    borderLeft: "0px",
-                                    borderRight: "0px",
-                                    width: "100%",
-                                }}
-                            />
-                        </Form.Item>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col span={11}>
-                        <Form.Item name="policyNumber">
-                            <Input
-                                placeholder="Policy Number"
-                                bordered={false}
-                                required
-                                style={{ borderBottom: "1px solid #ccccb3" }}
-                            />
-                        </Form.Item>
-                    </Col>
-                    <Col span={2}></Col>
-                    <Col span={11}>
-                        <Form.Item name="insuranceExpiryDate">
-                            <DatePicker
-                                placeholder="Expire Date"
-                                style={{
-                                    borderBottom: "1px solid #ccccb3",
-                                    borderTop: "0px",
-                                    borderLeft: "0px",
-                                    borderRight: "0px",
-                                    width: "100%",
-                                }}
-                            />
-                        </Form.Item>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col span={11}>
-                        <Form.Item name="policyHolderName">
-                            <Input
-                                placeholder="Policy Holder Name"
-                                bordered={false}
-                                required
-                                style={{ borderBottom: "1px solid #ccccb3" }}
-                            />
-                        </Form.Item>
-                    </Col>
-                    <Col span={2}></Col>
-                    <Col span={11}>
-                        <Upload
-                            name="avatar"
-                            listType="picture-card"
-                            className="avatar-uploader"
-                            showUploadList={false}
-                            action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-                            beforeUpload={beforeUpload}
-                            onChange={handleChange}
-                        >
-                            {imageUrl ? (
-                                <img
-                                    src={imageUrl}
-                                    alt="avatar"
-                                    style={{ width: "100%" }}
-                                />
-                            ) : (
-                                uploadButton
-                            )}
-                        </Upload>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col span={11}>
-                        <Form.Item name="insuranceType">
-                            <Select
-                                placeholder="Policy Type"
-                                optionFilterProp="children"
-                                bordered={false}
-                                style={{ borderBottom: "1px solid #ccccb3" }}
-                            >
-                                <Option value="Third Party">Third Party</Option>
-                                <Option value="Fully Insurance">
-                                    Fully Insurance
-                                </Option>
-                            </Select>
-                        </Form.Item>
-                        <Form.Item hidden={true} name="id"></Form.Item>
-
-                        <Form.Item hidden={true} name="userId"></Form.Item>
-                    </Col>
-                </Row>
-                <Row
-                    justify="end"
-                    className="Actions"
-                    gutter={8}
-                    style={{
-                        marginTop: "3%",
-                    }}
-                >
-                    <Button
-                        className="form-button"
-                        title="Cancel"
-                        onClick={cancelClickHandler}
-                    />
-                    <Button
-                        className="form-button"
-                        title={isEdit ? "Update" : "Add"}
-                        type="primary"
-                        htmlType="submit"
-                    />
-                </Row>
-            </Form>
-        </>
-    );
 }
-
 export default AddInsurance;

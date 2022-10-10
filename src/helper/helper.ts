@@ -62,6 +62,8 @@ export const errHandler = (err: any) => {
     // User
     errorBox("100018", "You already Verified");
     errorBox("1000002", "Invalid Token");
+    errorBox("100013", "Invalid Email");
+    errorBox("1000003", "Token Expired");
 };
 
 //success message popups
@@ -161,6 +163,12 @@ export const mileageAddSuccess = () =>
 export const driverAddSuccess = () =>
     notification.success({
         message: "Driver Added Successfully",
+        duration: 3,
+    });
+
+export const driverUpdateSuccess = () =>
+    notification.success({
+        message: "Driver Updated Successfully",
         duration: 3,
     });
 
