@@ -19,6 +19,7 @@ import StaticsHistory from "../contents/Home/Statics/StaticsHistory";
 import Page from "../contents/Home/Statistics/Statistics";
 import DashBoard from "../contents/Home/DashBoard/DashBoard";
 import OverallVehiclesStatus from "../contents/Home/VehiclesCard/OverallVehiclesStatus";
+import ManageCompany from "../contents/Master/Company/ManageCompany";
 
 const Loader = (Component: any) => (props: any) =>
     (
@@ -87,6 +88,10 @@ const PrivateRoute: RouteObject[] = [
     {
         path: "/allBranches",
         element: <DashBoard />,
+    },
+    {
+        path: "/companies",
+        element: <ManageCompany />,
     },
 ];
 
