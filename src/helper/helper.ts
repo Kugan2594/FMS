@@ -52,9 +52,6 @@ export const errHandler = (err: any) => {
   errorBox("401", "Vehicle Service Already Exists");
   errorBox("105", "Vehicle Not Exists");
 
-  // User
-  errorBox("100018", "You already Verified");
-
   // Branch
   errorBox("1001", "Branch is depended");
   errorBox("1000", "Branch Already Exists");
