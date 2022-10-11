@@ -6,6 +6,8 @@ import MasterTemplateWithLargeCard from "../../../templates/MasterTemplateWithLa
 import { createDeflateRaw } from "zlib";
 import {
   deleteEmissionTest,
+  getAllEmissionTestDocumentByCompanyId,
+  getAllEmissionTestDocumentByCompanyIdAndBranchId,
   getAllEmissionTestDocumentByUserId,
 } from "./ServicesEco";
 import { getUserDetails } from "../../Login/LoginAuthentication";
@@ -57,20 +59,52 @@ function ManageEco() {
   };
 
   useEffect(() => {
-    getAllEmissionTestData(getUserDetails().user_id);
-  }, []);
-  const getAllEmissionTestData = (userId: number) => {
-    let data: any = [];
-
-    getAllEmissionTestDocumentByUserId(userId).then(
-      (res: any) => {
-        data = createData(res.results.emissionTest);
-        setEco(data);
-      },
-      (error: any) => {
-        setEco([]);
-      }
+    getAllEmissionTestData(
+      getUserDetails().user_id,
+      getUserDetails().company_id,
+      getUserDetails().company_branch_id
     );
+  }, []);
+  const getAllEmissionTestData = (
+    userId: number,
+    companyId: number,
+    branchId: number
+  ) => {
+    let data: any = [];
+    if (getUserDetails().roleName === "COMPANYDRIVER") {
+      getAllEmissionTestDocumentByUserId(userId).then(
+        (res: any) => {
+          data = createData(res.results.emissionTest);
+          setEco(data);
+        },
+        (error: any) => {
+          setEco([]);
+        }
+      );
+    } else if (getUserDetails().roleName === "COMPANYADMIN") {
+      getAllEmissionTestDocumentByCompanyId(companyId).then(
+        (res: any) => {
+          data = createData(res.results.emissionTest);
+          setEco(data);
+        },
+        (error: any) => {
+          setEco([]);
+        }
+      );
+    } else if (getUserDetails().roleName === "COMPANYBRANCHADMIN") {
+      getAllEmissionTestDocumentByCompanyIdAndBranchId(
+        companyId,
+        branchId
+      ).then(
+        (res: any) => {
+          data = createData(res.results.emissionTest);
+          setEco(data);
+        },
+        (error: any) => {
+          setEco([]);
+        }
+      );
+    }
   };
 
   const deleteClickHandler = (id: any) => {
@@ -94,7 +128,11 @@ function ManageEco() {
   };
 
   const reloadTable = (res: any) => {
-    getAllEmissionTestData(getUserDetails().user_id);
+    getAllEmissionTestData(
+      getUserDetails().user_id,
+      getUserDetails().company_id,
+      getUserDetails().company_branch_id
+    );
   };
 
   return (
