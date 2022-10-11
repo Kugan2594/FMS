@@ -50,6 +50,7 @@ function ManageVehicles() {
                     " " +
                     post.resourceVehicleDto.vehicleBodyTypeResponseDto,
                 vehicleType: post.resourceVehicleDto.vehicleTypeName,
+                bodyType: post.resourceVehicleDto.vehicleBodyTypeResponseDto,
             };
         });
 
@@ -58,7 +59,7 @@ function ManageVehicles() {
 
     const profileOnClickHandler = (data: any) => {
         setIsProfileModalOpen(true);
-        setvehicles(data);
+        setupdateData(data);
     };
 
     const openAdd = () => {
@@ -81,6 +82,7 @@ function ManageVehicles() {
     const handleCancel = () => {
         setAddVisible(false);
         seteditVisible(false);
+        setIsProfileModalOpen(false);
     };
 
     const getAllVehicles = (companyId: number) => {
@@ -254,10 +256,12 @@ function ManageVehicles() {
                     open={isProfileModalOpen}
                     onCancel={handleCancel}
                     closable={false}
-                    width={"75%"}
+                    width={"90%"}
                     footer={false}
                 >
-                    <VehicleProfile />
+                    <VehicleProfile 
+                    profileData={updateData}
+                    />
                 </Modal>
             ) : (
                 <></>

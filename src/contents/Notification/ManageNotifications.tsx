@@ -95,6 +95,10 @@ function ManageNotifications() {
                 ? navigate("/master/drivers")
                 : data.message == "part expired"
                 ? navigate("/master/parts")
+                : data.message == "Alert for Revenue License Expiry "
+                ? navigate("/master/revenueLicense")
+                : data.message == "Alert for Emission Test expire "
+                ? navigate("/master/emissionTest")
                 : navigate("/notification/notification");
         }
     };
