@@ -106,7 +106,7 @@ function AddService(props: any) {
       serviceDate: values.serviceDate,
       expectedLifeTimeInKm: values.expectedLifeTimeInKm,
       expectedLifeTimeInMonth: values.expectedLifeTimeInMonth,
-      userId: values.userId,
+      userId: getUserDetails().user_id,
       companyId: getUserDetails().company_id,
       branchId: getUserDetails().company_branch_id,
     };
@@ -188,7 +188,7 @@ function AddService(props: any) {
                 bordered={false}
                 required
                 style={{ borderBottom: "1px solid #ccccb3" }}
-                maxLength={3}
+                maxLength={4}
               />
             </Form.Item>
             <Form.Item
