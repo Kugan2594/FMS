@@ -89,7 +89,7 @@ function AddRevenueLicense(props: any) {
         companyId: number,
         branchId: number
     ) => {
-        if (getUserDetails().roleName == "COMPANYDRIVER") {
+        if (getUserDetails().roleName === "COMPANYDRIVER") {
             getAllVehiclesAllocationsForDropDown(userId).then((res: any) => {
                 let data: any = [];
                 res.map((post: any) => {
@@ -103,7 +103,7 @@ function AddRevenueLicense(props: any) {
                 setVehicle(data);
                 setvehicleNumbers(vehicleNum);
             });
-        } else if (getUserDetails().roleName == "COMPANYADMIN") {
+        } else if (getUserDetails().roleName === "COMPANYADMIN") {
             getAllVehiclesByCompanyId(companyId).then((res: any) => {
                 let data: any = [];
                 res.results.companyVehicle.map((post: any) => {
@@ -117,7 +117,7 @@ function AddRevenueLicense(props: any) {
                 setVehicle(data);
                 setvehicleNumbers(vehicleNum);
             });
-        } else if (getUserDetails().roleName == "COMPANYBRANCHADMIN") {
+        } else if (getUserDetails().roleName === "COMPANYBRANCHADMIN") {
             getAllVehiclesByCompanyIdAndBranchId(companyId, branchId).then(
                 (res: any) => {
                     let data: any = [];
