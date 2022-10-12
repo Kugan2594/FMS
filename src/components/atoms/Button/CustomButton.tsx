@@ -15,7 +15,7 @@ interface ButtonPropsType {
         | undefined;
     className?: string;
     htmlType?: "submit" | "button" | "reset";
-    size?: 'small' | 'middle' | 'large';
+    size?: "small" | "middle" | "large";
     onChange?: any;
     disabled?: boolean;
 }
