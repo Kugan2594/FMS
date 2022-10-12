@@ -1,15 +1,18 @@
-import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
+import React, { useState, useEffect } from "react";
 import {
     Col,
     DatePicker,
     Form,
-    Input, message, Row,
-    Select, Upload
+    Input,
+    Row,
+    Select,
+    message,
+    Upload,
 } from "antd";
+import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
 import type { UploadChangeParam } from "antd/es/upload";
 import type { RcFile, UploadFile, UploadProps } from "antd/es/upload/interface";
 import moment from "moment";
-import { useEffect, useState } from "react";
 import { Button } from "../../../components/atoms/Button";
 import { getUserDetails } from "../../../contents/Login/LoginAuthentication";
 import {
@@ -92,7 +95,7 @@ function AddRevenueLicense(props: any) {
         companyId: number,
         branchId: number
     ) => {
-        if (getUserDetails().roleName == "COMPANYDRIVER") {
+        if (getUserDetails().roleName === "COMPANYDRIVER") {
             getAllVehiclesAllocationsForDropDown(userId).then((res: any) => {
                 let data: any = [];
                 res.map((post: any) => {
@@ -106,7 +109,7 @@ function AddRevenueLicense(props: any) {
                 setVehicle(data);
                 setvehicleNumbers(vehicleNum);
             });
-        } else if (getUserDetails().roleName == "COMPANYADMIN") {
+        } else if (getUserDetails().roleName === "COMPANYADMIN") {
             getAllVehiclesByCompanyId(companyId).then((res: any) => {
                 let data: any = [];
                 res.results.companyVehicle.map((post: any) => {
@@ -120,7 +123,7 @@ function AddRevenueLicense(props: any) {
                 setVehicle(data);
                 setvehicleNumbers(vehicleNum);
             });
-        } else if (getUserDetails().roleName == "COMPANYBRANCHADMIN") {
+        } else if (getUserDetails().roleName === "COMPANYBRANCHADMIN") {
             getAllVehiclesByCompanyIdAndBranchId(companyId, branchId).then(
                 (res: any) => {
                     let data: any = [];
@@ -213,14 +216,6 @@ function AddRevenueLicense(props: any) {
     };
 
     const onFinishFailed = () => {};
-
-    // form.setFieldsValue(
-    //     updateData && {
-    //         ...updateData,
-    //         issuedDate: moment(updateData.issuedDate, "YYYY-MM-DD"),
-    //         dueDate: moment(updateData.dueDate, "YYYY-MM-DD")
-    //     }
-    // );
 
     return (
         <>

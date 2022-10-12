@@ -15,9 +15,10 @@ import ManageRevenueLicense from "../contents/Master/RevenueLicense/ManageRevenu
 import ManageParts from "../contents/Master/Parts/ManageParts";
 import ManageVehicles from "../contents/Master/Vehicles/ManageVehicles";
 import ManageNotifications from "../contents/Notification/ManageNotifications";
-import Statistics from "../contents/Master/Statistics/Statistics";
-import Page from "../contents/Master/Statistics/Statistics";
 import StaticsHistory from "../contents/Home/Statics/StaticsHistory";
+import Page from "../contents/Home/Statistics/Statistics";
+import DashBoard from "../contents/Home/DashBoard/DashBoard";
+import OverallVehiclesStatus from "../contents/Home/VehiclesCard/OverallVehiclesStatus";
 
 const Loader = (Component: any) => (props: any) =>
     (
@@ -48,7 +49,7 @@ const PrivateRoute: RouteObject[] = [
         element: <ManageMileage />,
     },
     {
-        path: "/generators",
+        path: "/generator",
         element: <ManageGenerator />,
     },
     {
@@ -84,12 +85,8 @@ const PrivateRoute: RouteObject[] = [
         element: <ManageNotifications />,
     },
     {
-        path: "statistics",
-        element: <Page />,
-    },
-    {
         path: "/allBranches",
-        element: <StaticsHistory />,
+        element: <DashBoard />,
     },
 ];
 
