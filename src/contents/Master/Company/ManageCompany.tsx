@@ -31,6 +31,9 @@ function ManageCompany() {
     const deleteClickHandler = (id: any) => {};
     const openEdit = (data: any) => {};
     const handleCancel = () => {};
+    const onClickCreate = () => {
+        setOpen(!open);
+    };
     return (
         <div>
             <MasterTemplateWithSmallCard
@@ -57,12 +60,11 @@ function ManageCompany() {
                 open={open}
                 onCancel={handleCancel}
                 closable={false}
-                width={"70%"}
+                width={"60%"}
                 footer={false}
             >
-                <SignUp />
+                <SignUp onClickCreate={onClickCreate} />
             </Modal>
-            <SignUp />
         </div>
     );
 }

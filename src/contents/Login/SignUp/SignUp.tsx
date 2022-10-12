@@ -14,7 +14,7 @@ import Logo from "../../../assets/Logo.svg";
 import "./signup.style.less";
 import { useState } from "react";
 import { LeftOutlined, RightOutlined } from "@ant-design/icons";
-function SignUp() {
+function SignUp({ onClickCreate }: any) {
     const { Text, Title } = Typography;
     const { Option } = Select;
     const [form2, setForm2] = useState(false);
@@ -48,7 +48,7 @@ function SignUp() {
                                     marginBottom: "1%",
                                 }}
                             >
-                                <Title level={4}> Create Branch</Title>
+                                <Title level={4}> Create Company</Title>
                             </Col>
                         </Row>
 
@@ -147,6 +147,7 @@ function SignUp() {
                                             htmlType="submit"
                                             className="signup-button"
                                             type="primary"
+                                            onClick={onClickCreate}
                                         >
                                             Create
                                         </Button>
