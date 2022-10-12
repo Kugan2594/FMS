@@ -153,6 +153,23 @@ function SignUp({ onClickCreate }: any) {
                                         </Button>
                                     </Form.Item>
                                 </Col>
+                                <Col
+                                    style={{
+                                        marginRight: "4%",
+                                        marginBottom: "5%",
+                                    }}
+                                >
+                                    <Form.Item>
+                                        <Button
+                                            htmlType="submit"
+                                            className="signup-button"
+                                            type="primary"
+                                            onClick={onClickCreate}
+                                        >
+                                            Cancel
+                                        </Button>
+                                    </Form.Item>
+                                </Col>
                                 <Col></Col>
                             </Row>
                         </Form>
