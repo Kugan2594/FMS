@@ -1,40 +1,36 @@
 import { Modal } from "antd";
-import { useState, useEffect } from "react";
-import AddRevenueLicense from "./AddRevenueLicense";
-import MasterTemplateWithLargeCard from "../../../templates/MasterTemplateWithLargeCard";
+import moment from "moment";
+import { useEffect, useState } from "react";
 import {
-    deleteRevenueLicense,
-    getAllRevenueLicenseByUserId,
+  errHandler, revenueLicenseDocumentDeleteSuccess
+} from "../../../helper/helper";
+import MasterTemplateWithLargeCard from "../../../templates/MasterTemplateWithLargeCard";
+import AddRevenueLicense from "./AddRevenueLicense";
+import {
+  deleteRevenueLicense, getAllRevenueLicenseByUserId,
 } from "./ServicesRevenueLicense";
 import { getUserDetails } from "../../Login/LoginAuthentication";
-import moment from "moment";
 import { ExclamationCircleOutlined } from "@ant-design/icons";
-import {
-    errHandler,
-    revenueLicenseDocumentAddSuccess,
-    revenueLicenseDocumentDeleteSuccess,
-} from "../../../helper/helper";
 
 const { confirm } = Modal;
 
 function createData(data: any) {
-    let convertData = data.map((post: any, index: any) => {
-        return {
-            id: post.id,
-            name: "Revenue license",
-            progressData: post.revenueLicenseTestValidity,
-            vehicleNo: post.vehicleResponseDto.vehicleNumber,
-            vehicleModel:
-                post.vehicleResponseDto.resourceVehicleDto.vehicleModel,
-            branchName: "Jaffna Branch",
-            lastChangedDate: moment(post.updatedAt).format("DD-MM-yyyy"),
-            dueDate: moment(post.taxExpiryDate).format("DD-MM-yyyy"),
-            region: post.region,
-            issuedDate: post.taxIssuedDate,
-            taxAmount: post.taxAmount,
-        };
-    });
-    return convertData;
+  let convertData = data.map((post: any, index: any) => {
+    return {
+      id: post.id,
+      name: "Revenue license",
+      progressData: post.revenueLicenseTestValidity,
+      vehicleNo: post.vehicleResponseDto.vehicleNumber,
+      vehicleModel: post.vehicleResponseDto.resourceVehicleDto.vehicleModel,
+      branchName: "Jaffna Branch",
+      lastChangedDate: moment(post.updatedAt).format("YYYY-MM-DD"),
+      dueDate: moment(post.taxExpiryDate).format("YYYY-MM-DD"),
+      region: post.region,
+      issuedDate:moment(post.taxIssuedDate).format("YYYY-MM-DD"),
+      taxAmount:post.taxAmount,
+    };
+  });
+  return convertData;
 }
 
 function ManageRevenueLicense() {

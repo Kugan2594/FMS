@@ -256,7 +256,13 @@ export const insuranceDocumentDeleteSuccess = () =>
     });
 
 export const ecoDocumentDeleteSuccess = () =>
-    notification.success({
-        message: "Emission Test Document Deleted Successfully",
-        duration: 3,
-    });
+  notification.success({
+    message: "Emission Test Document Deleted Successfully",
+    duration: 3,
+  });
+
+  export const revenueLicenseDocumentUpdateSuccess = () =>
+  notification.success({
+    message: "Revenue License Document Updated Successfully",
+    duration: 3,
+  });
