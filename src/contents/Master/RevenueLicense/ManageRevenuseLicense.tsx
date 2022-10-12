@@ -1,7 +1,12 @@
 import { Modal } from "antd";
-import { useState, useEffect } from "react";
-import AddRevenueLicense from "./AddRevenueLicense";
+import moment from "moment";
+import { useEffect, useState } from "react";
+import {
+  errHandler,
+  revenueLicenseDocumentDeleteSuccess,
+} from "../../../helper/helper";
 import MasterTemplateWithLargeCard from "../../../templates/MasterTemplateWithLargeCard";
+import AddRevenueLicense from "./AddRevenueLicense";
 import {
   deleteRevenueLicense,
   getAllRevenueLicenseByCompanyId,
@@ -9,13 +14,7 @@ import {
   getAllRevenueLicenseByUserId,
 } from "./ServicesRevenueLicense";
 import { getUserDetails } from "../../Login/LoginAuthentication";
-import moment from "moment";
 import { ExclamationCircleOutlined } from "@ant-design/icons";
-import {
-  errHandler,
-  revenueLicenseDocumentAddSuccess,
-  revenueLicenseDocumentDeleteSuccess,
-} from "../../../helper/helper";
 
 const { confirm } = Modal;
 
@@ -28,10 +27,10 @@ function createData(data: any) {
       vehicleNo: post.vehicleResponseDto.vehicleNumber,
       vehicleModel: post.vehicleResponseDto.resourceVehicleDto.vehicleModel,
       branchName: "Jaffna Branch",
-      lastChangedDate: moment(post.updatedAt).format("DD-MM-yyyy"),
-      dueDate: moment(post.taxExpiryDate).format("DD-MM-yyyy"),
+      lastChangedDate: moment(post.updatedAt).format("YYYY-MM-DD"),
+      dueDate: moment(post.taxExpiryDate).format("YYYY-MM-DD"),
       region: post.region,
-      issuedDate: post.taxIssuedDate,
+      issuedDate: moment(post.taxIssuedDate).format("YYYY-MM-DD"),
       taxAmount: post.taxAmount,
     };
   });
