@@ -10,6 +10,11 @@ import {
 } from "./ServiceDriver";
 import { getUserDetails } from "../../../contents/Login/LoginAuthentication";
 import { assignedVehicleSuccess } from "../../../helper/helper";
+import { getAllVehiclesAllocationsForDropDown } from "../RevenueLicense/ServicesRevenueLicense";
+import {
+  getAllVehiclesByCompanyId,
+  getAllVehiclesByCompanyIdAndBranchId,
+} from "../Vehicles/ServiceVehicle";
 
 const { Title, Text } = Typography;
 const { Option } = Select;
@@ -26,6 +31,7 @@ function AssignVehicle({ driverData, cancelClickHandler }: DriverDataType) {
   const [isAdd, setIsAdd] = useState(false);
   useEffect(() => {
     getVehicleSelectData(
+      getUserDetails().user_id,
       getUserDetails().company_id,
       getUserDetails().company_branch_id
     );
@@ -43,42 +49,70 @@ function AssignVehicle({ driverData, cancelClickHandler }: DriverDataType) {
         userId: driverData.userId,
         vehicleNumber: assignedVehicle,
       };
-      addVehicleAllocationByDriverId(data).then((res) => {
-        assignedVehicleSuccess();
-        cancelClickHandler();
-      }).catch((err) => {
-
-      });
+      addVehicleAllocationByDriverId(data)
+        .then((res) => {
+          assignedVehicleSuccess();
+          cancelClickHandler();
+        })
+        .catch((err) => {});
     } else {
-    let data: object = {
-      id: 1,
-      userId: driverData.userId,
-      vehicleNumber: assignedVehicle,
-    };
-    updateVehicleAllocationByDriverId(data).then((res) => {
-      assignedVehicleSuccess();
-      cancelClickHandler();
-    }).catch((err) => {
-
-    });
-  }
-};
+      let data: object = {
+        id: 1,
+        userId: driverData.userId,
+        vehicleNumber: assignedVehicle,
+      };
+      updateVehicleAllocationByDriverId(data)
+        .then((res) => {
+          assignedVehicleSuccess();
+          cancelClickHandler();
+        })
+        .catch((err) => {});
+    }
+  };
 
   const onFinishFailed = () => {};
 
-  const getVehicleSelectData = (companyId: number, branchId: number) => {
-    getAllVehicleByCompanyIdAndBranchId(companyId, branchId).then(
-      (res: any) => {
+  const getVehicleSelectData = (
+    userId: number,
+    companyId: number,
+    branchId: number
+  ) => {
+    if (getUserDetails().roleName === "COMPANYDRIVER") {
+      getAllVehiclesAllocationsForDropDown(userId).then((res: any) => {
         let data: any = [];
-        res.results.vehicleByCompanyAndBranch.map((post: any) => {
+        res.map((post: any) => {
           data.push({
             value: post.vehicleNumber,
             label: `${post.vehicleNumber}`,
           });
         });
         setVehicle(data);
-      }
-    );
+      });
+    } else if (getUserDetails().roleName === "COMPANYADMIN") {
+      getAllVehiclesByCompanyId(companyId).then((res: any) => {
+        let data: any = [];
+        res.results.companyVehicle.map((post: any) => {
+          data.push({
+            value: post.vehicleNumber,
+            label: `${post.vehicleNumber}`,
+          });
+        });
+        setVehicle(data);
+      });
+    } else if (getUserDetails().roleName === "COMPANYBRANCHADMIN") {
+      getAllVehiclesByCompanyIdAndBranchId(companyId, branchId).then(
+        (res: any) => {
+          let data: any = [];
+          res.results.vehicleByCompanyAndBranch.map((post: any) => {
+            data.push({
+              value: post.vehicleNumber,
+              label: `${post.vehicleNumber}`,
+            });
+          });
+          setVehicle(data);
+        }
+      );
+    }
   };
 
   const getAllocatedVehicleData = (userId: number) => {
@@ -136,7 +170,7 @@ function AssignVehicle({ driverData, cancelClickHandler }: DriverDataType) {
                 <Text>Driving License Type: </Text>
                 <br />
                 <Text className="assignVehicle-data" strong>
-                  {driverData.drivingLicenseTypeId}
+                  {driverData.drivingLicenseType}
                 </Text>
               </div>
             </Col>
@@ -145,7 +179,7 @@ function AssignVehicle({ driverData, cancelClickHandler }: DriverDataType) {
                 <Text>Branch: </Text>
                 <br />
                 <Text className="assignVehicle-data" strong>
-                  {driverData.branchId}
+                  {driverData.branchName}
                 </Text>
               </div>
             </Col>

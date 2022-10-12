@@ -109,6 +109,26 @@ const getAllVehicleServicesByCompanyId = (companyId: Number) => {
   });
 };
 
+const getAllVehicleServicesByUserId = (userId: Number) => {
+  return new Promise((resolve, reject) => {
+    api(
+      "get",
+      "co-web",
+      null,
+      `/driverVehicleService/${userId}`,
+      "token",
+      "",
+      ""
+    )
+      .then((response: any) => {
+        resolve(response.data);
+      })
+      .catch((error: any) => {
+        reject(error);
+      });
+  });
+};
+
 export {
   getAllVehiclesAllocationsForDropDown,
   getAllServices,
@@ -117,4 +137,5 @@ export {
   getAllVehicleServicesByCompanyIdAndBranchId,
   deleteVehicleService,
   getAllVehicleServicesByCompanyId,
+  getAllVehicleServicesByUserId,
 };

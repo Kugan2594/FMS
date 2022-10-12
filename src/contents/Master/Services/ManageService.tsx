@@ -6,6 +6,7 @@ import {
   deleteVehicleService,
   getAllVehicleServicesByCompanyIdAndBranchId,
   getAllVehicleServicesByCompanyId,
+  getAllVehicleServicesByUserId,
 } from "./ServicesService";
 import moment from "moment";
 import {
@@ -53,15 +54,37 @@ function ManageService() {
     setIsModalOpen(false);
   };
 
-  const getAllVehicleServiceData = (companyId: Number, branchId: Number) => {
+  const getAllVehicleServiceData = (
+    companyId: Number,
+    branchId: Number,
+    userId: number
+  ) => {
     let data: any = [];
-    getAllVehicleServicesByCompanyIdAndBranchId(companyId, branchId).then(
-      (res: any) => {
-        data = createData(res.results.companyVehicleService);
-        setServices(data);
-      },
-      (error: any) => {}
-    );
+    if (getUserDetails().roleName === "COMPANYBRANCHADMIN") {
+      getAllVehicleServicesByCompanyIdAndBranchId(companyId, branchId).then(
+        (res: any) => {
+          data = createData(res.results.companyVehicleService);
+          setServices(data);
+        },
+        (error: any) => {}
+      );
+    } else if (getUserDetails().roleName === "COMPANYADMIN") {
+      getAllVehicleServicesByCompanyId(companyId).then(
+        (res: any) => {
+          data = createData(res.results.companyVehicleService);
+          setServices(data);
+        },
+        (error: any) => {}
+      );
+    } else if (getUserDetails().roleName === "COMPANYDRIVER") {
+      getAllVehicleServicesByUserId(userId).then(
+        (res: any) => {
+          data = createData(res.results.companyVehicleService);
+          setServices(data);
+        },
+        (error: any) => {}
+      );
+    }
   };
 
   const getAllVehicleServices = (companyId: Number) => {
@@ -101,11 +124,18 @@ function ManageService() {
     } else if (getUserDetails().roleName == "COMPANYBRANCHADMIN") {
       getAllVehicleServiceData(
         getUserDetails().company_id,
-        getUserDetails().company_branch_id
+        getUserDetails().company_branch_id,
+        getUserDetails().user_id
       );
       getAllVehiclesByCompanyAndBranch(
         getUserDetails().company_id,
         getUserDetails().company_branch_id
+      );
+    } else if (getUserDetails().roleName == "COMPANYDRIVER") {
+      getAllVehicleServiceData(
+        getUserDetails().company_id,
+        getUserDetails().company_branch_id,
+        getUserDetails().user_id
       );
     }
   }, []);
@@ -113,8 +143,10 @@ function ManageService() {
   const reloadTable = (res: any) => {
     getAllVehicleServiceData(
       getUserDetails().company_id,
-      getUserDetails().company_branch_id
+      getUserDetails().company_branch_id,
+      getUserDetails().user_id
     );
+    getAllVehicleServices(getUserDetails().company_id);
   };
 
   const deleteClickHandler = (id: any) => {

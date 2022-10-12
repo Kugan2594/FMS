@@ -57,9 +57,54 @@ const updateEmissionTest = (data: object) => {
   });
 };
 
+const getAllEmissionTestDocumentByCompanyId = (companyId: number) => {
+  return new Promise((resolve, reject) => {
+    api(
+      "get",
+      "co-web",
+      null,
+      `/companyEmissionTest/${companyId}`,
+      "token",
+      "",
+      ""
+    )
+      .then((response: any) => {
+        resolve(response.data);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+};
+
+const getAllEmissionTestDocumentByCompanyIdAndBranchId = (
+  companyId: number,
+  branchId: number
+) => {
+  return new Promise((resolve, reject) => {
+    api(
+      "get",
+      "co-web",
+      null,
+      `/companyEmissionTest/${companyId}/${branchId}`,
+      "token",
+      "",
+      ""
+    )
+      .then((response: any) => {
+        resolve(response.data);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+};
+
 export {
   getAllEmissionTestDocumentByUserId,
   addEmissionTest,
   deleteEmissionTest,
   updateEmissionTest,
+  getAllEmissionTestDocumentByCompanyId,
+  getAllEmissionTestDocumentByCompanyIdAndBranchId,
 };
