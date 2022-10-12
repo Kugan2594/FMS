@@ -1,36 +1,31 @@
-import React, { useState, useEffect } from "react";
+import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
 import {
     Col,
     DatePicker,
     Form,
-    Input,
-    Row,
-    Select,
-    message,
-    Upload,
+    Input, message, Row,
+    Select, Upload
 } from "antd";
-import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
 import type { UploadChangeParam } from "antd/es/upload";
 import type { RcFile, UploadFile, UploadProps } from "antd/es/upload/interface";
-import {
-    addRevenueLicense,
-    getAllRevenueLicenseByUserId,
-    getAllVehiclesAllocationsForDropDown,
-} from "./ServicesRevenueLicense";
+import moment from "moment";
+import { useEffect, useState } from "react";
+import { Button } from "../../../components/atoms/Button";
 import { getUserDetails } from "../../../contents/Login/LoginAuthentication";
-import axios from "axios";
-import { getValue } from "@testing-library/user-event/dist/utils";
 import {
     errHandler,
     revenueLicenseDocumentAddSuccess,
+    revenueLicenseDocumentUpdateSuccess
 } from "../../../helper/helper";
 import { noSplCharAndLetterRegex } from "../../../utils/Regex";
 import {
     getAllVehiclesByCompanyId,
-    getAllVehiclesByCompanyIdAndBranchId,
+    getAllVehiclesByCompanyIdAndBranchId
 } from "../Vehicles/ServiceVehicle";
-import { Button } from "../../../components/atoms/Button";
-import moment from "moment";
+import {
+    addRevenueLicense, getAllVehiclesAllocationsForDropDown,
+    updateRevenueLicense
+} from "./ServicesRevenueLicense";
 
 const getBase64 = (img: RcFile, callback: (url: string) => void) => {
     const reader = new FileReader();
@@ -57,6 +52,7 @@ function AddRevenueLicense(props: any) {
         cancelClickHandler,
         isEdit,
         updateData,
+        action
     } = props;
     const [form] = Form.useForm();
     const [loading, setLoading] = useState(false);
@@ -153,6 +149,7 @@ function AddRevenueLicense(props: any) {
     const { Option } = Select;
 
     const onFinishAdd = (values: any) => {
+        if (action == "add"){
         const formData = new FormData();
         let revenueLicenseData = values;
         const data = {
@@ -182,17 +179,48 @@ function AddRevenueLicense(props: any) {
             .catch((err) => {
                 errHandler(err);
             });
+        }else{
+            const formData = new FormData();
+        let revenueLicenseData = values;
+        const data = {
+            id: revenueLicenseData.id,
+            taxIssuedDate: revenueLicenseData.issuedDate,
+            taxExpiryDate: revenueLicenseData.dueDate,
+            region: revenueLicenseData.region,
+            vehicleNumber: vehicleNumbers,
+            taxAmount: revenueLicenseData.taxAmount,
+            userId: getUserDetails().user_id,
+            companyId: getUserDetails().company_id,
+            branchId: getUserDetails().company_branch_id,
+        };
+
+        fileList.map((post, index) => {
+            formData.append("files", post);
+        });
+
+        formData.append("updateRevenueLicense", JSON.stringify(data));
+
+        updateRevenueLicense(formData)
+            .then((res: any) => {
+                revenueLicenseDocumentUpdateSuccess();
+                setIsModelOpen(false);
+                reloadTable(res);
+            })
+            .catch((err) => {
+                errHandler(err);
+            });
+        }
     };
 
     const onFinishFailed = () => {};
 
-    form.setFieldsValue(
-        updateData && {
-            ...updateData,
-            issuedDate: moment(updateData.issuedDate, "YYYY-MM-DD"),
-            dueDate: moment(updateData.dueDate, "YYYY-MM-DD")
-        }
-    );
+    // form.setFieldsValue(
+    //     updateData && {
+    //         ...updateData,
+    //         issuedDate: moment(updateData.issuedDate, "YYYY-MM-DD"),
+    //         dueDate: moment(updateData.dueDate, "YYYY-MM-DD")
+    //     }
+    // );
 
     return (
         <>
@@ -200,7 +228,11 @@ function AddRevenueLicense(props: any) {
                 id="form"
                 name="basic"
                 form={form}
-                initialValues={props.isEdit ? updateData : {}}
+                initialValues={props.isEdit ? {
+                    ...updateData,
+                    issuedDate: moment(updateData.issuedDate, "YYYY-MM-DD"),
+                    dueDate: moment(updateData.dueDate, "YYYY-MM-DD")
+                } : {}}
                 onFinish={onFinishAdd}
                 onFinishFailed={onFinishFailed}
             >

@@ -24,11 +24,11 @@ function createData(data: any) {
       vehicleNo: post.vehicleResponseDto.vehicleNumber,
       vehicleModel: post.vehicleResponseDto.resourceVehicleDto.vehicleModel,
       branchName: "Jaffna Branch",
-      lastChangedDate: moment(post.updatedAt).format("DD-MM-yyyy"),
-      dueDate: moment(post.taxExpiryDate).format("DD-MM-yyyy"),
+      lastChangedDate: moment(post.updatedAt).format("YYYY-MM-DD"),
+      dueDate: moment(post.taxExpiryDate).format("YYYY-MM-DD"),
       region: post.region,
-      issuedDate: post.taxIssuedDate,
-      taxAmount: post.taxAmount,
+      issuedDate:moment(post.taxIssuedDate).format("YYYY-MM-DD"),
+      taxAmount:post.taxAmount,
     };
   });
   return convertData;
@@ -92,7 +92,6 @@ function ManageRevenueLicense() {
   const handleCancel = () => {
     setIsModalOpen(false);
     setisEdit(false);
-    getAllRevenueLicenseData(getUserDetails().user_id);
   };
 
   const onFinishAdd = () => {};
