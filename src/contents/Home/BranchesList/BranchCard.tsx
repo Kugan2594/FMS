@@ -1,4 +1,4 @@
-import { Card, Col, Image, Progress, Row, Typography } from "antd";
+import { Card, Col, Image, Progress, Row, Space, Typography } from "antd";
 import React from "react";
 import "./branch.style.less";
 import { useState, useEffect } from "react";
@@ -44,71 +44,32 @@ function BranchCard() {
         <div>
             {branch.map((x: any) => {
                 return (
-                    <div className="card-container">
-                        <Card style={{ borderRadius: "10px" }}>
-                            <Row justify="center" align="middle">
-                                <Col xs={24} xl={3}>
-                                    {" "}
-                                    <Image
-                                        // width={200}
-                                        style={{
-                                            borderRadius: "100%",
-                                            border: "1px solid red",
-                                            margin: "0px !important",
-                                        }}
-                                        height={50}
-                                        src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
-                                    />
-                                </Col>
-                                <Col xs={24} xl={18}>
-                                    <Text>{x.branchName}</Text>
-                                    <Progress percent={x.progressData} />
-                                </Col>
-                                <Col xs={24} xl={3}>
-                                    <div
-                                        className="span"
-                                        style={{
-                                            borderRadius: "5px",
-                                            backgroundColor: "#EEEDE7",
-                                            textAlign: "center",
-                                            fontSize: "18px",
-
-                                            width: "60%",
-                                            marginLeft: "30%",
-                                        }}
-                                    >
-                                        {" "}
-                                        {x.progressData >= 75 ? (
-                                            <Text
-                                                style={{
-                                                    color: "green",
-                                                }}
-                                            >
-                                                {x.progressData}%
-                                            </Text>
-                                        ) : x.progressData <= 74 &&
-                                          x.progressData >= 50 ? (
-                                            <Text
-                                                style={{
-                                                    color: "orange",
-                                                }}
-                                            >
-                                                {x.progressData}%
-                                            </Text>
-                                        ) : (
-                                            <Text
-                                                style={{
-                                                    color: "red",
-                                                }}
-                                            >
-                                                {x.progressData}%
-                                            </Text>
-                                        )}
-                                    </div>
-                                </Col>
-                            </Row>
-                        </Card>
-                    </div>
+                    <Card className="card-container">
+                        <Row justify="center" align="middle">
+                            <Col xs={24} xl={2}>
+                                {" "}
+                                <Image
+                                    // width={200}
+                                    style={{
+                                        borderRadius: "100%",
+                                        border: "1px solid red",
+                                        margin: "0px !important",
+                                    }}
+                                    height={40}
+                                    src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
+                                />
+                            </Col>
+                            <Col xs={24} xl={20}>
+                                <Text>{x.branchName}</Text>
+                                <Progress
+                                    percent={x.progressData}
+                                    size="small"
+                                    strokeWidth={3}
+                                />
+                            </Col>
+                            <Col xs={24} xl={2}></Col>
+                        </Row>
+                    </Card>
                 );
             })}
         </div>

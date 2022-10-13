@@ -27,6 +27,7 @@ import StaticsHistory from "../contents/Home/Statics/StaticsHistory";
 import Page from "../contents/Home/Statistics/Statistics";
 import OverallVehiclesStatus from "../contents/Home/VehiclesCard/OverallVehiclesStatus";
 import DashBoard from "../contents/Home/DashBoard/DashBoard";
+import ManageCompany from "../contents/Master/Company/ManageCompany";
 
 const Loader = (Component: any) => (props: any) =>
     (
@@ -118,6 +119,10 @@ const PublicRoute: RouteObject[] = [
             {
                 path: "vehicles",
                 element: <ManageVehicles />,
+            },
+            {
+                path: "companies",
+                element: <ManageCompany />,
             },
         ],
     },

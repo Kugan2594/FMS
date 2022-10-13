@@ -7,19 +7,26 @@ import { useState, useEffect } from "react";
 import { getAllVehiclesByCompanyId } from "../../../contents/Master/Vehicles/ServiceVehicle";
 import { getUserDetails } from "../../../contents/Login/LoginAuthentication";
 import { IoIosCar } from "react-icons/io";
+import { IoCarSportOutline } from "react-icons/io5";
+import { GrBus } from "react-icons/gr";
+import { transform } from "typescript";
+import Bus from "../../../assets/bus.svg";
+import Car from "../../../assets/car.svg";
+import Van from "../../../assets/van.svg";
+import Bike from "../../../assets/motor-bike.svg";
+import Lorry from "../../../assets/lorry.svg";
 Chart.register(CategoryScale);
 const { Title, Text } = Typography;
 
 function OverallVehicleTypeCard() {
     const [vehicles, setVehicles]: any[] = useState([]);
     const [vehicleType, setVehicleType]: any[] = useState([]);
-    const [vehicleTypeArray, setVehicleTypeArray]: any[] = useState([]);
     const [vehicleTypeData, setVehicleTypeData]: any[] = useState([]);
     const [countArray, setCountArray]: any[] = useState([]);
     useEffect(() => {
         getVehicleTypeData();
         getAllVehicles(getUserDetails().company_id);
-        overallVehicleTypes(vehicles, vehicleType);
+        console.log("....)8....", typeArray);
     }, []);
     const createData = (data: any) => {
         let convertData = data.map((post: any) => {
@@ -70,40 +77,46 @@ function OverallVehicleTypeCard() {
             setVehicles(data);
         });
     };
-    const overallVehicleTypes = (data1: any, data2: any) => {
-        for (let i = 0; i < vehicleType.length; i++) {
-            let vehicleTypeCount = 0;
-            let typeArray = vehicleTypeArray;
-            let vehicleTypeFilter = vehicles.filter(
-                (x: any) => x.vehicleType === vehicleType[i].vehicleType
-            );
-            vehicleTypeCount = vehicleTypeFilter.length;
-            typeArray.push({
-                vehicleType: vehicleType[i].vehicleType,
-                icon: <IoIosCar size={30} />,
-                vehicleTypeCount: vehicleTypeCount,
-            });
-            setVehicleTypeArray(typeArray);
-        }
-        let count = vehicleTypeArray.map((x: any) => x.vehicleTypeCount);
-        setCountArray(count);
-    };
+    let typeArray: any[] = [];
+    let count: any[] = [];
+    for (let i = 0; i < vehicleType.length; i++) {
+        let vehicleTypeCount = 0;
+        let vehicleTypeFilter = vehicles.filter(
+            (x: any) => x.vehicleType === vehicleType[i].vehicleType
+        );
+        vehicleTypeCount = vehicleTypeFilter.length;
+        typeArray.push({
+            vehicleType: vehicleType[i].vehicleType,
+            icon:
+                vehicleType[i].vehicleType === "Car" ? (
+                    <img src={Car} width={30} />
+                ) : vehicleType[i].vehicleType === "Bus" ? (
+                    <img src={Bus} width={25} />
+                ) : vehicleType[i].vehicleType === "Van" ? (
+                    <img src={Van} width={30} />
+                ) : vehicleType[i].vehicleType === "Lorry" ? (
+                    <img src={Lorry} width={30} />
+                ) : vehicleType[i].vehicleType === "Motor Bikes" ? (
+                    <img src={Bike} width={30} />
+                ) : (
+                    ""
+                ),
 
+            vehicleTypeCount: vehicleTypeCount,
+        });
+        if (i === vehicleType.length) {
+            typeArray.push(typeArray);
+        }
+    }
     const data = {
-        labels: ["Red", "Blue", "Yellow", "Blue", "Yellow"],
         datasets: [
             {
                 label: "My First Dataset",
-                data: countArray,
-                backgroundColor: [
-                    "rgb(255, 99, 132)",
-                    "rgb(54, 162, 235)",
-                    "rgb(255, 205, 86)",
-                    "rgb(26, 23, 202)",
-                    "rgb(26, 23, 202)",
-                ],
+                data: typeArray.map((x: any) => x.vehicleTypeCount),
+                backgroundColor: ["#32CD30", "#DE0001", "#013A20", "#013A20"],
                 hoverOffset: 4,
-                cutout: 50,
+                cutout: 70,
+                borderRadius: 2,
             },
         ],
         option: [
@@ -118,12 +131,36 @@ function OverallVehicleTypeCard() {
     };
 
     return (
-        <Card style={{ borderRadius: "3%" }}>
+        <Card style={{ borderRadius: "3%", height: "100%" }}>
             <Row justify="center">
                 <Col span={1}></Col>
                 <Col span={22}>
-                    <Pie data={data} height={"100%"} />
+                    <div className="doughnut">
+                        {" "}
+                        <Pie data={data} height={"100%"} />
+                        <div
+                            className="doughnut"
+                            style={{
+                                position: "absolute",
+                                // bottom: "0",
+                                // left: "0",
+                                top: "35%",
+                                left: "30%",
+                                textAlign: "center",
+                            }}
+                        >
+                            <div>
+                                <Text style={{ fontSize: "24px" }}>
+                                    {typeArray.length}
+                                </Text>
+                            </div>
+                            <div>
+                                <Text>Vehicle Types</Text>
+                            </div>
+                        </div>
+                    </div>
                 </Col>
+
                 <Col span={1}></Col>
             </Row>
             <Row style={{ margin: "5%" }}>
@@ -131,7 +168,7 @@ function OverallVehicleTypeCard() {
             </Row>
             <div className="row-container" style={{ width: "100%" }}>
                 <Row gutter={16} justify="start">
-                    {vehicleTypeArray.map((x: any) => {
+                    {typeArray.map((x: any) => {
                         return (
                             <Col span={8} style={{ textAlign: "center" }}>
                                 <div>{x.icon}</div>

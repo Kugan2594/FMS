@@ -118,7 +118,6 @@ function StaticsHistory() {
     return (
         <div className="statics-history">
             <Card className="statics-history-card">
-                <Title level={5}>Expense History</Title>
                 <div className="statics-history-header">
                     <Row>
                         <Col span={12}>
