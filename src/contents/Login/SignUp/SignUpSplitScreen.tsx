@@ -5,7 +5,6 @@ import Standalone from "../../../assets/Standalone.svg";
 import Corporate from "../../../assets/Corporate.svg";
 import { Image, Row, Col, Typography, Card } from "antd";
 import { Link, useNavigate } from "react-router-dom";
-
 const { Title, Text } = Typography;
 
 function SignUpSplitScreen() {

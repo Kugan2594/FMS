@@ -27,6 +27,7 @@ function DashBoard() {
                     width: "100%",
                     height: "70%",
                 }}
+                gutter={8}
             >
                 <Col span={10}>
                     <Row style={{ width: "100%" }}>
@@ -34,7 +35,7 @@ function DashBoard() {
                             <MajorDetails />
                         </Col>
                     </Row>
-                    <Row>
+                    <Row gutter={4}>
                         <Col span={12}>
                             <OverallVehiclesStatus />
                         </Col>
@@ -44,8 +45,25 @@ function DashBoard() {
                     </Row>
                 </Col>
                 <Col span={14}>
-                    <Row justify="end" style={{ backgroundColor: "white" }}>
-                        <Col xs={24} xl={15}></Col> <Col xs={24} xl={1}></Col>
+                    <Row
+                        justify="end"
+                        style={{
+                            backgroundColor: "white",
+                            borderRadius: "0.5vw 0.5vw 0vw 0vw",
+                        }}
+                        align="middle"
+                    >
+                        <Col xs={24} xl={15}>
+                            <div
+                                className="space"
+                                style={{
+                                    marginLeft: "10px",
+                                }}
+                            >
+                                Expense History
+                            </div>
+                        </Col>{" "}
+                        <Col xs={24} xl={1}></Col>
                         <Col
                             xs={24}
                             xl={8}
@@ -71,7 +89,7 @@ function DashBoard() {
                             />
                         </Col>
                     </Row>
-                    <Row>
+                    <Row gutter={24}>
                         <Col span={24}>
                             {chart ? <Page /> : <StaticsHistory />}
                         </Col>

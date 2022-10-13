@@ -3,6 +3,7 @@ import { getUserDetails } from "../../../contents/Login/LoginAuthentication";
 import { getAllBranchByCompanyId } from "../../../contents/Master/Branch/ServicesBranch";
 import React from "react";
 import { useEffect, useState } from "react";
+import { TbMoodHappy, TbMoodNervous } from "react-icons/tb";
 import {
     AiOutlineAlibaba,
     AiOutlineRadarChart,
@@ -13,6 +14,7 @@ import {
     getAllVehiclesByCompanyId,
     getAllVehiclesByCompanyIdAndBranchId,
 } from "../../../contents/Master/Vehicles/ServiceVehicle";
+import { IoGitNetworkOutline } from "react-icons/io5";
 const { Title, Text } = Typography;
 
 function MajorDetails() {
@@ -137,21 +139,20 @@ function MajorDetails() {
             }
         }
     };
-
     const cardInfo: any = [
         {
             title: "Branches",
-            icon: <AiOutlineAlibaba size={30} />,
+            icon: <IoGitNetworkOutline size={30} />,
             count: branch.length,
         },
         {
             title: "On-risk",
-            icon: <AiOutlineRedEnvelope size={30} />,
+            icon: <TbMoodNervous size={30} />,
             count: branch.length - perfectNumber,
         },
         {
             title: "Perfect",
-            icon: <AiOutlineRadarChart size={30} />,
+            icon: <TbMoodHappy size={30} />,
             count: perfectNumber,
         },
     ];

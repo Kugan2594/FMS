@@ -69,10 +69,9 @@ function OverallVehiclesStatus() {
     ];
     const count1 = data1.map((x) => x.count);
     const data = {
-        labels: ["Red", "Blue", "Yellow"],
         datasets: [
             {
-                label: "Dataset",
+                label: "vehicle types",
                 data: count1,
                 backgroundColor: [
                     "rgb(255, 99, 132)",
@@ -80,7 +79,7 @@ function OverallVehiclesStatus() {
                     "rgb(255, 205, 86)",
                 ],
                 hoverOffset: 8,
-                cutout: 50,
+                cutout: 70,
             },
         ],
     };
@@ -94,11 +93,30 @@ function OverallVehiclesStatus() {
                 <Col span={1}></Col>
                 <Col span={22}>
                     <Pie data={data} />
+                    <div
+                        className="div"
+                        style={{
+                            position: "absolute",
+                            // bottom: "0",
+                            // left: "0",
+                            top: "35%",
+                            left: "38%",
+                            textAlign: "center",
+                        }}
+                    >
+                        {" "}
+                        <div style={{ textAlign: "center", fontSize: "28px" }}>
+                            <Text>{count}</Text>
+                        </div>
+                        <div>
+                            <Text>Vehicles</Text>
+                        </div>
+                    </div>
                 </Col>
                 <Col span={1}></Col>
             </Row>
             <Row>
-                <Col>Total Vehicles:{count}</Col>
+                <Col></Col>
             </Row>
             <Row style={{ margin: "3%" }}>
                 <Col span={24}></Col>
@@ -118,17 +136,45 @@ function OverallVehiclesStatus() {
                         return (
                             <>
                                 <Col span={2}>
-                                    <div
-                                        className="dot"
-                                        style={{
-                                            backgroundColor: "green",
-                                            width: "10px",
-                                            height: "10px",
-                                            borderRadius: "100%",
-                                        }}
-                                    >
-                                        <Space></Space>
-                                    </div>
+                                    {x.title === "Perfect" ? (
+                                        <div
+                                            className="dot"
+                                            style={{
+                                                backgroundColor: "green",
+                                                width: "10px",
+                                                height: "10px",
+                                                borderRadius: "100%",
+                                            }}
+                                        >
+                                            <Space></Space>
+                                        </div>
+                                    ) : x.title === "Needs Attention" ? (
+                                        <div
+                                            className="dot"
+                                            style={{
+                                                backgroundColor: "red",
+                                                width: "10px",
+                                                height: "10px",
+                                                borderRadius: "100%",
+                                            }}
+                                        >
+                                            <Space></Space>
+                                        </div>
+                                    ) : x.title === "Sleep" ? (
+                                        <div
+                                            className="dot"
+                                            style={{
+                                                backgroundColor: "orange",
+                                                width: "10px",
+                                                height: "10px",
+                                                borderRadius: "100%",
+                                            }}
+                                        >
+                                            <Space></Space>
+                                        </div>
+                                    ) : (
+                                        ""
+                                    )}
                                 </Col>
                                 <Col span={18}>{x.title}</Col>
                                 <Col span={4}>{x.count}</Col>

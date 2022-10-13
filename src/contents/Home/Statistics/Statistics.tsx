@@ -9,9 +9,12 @@ import {
     AiOutlineBarChart,
     AiOutlineOrderedList,
 } from "react-icons/ai";
+import { FaRegChartBar } from "react-icons/fa";
+import { FcBarChart, FcLineChart } from "react-icons/fc";
 import moment from "moment";
 import { any } from "prop-types";
 import { has } from "immer/dist/internal";
+import { type } from "@testing-library/user-event/dist/type";
 const { RangePicker } = DatePicker;
 const Page: React.FC = () => {
     const data1 = [
@@ -364,7 +367,7 @@ const Page: React.FC = () => {
         };
         dataArray.push(obj);
     });
-
+    const typeArray = ["All Vehhicle Types", "Bus", "Car", "Train"];
     const [overAll, setOverAll] = useState(false);
     const [service, setService] = useState(false);
     const [part, setPart] = useState(false);
@@ -400,8 +403,12 @@ const Page: React.FC = () => {
     const [majorData, setMajorData]: any = useState([]);
     const [bar, setBar]: any = useState(true);
     const [staticsType, setStaticsType]: any = useState(true);
+    const [value1, setValue1]: any = useState("All vehicle Types");
+    const [value2, setValue2]: any = useState("Last 7 Days");
+
     useEffect(() => {
         console.log("vehicleType", vehicleTypeValue);
+        setValue1(typeArray[0]);
     }, [
         majorData,
         startYearEndYear,
@@ -906,26 +913,39 @@ const Page: React.FC = () => {
             },
         ],
     };
+
     return (
-        <Card style={{ width: "100%" }}>
+        <Card
+            style={{
+                width: "100%",
+                backgroundColor: "white",
+                borderRadius: "0vw 0vw 0.5vw 0.5vw",
+            }}
+        >
             <div className="filter-container" style={{ height: "10%" }}>
                 <Row justify="end" align="middle">
-                    <Col xs={24} xl={8}>
+                    <Col xs={24} xl={11}>
                         <Select
                             // defaultValue="All Types"
-                            style={{ width: "70%" }}
+                            style={{ width: "60%", borderRadius: "50px" }}
                             onChange={handleVehicleType}
+                            placeholder="All vehicle Types"
+                            defaultValue="All vehicle Types"
+                            size="small"
                         >
                             {" "}
+                            <Option value="All vehicle Types">
+                                All vehicle Types
+                            </Option>
                             <Option value="Bus">Bus</Option>
                             <Option value="Car">Car</Option>
                             <Option value="Train">Train</Option>
                         </Select>
                     </Col>
-                    <Col xs={24} xl={13}>
+                    <Col xs={24} xl={10}>
                         <Select
                             showSearch
-                            placeholder="VehicleNUmber"
+                            placeholder="All vehicles"
                             optionFilterProp="children"
                             onChange={onChange}
                             onSearch={onSearch}
@@ -935,6 +955,7 @@ const Page: React.FC = () => {
                                     .includes(input.toLowerCase())
                             }
                             style={{ width: "90%" }}
+                            size="small"
                         >
                             {vehicleTypeFilter
                                 ? data
@@ -964,12 +985,12 @@ const Page: React.FC = () => {
                         <div className="toggle">
                             <Space className="toggle-space">
                                 {bar ? (
-                                    <AiOutlineBarChart
+                                    <FcBarChart
                                         size={25}
                                         onClick={handleChangeChart}
                                     />
                                 ) : (
-                                    <AiOutlineAreaChart
+                                    <FcLineChart
                                         size={25}
                                         onClick={handleChangeChart}
                                     />
@@ -994,6 +1015,8 @@ const Page: React.FC = () => {
                                 width: "100%",
                             }}
                             onChange={handleDateRange}
+                            defaultValue="Last 7 Days"
+                            size="small"
                         >
                             <Option value="Last 7 Days">Last 7 Days</Option>
                             <Option value="Last Month">Last Month</Option>
@@ -1005,7 +1028,10 @@ const Page: React.FC = () => {
                     <Col xs={24} xl={2}></Col>
                     <Col xs={24} xl={14} style={{}}>
                         {custom ? (
-                            <RangePicker onChange={handleCustomChange} />
+                            <RangePicker
+                                onChange={handleCustomChange}
+                                size="small"
+                            />
                         ) : (
                             ""
                         )}
@@ -1018,6 +1044,7 @@ const Page: React.FC = () => {
                                 ]}
                                 format={yearFormat}
                                 picker="year"
+                                size="small"
                             />
                         ) : (
                             ""
@@ -1031,16 +1058,18 @@ const Page: React.FC = () => {
                                 ]}
                                 format={monthFormat}
                                 picker="month"
+                                size="small"
                             />
                         ) : (
                             ""
                         )}
                     </Col>
+                    <Col xs={24} xl={2}></Col>
                 </Row>
             </div>
             <div className="filter-container" style={{ height: "10%" }}>
                 <Row>
-                    <Col>
+                    <Col xs={24} xl={24}>
                         <SelectOptions />
                     </Col>
                 </Row>

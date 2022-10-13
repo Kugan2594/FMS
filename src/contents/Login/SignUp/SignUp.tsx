@@ -51,7 +51,6 @@ function SignUp({ onClickCreate }: any) {
                                 <Title level={4}> Create Company</Title>
                             </Col>
                         </Row>
-
                         <Form
                             labelCol={{
                                 span: 24,
