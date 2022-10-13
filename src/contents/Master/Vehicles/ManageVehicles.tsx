@@ -253,14 +253,16 @@ function ManageVehicles() {
             ) : isProfileModalOpen ? (
                 <Modal
                     title={false}
+                    style={{ top: 10 }}
                     open={isProfileModalOpen}
                     onCancel={handleCancel}
                     closable={false}
-                    width={"90%"}
+                    width={"62%"}
                     footer={false}
                 >
                     <VehicleProfile 
                     profileData={updateData}
+                    onClickClose={handleCancel}
                     />
                 </Modal>
             ) : (

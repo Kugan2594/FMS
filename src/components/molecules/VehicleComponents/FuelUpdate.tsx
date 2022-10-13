@@ -1,6 +1,6 @@
 import React from "react";
-import { Typography } from "antd";
-import { PlusCircleOutlined } from "@ant-design/icons";
+import { Col, Row, Typography } from "antd";
+import FuelUp from "../../../assets/FuelUp.svg";
 
 const { Title, Text } = Typography;
 
@@ -13,6 +13,8 @@ interface FuelUpdateType {
 function FuelUpdate({ fuelType, fuelOnClick, lastUpdate }: FuelUpdateType) {
   return (
     <div onClick={(data) => fuelOnClick(data)} style={{ cursor: "pointer" }}>
+      <Row>
+        <Col span={20}>
       <Title level={5} style={{ lineHeight: 1 }}>
         {fuelType}
       </Title>
@@ -28,6 +30,11 @@ function FuelUpdate({ fuelType, fuelOnClick, lastUpdate }: FuelUpdateType) {
           {lastUpdate.amount}
         </Text>
       </div>
+      </Col>
+      <Col span={4}>
+      <img src={FuelUp} />
+      </Col>
+      </Row>
     </div>
   );
 }

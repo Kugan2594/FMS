@@ -94,6 +94,29 @@ const updateVehicle = (data: any) => {
   });
 };
 
+const getRevenueLicense = (
+  vehicleNumber: string,
+  userId: number
+) => {
+  return new Promise((resolve, reject) => {
+    api(
+      "get",
+      "co-web",
+      null,
+      `/revenueLicense/${vehicleNumber}/${userId}`,
+      "token",
+      "",
+      ""
+    )
+      .then((response: any) => {
+        resolve(response.data);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+};
+
 export {
   addVehicle,
   getAllVehiclesByCompanyId,
@@ -101,4 +124,5 @@ export {
   getAllVehiclesFromResourcesForDropDown,
   getAllVehiclesByCompanyIdAndBranchId,
   updateVehicle,
+  getRevenueLicense,
 };
