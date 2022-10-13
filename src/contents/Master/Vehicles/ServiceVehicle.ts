@@ -96,14 +96,57 @@ const updateVehicle = (data: any) => {
 
 const getRevenueLicense = (
   vehicleNumber: string,
-  userId: number
 ) => {
   return new Promise((resolve, reject) => {
     api(
       "get",
       "co-web",
       null,
-      `/revenueLicense/${vehicleNumber}/${userId}`,
+      `/vehicleRevenueLicense/${vehicleNumber}`,
+      "token",
+      "",
+      ""
+    )
+      .then((response: any) => {
+        resolve(response.data);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+};
+
+const getInsurance = (
+  vehicleNumber: string,
+) => {
+  return new Promise((resolve, reject) => {
+    api(
+      "get",
+      "co-web",
+      null,
+      `/insurance/${vehicleNumber}`,
+      "token",
+      "",
+      ""
+    )
+      .then((response: any) => {
+        resolve(response.data);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+};
+
+const getEmissionTest = (
+  vehicleNumber: string,
+) => {
+  return new Promise((resolve, reject) => {
+    api(
+      "get",
+      "co-web",
+      null,
+      `/emissionTest/${vehicleNumber}`,
       "token",
       "",
       ""
@@ -125,4 +168,6 @@ export {
   getAllVehiclesByCompanyIdAndBranchId,
   updateVehicle,
   getRevenueLicense,
+  getInsurance,
+  getEmissionTest,
 };

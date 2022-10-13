@@ -82,7 +82,7 @@ function VehicleProfile({ profileData, onClickClose }: VehicleProfileType) {
                   emissionTestUpdate={""}
                   insuranceUpdate={""}
                   revenueLicenseUpdate={""}
-                  vehicleNumber={""}
+                  vehicleNumber={profileData.vehicleNumber}
                 />
               </div>
               <div className="vehicle-reminder-reminder">
