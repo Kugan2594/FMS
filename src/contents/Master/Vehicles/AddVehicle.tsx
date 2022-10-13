@@ -15,6 +15,7 @@ import "./vehicle.style.less";
 import React, { useEffect, useState } from "react";
 import { getAllBranchesByCompanyId } from "../Branch/ServicesBranch";
 import { Button } from "../../../components/atoms/Button";
+import { vehicleNoRegex } from "../../../utils/Regex";
 
 const { Option } = Select;
 interface AddVehiclePropsType {
@@ -178,7 +179,15 @@ function AddVehicle(props: AddVehiclePropsType) {
               </Form.Item>
             </Col>
             <Col span={12}>
-              <Form.Item name="vehicleNumber">
+              <Form.Item
+                rules={[
+                  {
+                    pattern: new RegExp(vehicleNoRegex),
+                    message: "Enter valid Vehicle No Ex: ABC-1234",
+                  },
+                ]}
+                name="vehicleNumber"
+              >
                 <Input
                   placeholder="Vehicle Number"
                   required
