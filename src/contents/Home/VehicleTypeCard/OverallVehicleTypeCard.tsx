@@ -115,7 +115,7 @@ function OverallVehicleTypeCard() {
                 data: typeArray.map((x: any) => x.vehicleTypeCount),
                 backgroundColor: ["#32CD30", "#DE0001", "#013A20", "#013A20"],
                 hoverOffset: 4,
-                cutout: 70,
+                cutout: 55,
                 borderRadius: 2,
             },
         ],
@@ -132,6 +132,11 @@ function OverallVehicleTypeCard() {
 
     return (
         <Card style={{ borderRadius: "3%", height: "100%" }}>
+            <Row>
+                <Col>
+                    <Title level={5}>Vehicle Types</Title>
+                </Col>
+            </Row>
             <Row justify="center">
                 <Col span={1}></Col>
                 <Col span={22}>
@@ -144,8 +149,8 @@ function OverallVehicleTypeCard() {
                                 position: "absolute",
                                 // bottom: "0",
                                 // left: "0",
-                                top: "35%",
-                                left: "30%",
+                                top: "45%",
+                                left: "45%",
                                 textAlign: "center",
                             }}
                         >
@@ -154,9 +159,7 @@ function OverallVehicleTypeCard() {
                                     {typeArray.length}
                                 </Text>
                             </div>
-                            <div>
-                                <Text>Vehicle Types</Text>
-                            </div>
+                            <div>{/* <Text>Vehicle Types</Text> */}</div>
                         </div>
                     </div>
                 </Col>

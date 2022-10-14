@@ -79,13 +79,18 @@ function OverallVehiclesStatus() {
                     "rgb(255, 205, 86)",
                 ],
                 hoverOffset: 8,
-                cutout: 70,
+                cutout: 55,
             },
         ],
     };
 
     return (
         <Card style={{ borderRadius: "3%" }}>
+            <Row>
+                <Col>
+                    <Title level={5}>Vehicles</Title>
+                </Col>
+            </Row>
             <Row>
                 <Col style={{ width: "130%" }}></Col>
             </Row>
@@ -99,8 +104,8 @@ function OverallVehiclesStatus() {
                             position: "absolute",
                             // bottom: "0",
                             // left: "0",
-                            top: "35%",
-                            left: "38%",
+                            top: "40%",
+                            left: "45%",
                             textAlign: "center",
                         }}
                     >
@@ -108,9 +113,9 @@ function OverallVehiclesStatus() {
                         <div style={{ textAlign: "center", fontSize: "28px" }}>
                             <Text>{count}</Text>
                         </div>
-                        <div>
+                        {/* <div>
                             <Text>Vehicles</Text>
-                        </div>
+                        </div> */}
                     </div>
                 </Col>
                 <Col span={1}></Col>

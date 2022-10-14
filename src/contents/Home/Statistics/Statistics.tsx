@@ -25,6 +25,7 @@ import moment from "moment";
 import { any } from "prop-types";
 import { has } from "immer/dist/internal";
 import { type } from "@testing-library/user-event/dist/type";
+
 const { RangePicker } = DatePicker;
 const Statistics: React.FC = () => {
     const data1 = [
@@ -1175,6 +1176,7 @@ const Statistics: React.FC = () => {
                         display: "flex",
                         flexDirection: "row",
                         justifyContent: "right",
+                        gap: "20px",
                     }}
                 >
                     {" "}
@@ -1183,12 +1185,12 @@ const Statistics: React.FC = () => {
                             <Space className="toggle-space">
                                 {bar ? (
                                     <FcBarChart
-                                        size={25}
+                                        size={20}
                                         onClick={handleChangeChart}
                                     />
                                 ) : (
                                     <FcLineChart
-                                        size={25}
+                                        size={20}
                                         onClick={handleChangeChart}
                                     />
                                 )}

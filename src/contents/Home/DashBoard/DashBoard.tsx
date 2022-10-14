@@ -41,11 +41,11 @@ function DashBoard() {
             >
                 <Col span={10}>
                     <Row style={{ width: "100%" }}>
-                        <Col>
+                        <Col span={24}>
                             <MajorDetails />
                         </Col>
                     </Row>
-                    <Row gutter={4}>
+                    <Row gutter={8}>
                         <Col span={12}>
                             <OverallVehiclesStatus />
                         </Col>
