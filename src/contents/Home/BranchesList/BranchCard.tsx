@@ -44,7 +44,10 @@ function BranchCard() {
         <div>
             {branch.map((x: any) => {
                 return (
-                    <Card className="card-container">
+                    <Card
+                        className="card-container"
+                        style={{ marginBottom: "2px" }}
+                    >
                         <Row justify="center" align="middle">
                             <Col xs={24} xl={2}>
                                 {" "}

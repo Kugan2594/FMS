@@ -4,7 +4,16 @@ import {
     CheckOutlined,
     CloseOutlined,
 } from "@ant-design/icons";
-import { Button, Card, Col, Row, Segmented, Space, Switch } from "antd";
+import {
+    Button,
+    Card,
+    Col,
+    Row,
+    Segmented,
+    Space,
+    Switch,
+    Typography,
+} from "antd";
 import React, { useState } from "react";
 import BranchCard from "../BranchesList/BranchCard";
 
@@ -16,6 +25,7 @@ import OverallVehicleTypeCard from "../VehicleTypeCard/OverallVehicleTypeCard";
 import "./dashBoard.styles.less";
 
 function DashBoard() {
+    const { Text, Title } = Typography;
     const [chart, setChart] = useState(false);
     const onchangeHandler = () => {
         setChart(!chart);
@@ -95,7 +105,11 @@ function DashBoard() {
                         </Col>
                     </Row>{" "}
                     <Row>
+                        <Col span={24} style={{ height: "10px" }}></Col>
+                    </Row>
+                    <Row>
                         <Col span={24}>
+                            <Title level={5}>Branch Status</Title>
                             <BranchCard />
                         </Col>
                     </Row>{" "}

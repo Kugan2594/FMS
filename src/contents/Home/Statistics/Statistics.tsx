@@ -1,7 +1,17 @@
 import React from "react";
 import { Column, Line, Pie } from "@ant-design/charts";
 import { useState, useEffect } from "react";
-import { Button, Card, Col, DatePicker, Row, Select, Space } from "antd";
+import {
+    Button,
+    Card,
+    Col,
+    DatePicker,
+    Form,
+    Modal,
+    Row,
+    Select,
+    Space,
+} from "antd";
 import "./Statistics.style.less";
 import SelectOptions from "./SelectOptions";
 import {
@@ -16,7 +26,7 @@ import { any } from "prop-types";
 import { has } from "immer/dist/internal";
 import { type } from "@testing-library/user-event/dist/type";
 const { RangePicker } = DatePicker;
-const Page: React.FC = () => {
+const Statistics: React.FC = () => {
     const data1 = [
         {
             month: "Jan",
@@ -405,6 +415,8 @@ const Page: React.FC = () => {
     const [staticsType, setStaticsType]: any = useState(true);
     const [value1, setValue1]: any = useState("All vehicle Types");
     const [value2, setValue2]: any = useState("Last 7 Days");
+    const [open, setOpen]: any = useState(false);
+    const [filterData, setFilterData]: any = useState(dataArray);
 
     useEffect(() => {
         console.log("vehicleType", vehicleTypeValue);
@@ -843,7 +855,14 @@ const Page: React.FC = () => {
     const handleStaticType = () => {
         setStaticsType(!staticsType);
     };
-
+    const openModalHandler = () => {
+        setOpen(!open);
+        console.log("modal opened");
+    };
+    const onOk = () => {
+        setOpen(!open);
+        setFilterData(newData);
+    };
     const config = {
         // data: anually
         //     ? yearData
@@ -856,7 +875,7 @@ const Page: React.FC = () => {
         //     : monthly
         //     ? monthlyData
         //     : data,
-        data: newData,
+        data: filterData,
         xField: "date",
         yField: "amount",
         key: "id",
@@ -915,73 +934,251 @@ const Page: React.FC = () => {
     };
 
     return (
-        <Card
-            style={{
-                width: "100%",
-                backgroundColor: "white",
-                borderRadius: "0vw 0vw 0.5vw 0.5vw",
-            }}
-        >
-            <div className="filter-container" style={{ height: "10%" }}>
-                <Row justify="end" align="middle">
-                    <Col xs={24} xl={11}>
-                        <Select
-                            // defaultValue="All Types"
-                            style={{ width: "60%", borderRadius: "50px" }}
-                            onChange={handleVehicleType}
-                            placeholder="All vehicle Types"
-                            defaultValue="All vehicle Types"
-                            size="small"
-                        >
-                            {" "}
-                            <Option value="All vehicle Types">
-                                All vehicle Types
-                            </Option>
-                            <Option value="Bus">Bus</Option>
-                            <Option value="Car">Car</Option>
-                            <Option value="Train">Train</Option>
-                        </Select>
-                    </Col>
-                    <Col xs={24} xl={10}>
-                        <Select
-                            showSearch
-                            placeholder="All vehicles"
-                            optionFilterProp="children"
-                            onChange={onChange}
-                            onSearch={onSearch}
-                            filterOption={(input, option) =>
-                                (option!.children as unknown as string)
-                                    .toLowerCase()
-                                    .includes(input.toLowerCase())
-                            }
-                            style={{ width: "90%" }}
-                            size="small"
-                        >
-                            {vehicleTypeFilter
-                                ? data
-                                      .filter(
-                                          (x: any) =>
-                                              x.vehicleTypeId ===
-                                              vehicleTypeValue
-                                      )
-                                      .map((x: any) => {
-                                          return (
-                                              <Option value={x.vehicleNumber}>
-                                                  {x.vehicleNumber}
-                                              </Option>
-                                          );
-                                      })
-                                : data.map((x: any) => {
-                                      return (
-                                          <Option value={x.vehicleNumber}>
-                                              {x.vehicleNumber}
-                                          </Option>
-                                      );
-                                  })}
-                        </Select>
-                    </Col>
+        <>
+            {" "}
+            <Form>
+                <Modal
+                    onCancel={openModalHandler}
+                    open={open}
+                    onOk={onOk}
+                    footer={false}
+                >
+                    {" "}
+                    <div className="modal-rows">
+                        <Row gutter={64} style={{ marginBottom: "20px" }}>
+                            <Col>Filter</Col>
+                        </Row>
+                        <Row gutter={128} style={{ marginBottom: "20px" }}>
+                            <Col>
+                                <Row
+                                    justify="end"
+                                    align="middle"
+                                    style={{ marginBottom: "20px" }}
+                                >
+                                    <Col xs={24} xl={21}>
+                                        <Select
+                                            // defaultValue="All Types"
+                                            style={{
+                                                width: "60%",
+                                                borderRadius: "50px",
+                                            }}
+                                            onChange={handleVehicleType}
+                                            placeholder="All vehicle Types"
+                                            defaultValue="All vehicle Types"
+                                            size="small"
+                                        >
+                                            {" "}
+                                            <Option value="All vehicle Types">
+                                                All vehicle Types
+                                            </Option>
+                                            <Option value="Bus">Bus</Option>
+                                            <Option value="Car">Car</Option>
+                                            <Option value="Train">Train</Option>
+                                        </Select>
+                                    </Col>
 
-                    <Col xs={24} xl={3}>
+                                    <Col xs={24} xl={3}></Col>
+                                </Row>
+
+                                <Row style={{ marginBottom: "20px" }}>
+                                    {" "}
+                                    <Col xs={24} xl={10}>
+                                        <Select
+                                            showSearch
+                                            placeholder="All vehicles"
+                                            optionFilterProp="children"
+                                            onChange={onChange}
+                                            onSearch={onSearch}
+                                            filterOption={(input, option) =>
+                                                (
+                                                    option!
+                                                        .children as unknown as string
+                                                )
+                                                    .toLowerCase()
+                                                    .includes(
+                                                        input.toLowerCase()
+                                                    )
+                                            }
+                                            style={{ width: "90%" }}
+                                            size="small"
+                                        >
+                                            {vehicleTypeFilter
+                                                ? data
+                                                      .filter(
+                                                          (x: any) =>
+                                                              x.vehicleTypeId ===
+                                                              vehicleTypeValue
+                                                      )
+                                                      .map((x: any) => {
+                                                          return (
+                                                              <Option
+                                                                  value={
+                                                                      x.vehicleNumber
+                                                                  }
+                                                              >
+                                                                  {
+                                                                      x.vehicleNumber
+                                                                  }
+                                                              </Option>
+                                                          );
+                                                      })
+                                                : data.map((x: any) => {
+                                                      return (
+                                                          <Option
+                                                              value={
+                                                                  x.vehicleNumber
+                                                              }
+                                                          >
+                                                              {x.vehicleNumber}
+                                                          </Option>
+                                                      );
+                                                  })}
+                                        </Select>
+                                    </Col>
+                                </Row>
+
+                                <Row
+                                    justify="space-around"
+                                    style={{ marginBottom: "20px" }}
+                                >
+                                    <Col
+                                        xs={24}
+                                        xl={6}
+                                        style={{
+                                            width: "100%",
+                                        }}
+                                    >
+                                        <Select
+                                            // defaultValue="Bar"
+                                            style={{
+                                                width: "100%",
+                                            }}
+                                            onChange={handleDateRange}
+                                            defaultValue="Last 7 Days"
+                                            size="small"
+                                        >
+                                            <Option value="Last 7 Days">
+                                                Last 7 Days
+                                            </Option>
+                                            <Option value="Last Month">
+                                                Last Month
+                                            </Option>
+                                            <Option value="Monthly">
+                                                Monthly
+                                            </Option>
+                                            <Option value="Annually">
+                                                Annually
+                                            </Option>
+                                            <Option value="Custom">
+                                                Custom
+                                            </Option>
+                                        </Select>
+                                    </Col>
+                                    <Col xs={24} xl={2}></Col>
+                                    <Col xs={24} xl={14} style={{}}>
+                                        {custom ? (
+                                            <RangePicker
+                                                onChange={handleCustomChange}
+                                                size="small"
+                                            />
+                                        ) : (
+                                            ""
+                                        )}
+                                        {anually ? (
+                                            <RangePicker
+                                                onChange={handleYearChange}
+                                                defaultValue={[
+                                                    moment("2015", yearFormat),
+                                                    moment("2016", yearFormat),
+                                                ]}
+                                                format={yearFormat}
+                                                picker="year"
+                                                size="small"
+                                            />
+                                        ) : (
+                                            ""
+                                        )}
+                                        {monthly ? (
+                                            <RangePicker
+                                                onChange={handleMonthChange}
+                                                defaultValue={[
+                                                    moment(
+                                                        "2015/01",
+                                                        monthFormat
+                                                    ),
+                                                    moment(
+                                                        "2015/02",
+                                                        monthFormat
+                                                    ),
+                                                ]}
+                                                format={monthFormat}
+                                                picker="month"
+                                                size="small"
+                                            />
+                                        ) : (
+                                            ""
+                                        )}
+                                    </Col>
+                                    <Col xs={24} xl={2}></Col>
+                                </Row>
+
+                                <Row>
+                                    <Col xs={24} xl={24}>
+                                        <SelectOptions />
+                                    </Col>
+                                </Row>
+                            </Col>
+                        </Row>
+                    </div>
+                    <Row justify="end">
+                        <Col span={12}></Col>
+                        <Col span={4}>
+                            <Button
+                                htmlType="reset"
+                                size="small"
+                                style={{ width: "80%" }}
+                            >
+                                Reset
+                            </Button>
+                        </Col>
+                        <Col span={4}>
+                            <Button
+                                size="small"
+                                style={{ width: "80%" }}
+                                onClick={openModalHandler}
+                            >
+                                Cancel
+                            </Button>
+                        </Col>
+                        <Col span={4}>
+                            <Button
+                                onClick={onOk}
+                                size="small"
+                                style={{ width: "80%" }}
+                            >
+                                Ok
+                            </Button>
+                        </Col>
+                    </Row>
+                </Modal>
+            </Form>
+            <Card
+                style={{
+                    width: "100%",
+                    backgroundColor: "white",
+                    borderRadius: "0vw 0vw 0.5vw 0.5vw",
+                }}
+            >
+                <div
+                    className="filter-comntainer"
+                    style={{
+                        display: "flex",
+                        flexDirection: "row",
+                        justifyContent: "right",
+                    }}
+                >
+                    {" "}
+                    <div>
                         <div className="toggle">
                             <Space className="toggle-space">
                                 {bar ? (
@@ -997,93 +1194,38 @@ const Page: React.FC = () => {
                                 )}
                             </Space>
                         </div>
-                    </Col>
-                </Row>
-            </div>
-            <div className="filter-container" style={{ height: "10%" }}>
-                <Row justify="space-around" style={{}}>
-                    <Col
-                        xs={24}
-                        xl={6}
-                        style={{
-                            width: "100%",
-                        }}
-                    >
-                        <Select
-                            // defaultValue="Bar"
-                            style={{
-                                width: "100%",
-                            }}
-                            onChange={handleDateRange}
-                            defaultValue="Last 7 Days"
-                            size="small"
-                        >
-                            <Option value="Last 7 Days">Last 7 Days</Option>
-                            <Option value="Last Month">Last Month</Option>
-                            <Option value="Monthly">Monthly</Option>
-                            <Option value="Annually">Annually</Option>
-                            <Option value="Custom">Custom</Option>
-                        </Select>
-                    </Col>
-                    <Col xs={24} xl={2}></Col>
-                    <Col xs={24} xl={14} style={{}}>
-                        {custom ? (
-                            <RangePicker
-                                onChange={handleCustomChange}
-                                size="small"
-                            />
-                        ) : (
-                            ""
-                        )}
-                        {anually ? (
-                            <RangePicker
-                                onChange={handleYearChange}
-                                defaultValue={[
-                                    moment("2015", yearFormat),
-                                    moment("2016", yearFormat),
-                                ]}
-                                format={yearFormat}
-                                picker="year"
-                                size="small"
-                            />
-                        ) : (
-                            ""
-                        )}
-                        {monthly ? (
-                            <RangePicker
-                                onChange={handleMonthChange}
-                                defaultValue={[
-                                    moment("2015/01", monthFormat),
-                                    moment("2015/02", monthFormat),
-                                ]}
-                                format={monthFormat}
-                                picker="month"
-                                size="small"
-                            />
-                        ) : (
-                            ""
-                        )}
-                    </Col>
-                    <Col xs={24} xl={2}></Col>
-                </Row>
-            </div>
-            <div className="filter-container" style={{ height: "10%" }}>
+                    </div>
+                    <div>
+                        <Button onClick={openModalHandler}>filters</Button>
+                    </div>
+                </div>{" "}
                 <Row>
                     <Col xs={24} xl={24}>
-                        <SelectOptions />
+                        {graph ? (
+                            <div>
+                                <Line
+                                    {...configLine}
+                                    width={300}
+                                    height={200}
+                                />
+                            </div>
+                        ) : (
+                            <div>
+                                {" "}
+                                <div className="filter-comntainer">
+                                    {" "}
+                                    <Column
+                                        {...config}
+                                        width={300}
+                                        height={200}
+                                    />
+                                </div>
+                            </div>
+                        )}
                     </Col>
                 </Row>
-            </div>
-            <Row>
-                <Col xs={24} xl={24}>
-                    {graph ? (
-                        <Line {...configLine} width={300} height={200} />
-                    ) : (
-                        <Column {...config} width={300} height={200} />
-                    )}
-                </Col>
-            </Row>
-        </Card>
+            </Card>
+        </>
     );
 };
-export default Page;
+export default Statistics;
