@@ -15,6 +15,9 @@ import {
     getAllVehiclesByCompanyIdAndBranchId,
 } from "../../../contents/Master/Vehicles/ServiceVehicle";
 import { IoGitNetworkOutline } from "react-icons/io5";
+import Office from "../../../assets/office.svg";
+import Happy from "../../../assets/happy.svg";
+import Sad from "../../../assets/sad.svg";
 const { Title, Text } = Typography;
 
 function MajorDetails() {
@@ -142,31 +145,33 @@ function MajorDetails() {
     const cardInfo: any = [
         {
             title: "Branches",
-            icon: <IoGitNetworkOutline size={30} />,
+            icon: <img src={Office} />,
             count: branch.length,
         },
         {
             title: "On-risk",
-            icon: <TbMoodNervous size={30} />,
+            icon: <img src={Sad} />,
             count: branch.length - perfectNumber,
         },
         {
             title: "Perfect",
-            icon: <TbMoodHappy size={30} />,
+            icon: <img src={Happy} />,
             count: perfectNumber,
         },
     ];
     return (
-        <div>
-            <Row justify="end">
+        <div
+            style={{
+                marginBottom: "8px",
+            }}
+        >
+            <Row gutter={8}>
                 {cardInfo.map((x: any) => (
                     <Col span={8}>
                         <div className="mini-card">
                             <Card
                                 style={{
-                                    width: "128px",
                                     borderRadius: "5px",
-                                    margin: "5px",
                                 }}
                             >
                                 <Row justify="end">
