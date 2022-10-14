@@ -94,6 +94,72 @@ const updateVehicle = (data: any) => {
   });
 };
 
+const getRevenueLicense = (
+  vehicleNumber: string,
+) => {
+  return new Promise((resolve, reject) => {
+    api(
+      "get",
+      "co-web",
+      null,
+      `/vehicleRevenueLicense/${vehicleNumber}`,
+      "token",
+      "",
+      ""
+    )
+      .then((response: any) => {
+        resolve(response.data);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+};
+
+const getInsurance = (
+  vehicleNumber: string,
+) => {
+  return new Promise((resolve, reject) => {
+    api(
+      "get",
+      "co-web",
+      null,
+      `/insurance/${vehicleNumber}`,
+      "token",
+      "",
+      ""
+    )
+      .then((response: any) => {
+        resolve(response.data);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+};
+
+const getEmissionTest = (
+  vehicleNumber: string,
+) => {
+  return new Promise((resolve, reject) => {
+    api(
+      "get",
+      "co-web",
+      null,
+      `/emissionTest/${vehicleNumber}`,
+      "token",
+      "",
+      ""
+    )
+      .then((response: any) => {
+        resolve(response.data);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+};
+
 export {
   addVehicle,
   getAllVehiclesByCompanyId,
@@ -101,4 +167,7 @@ export {
   getAllVehiclesFromResourcesForDropDown,
   getAllVehiclesByCompanyIdAndBranchId,
   updateVehicle,
+  getRevenueLicense,
+  getInsurance,
+  getEmissionTest,
 };

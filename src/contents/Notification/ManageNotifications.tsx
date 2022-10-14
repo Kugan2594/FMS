@@ -96,14 +96,18 @@ function ManageNotifications() {
       getAllNotification(getUserDetails().user_id);
     });
 
-    {
-      data.message == "vehicle allocation"
-        ? navigate("/master/drivers")
-        : data.message == "part expired"
-        ? navigate("/master/parts")
-        : navigate("/notification/notification");
-    }
-  };
+        {
+            data.message == "vehicle allocation"
+                ? navigate("/master/drivers")
+                : data.message == "part expired"
+                ? navigate("/master/parts")
+                : data.message == "Alert for Revenue License Expiry "
+                ? navigate("/master/revenueLicense")
+                : data.message == "Alert for Emission Test expire "
+                ? navigate("/master/emissionTest")
+                : navigate("/notification/notification");
+        }
+    };
 
   return (
     <div className="notification-layout">
