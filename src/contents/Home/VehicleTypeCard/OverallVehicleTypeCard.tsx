@@ -115,7 +115,7 @@ function OverallVehicleTypeCard() {
                 data: typeArray.map((x: any) => x.vehicleTypeCount),
                 backgroundColor: ["#32CD30", "#DE0001", "#013A20", "#013A20"],
                 hoverOffset: 4,
-                cutout: 55,
+                cutout: 45,
                 borderRadius: 2,
             },
         ],
@@ -133,13 +133,14 @@ function OverallVehicleTypeCard() {
     return (
         <Card style={{ borderRadius: "3%", height: "100%" }}>
             <Row>
-                <Col>
+                <Col span={1}></Col>
+                <Col span={23}>
                     <Title level={5}>Vehicle Types</Title>
                 </Col>
             </Row>
             <Row justify="center">
-                <Col span={1}></Col>
-                <Col span={22}>
+                <Col></Col>
+                <Col span={9}>
                     <div className="doughnut">
                         {" "}
                         <Pie data={data} height={"100%"} />
@@ -163,27 +164,25 @@ function OverallVehicleTypeCard() {
                         </div>
                     </div>
                 </Col>
-
-                <Col span={1}></Col>
+                <Col span={15}>
+                    <Row gutter={16} justify="start">
+                        {typeArray.map((x: any) => {
+                            return (
+                                <Col span={8} style={{ textAlign: "center" }}>
+                                    <div>{x.icon}</div>
+                                    <div style={{ color: "grey" }}>
+                                        {x.vehicleType}
+                                    </div>
+                                    <div>{x.vehicleTypeCount}</div>
+                                </Col>
+                            );
+                        })}
+                    </Row>
+                </Col>
             </Row>
             <Row style={{ margin: "5%" }}>
                 <Col span={24}></Col>
             </Row>
-            <div className="row-container" style={{ width: "100%" }}>
-                <Row gutter={16} justify="start">
-                    {typeArray.map((x: any) => {
-                        return (
-                            <Col span={8} style={{ textAlign: "center" }}>
-                                <div>{x.icon}</div>
-                                <div style={{ color: "grey" }}>
-                                    {x.vehicleType}
-                                </div>
-                                <div>{x.vehicleTypeCount}</div>
-                            </Col>
-                        );
-                    })}
-                </Row>
-            </div>
         </Card>
     );
 }

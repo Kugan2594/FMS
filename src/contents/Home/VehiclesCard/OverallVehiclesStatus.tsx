@@ -7,6 +7,7 @@ import { AiOutlineRocket } from "react-icons/ai";
 import { getUserDetails } from "../../../contents/Login/LoginAuthentication";
 import { getAllVehiclesByCompanyId } from "../../../contents/Master/Vehicles/ServiceVehicle";
 import { useEffect, useState } from "react";
+import "./OverallVehicleStatus.style.less";
 Chart.register(CategoryScale);
 const { Text, Title } = Typography;
 const labels = ["Perfect", "Needs Attention", "Sleep"];
@@ -79,24 +80,24 @@ function OverallVehiclesStatus() {
                     "rgb(255, 205, 86)",
                 ],
                 hoverOffset: 8,
-                cutout: 55,
+                cutout: 45,
             },
         ],
     };
 
     return (
-        <Card style={{ borderRadius: "3%" }}>
-            <Row>
-                <Col>
+        <Card className="vehicleCard" style={{ borderRadius: "3%" }}>
+            <Row justify="center" align="middle">
+                <Col span={1}></Col>
+                <Col span={23}>
                     <Title level={5}>Vehicles</Title>
                 </Col>
             </Row>
             <Row>
                 <Col style={{ width: "130%" }}></Col>
             </Row>
-            <Row justify="center">
-                <Col span={1}></Col>
-                <Col span={22}>
+            <Row justify="center" gutter={16}>
+                <Col span={9}>
                     <Pie data={data} />
                     <div
                         className="div"
@@ -118,7 +119,82 @@ function OverallVehiclesStatus() {
                         </div> */}
                     </div>
                 </Col>
-                <Col span={1}></Col>
+                <Col span={15} style={{}}>
+                    <div className="row-container" style={{ width: "100%" }}>
+                        <Row gutter={4} justify="center" align="middle">
+                            <Col span={2}></Col>
+                            <Col span={16} style={{ fontSize: "16px" }}>
+                                <Text strong>Status</Text>
+                            </Col>
+                            <Col span={6} style={{ fontSize: "16px" }}>
+                                <Text strong>Count</Text>
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col span-={24}></Col>
+                        </Row>
+                        <div className="data-content">
+                            <Row gutter={8} justify="start" align="middle">
+                                {data1.map((x) => {
+                                    return (
+                                        <>
+                                            <Col span={2}>
+                                                {x.title === "Perfect" ? (
+                                                    <div
+                                                        className="dot"
+                                                        style={{
+                                                            backgroundColor:
+                                                                "green",
+                                                            width: "10px",
+                                                            height: "10px",
+                                                            borderRadius:
+                                                                "100%",
+                                                        }}
+                                                    >
+                                                        <Space></Space>
+                                                    </div>
+                                                ) : x.title ===
+                                                  "Needs Attention" ? (
+                                                    <div
+                                                        className="dot"
+                                                        style={{
+                                                            backgroundColor:
+                                                                "red",
+                                                            width: "10px",
+                                                            height: "10px",
+                                                            borderRadius:
+                                                                "100%",
+                                                        }}
+                                                    >
+                                                        <Space></Space>
+                                                    </div>
+                                                ) : x.title === "Sleep" ? (
+                                                    <div
+                                                        className="dot"
+                                                        style={{
+                                                            backgroundColor:
+                                                                "orange",
+                                                            width: "10px",
+                                                            height: "10px",
+                                                            borderRadius:
+                                                                "100%",
+                                                        }}
+                                                    >
+                                                        <Space></Space>
+                                                    </div>
+                                                ) : (
+                                                    ""
+                                                )}
+                                            </Col>
+                                            <Col span={18}>{x.title}</Col>
+                                            <Col span={4}>{x.count}</Col>
+                                        </>
+                                    );
+                                })}
+                            </Row>
+                        </div>
+                    </div>
+                </Col>
             </Row>
             <Row>
                 <Col></Col>
@@ -126,68 +202,6 @@ function OverallVehiclesStatus() {
             <Row style={{ margin: "3%" }}>
                 <Col span={24}></Col>
             </Row>
-            <div className="row-container" style={{ width: "100%" }}>
-                <Row gutter={4} justify="start">
-                    <Col span={2}></Col>
-                    <Col span={16} style={{ fontSize: "16px" }}>
-                        <Text strong>Status</Text>
-                    </Col>
-                    <Col span={6} style={{ fontSize: "16px" }}>
-                        <Text strong>Count</Text>
-                    </Col>
-                </Row>
-                <Row gutter={16} justify="start" align="middle">
-                    {data1.map((x) => {
-                        return (
-                            <>
-                                <Col span={2}>
-                                    {x.title === "Perfect" ? (
-                                        <div
-                                            className="dot"
-                                            style={{
-                                                backgroundColor: "green",
-                                                width: "10px",
-                                                height: "10px",
-                                                borderRadius: "100%",
-                                            }}
-                                        >
-                                            <Space></Space>
-                                        </div>
-                                    ) : x.title === "Needs Attention" ? (
-                                        <div
-                                            className="dot"
-                                            style={{
-                                                backgroundColor: "red",
-                                                width: "10px",
-                                                height: "10px",
-                                                borderRadius: "100%",
-                                            }}
-                                        >
-                                            <Space></Space>
-                                        </div>
-                                    ) : x.title === "Sleep" ? (
-                                        <div
-                                            className="dot"
-                                            style={{
-                                                backgroundColor: "orange",
-                                                width: "10px",
-                                                height: "10px",
-                                                borderRadius: "100%",
-                                            }}
-                                        >
-                                            <Space></Space>
-                                        </div>
-                                    ) : (
-                                        ""
-                                    )}
-                                </Col>
-                                <Col span={18}>{x.title}</Col>
-                                <Col span={4}>{x.count}</Col>
-                            </>
-                        );
-                    })}
-                </Row>
-            </div>
         </Card>
         // </div>
     );

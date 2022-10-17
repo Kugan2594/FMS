@@ -3,7 +3,7 @@ import { getUserDetails } from "../../../contents/Login/LoginAuthentication";
 import { getAllBranchByCompanyId } from "../../../contents/Master/Branch/ServicesBranch";
 import React from "react";
 import { useEffect, useState } from "react";
-import { TbMoodHappy, TbMoodNervous } from "react-icons/tb";
+
 import {
     AiOutlineAlibaba,
     AiOutlineRadarChart,
@@ -18,6 +18,7 @@ import { IoGitNetworkOutline } from "react-icons/io5";
 import Office from "../../../assets/office.svg";
 import Happy from "../../../assets/happy.svg";
 import Sad from "../../../assets/sad.svg";
+import "../MajorDetails/MajorDetail.style.less";
 const { Title, Text } = Typography;
 
 function MajorDetails() {
@@ -174,7 +175,7 @@ function MajorDetails() {
                                     borderRadius: "5px",
                                 }}
                             >
-                                <Row justify="end">
+                                <Row justify="end" align="bottom">
                                     <Col>
                                         <Title level={3}>{x.count}</Title>
                                     </Col>
@@ -182,6 +183,7 @@ function MajorDetails() {
                                 <Row
                                     justify="end"
                                     style={{ textAlign: "right" }}
+                                    align="bottom"
                                 >
                                     <Col span={8}>{x.icon}</Col>
                                     <Col span={16}>

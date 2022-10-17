@@ -35,7 +35,11 @@ let mainMenuItems: MenuItem[] = [];
                   icon: CarOutlined,
                   name: "Master",
                   link: "/master/branches",
-                  children: [{ id: "companies", name: "Companies" }],
+                  children: [
+                      { id: "companies", name: "Companies" },
+                      { id: "colombo", name: "Colombo" },
+                      { id: "jaffna", name: "jaffna" },
+                  ],
               },
               {
                   id: "notification",

@@ -93,6 +93,10 @@ const PrivateRoute: RouteObject[] = [
         path: "/companies",
         element: <ManageCompany />,
     },
+    {
+        path: "/1",
+        element: <DashBoard />,
+    },
 ];
 
 export default PrivateRoute;

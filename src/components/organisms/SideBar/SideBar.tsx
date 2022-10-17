@@ -86,7 +86,7 @@ function SideBar() {
     const badgeCount = notificationData.filter((data) => data.isRead == false);
 
     const homeItems: any = [
-        { id: "1", name: "a" },
+        { id: "1", name: "Colombo" },
         { id: "2", name: "b" },
         { id: "3", name: "c" },
         { id: "4", name: "d" },

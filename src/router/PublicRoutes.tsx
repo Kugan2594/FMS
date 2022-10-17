@@ -65,6 +65,10 @@ const PublicRoute: RouteObject[] = [
                 path: "allBranches",
                 element: <DashBoard />,
             },
+            {
+                path: "1",
+                element: <DashBoard />,
+            },
         ],
     },
     {

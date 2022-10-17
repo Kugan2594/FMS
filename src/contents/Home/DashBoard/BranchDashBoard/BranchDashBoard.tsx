@@ -14,14 +14,13 @@ import {
     Switch,
     Typography,
 } from "antd";
+import BranchCard from "contents/Home/BranchesList/BranchCard";
+import MajorDetails from "contents/Home/MajorDetails/MajorDetails";
+import StaticsHistory from "contents/Home/Statics/StaticsHistory";
+import OverallVehiclesStatus from "contents/Home/VehiclesCard/OverallVehiclesStatus";
+import OverallVehicleTypeCard from "contents/Home/VehicleTypeCard/OverallVehicleTypeCard";
+import Page from "contents/Master/Statistics/Statistics";
 import React, { useState } from "react";
-import BranchCard from "../BranchesList/BranchCard";
-
-import MajorDetails from "../MajorDetails/MajorDetails";
-import StaticsHistory from "../Statics/StaticsHistory";
-import Page from "../Statistics/Statistics";
-import OverallVehiclesStatus from "../VehiclesCard/OverallVehiclesStatus";
-import OverallVehicleTypeCard from "../VehicleTypeCard/OverallVehicleTypeCard";
 import "./dashBoard.styles.less";
 
 function DashBoard() {
