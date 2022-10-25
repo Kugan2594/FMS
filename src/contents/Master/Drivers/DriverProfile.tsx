@@ -1,4 +1,5 @@
 import { Image, Typography } from "antd";
+import { Button } from "../../../components/atoms/Button";
 import React, { useEffect, useState } from "react";
 import User from "../../../assets/User.svg";
 import { getAllocatedVehicleByDriverId } from "./ServiceDriver";
@@ -7,15 +8,15 @@ const { Title, Text } = Typography;
 
 interface DriverProfileType {
   driverProfileData: any;
+  onClickClose: any;
 }
 
-function DriverProfile({ driverProfileData }: DriverProfileType) {
-
+function DriverProfile({ driverProfileData, onClickClose }: DriverProfileType) {
   const [assignedVehicle, setAssignedVehicle] = useState([]);
 
   useEffect(() => {
-    getAllocatedVehicleData(driverProfileData.userId)
-  }, [])
+    getAllocatedVehicleData(driverProfileData.userId);
+  }, []);
 
   const getAllocatedVehicleData = (userId: number) => {
     getAllocatedVehicleByDriverId(userId).then((res: any) => {
@@ -98,10 +99,22 @@ function DriverProfile({ driverProfileData }: DriverProfileType) {
         <div className="driver-detail">
           <Text>Assign Vehicles: </Text>
           <br />
-            {assignedVehicle.map((vehicle: any) => {
-              return <Text className="data" strong>{vehicle}{" "}</Text>
-            })}
+          {assignedVehicle.map((vehicle: any) => {
+            return (
+              <Text className="data" strong>
+                {vehicle}{" "}
+              </Text>
+            );
+          })}
         </div>
+      </div>
+      <div style={{ marginTop: "10px" }}>
+        <Button
+          title="Close"
+          type="primary"
+          onClick={onClickClose}
+          style={{ width: "100%" }}
+        />
       </div>
     </div>
   );

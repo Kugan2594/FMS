@@ -152,12 +152,13 @@ function ManageDrivers() {
       {isProfileModalOpen && (
         <Modal
           open={isProfileModalOpen}
+          style={{ top: 40 }}
           onCancel={handleCancel}
           closable={false}
           width={"25%"}
           footer={false}
         >
-          <DriverProfile driverProfileData={driverData} />
+          <DriverProfile driverProfileData={driverData} onClickClose={ handleCancel} />
         </Modal>
       )}
       {isAssignVehicleModal && (
